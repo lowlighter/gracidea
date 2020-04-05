@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/png" href="/imgs/icons/gracidea.png">
+  <title>Gracidea | Pokémon Live Map</title>
+</head>
+<body>
+  <!-- App -->
+  <main id="app" :class="{ready:ready}">
+    <template>
+      <div class="ui">
+        <header>
+          <div class="title">
+            <img src="imgs/icons/gracidea.png">
+            <div>Gracidea</div>
+          </div>
+          <div class="position">
+            {{ user.position.x }};{{ user.position.y }}
+          </div>
+          <nav class="menu">
+            <div @click="show.map = !show.map" class="button" :class="{active:show.map}"><img src="imgs/icons/map.png">Map</div>
+            <div @click="redirect('https://github.com/lowlighter/gracidea')" class="button"><img src="imgs/icons/pokedoll.png">GitHub</div>
+          </nav>
+        </header>
+        <transition name="fade">
+          <map v-if="show.map">
+            <div class="wrapper">
+              <div v-for="map in maps" :style="{top:map.css.y+'px', left:map.css.x+'px'}" class="area">
+                <img :src="'imgs/regions/'+map.id+'.png'">
+                <div class="location tips" v-for="location in map.locations" :class="{[location.type]:true, disabled:location.disabled}" :style="{top:location.css.y+'%', left:location.css.x+'%', zIndex:location.css.y}" @click="!location.disabled ? (camera(location), show.map = false) : null">
+                  <div class="tips-text">{{ lang.map.locations[location.id]}}</div>
+                </div>
+              </div>
+            </div>
+          </map>
+        </transition>
+      </div>
+      <div class="view"></div>
+    </template>
+  </main>
+
+  <!-- Scripts -->
+  <script src="js/pixi.min.js"></script>
+  <script src="js/viewport.js"></script>
+  <script src="js/axios.js"></script>
+  <script src="js/vue.min.js"></script>
+  <script src="js/gracidea.js"></script>
+</body>
+</html>

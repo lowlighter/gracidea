@@ -1,0 +1,19 @@
+[
+  {
+    "id":"hoenn", 
+    "css":{"x":100, "y":260},
+    "locations":[
+      {"id":"littleroot", "type":"city", "x":0, "y":0, "css":{"x":20, "y":70}, "disabled":true},
+      {"id":"oldale", "type":"city", "x":0, "y":0, "css":{"x":20, "y":58}, "disabled":true},
+      {"id":"petalburg", "type":"city", "x":0, "y":0, "css":{"x":12, "y":58}, "disabled":true},
+      {"id":"dewford", "type":"city", "x":266, "y":-842, "css":{"x":14, "y":78}}
+      
+    ]
+  },
+  {
+    "id":"faraway_island", "css":{"x":100, "y":420},
+    "locations":[
+      {"id":"faraway_island", "type":"interest", "x":-14, "y":65, "css":{"x":0, "y":40}}
+    ]
+  }
+]

@@ -1,0 +1,11 @@
+{
+    "map":{
+        "locations":{
+            "littleroot":"Littleroot Town",
+            "oldale":"Oldale Town",
+            "petalburg":"Petalburg City",
+            "dewford":"Dewford Town",
+            "faraway_island":"Faraway Island"
+        }
+    }
+}

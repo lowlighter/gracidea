@@ -1,0 +1,186 @@
+/* Body */
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  }
+
+/* Main */
+  main {
+    background-color: black;
+  }
+
+  main.ready {
+    background-color: #5068D0;
+  }
+
+/* Header */
+  header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    color: white;
+    z-index: 9001;
+    height: 3rem;
+    background-color: #24292E;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+  }
+
+    header > * {
+      flex-basis: 100%;
+    }
+
+  /* Title */
+    header .title {
+      display: flex;
+      align-items: center;
+      height: 100%;
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin: 0 1rem;
+    }
+
+    header .position {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  /* Buttons */
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: end;
+    }
+
+      nav .button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: .25rem;
+        border-radius: .25rem;
+        margin: 0 1rem;
+        transition: background-color .2s ease;
+      }
+
+      nav .button:hover {
+        cursor: pointer;
+        background-color: white;
+        color: black;
+      }
+
+      nav .button.active {
+        background-color: #3F4448;
+      }
+
+/* World map */
+  map {
+    position: fixed;
+    top: 3rem;
+    left: 0; right: 0;
+    background-color: rgb(63,200,216,.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: calc(100vh - 3rem);
+  }
+
+  /* World map wrapper */
+    map .wrapper {
+      position: relative;
+      height: 600px;
+      width: 600px;
+      overflow: auto;
+    }
+
+    /* Map area */
+      map .area {
+        position: absolute;
+      }
+
+      /* Map area image */
+        .area img {
+          image-rendering: pixelated;
+          image-rendering: -moz-crisp-edges;
+          image-rendering: crisp-edges;
+        }
+
+      /* Map area location */
+        .area .location {
+          position: absolute;
+          width: .5rem;
+          height: .5rem;
+          border: 2px solid #515150;
+          border-radius: .25rem;
+          transition: filter .2s;
+          cursor: pointer;
+        }
+
+        .area .location.city {
+          background-color: #FA5263;
+        }
+
+        .area .location.interest {
+          background-color: #71CA92;
+        }
+
+        .area .location:hover {
+          filter: brightness(2);
+        }
+
+        .area .location.disabled {
+          background-color: gray;
+          cursor: not-allowed;
+        }
+
+/* No scrollbars */
+  *::-webkit-scrollbar {
+    display: none; 
+  }
+
+/* Transitions */
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+
+/* Tooltip texts */
+  .tips {
+    position: relative;
+  }
+
+  .tips .tips-text {
+    visibility: hidden;
+    position: absolute;
+    bottom: .5rem;
+    z-index: 1000;
+    font-size: .8rem;
+    background-color: black;
+    color: white;
+    padding: .25rem .5rem;
+    border-radius: .25rem;
+    transform: translateX(-50%);
+    white-space: nowrap;
+  }
+
+  .tips:hover .tips-text {
+    visibility: visible;
+  }
+
+  .tips .tips-text::after {
+    content: " ";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    border: .25rem  solid black;
+    border-color: black transparent transparent transparent;
+  }
