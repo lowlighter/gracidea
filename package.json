@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server/app.js"
+    "start": "node server/app.js",
+    "build": "npx babel src -d client/js --plugins \"@babel/proposal-class-properties\" --presets minify"
   },
   "author": "lowlighter",
   "license": "AGPL-3.0",
@@ -16,5 +17,11 @@
     "pixi-viewport": "^4.10.0",
     "pixi.js": "^5.2.1",
     "vue": "^2.6.11"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "babel-preset-minify": "^0.5.1"
   }
 }
