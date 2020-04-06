@@ -87,7 +87,7 @@
               App.loader.renderer.load(async () => {
                 await this.world.load.sea()
                 await this.world.render({delay:0})
-                this.methods.camera(GET.has("x")&&GET.has("y") ? {x:Number(GET.get("x"))||0, y:Number(GET.get("y"))||0, offset:{x:0, y:0}} : {x:-14, y:65})
+                this.methods.camera(GET.has("x")&&GET.has("y") ? {x:Number(GET.get("x"))||0, y:Number(GET.get("y"))||0, offset:{x:0, y:0}} : {x:329, y:-924})
                 this.methods.update()
                 this.data.ready = true
                 this.data.lang = (await axios.get(`/lang/${GET.get("lang")||"en"}.json`)).data
