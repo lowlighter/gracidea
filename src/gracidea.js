@@ -3,15 +3,16 @@
   //Animated textures
     const textures = {
       animated:{
-        2561:{
-          frames:[32512, 32513, 32514, 32515, 32516, 32517, 32518, 32519].map(frame => `${frame}`),
+        2374:{
+          frames:[2374, 2375, 2376, 2377, 2378, 2379, 2380, 2381].map(frame => `${frame}`),
           speed:0.075,
         }
       }
     }
 
   //Pixi Settings
-    PIXI.SCALE_MODES.DEFAULT = PIXI.SCALE_MODES.NEAREST
+    PIXI.settings.SCALE_MODE = PIXI.SCALE_MODES.NEAREST
+    PIXI.settings.MIPMAP_TEXTURES =  PIXI.MIPMAP_MODES.OFF
   //Get params
     const GET = new URLSearchParams(window.location.search)
 
@@ -318,7 +319,7 @@
           this.world.app.tween.fade({target:this.sprite, change:"alpha", from:0, to:1, duration:15})
         }
       //Texture
-        static texture = 2561
+        static texture = 2374
     }
 
   //Instantiate app

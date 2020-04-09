@@ -1,6 +1,6 @@
 function _defineProperty(a,b,c){return b in a?Object.defineProperty(a,b,{value:c,enumerable:!0,configurable:!0,writable:!0}):a[b]=c,a}(async function(){var d,e,f,g,a=Math.ceil,b=Math.max,c=Math.min;//Animated textures
-const h={animated:{2561:{frames:[32512,32513,32514,32515,32516,32517,32518,32519].map(a=>`${a}`),speed:.075}}};//Pixi Settings
-PIXI.SCALE_MODES.DEFAULT=PIXI.SCALE_MODES.NEAREST;//Get params
+const h={animated:{2374:{frames:[2374,2375,2376,2377,2378,2379,2380,2381].map(a=>`${a}`),speed:.075}}};//Pixi Settings
+PIXI.settings.SCALE_MODE=PIXI.SCALE_MODES.NEAREST,PIXI.settings.MIPMAP_TEXTURES=PIXI.MIPMAP_MODES.OFF;//Get params
 const i=new URLSearchParams(window.location.search),j={//Basename
 basename({path:a,extension:b}){return a.substring(1+a.lastIndexOf("/")).replace(/(\..+?)$/,b?"$1":"")},//Map get or set
 mget({map:a,key:b,create:c}){return!a.has(b)&&a.set(b,c(b)),a.get(b)},//Render coordinates
@@ -75,5 +75,5 @@ async render({delay:b=250}={}){//Delay rendering
 clearTimeout(this._render),this._render=setTimeout(async()=>{this.sprite.removeChildren(),this.sprite.anchor.set(.5);//Compute size
 const b=a(this.world.app.renderer.view.width/l.Chunk.tile.size),c=a(this.world.app.renderer.view.height/l.Chunk.tile.size),d=h.animated[`${l.Sea.texture}`];for(let a=-b;a<=b;a++)for(let b=-c;b<=c;b++){const c=this.sprite.addChild(new PIXI.AnimatedSprite(d.frames.map(PIXI.Texture.from)));c.animationSpeed=d.speed,c.position.set(a*l.Chunk.tile.size,b*l.Chunk.tile.size),c.width=c.height=l.Chunk.tile.size,c.play()}},b)}//Refresh sea
 refresh({x:a,y:b}){const{origin:c}=this.world;this.sprite.alpha=0,this.sprite.position.set((c.x+a)*l.Chunk.tile.size,(c.y+b)*l.Chunk.tile.size),this.world.app.tween.fade({target:this.sprite,change:"alpha",from:0,to:1,duration:15})}//Texture
-},_defineProperty(f,"texture",2561),g);//Instantiate app
+},_defineProperty(f,"texture",2374),g);//Instantiate app
 const m=new k({world:"overworld"});await m.ready})();
