@@ -11,6 +11,10 @@
         2374:{
           frames:[2374, 2375, 2376, 2377, 2378, 2379, 2380, 2381].map(frame => `${frame}`),
           speed:0.075,
+        },
+        429:{
+          frames:[429, 430].map(frame => `${frame}`),
+          speed:0.05,
         }
       }
     }
@@ -135,6 +139,8 @@
         boundary = {x:-Infinity, y:-Infinity}
       //Chunks
         chunks = new Map()
+      //Creatures
+        creatures = new Set()
       //Constructor
         constructor({app, name}) {
           this.name = name
@@ -171,6 +177,15 @@
               //Create sea
                 this.sea = new World.Sea({world:this})
                 this.sprite.addChildAt(this.sea.sprite, 0)
+            }
+        }
+      //Create units
+        add = {
+          //Add creature
+            creature() {
+              const creature = new Creature({species:"mudkip"}) 
+              this.pokemons.add(creature)
+              this.sprite.addChild(creature.sprite)
             }
         }
       //Render chunks
@@ -331,6 +346,15 @@
         }
       //Texture
         static texture = 2374
+    }
+
+  //Creatures
+    class Creature {
+      //Constructor
+        constructor({species}) {
+          this.species = species
+          this.sprite = new PIXI.AnimatedSprite([0, 1].map(i => `${species}_${i}`))
+        }
     }
 
   //Instantiate app
