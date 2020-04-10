@@ -8,7 +8,8 @@
     "start": "node server/app.js",
     "start-dev": "node server/app.js --dev 1",
     "build": "npx babel client/src -d client/js --plugins \"@babel/proposal-class-properties\" --presets minify --no-comments",
-    "usprite-overworld": "node utils/tileset.js --margin 2 --spacing 2 --extrusion 1 --source maps/overworld/tileset.textures.raw.png"
+    "usprite-overworld": "node utils/tileset.js --margin 2 --spacing 2 --extrusion 1 --source maps/overworld/tileset.textures.raw.png",
+    "jsprite-overworld": "node utils/tileset-json.js --margin --spacing 2 --destination maps/overworld/tileset.textures.json"
   },
   "author": "lowlighter",
   "license": "AGPL-3.0",
