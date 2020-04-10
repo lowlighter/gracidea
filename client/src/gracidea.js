@@ -1,5 +1,10 @@
-;(async function () {
+/**
+ * Copyright 2017, Lecoq Simon (@lowlighter)
+ * @license https://github.com/lowlighter/gracidea/blob/master/LICENSE
+ */
 
+;(async function () {
+  
   //Animated textures
     const textures = {
       animated:{
@@ -249,6 +254,7 @@
                 if ((chunk.children.length)&&(!force))
                   continue 
               //Render tiles
+                const flags = {}
                 chunk.cacheAsBitmap = false
                 chunk.alpha = 0
                 chunk.removeChildren()
@@ -258,8 +264,10 @@
                   if (texture in textures.animated) {
                     tile = chunk.addChild(new PIXI.AnimatedSprite(textures.animated[texture].frames.map(PIXI.Texture.from)))
                     tile.animationSpeed = textures.animated[texture].speed
-                    if (animated)
+                    if (animated) {
                       animated.add(tile)
+                      flags.animated = true
+                    }
                   }
                   else
                     tile = chunk.addChild(new PIXI.Sprite.from(`${texture}`))
@@ -268,6 +276,9 @@
                 }
               //Cache if needed
                 if (cache)
+                  chunk.cacheAsBitmap = true
+              //Cache if not animated
+                if (!flags.animated)
                   chunk.cacheAsBitmap = true
               //Fade
                 this.world.app.tween.fade({target:chunk, change:"alpha", from:0, to:1, duration:15})

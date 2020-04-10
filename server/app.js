@@ -2,6 +2,14 @@
   const express = require("express")
   const app = express()
   const argv = require("minimist")(process.argv.slice(2))
+  const path = require("path")
+  const colors = require("colors")
+
+//Dev mode
+  if (argv.dev) {
+    console.log("Launching in dev environment".cyan)
+    app.get("/js/gracidea.js", (req, res) => res.sendFile(path.join(__dirname, "..", "client/src/gracidea.js")))
+  }
 
 //Serve client files
   app.use("/", express.static("client"))
