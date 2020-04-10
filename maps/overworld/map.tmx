@@ -41588,7 +41588,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="2" name="02-ground-primary" width="100" height="100">
+ <layer id="2" name="01-ground-primary" width="100" height="100">
   <data encoding="csv">
    <chunk x="192" y="-1008" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -43536,7 +43536,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="3" name="03-ground-secondary" width="100" height="100">
+ <layer id="3" name="02-ground-secondary" width="100" height="100">
   <data encoding="csv">
    <chunk x="208" y="-1008" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -44206,7 +44206,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="4" name="04-ground-tertiary" width="100" height="100">
+ <layer id="4" name="03-ground-tertiary" width="100" height="100">
   <data encoding="csv"/>
  </layer>
  <layer id="5" name="05-ground-limits" width="100" height="100">
