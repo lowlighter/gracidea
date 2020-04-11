@@ -105,3 +105,4 @@ dist
 
 # Additional ignores
 /tmp
+/client/js/build
