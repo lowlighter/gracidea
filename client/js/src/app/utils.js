@@ -2,15 +2,28 @@
   import World from "./../world/world.js"
 
 /** 
- * Utilitaires functions.
+ * Utilitaries functions.
  */
   export default {
     //Basename
       basename({path, extension}) { return path.substring(1+path.lastIndexOf("/")).replace(/(\..+?)$/, extension ? "$1" : "") },
     //Map get or set
       mget({map, key, create}) { return (!map.has(key) && map.set(key, create(key))), map.get(key) },
-    //Render coordinates
-      rc(c) { return c*World.Chunk.tile.size },
     //Compute distance between two points
       dist(a, b) { return Math.sqrt((b.x - a.x)**2 + (b.y - a.y)**2) },
+    //Converters
+      to:{
+        //Coordinates
+          coord:{
+            //Pixels
+              px(c) { return c*World.Chunk.tile.size },
+            //Tiles
+              tile(c) { return Math.floor(c/World.Chunk.tile.size) },
+          }
+      },
+    //Sync two objects
+      sync({a, b}) {
+        for (let key in b)
+          a[key] = b[key]
+      }
   }

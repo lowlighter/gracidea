@@ -1,31 +1,41 @@
 //Imports
   import World from "./../world/world.js"
   import settings from "./settings.js"
+  import u from "./utils.js"
 
 /** 
  * Application.
+ * 
+ * This is the main handler for the application.
+ * It instantiates renderer, viewport, controller, params and other stuff.
  */
   export default class App {
-    //App is ready
+    //Promise which tell if app is ready
       ready = new Promise(solve => null)
     //Data
       data = {
-        user:{
-          position:{x:0, y:0}
-        },
-        maps:[],
-        show:{
-          map:false
-        },
-        lang:{},
-        ready:false
+        //User data
+          user:{
+            //User position
+              position:{x:0, y:0}
+          },
+        //Maps data (like locations and interests points)
+          maps:[],
+        //Show states
+          show:{
+            map:false
+          },
+        //Lang data
+          lang:{},
+        //Ready flag
+          ready:false
       }
     //Methods
       methods = {
         //Move camera
           camera:({x, y, offset}) => this.world.camera({x, y, offset}),
         //Update user position
-          update:() => this.data.user.position = {x:~~(this.view.center.x/World.Chunk.tile.size), y:~~(this.view.center.y/World.Chunk.tile.size)},
+          update:() => this.data.user.position = {x:u.to.coord.tile(this.view.center.x), y:u.to.coord.tile(this.view.center.y)},
         //Render world
           render:() => this.world.render(),
         //Redirect
@@ -48,8 +58,20 @@
       view = this.renderer.stage.addChild(this.viewport)
     //Loaders
       static loader = {renderer:PIXI.Loader.shared}
-    //Get params
-      GET = new URLSearchParams(window.location.search)
+    //Params
+      params = {
+        //Get params
+          get:{
+            //Update params
+              update:(properties) => {
+                for (let [key, value] of Object.entries(properties))
+                  this.params.get.map.set(key, value)
+                window.history.pushState("", "", `/?${this.params.get.map.toString()}`)
+              },
+            //Params map
+              map:new URLSearchParams(window.location.search),
+          } 
+      }
     //Constructor
       constructor({world}) {
         //Apply settings
@@ -67,12 +89,11 @@
             await this.world.load.world()
             App.loader.renderer.load(async () => {
               await this.world.load.sea()
-              await this.world.render({delay:0})
-              this.methods.camera(this.GET.has("x")&&this.GET.has("y") ? {x:Number(this.GET.get("x"))||0, y:Number(this.GET.get("y"))||0, offset:{x:0, y:0}} : {x:329, y:-924})
+              this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x"))||0, y:Number(this.params.get.map.get("y"))||0, offset:{x:0, y:0}} : {x:329, y:-924})
               this.methods.update()
-              this.data.ready = true
-              this.data.lang = (await axios.get(`/lang/${this.GET.get("lang")||"en"}.json`)).data
+              this.data.lang = (await axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)).data
               solve()
+              this.data.ready = true
             })
           })
       }

@@ -39,6 +39,10 @@
         </transition>
       </div>
       <div class="view"></div>
+      <div class="loading" v-if="!ready">
+        <img src="imgs/icons/loading.gif" alt="">
+        Loading
+      </div>
     </template>
   </main>
 
