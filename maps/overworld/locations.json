@@ -6,7 +6,8 @@
       {"id":"petalburg", "type":"city", "x":264, "y":-966, "css":{"x":12, "y":58}},
       {"id":"oldale", "type":"city", "x":330, "y":-956, "css":{"x":20, "y":58}},
       {"id":"littleroot", "type":"city", "x":329, "y":-924, "css":{"x":20, "y":70}},
-      {"id":"dewford", "type":"city", "x":266, "y":-842, "css":{"x":14, "y":78}}
+      {"id":"dewford", "type":"city", "x":266, "y":-842, "css":{"x":14, "y":78}},
+      {"id":"rustboro", "type":"city", "x":220, "y":-1054, "css":{"x":8, "y":48}}
     ]
   },
   {

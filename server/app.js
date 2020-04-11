@@ -9,6 +9,7 @@
   if (argv.dev) {
     console.log("Launching in dev environment".cyan)
     app.get("/js/gracidea.js", (req, res) => res.sendFile(path.join(__dirname, "..", "client/src/gracidea.js")))
+    app.get("/maps/:map/tileset.textures.png", (req, res) => res.sendFile(path.join(__dirname, "..", "/maps/", req.params.map,"/tileset.textures.raw.png")))
   }
 
 //Serve client files
