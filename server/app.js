@@ -8,7 +8,8 @@
 //Dev mode
   if (argv.dev) {
     console.log("Launching in dev environment".cyan)
-    app.get("/js/gracidea.js", (req, res) => res.sendFile(path.join(__dirname, "..", "client/src/gracidea.js")))
+    app.get("/js/gracidea.min.js", (req, res) => res.sendFile(path.join(__dirname, "..", "client/js/src/gracidea.js")))
+    app.use("/js", express.static("client/js/src"))
     app.get("/maps/:map/tileset.textures.png", (req, res) => res.sendFile(path.join(__dirname, "..", "/maps/", req.params.map,"/tileset.textures.raw.png")))
   }
 
