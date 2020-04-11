@@ -106,3 +106,4 @@ dist
 # Additional ignores
 /tmp
 /client/js/build
+/client/js/gracidea.js

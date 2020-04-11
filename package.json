@@ -7,9 +7,10 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server/app.js",
     "start-dev": "node server/app.js --dev 1",
-    "build": "npx run-s build-transpile build-bundle",
-    "build-bundle": "npx rollup --input client/js/build/gracidea.js --file client/js/gracidea.min.js --format iife",
-    "build-transpile": "npx babel client/js/src --out-dir client/js/build/ --plugins \"@babel/proposal-class-properties\" --presets minify --no-comments",
+    "build": "npx run-s build-transpile build-bundle build-minify",
+    "build-bundle": "npx rollup --input client/js/build/gracidea.js --file client/js/gracidea.js --format iife",
+    "build-minify": "npx babel client/js/gracidea.js --presets minify --out-file gracidea.min.js",
+    "build-transpile": "npx babel client/js/src --out-dir client/js/build/ --plugins \"@babel/proposal-class-properties\" --no-comments",
     "jsprite-overworld": "node utils/tileset-json.js --margin --spacing 2 --destination maps/overworld/tileset.textures.json",
     "usprite-overworld": "node utils/tileset.js --margin 2 --spacing 2 --extrusion 1 --source maps/overworld/tileset.textures.raw.png"
   },
