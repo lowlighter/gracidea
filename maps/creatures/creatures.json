@@ -1,8 +1,24 @@
 {"frames": {
 
+"mew_0":
+{
+	"frame": {"x":27,"y":1,"w":23,"h":21},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":7,"w":23,"h":21},
+	"sourceSize": {"w":32,"h":32}
+},
+"mew_1":
+{
+	"frame": {"x":1,"y":1,"w":24,"h":21},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":5,"y":7,"w":24,"h":21},
+	"sourceSize": {"w":32,"h":32}
+},
 "mudkip_0":
 {
-	"frame": {"x":94,"y":1,"w":21,"h":19},
+	"frame": {"x":50,"y":24,"w":21,"h":19},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":11,"w":21,"h":19},
@@ -10,15 +26,15 @@
 },
 "mudkip_1":
 {
-	"frame": {"x":117,"y":1,"w":19,"h":21},
-	"rotated": true,
+	"frame": {"x":52,"y":1,"w":19,"h":21},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":9,"w":19,"h":21},
 	"sourceSize": {"w":32,"h":32}
 },
 "poochyena_0":
 {
-	"frame": {"x":70,"y":1,"w":22,"h":19},
+	"frame": {"x":26,"y":24,"w":22,"h":19},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":10,"w":22,"h":19},
@@ -26,7 +42,7 @@
 },
 "poochyena_1":
 {
-	"frame": {"x":1,"y":1,"w":22,"h":20},
+	"frame": {"x":73,"y":1,"w":22,"h":20},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":10,"w":22,"h":20},
@@ -34,7 +50,7 @@
 },
 "wurmple_0":
 {
-	"frame": {"x":25,"y":1,"w":20,"h":18},
+	"frame": {"x":73,"y":23,"w":20,"h":18},
 	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":6,"y":12,"w":20,"h":18},
@@ -42,29 +58,30 @@
 },
 "wurmple_1":
 {
-	"frame": {"x":140,"y":1,"w":19,"h":17},
-	"rotated": true,
+	"frame": {"x":93,"y":26,"w":19,"h":17},
+	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":6,"y":13,"w":19,"h":17},
 	"sourceSize": {"w":32,"h":32}
 },
 "zigzagoon_0":
 {
-	"frame": {"x":159,"y":1,"w":23,"h":18},
-	"rotated": false,
+	"frame": {"x":97,"y":1,"w":23,"h":18},
+	"rotated": true,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":12,"w":23,"h":18},
 	"sourceSize": {"w":32,"h":32}
 },
 "zigzagoon_1":
 {
-	"frame": {"x":45,"y":1,"w":23,"h":19},
+	"frame": {"x":1,"y":24,"w":23,"h":19},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":5,"y":10,"w":23,"h":19},
 	"sourceSize": {"w":32,"h":32}
 }},
 "animations": {
+	"mew": ["mew_0","mew_1"],
 	"mudkip": ["mudkip_0","mudkip_1"],
 	"poochyena": ["poochyena_0","poochyena_1"],
 	"wurmple": ["wurmple_0","wurmple_1"],
@@ -75,8 +92,8 @@
 	"version": "1.0",
 	"image": "creatures.png",
 	"format": "RGBA8888",
-	"size": {"w":183,"h":22},
+	"size": {"w":116,"h":44},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:8681598206593edabec3ecf6ffd837f0:4fb3c623c62981ebbaa3f00b5c4e1d32:f41c7e12db68dcb339658de4dbfb6fc0$"
+	"smartupdate": "$TexturePacker:SmartUpdate:d524fcabd66638516bddb729a0af6877:2fa9eca3dd57c43afddbe794750a62b9:f41c7e12db68dcb339658de4dbfb6fc0$"
 }
 }

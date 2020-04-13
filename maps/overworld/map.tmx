@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="16" nextobjectid="7">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="16" nextobjectid="8">
  <editorsettings>
   <export target="map.json" format="json"/>
  </editorsettings>
@@ -60767,41 +60767,44 @@
   </data>
  </layer>
  <objectgroup id="15" name="21-wild-areas">
-  <object id="3" name="3-101-1" x="5216" y="-15040">
+  <object id="3" name="3-101-1" type="wild" x="5216" y="-15040">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
     <property name="pk_wurmple" type="float" value="0.45"/>
     <property name="pk_zigzagoon" type="float" value="0.1"/>
-    <property name="type" value="wild"/>
    </properties>
    <polygon points="0,0 32,0 32,16 48,16 48,32 64,32 64,64 48,64 48,80 0,80 0,48 -32,48 -32,16 0,16"/>
   </object>
-  <object id="4" name="3-101-2" x="5360" y="-15088">
+  <object id="4" name="3-101-2" type="wild" x="5360" y="-15088">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
     <property name="pk_wurmple" type="float" value="0.45"/>
     <property name="pk_zigzagoon" type="float" value="0.1"/>
-    <property name="type" value="wild"/>
    </properties>
    <polygon points="0,0 32,0 32,-16 64,-16 64,0 80,0 80,16 96,16 96,64 80,64 80,96 48,96 48,64 16,64 16,48 0,48 0,0"/>
   </object>
-  <object id="5" name="3-101-3" x="5376" y="-15152">
+  <object id="5" name="3-101-3" type="wild" x="5376" y="-15152">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
     <property name="pk_wurmple" type="float" value="0.45"/>
     <property name="pk_zigzagoon" type="float" value="0.1"/>
-    <property name="type" value="wild"/>
    </properties>
    <polygon points="0,0 16,0 16,16 64,16 64,0 96,0 96,-32 64,-32 64,-64 16,-64 16,-48 0,-48"/>
   </object>
-  <object id="6" name="3-101-4" x="5248" y="-15136">
+  <object id="6" name="3-101-4" type="wild" x="5248" y="-15136">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
     <property name="pk_wurmple" type="float" value="0.45"/>
     <property name="pk_zigzagoon" type="float" value="0.1"/>
-    <property name="type" value="wild"/>
    </properties>
    <polygon points="0,0 0,-16 16,-16 16,-32 32,-32 32,-64 16,-64 16,-80 -32,-80 -32,-48 -64,-48 -64,-16 -32,-16 -32,0"/>
+  </object>
+  <object id="7" name="3-999-1" type="wild" x="-80" y="-160">
+   <properties>
+    <property name="max_creatures" type="int" value="1"/>
+    <property name="pk_mew" type="float" value="1"/>
+   </properties>
+   <polygon points="0,0 192,0 192,80 176,80 176,112 160,112 160,128 112,128 112,144 64,144 64,128 32,128 32,112 0,112 0,96 -16,96 -16,16 0,16 0,0"/>
   </object>
  </objectgroup>
 </map>

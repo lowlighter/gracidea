@@ -31,6 +31,11 @@
             this.species[`${p}-${p+dp}`] = name.replace(Wild.species.property, "")
             p = dp
           }
+        //Spawn parameters
+          this.spawns = {
+            max:{creatures:this.properties.max_creatures||this.area.size/8},
+            probability:0.4
+          }
       }
 
     //Update
@@ -38,7 +43,7 @@
         //Heritage
           await super.update(...arguments)
         //Add creature if possible
-          if ((this.creatures.size < this.area.size/8)&&(Math.random() < 0.4)) {
+          if ((this.creatures.size < this.spawns.max.creatures)&&(Math.random() < this.spawns.probability)) {
             //Generate a species
               let species = null
               const r = Math.random()

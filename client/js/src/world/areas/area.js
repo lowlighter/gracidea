@@ -24,7 +24,7 @@
     //Load
       async load({object:data}) {
         //Load data
-          const {polygon:points, x:X, y:Y, properties} = data
+          const {polygon:points, x:X, y:Y, properties = []} = data
         //Save properties
           this.properties = {}
           properties.map(({name, value}) => this.properties[name] = value)
@@ -113,8 +113,7 @@
     //Create area from
       static from({world, key, object}) {
         //Retrieve type
-          let type = "?" 
-          try { type = object.properties.filter(property => property.name === "type")[0].value } catch { console.warn(`Undefined type for object ${JSON.stringify(object)}`) }
+          const {type} = object
         //Wild area
           if (type === "wild")
             return new Area.Wild(...arguments)
