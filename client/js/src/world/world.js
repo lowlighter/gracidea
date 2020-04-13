@@ -53,10 +53,11 @@
             global:{
               sea:this.sprite.addChild(new PIXI.Container()),
               world:this.sprite.addChild(new PIXI.Container()),
-              data:this.sprite.addChild(new PIXI.Container()),
               characters:this.sprite.addChild(new PIXI.Container()),
+              areas:this.sprite.addChild(new PIXI.Container()),
             }
           }
+          this.layers.global.characters.visible = false
         //Update static values
           Area.Wild = Wild
       }
@@ -117,7 +118,7 @@
       }
 
     //Render world
-      async render({center = this.app.data.user.position, delay = 100, radius = "auto", offset  = this.origin, force = false, areas = true} = {}) {
+      async render({center = this.app.data.user.position, delay = 100, radius = "auto", offset  = this.origin, force = false} = {}) {
         //Delay rendering
           clearTimeout(this._render)
           this._render = setTimeout(async () => {
@@ -131,20 +132,20 @@
               const renderable = this.qt.chunks.get({x:center.x-radius, y:center.y-radius, width:2*radius, height:2*radius})
               const animated = new Set()
               const renders = []
-              //Clear rendered chunks
+              //Clear rendered chunks and character layers
                 const rendered = [...this.layers.global.world.children]
                 this.layers.global.world.removeChildren()
+                
               //Render chunks
                 for (let chunk of renderable)
                   renders.push(chunk.render({force, animated, fade:!rendered.includes(chunk.sprite)}))
-              //Render areas if needed
-                if (areas)
-                  renders.push(...[...this.areas.values()].map(area => area.update({center, radius})))
             //Play animated tiles after rendering
               await Promise.all(renders)
               animated.forEach(tile => (tile.play(), tile.parent.cacheAsBitmap = false))
             //Refresh world sea position 
               this.sea.refresh(this.app.data.user.position)
+            //Display characters layer
+              this.layers.global.characters.visible = true
             //Update parameters
               this.app.params.get.update({x:this.app.data.user.position.x, y:this.app.data.user.position.y})
           }, delay)
@@ -165,12 +166,16 @@
 
     //Ticker for world
       ticker(dt) {
-        //Update character each second
+        //Update each second
           if (App.time - this.cache.ticked > 1000) {
-            const center = this.app.data.user.position, radius = Math.max(u.to.coord.tile(this.app.renderer.view.height), u.to.coord.tile(this.app.renderer.view.width))
-            const areas = this.qt.areas.get({x:center.x-radius, y:center.y-radius, width:2*radius, height:2*radius})
-            areas.forEach(area => area.update({center, radius}))
-            this.cache.ticked = App.time
+            //Prepare update
+              const center = this.app.data.user.position
+              const radius = Math.max(u.to.coord.tile(this.app.renderer.view.height), u.to.coord.tile(this.app.renderer.view.width))
+            //Update areas
+              const areas = this.qt.areas.get({x:center.x-radius, y:center.y-radius, width:2*radius, height:2*radius})
+              areas.forEach(area => area.update({center, radius}))
+            //Update last ticked time
+              this.cache.ticked = App.time
           }
       }
 

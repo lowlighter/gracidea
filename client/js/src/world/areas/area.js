@@ -18,7 +18,7 @@
         //Sprite creation
           this.sprite = new PIXI.Container()
           this.sprite.visible = false
-          this.world.layers.global.data.addChild(this.sprite)
+          this.world.layers.global.areas.addChild(this.sprite)
       }
       
     //Load
