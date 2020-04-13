@@ -18,6 +18,7 @@
         //Sprite creation
           this.sprite = new PIXI.Sprite()
           this.render({delay:0})
+          this.world.layers.global.sea.addChild(this.sprite)
       }
 
     //Render

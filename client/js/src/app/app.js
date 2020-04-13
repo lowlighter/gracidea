@@ -81,6 +81,7 @@
               map:new URLSearchParams(window.location.search),
           } 
       }
+
     //Constructor
       constructor({world}) {
         //Apply settings
@@ -95,11 +96,15 @@
           this.view.scale.set(1)
         //Deffered constructor
           this.ready = new Promise(async solve => {
+            this.data.loading.state = "Loading world..."
             await this.world.load.world()
             App.loader.renderer.load(async () => {
+              this.data.loading.state = "Loading sea..."
               await this.world.load.sea()
+              this.data.loading.state = "Loading camera..."
               this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x"))||0, y:Number(this.params.get.map.get("y"))||0, offset:{x:0, y:0}} : {x:329, y:-924})
               this.methods.update()
+              this.data.loading.state = "Loading lang..."
               this.data.lang = (await axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)).data
               solve()
               this.data.loading.done = true
@@ -131,6 +136,9 @@
               this.renderer.ticker.add(tween)
           }
       }
+
+    //App time
+      static get time() { return PIXI.Ticker.shared.lastTime }
 
     //Loaders
       static loader = {renderer:PIXI.Loader.shared}

@@ -30,16 +30,6 @@
           chunks:new Quadtree({max:{items:100, depth:100}}),
       }
 
-      layers = {
-        global:{
-          data:null
-        }
-      }
-
-      cache = {
-        rendered:new Set()
-      }
-
     //Constructor
       constructor({app, name}) {
         //Heritage
@@ -51,9 +41,12 @@
           this.sprite = new PIXI.Container()
           this.sprite.name = this.name
           this.app.viewport.addChild(this.sprite)
+        //Layers creation
           this.layers = {
             global:{
-              data:this.sprite.addChild(new PIXI.Container())
+              sea:this.sprite.addChild(new PIXI.Container()),
+              world:this.sprite.addChild(new PIXI.Container()),
+              data:this.sprite.addChild(new PIXI.Container()),
             }
           }
       }
@@ -100,7 +93,6 @@
           sea:async () => {
             //Create sea
               this.sea = new World.Sea({world:this})
-              this.sprite.addChildAt(this.sea.sprite, 0)
           }
       }
 
@@ -129,14 +121,15 @@
               const renderable = this.qt.chunks.get({x:center.x-radius, y:center.y-radius, width:2*radius, height:2*radius})
               const animated = new Set()
               const renders = []
-              //Clear rendered chunks if needed
-                this.cache.rendered.forEach(chunk => !renderable.has(chunk) ? chunk.render({render:false}) : null)
+              //Clear rendered chunks
+                const rendered = [...this.layers.global.world.children]
+                this.layers.global.world.removeChildren()
               //Render chunks
                 for (let chunk of renderable)
-                  renders.push(chunk.render({force, animated}))
-            //Render data if needed
-              if (data)
-                renders.push(...[...this.data.values()].map(value => value.render()))
+                  renders.push(chunk.render({force, animated, fade:!rendered.includes(chunk.sprite)}))
+              //Render data if needed
+                if (data)
+                  renders.push(...[...this.data.values()].map(value => value.render()))
             //Play animated tiles after rendering
               await Promise.all(renders)
               animated.forEach(tile => (tile.play(), tile.parent.cacheAsBitmap = false))

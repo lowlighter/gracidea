@@ -25,8 +25,6 @@
         //Sprite creation
           this.sprite = new PIXI.Container()
           this.sprite.name = this.key
-          this.sprite.visible = false
-          this.world.sprite.addChild(this.sprite)
       }
 
     //Load a chunk layer 
@@ -43,12 +41,9 @@
       }
 
     //Render chunk
-      async render({force, animated, cache, render = true}) {
-        //Disable rendering if asked
-          if (!render) {
-            this.sprite.visible = false
-            return
-          }
+      async render({force, animated, cache, fade}) {
+        //Global flags
+          const flags = {rendered:false}
         //Render layers
           for (let [layer, {x, y, width, height, data:tiles}] of this.layers.entries()) {
             //Skip if ignored layer
@@ -59,12 +54,14 @@
               chunk.name = layer
               chunk.position.set(u.to.coord.px(x), u.to.coord.px(y))
             //Skip rendering if already rendered
-              if ((chunk.children.length)&&(!force))
-                continue 
+              if ((chunk.children.length)&&(!force)) {
+                flags.rendered = true
+                continue
+              }
             //Render tiles
-              const flags = {}
+              flags.rendered = true
+              flags.local = {}
               chunk.cacheAsBitmap = false
-              chunk.alpha = 0
               chunk.removeChildren()
               for (let [index, texture] of tiles.entries()) {
                 //Skip if unknown texture
@@ -77,7 +74,7 @@
                     tile.animationSpeed = textures.animated[texture].speed
                     if (animated) {
                       animated.add(tile)
-                      flags.animated = true
+                      flags.local.animated = true
                     }
                   }
                 //Static texture
@@ -91,14 +88,17 @@
               if (cache)
                 chunk.cacheAsBitmap = true
             //Cache sprite if not animated
-              if (!flags.animated)
+              if (!flags.local.animated)
                 chunk.cacheAsBitmap = true
-            //Fading
-              this.sprite.visible = true
-              this.world.app.tween.fade({target:chunk, change:"alpha", from:0, to:1, duration:15})
           }
-        //Add rendered chunk in world cache
-          this.world.cache.rendered.add(this)
+        //Additional processing if chunk has been rendered
+          if (flags.rendered) {
+            //Fade if needed
+              if (fade)
+                this.world.app.tween.fade({target:this.sprite, change:"alpha", from:0, to:1, duration:15})
+            //Add sprite
+              this.world.layers.global.world.addChild(this.sprite)
+          }
       }
 
     //Chunk key generator
