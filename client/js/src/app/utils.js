@@ -30,5 +30,13 @@
       sync({a, b}) {
         for (let key in b)
           a[key] = b[key]
+      },
+
+    //Shuffle an array
+      shuffle(array) {
+        array = [...array]
+        for (let i = array.length - 1, j = 0; i > 0; i--) 
+          [array[i], array[(j = Math.floor(Math.random() * (i + 1)))]] = [array[j], array[i]]
+        return array
       }
   }

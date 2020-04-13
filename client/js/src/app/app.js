@@ -104,9 +104,10 @@
               this.data.loading.state = "Loading camera..."
               this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x"))||0, y:Number(this.params.get.map.get("y"))||0, offset:{x:0, y:0}} : {x:329, y:-924})
               this.methods.update()
+              this.data.loading.state = "Loading life..."
+              this.world.start()
               this.data.loading.state = "Loading lang..."
               this.data.lang = (await axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)).data
-              solve()
               this.data.loading.done = true
             })
           })
@@ -117,21 +118,33 @@
         //Quad in out
           quadInOut:(t) => t*t,
         //Fade
-          fade:({target, change, from, to, duration}) => {
+          fade:({target, from, to, duration, callback}) => {
             //Prepare tween
-              let t = 0, cached = target.cacheAsBitmap
+              const cached = target.cacheAsBitmap
               target.cacheAsBitmap = false
+            //Tween
+              this.tween.property({target, change:"alpha", from, to, duration, callback:() => {  
+                target.cacheAsBitmap = cached
+                if (callback)
+                  callback()
+              }})
+          },
+        //Property
+          property:({target, change, from, to, duration, callback}) => {
+            //Prepare tween
+              let t = 0, op = to > from ? Math.min : Math.max
             //Tween
               const tween = (delta) => {
                 //Completed
                   if ((t += delta)/duration >= 1) {
                     target[change] = to
-                    target.cacheAsBitmap = cached
                     this.renderer.ticker.remove(tween)
+                    if (callback)
+                      callback()
                   }
                 //Pending
                   else
-                    target[change] = Math.min(to, from + (to - from) * this.tween.quadInOut(t/duration))
+                    target[change] = op(to, from + (to - from) * this.tween.quadInOut(t/duration))
               }
               this.renderer.ticker.add(tween)
           }
@@ -142,4 +155,7 @@
 
     //Loaders
       static loader = {renderer:PIXI.Loader.shared}
+
+    //Debug mode
+      static debug = false
   }
