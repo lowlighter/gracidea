@@ -7,12 +7,14 @@
  * Application.
  * 
  * This is the main handler for the application.
- * It instantiates renderer, viewport, controller, params and other stuff.
+ * It instantiates renderer, viewport, controller, url params and other stuff.
  */
   export default class App {
+
     //Promise which tell if app is ready
       ready = new Promise(solve => null)
-    //Data
+
+    //Data reference
       data = {
         //User data
           user:{
@@ -27,10 +29,14 @@
           },
         //Lang data
           lang:{},
-        //Ready flag
-          ready:false
+        //Loading status
+          loading:{
+            state:"Loading...",
+            done:false
+          }
       }
-    //Methods
+
+    //Methods reference (also used by controller)
       methods = {
         //Move camera
           camera:({x, y, offset}) => this.world.camera({x, y, offset}),
@@ -41,11 +47,17 @@
         //Redirect
           redirect:(url) => window.location.replace(url)
       }
-    //Renderer
+
+    //Renderer reference
       renderer = new PIXI.Application({width:document.body.clientWidth, height:document.body.clientHeight, transparent:true, resizeTo:window, antialias:true})
-    //Viewport
+  
+    //Viewport reference
       viewport = new Viewport.Viewport({screenWidth: window.innerWidth, screenHeight: window.innerHeight, interaction:this.renderer.renderer.plugins.interaction})
-    //Controller
+  
+    //View reference
+      view = this.renderer.stage.addChild(this.viewport)
+
+    //Controller reference
       controller = new Vue({
         //Selector
           el:"#app", 
@@ -54,11 +66,8 @@
         //Mounted callback
           mounted:() => document.querySelector("#app .view").appendChild(this.renderer.view),
       })
-    //View
-      view = this.renderer.stage.addChild(this.viewport)
-    //Loaders
-      static loader = {renderer:PIXI.Loader.shared}
-    //Params
+
+    //URL params
       params = {
         //Get params
           get:{
@@ -93,10 +102,11 @@
               this.methods.update()
               this.data.lang = (await axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)).data
               solve()
-              this.data.ready = true
+              this.data.loading.done = true
             })
           })
       }
+
     //Tweening
       tween = {
         //Quad in out
@@ -121,4 +131,7 @@
               this.renderer.ticker.add(tween)
           }
       }
+
+    //Loaders
+      static loader = {renderer:PIXI.Loader.shared}
   }

@@ -5,12 +5,16 @@
  * Utilitaries functions.
  */
   export default {
+
     //Basename
       basename({path, extension}) { return path.substring(1+path.lastIndexOf("/")).replace(/(\..+?)$/, extension ? "$1" : "") },
+
     //Map get or set
       mget({map, key, create}) { return (!map.has(key) && map.set(key, create(key))), map.get(key) },
+
     //Compute distance between two points
       dist(a, b) { return Math.sqrt((b.x - a.x)**2 + (b.y - a.y)**2) },
+
     //Converters
       to:{
         //Coordinates
@@ -21,6 +25,7 @@
               tile(c) { return Math.floor(c/World.Chunk.tile.size) },
           }
       },
+      
     //Sync two objects
       sync({a, b}) {
         for (let key in b)

@@ -9,7 +9,7 @@
 </head>
 <body>
   <!-- App -->
-  <main id="app" :class="{ready:ready}">
+  <main id="app" :class="{ready:loading.done}">
     <template>
       <div class="ui">
         <header>
@@ -39,9 +39,9 @@
         </transition>
       </div>
       <div class="view"></div>
-      <div class="loading" v-if="!ready">
+      <div class="loading" v-if="!loading.done">
         <img src="imgs/icons/loading.gif" alt="">
-        Loading
+        {{ loading.state }}
       </div>
     </template>
   </main>

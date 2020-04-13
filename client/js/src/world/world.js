@@ -4,6 +4,8 @@
   import Chunk from "./chunk.js"
   import Sea from "./sea.js"
   import Data from "./data.js"
+  import Quadtree from "./../structs/quadtree.js"
+  import Element from "./element.js"
 
 /** 
  * World.
@@ -11,25 +13,51 @@
  * This class is the main renderer for the world.
  * It handles chunks data and rendering, instantiated characters and world data.
  */
-  export default class World {
-    //Origin point (top-left tile)
-      origin = {x:Infinity, y:Infinity}
-    //Boundary point (bottom-right)
-      boundary = {x:-Infinity, y:-Infinity}
-    //World chunks
+  export default class World extends Element {
+
+    //World chunks reference
       chunks = new Map()
-    //World data
+
+    //World data reference
       data = new Map()
-    //World instancied creatures
-      creatures = new Set()
+
+    //World instancied characters reference
+      characters = new Set()
+
+    //Quadtrees reference
+      qt = {
+        //Chunks quadtree
+          chunks:new Quadtree({max:{items:100, depth:100}}),
+      }
+
+      layers = {
+        global:{
+          data:null
+        }
+      }
+
+      cache = {
+        rendered:new Set()
+      }
+
     //Constructor
       constructor({app, name}) {
-        this.name = name
-        this.sprite = new PIXI.Container()
-        this.sprite.name = this.name
-        this.app = app
-        this.app.viewport.addChild(this.sprite)
+        //Heritage
+          super(...arguments)
+        //References
+          this.name = this.key = name
+          this.app = app
+        //Sprite creation
+          this.sprite = new PIXI.Container()
+          this.sprite.name = this.name
+          this.app.viewport.addChild(this.sprite)
+          this.layers = {
+            global:{
+              data:this.sprite.addChild(new PIXI.Container())
+            }
+          }
       }
+
     //Loaders
       load = {
         //Load world
@@ -51,20 +79,22 @@
                   //Object group
                     case "objectgroup":{
                       for (let object of layer.objects)
-                        await u.mget({map:this.data, key:object.name, create:key => new World.Data({world:this, key, object})})
+                        await u.mget({map:this.data, key:object.name, create:key => new World.Data({world:this, key})}).load({object})
                       break
                     }
-                }      
+                }
             //Update world boundaries
               this.app.viewport.left = u.to.coord.px(this.origin.x)
               this.app.viewport.top = u.to.coord.px(this.origin.y)
-              this.app.viewport.worldWidth = u.to.coord.px(Math.abs(this.boundary.x - this.origin.x))
-              this.app.viewport.worldHeight = u.to.coord.px(Math.abs(this.boundary.y - this.origin.y))
-            //Update sprite position and create sprite
-              this.sprite.position.set(u.to.coord.px(-this.origin.x), u.to.coord.px(-this.origin.y))
-              this.sprite.data = this.sprite.addChild(new PIXI.Container())
+              this.app.viewport.worldWidth = u.to.coord.px(this.width)
+              this.app.viewport.worldHeight = u.to.coord.px(this.height)
             //Update maps locations
               this.app.data.maps = (await axios.get(`/maps/${this.name}/locations.json`)).data
+            //Update quadtrees
+              this.qt.chunks.resize({...this.origin, width:this.width, height:this.height}).clear()
+              this.chunks.forEach(chunk => this.qt.chunks.add(chunk))
+            //Update sprite position and create sprite
+              this.sprite.position.set(u.to.coord.px(-this.origin.x), u.to.coord.px(-this.origin.y))
           },
         //Load sea
           sea:async () => {
@@ -73,7 +103,8 @@
               this.sprite.addChildAt(this.sea.sprite, 0)
           }
       }
-    //Create units
+
+    //Create entities
       add = {
         //Add creature
           creature() {
@@ -82,6 +113,7 @@
             this.sprite.addChild(creature.sprite)
           }
       }
+
     //Render world
       async render({center = this.app.data.user.position, delay = 100, radius = "auto", offset  = this.origin, force = false, data = true} = {}) {
         //Delay rendering
@@ -93,37 +125,47 @@
             //Apply offset
               if (offset)
                 center = {x:center.x + offset.x, y:center.y + offset.y}
-            //Render chunks
+            //Prepare rendering
+              const renderable = this.qt.chunks.get({x:center.x-radius, y:center.y-radius, width:2*radius, height:2*radius})
               const animated = new Set()
               const renders = []
-              for (let chunk of this.chunks.values())
-                renders.push(chunk.render({center, radius, force, animated}))
+              //Clear rendered chunks if needed
+                this.cache.rendered.forEach(chunk => !renderable.has(chunk) ? chunk.render({render:false}) : null)
+              //Render chunks
+                for (let chunk of renderable)
+                  renders.push(chunk.render({force, animated}))
             //Render data if needed
               if (data)
                 renders.push(...[...this.data.values()].map(value => value.render()))
             //Play animated tiles after rendering
               await Promise.all(renders)
               animated.forEach(tile => (tile.play(), tile.parent.cacheAsBitmap = false))
-
+            //Refresh world sea position 
+              this.sea.refresh(this.app.data.user.position)
             //Update parameters
               this.app.params.get.update({x:this.app.data.user.position.x, y:this.app.data.user.position.y})
           }, delay)
-          this.sea.refresh(this.app.data.user.position)
       }
+
     //Set camera position
       camera({x, y, offset = this.origin}) {
         this.app.viewport.moveCenter({x:u.to.coord.px(x-offset.x), y:u.to.coord.px(y-offset.y)})
         this.app.methods.update()
         this.render()
       }
+
     //Layers options
       static layers = {
         ignored:new Set(["00-boundaries"])
       }
+
     //Chunk class reference
       static Chunk = Chunk
+
     //Sea class reference
       static Sea = Sea
+      
     //Data class reference
       static Data = Data
+
   }

@@ -2,6 +2,7 @@
   import World from "./world.js"
   import u from "./../app/utils.js"
   import textures from "./../app/textures.js"
+  import Element from "./element.js"
 
 /** 
  * World chunk.
@@ -9,28 +10,45 @@
  * This class allows to split the world into smaller chunks for improved rendering.
  * Chunk are also divided internally into layers.
  */
-  export default class Chunk {
-    //Layers data
+  export default class Chunk extends Element {
+
+    //Layers reference (contains {x, y, width, height, data} of each loaded layer)
       layers = new Map()
+
     //Constructor
       constructor({world, key}) {
-        this.key = key
-        this.world = world
-        this.sprite = new PIXI.Container()
-        this.sprite.name = this.key
-        this.world.sprite.addChild(this.sprite)
+        //Heritage
+          super(...arguments)
+        //References
+          this.key = key
+          this.world = world
+        //Sprite creation
+          this.sprite = new PIXI.Container()
+          this.sprite.name = this.key
+          this.sprite.visible = false
+          this.world.sprite.addChild(this.sprite)
       }
-    //Loader
+
+    //Load a chunk layer 
       async load({layer:{name:layer}, chunk:{x, y, width, height, data}}) {
         //Save layer data
           this.layers.set(layer, {x, y, width, height, data})
+        //Update chunk origin and boundary
+          this.origin = {x:Math.min(x, this.origin.x), y:Math.min(y, this.origin.y)}
+          this.boundary = {x:Math.max(x, this.boundary.x), y:Math.max(y, this.boundary.y)}
         //Update world origin and boundary
           const {origin, boundary} = this.world
-          u.sync({a:origin, b:{x:Math.min(x, origin.x), y:Math.min(y, origin.y)}})
-          u.sync({a:boundary, b:{x:Math.max(x, boundary.x), y:Math.max(y, boundary.y)}})
+          u.sync({a:origin, b:{x:Math.min(this.origin.x, origin.x), y:Math.min(this.origin.y, origin.y)}})
+          u.sync({a:boundary, b:{x:Math.max(this.boundary.x, boundary.x), y:Math.max(this.boundary.y, boundary.y)}})
       }
-    //Render
-      async render({center, radius, force, animated, cache}) {
+
+    //Render chunk
+      async render({force, animated, cache, render = true}) {
+        //Disable rendering if asked
+          if (!render) {
+            this.sprite.visible = false
+            return
+          }
         //Render layers
           for (let [layer, {x, y, width, height, data:tiles}] of this.layers.entries()) {
             //Skip if ignored layer
@@ -40,11 +58,6 @@
               const chunk = this.sprite.getChildByName(layer) || this.sprite.addChild(new PIXI.Container())
               chunk.name = layer
               chunk.position.set(u.to.coord.px(x), u.to.coord.px(y))
-            //Skip rendering if too far
-              if (u.dist(center, {x, y}) > radius) {
-                chunk.removeChildren()
-                continue
-              }
             //Skip rendering if already rendered
               if ((chunk.children.length)&&(!force))
                 continue 
@@ -81,11 +94,16 @@
               if (!flags.animated)
                 chunk.cacheAsBitmap = true
             //Fading
+              this.sprite.visible = true
               this.world.app.tween.fade({target:chunk, change:"alpha", from:0, to:1, duration:15})
           }
+        //Add rendered chunk in world cache
+          this.world.cache.rendered.add(this)
       }
-    //Key
+
+    //Chunk key generator
       static key({x, y}) { return `${x};${y}` }
-    //Tile properties
+
+    //Tile general properties
       static tile = {size:16}
   }

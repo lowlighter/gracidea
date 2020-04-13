@@ -1,22 +1,21 @@
 //Imports
-  import World from "./world.js"
   import u from "./../app/utils.js"
-  import textures from "./../app/textures.js"
 
 /** 
  * World Data.
  */
   export default class Data {
     //Constructor
-      constructor({world, key, object:data}) {
-        this.key = key
-        this.world = world
-        this.sprite = new PIXI.Container()
-        this.load({data})
+      constructor({world, key}) {
+        //references
+          this.key = key
+          this.world = world
+        //Sprite creation
+          this.sprite = new PIXI.Container()
       }
       
     //Load
-      async load({data}) {
+      async load({object:data}) {
         //Load data
           const {polygon:points, x:X, y:Y, properties} = data
         //Save properties
@@ -37,6 +36,6 @@
           this.sprite.removeChildren()
           this.graphics = this.sprite.addChild(new PIXI.Graphics())
           this.graphics.beginFill(0xFF0000, .5).drawPolygon(this.polygons.points).endFill()
-          this.world.sprite.data.addChild(this.sprite)
+          this.world.layers.global.data.addChild(this.sprite)
       }
   }

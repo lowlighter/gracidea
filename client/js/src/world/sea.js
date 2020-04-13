@@ -10,12 +10,16 @@
  * It is rendered once and for all and moved each time camera is moved.
  */
   export default class Sea {
+
     //Constructor
       constructor({world}) {
-        this.world = world
-        this.sprite = new PIXI.Sprite()
-        this.render({delay:0})
+        //References
+          this.world = world
+        //Sprite creation
+          this.sprite = new PIXI.Sprite()
+          this.render({delay:0})
       }
+
     //Render
       async render({delay = 250} = {}) {
         //Delay rendering
@@ -40,6 +44,7 @@
               }
           }, delay)
       }
+
     //Refresh sea
       refresh({x, y}) {
         const {origin} = this.world
@@ -47,6 +52,7 @@
         this.sprite.position.set(u.to.coord.px(origin.x + x), u.to.coord.px(origin.y + y))
         this.world.app.tween.fade({target:this.sprite, change:"alpha", from:0, to:1, duration:15})
       }
+
     //Texture
       static texture = 2374
   }
