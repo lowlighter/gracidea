@@ -96,6 +96,7 @@
           this.view.scale.set(1)
         //Deffered constructor
           this.ready = new Promise(async solve => {
+            const lang = axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)
             this.data.loading.state = "Loading world..."
             await this.world.load.world()
             App.loader.renderer.load(async () => {
@@ -107,7 +108,10 @@
               this.data.loading.state = "Loading life..."
               this.world.start()
               this.data.loading.state = "Loading lang..."
-              this.data.lang = (await axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)).data
+              this.data.lang = (await lang).data
+              this.data.loading.state = "Waiting for first rendering..."
+              await this.world.render({delay:0, fade:false})
+              await this.world.cache.rendered
               this.data.loading.done = true
             })
           })

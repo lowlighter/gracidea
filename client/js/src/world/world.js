@@ -34,7 +34,9 @@
     //Cache
       cache = {
         //Last ticked valued
-          ticked:-Infinity
+          ticked:-Infinity,
+        //Has been rendered once
+          rendered:new Promise(solve => this._rendered = solve),
       }
 
     //Constructor
@@ -135,10 +137,9 @@
               //Clear rendered chunks and character layers
                 const rendered = [...this.layers.global.world.children]
                 this.layers.global.world.removeChildren()
-                
               //Render chunks
                 for (let chunk of renderable)
-                  renders.push(chunk.render({force, animated, fade:!rendered.includes(chunk.sprite)}))
+                  renders.push(chunk.render({force, animated, fade:delay && !rendered.includes(chunk.sprite)}))
             //Play animated tiles after rendering
               await Promise.all(renders)
               animated.forEach(tile => (tile.play(), tile.parent.cacheAsBitmap = false))
@@ -148,6 +149,9 @@
               this.layers.global.characters.visible = true
             //Update parameters
               this.app.params.get.update({x:this.app.data.user.position.x, y:this.app.data.user.position.y})
+            //Update cache rendered value
+              if (this.cache.rendered !== true)
+                (this._rendered(), this.cache.rendered = true)
           }, delay)
       }
 
