@@ -181,6 +181,8 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">raw/mew_0.png</key>
+            <key type="filename">raw/mew_1.png</key>
             <key type="filename">raw/mudkip_0.png</key>
             <key type="filename">raw/mudkip_1.png</key>
             <key type="filename">raw/poochyena_0.png</key>

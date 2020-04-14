@@ -9,13 +9,41 @@
   <terrain name="New Terrain" tile="2604"/>
   <terrain name="New Terrain" tile="3401"/>
   <terrain name="New Terrain" tile="2616"/>
+  <terrain name="New Terrain" tile="2613"/>
  </terraintypes>
+ <tile id="2487" terrain=",,,0"/>
+ <tile id="2488" terrain=",,0,0"/>
+ <tile id="2489" terrain=",,0,"/>
+ <tile id="2490" terrain=",,,1"/>
+ <tile id="2491" terrain=",,1,1"/>
+ <tile id="2492" terrain=",,1,"/>
+ <tile id="2499" terrain=",,,4"/>
+ <tile id="2500" terrain=",,4,4"/>
+ <tile id="2501" terrain=",,4,"/>
  <tile id="2502" terrain=",,,3"/>
  <tile id="2503" terrain=",,3,3"/>
  <tile id="2504" terrain=",,3,"/>
+ <tile id="2600" terrain=",0,,0"/>
+ <tile id="2601" terrain="0,0,0,0"/>
+ <tile id="2602" terrain="0,,0,"/>
+ <tile id="2603" terrain=",1,,1"/>
+ <tile id="2604" terrain="1,1,1,1"/>
+ <tile id="2605" terrain="1,,1,"/>
+ <tile id="2612" terrain=",4,,4"/>
+ <tile id="2613" terrain="4,4,4,4"/>
+ <tile id="2614" terrain="4,,4,"/>
  <tile id="2615" terrain=",3,,3"/>
  <tile id="2616" terrain="3,3,3,3"/>
  <tile id="2617" terrain="3,,3,"/>
+ <tile id="2713" terrain=",0,,"/>
+ <tile id="2714" terrain="0,0,,"/>
+ <tile id="2715" terrain="0,,,"/>
+ <tile id="2716" terrain=",1,,"/>
+ <tile id="2717" terrain="1,1,,"/>
+ <tile id="2718" terrain="1,,,"/>
+ <tile id="2725" terrain=",4,,"/>
+ <tile id="2726" terrain="4,4,,"/>
+ <tile id="2727" terrain="4,,,"/>
  <tile id="2728" terrain=",3,,"/>
  <tile id="2729" terrain="3,3,,"/>
  <tile id="2730" terrain="3,,,"/>
