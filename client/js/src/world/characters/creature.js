@@ -1,6 +1,7 @@
 //Imports
   import NPC from "./npc.js"
   import App from "../../app/app.js"
+  import u from "../../app/utils.js"
 
 /** 
  * Creatures.
@@ -24,7 +25,10 @@
           this.y = y
           this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:15})
         //Lifetime
-          this.lifetime = 16 + Math.floor(16*Math.random())
+          this.lifetime = 16 + Math.floor(u.rand({a:16, b:32}))
+        //Special processing if in water
+          if (this.area.water)
+            this.in.water()
       }
 
     //Textures
@@ -34,7 +38,7 @@
       wander() {
         //Prepare movement
           const {x, y} = this
-          const {dx, dy} = [{dx:0, dy:0}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:-1}, {dx:0, dy:+1}][Math.floor(Math.random()/0.25)]
+          const {dx, dy} = [{dx:0, dy:0}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:-1}, {dx:0, dy:+1}][Math.floor(u.rand()/0.25)]
         //Move if still inside forced area
           if ((dx || dy)&&(this.area.inside({x:x+dx, y:y+dy}))) {
             if (dx) {
@@ -59,6 +63,17 @@
             this.area.creatures.delete(this)
             this.world.app.tween.fade({target:this.sprite, from:1, to:0, duration:15, callback:() => this.destroy()})
           }    
+      }
+
+    //Special processing when inside
+      in = {
+        //When inside water
+          water:() => {
+            //Apply mask
+              const mask = new PIXI.Graphics().beginFill(0x000000).drawRect(-this.sprite.width/2, -this.sprite.height, this.sprite.width, this.sprite.height-12).endFill()
+              this.sprite.addChild(mask)
+              this.sprite.mask = mask       
+          }
       }
 
   }

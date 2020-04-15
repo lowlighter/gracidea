@@ -181,12 +181,36 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">raw/electrike_0.png</key>
+            <key type="filename">raw/electrike_1.png</key>
+            <key type="filename">raw/gulpin_0.png</key>
+            <key type="filename">raw/gulpin_1.png</key>
+            <key type="filename">raw/magikarp_0.png</key>
+            <key type="filename">raw/magikarp_1.png</key>
             <key type="filename">raw/mew_0.png</key>
             <key type="filename">raw/mew_1.png</key>
+            <key type="filename">raw/minun_0.png</key>
+            <key type="filename">raw/minun_1.png</key>
             <key type="filename">raw/mudkip_0.png</key>
             <key type="filename">raw/mudkip_1.png</key>
+            <key type="filename">raw/oddish_0.png</key>
+            <key type="filename">raw/oddish_1.png</key>
+            <key type="filename">raw/pelipper_0.png</key>
+            <key type="filename">raw/pelipper_1.png</key>
+            <key type="filename">raw/plusle_0.png</key>
+            <key type="filename">raw/plusle_1.png</key>
             <key type="filename">raw/poochyena_0.png</key>
             <key type="filename">raw/poochyena_1.png</key>
+            <key type="filename">raw/porygon2_0.png</key>
+            <key type="filename">raw/porygon2_1.png</key>
+            <key type="filename">raw/smeargle_0.png</key>
+            <key type="filename">raw/smeargle_1.png</key>
+            <key type="filename">raw/tentacool_0.png</key>
+            <key type="filename">raw/tentacool_1.png</key>
+            <key type="filename">raw/wailmer_0.png</key>
+            <key type="filename">raw/wailmer_1.png</key>
+            <key type="filename">raw/wingull_0.png</key>
+            <key type="filename">raw/wingull_1.png</key>
             <key type="filename">raw/wurmple_0.png</key>
             <key type="filename">raw/wurmple_1.png</key>
             <key type="filename">raw/zigzagoon_0.png</key>

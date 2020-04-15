@@ -43,10 +43,10 @@
         //Heritage
           await super.update(...arguments)
         //Add creature if possible
-          if ((this.creatures.size < this.spawns.max.creatures)&&(Math.random() < this.spawns.probability)) {
+          if ((this.creatures.size < this.spawns.max.creatures)&&(u.rand() < this.spawns.probability)) {
             //Generate a species
               let species = null
-              const r = Math.random()
+              const r = u.rand()
               for (let p in this.species) {
                 const [a, b] = p.split("-").map(Number)
                 if ((a < r)&&(r < b)) {
@@ -54,13 +54,13 @@
                   break
                 }
               }
-            //Generate spawn point
-              let x = NaN, y = NaN, spawns = u.shuffle(this.area.tiled)
-              for (let spawn of spawns)
-                if (this.inside({x:spawn[0], y:spawn[1]})) {
-                  [x, y] = spawn
+            //Generate spawn point (random point inside polygon)
+              let [x, y] = [u.rand({a:this.origin.x, b:this.boundary.x}), u.rand({a:this.origin.y, b:this.boundary.y, int:true})]
+              for (let i = 0; i < 16; i++, x = u.rand({a:this.origin.x, b:this.boundary.x}), y = u.rand({a:this.origin.y, b:this.boundary.y, int:true}))
+                if (this.inside({x, y}))
                   break
-                }
+                else
+                  [x, y] = [NaN, NaN]
             //Create creature
               if ((species)&&(Number.isFinite(x))&&(Number.isFinite(y))) {
                 const creature = this.world.add.creature({species, x, y, area:this})
@@ -79,6 +79,9 @@
           this.creatures.forEach(creature => creature.destroy())
           this.creatures.clear()
       }
+
+    //Area is water
+      get water() { return this.properties.water }
 
     //Species variable
       static species = {

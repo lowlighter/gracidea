@@ -38,5 +38,11 @@
         for (let i = array.length - 1, j = 0; i > 0; i--) 
           [array[i], array[(j = Math.floor(Math.random() * (i + 1)))]] = [array[j], array[i]]
         return array
-      }
+      },
+
+    //Generate a random number
+      rand({a = 0, b = 1, int = false} = {}) {
+        const rand = a + Math.random()*(b-a)
+        return int ? Math.floor(rand) : rand 
+      },
   }
