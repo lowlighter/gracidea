@@ -95,7 +95,7 @@
           if (flags.rendered) {
             //Fade if needed
               if (fade)
-                this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:15})
+                this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:16})
             //Add sprite
               this.world.layers.global.world.addChild(this.sprite)
           }

@@ -23,9 +23,9 @@
           this.sprite.play()
           this.x = x
           this.y = y
-          this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:15})
+          this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:16})
         //Lifetime
-          this.lifetime = 16 + Math.floor(u.rand({a:16, b:32}))
+          this.lifetime = u.rand({a:16, b:32, int:true})
         //Special processing if in water
           if (this.area.water)
             this.in.water()
@@ -61,7 +61,7 @@
         //End of life
           else {
             this.area.creatures.delete(this)
-            this.world.app.tween.fade({target:this.sprite, from:1, to:0, duration:15, callback:() => this.destroy()})
+            this.world.app.tween.fade({target:this.sprite, from:1, to:0, duration:32, callback:() => this.destroy()})
           }    
       }
 

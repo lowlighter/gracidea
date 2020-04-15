@@ -33,17 +33,15 @@
           }
         //Spawn parameters
           this.spawns = {
-            max:{creatures:this.properties.max_creatures||this.area.size/8},
+            max:{creatures:Math.ceil(this.properties.max_creatures||Math.max(1, Math.log2(this.area.size)-2))},
             probability:0.4
           }
       }
 
-    //Update
-      async update() {
-        //Heritage
-          await super.update(...arguments)
+    //Spawn a new creature
+      spawn() {
         //Add creature if possible
-          if ((this.creatures.size < this.spawns.max.creatures)&&(u.rand() < this.spawns.probability)) {
+          if (this.creatures.size < this.spawns.max.creatures) {
             //Generate a species
               let species = null
               const r = u.rand()
@@ -55,8 +53,8 @@
                 }
               }
             //Generate spawn point (random point inside polygon)
-              let [x, y] = [u.rand({a:this.origin.x, b:this.boundary.x}), u.rand({a:this.origin.y, b:this.boundary.y, int:true})]
-              for (let i = 0; i < 16; i++, x = u.rand({a:this.origin.x, b:this.boundary.x}), y = u.rand({a:this.origin.y, b:this.boundary.y, int:true}))
+              let [x, y] = [NaN, NaN]
+              for (let i = 0; i < 128; i++, x = u.rand({a:this.origin.x, b:this.boundary.x, int:true}), y = u.rand({a:this.origin.y, b:this.boundary.y, int:true}))
                 if (this.inside({x, y}))
                   break
                 else
@@ -67,6 +65,23 @@
                 this.creatures.add(creature)
               }
           }
+      }
+
+    //Create
+      create() {
+        //Create creatures
+          for (let i = 0; i < this.creatures.size; i++)
+            if (u.rand() < this.spawns.probability)
+              this.spawn()
+      }
+
+    //Update
+      async update() {
+        //Heritage
+          await super.update(...arguments)
+        //Add creature if possible
+          if ((this.creatures.size < this.spawns.max.creatures)&&(u.rand() < this.spawns.probability)) 
+            this.spawn()
         //Wander
           this.creatures.forEach(creature => creature.update())
       }

@@ -85,8 +85,8 @@
     //Update
       async update({center, radius}) {
         //Reset if too far
-          const {x, y} = {x:this.x-this.world.origin.x, y:this.y-this.world.origin.y}
-          if (u.dist(center, {x,y}) > radius)
+          const {xa, ya, xb, yb} = {xa:this.origin.x-this.world.origin.x, ya:this.origin.y-this.world.origin.y, xb:this.boundary.x-this.world.origin.x, yb:this.boundary.y-this.world.origin.y}
+          if (Math.min(u.dist(center, {x:xa, y:ya}), u.dist(center, {x:xb, y:yb})) > radius)
             return this.reset()
         //Create if needed
           if (!this.created)
@@ -120,5 +120,8 @@
         //General area
           return new Area({world, key})
       }
+
+    //Unique id
+      static uid = 0
 
   }

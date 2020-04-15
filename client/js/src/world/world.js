@@ -87,7 +87,7 @@
                   //Object group
                     case "objectgroup":{
                       for (let object of layer.objects)
-                        await u.mget({map:this.areas, key:object.name, create:key => World.Area.from({world:this, key, object})}).load({object})
+                        await u.mget({map:this.areas, key:object.name||World.Area.uid++, create:key => World.Area.from({world:this, key, object})}).load({object})
                       break
                     }
                 }

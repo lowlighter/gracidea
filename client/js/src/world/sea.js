@@ -51,7 +51,7 @@
         const {origin} = this.world
         this.sprite.alpha = 0
         this.sprite.position.set(u.to.coord.px(origin.x + x), u.to.coord.px(origin.y + y))
-        this.world.app.tween.fade({target:this.sprite, change:"alpha", from:0, to:1, duration:15})
+        this.world.app.tween.fade({target:this.sprite, change:"alpha", from:0, to:1, duration:16})
       }
 
     //Texture
