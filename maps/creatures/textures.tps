@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>creatures.png</filename>
+        <filename>textures.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -132,7 +132,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>creatures.json</filename>
+                <filename>textures.json</filename>
             </struct>
         </map>
         <key>multiPack</key>
@@ -185,8 +185,12 @@
             <key type="filename">raw/electrike_1.png</key>
             <key type="filename">raw/gulpin_0.png</key>
             <key type="filename">raw/gulpin_1.png</key>
+            <key type="filename">raw/lotad_0.png</key>
+            <key type="filename">raw/lotad_1.png</key>
             <key type="filename">raw/magikarp_0.png</key>
             <key type="filename">raw/magikarp_1.png</key>
+            <key type="filename">raw/marill_0.png</key>
+            <key type="filename">raw/marill_1.png</key>
             <key type="filename">raw/mew_0.png</key>
             <key type="filename">raw/mew_1.png</key>
             <key type="filename">raw/minun_0.png</key>
@@ -203,6 +207,10 @@
             <key type="filename">raw/poochyena_1.png</key>
             <key type="filename">raw/porygon2_0.png</key>
             <key type="filename">raw/porygon2_1.png</key>
+            <key type="filename">raw/ralts_0.png</key>
+            <key type="filename">raw/ralts_1.png</key>
+            <key type="filename">raw/seedot_0.png</key>
+            <key type="filename">raw/seedot_1.png</key>
             <key type="filename">raw/smeargle_0.png</key>
             <key type="filename">raw/smeargle_1.png</key>
             <key type="filename">raw/tentacool_0.png</key>

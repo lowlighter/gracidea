@@ -11,7 +11,12 @@
   const argv = require("minimist")(process.argv.slice(2))
   const path = require("path")
   const util = require("util")
+  const fs = require("fs")
   const colors = require("colors")
+  const PAD = 48
+
+//Die on unhandled promises
+  process.on("unhandledRejection", error => { throw error })
 
 //Process
   ;(async () => {
@@ -36,6 +41,7 @@
         },
       }
       const tileset = {
+        force:argv.force||false,
         max:{size:2048},
         margin:{
           full:argv.margin||0,
@@ -53,29 +59,38 @@
         get options() { return {mime:"image/png", margin:tileset.margin.full, spacing:tile.spacing, extrusion:tile.extrusion} }
       }
       ;[["tile", tile], ["tileset", tileset]].map(([name, object]) => process.stdout.write(`${name} => ${util.inspect(object, {getters:true}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan))
-      process.stdout.write(`\nPROCESSING : \n`)
+      process.stdout.write(`\nTILESET-SPRITE : \n`)
+
+    //Check if rebuild is needed
+      if ((fs.statSync(tileset.source).mtimeMs < fs.statSync(tileset.destination).mtimeMs)&&(!tileset.force)) {
+        process.stdout.write(`Skipped because destination is newer than source\n`.gray)
+        return
+      }
 
     //Extrude
-      process.stdout.write(`Extruding       ...\r`.yellow)
+      process.stdout.write(`${"Extruding".padEnd(PAD)} ...\r`.yellow)
       const buffer = await extruder(tile.width, tile.height, tileset.source, tileset.options)
-      process.stdout.write(`Extruding       Done\n`.green)
+      process.stdout.write(`${"Extruding".padEnd(PAD)} OK \n`.green)
 
     //Compose
-      process.stdout.write(`Composing       ...\r`.yellow)
+      process.stdout.write(`${"Composing".padEnd(PAD)} ...\r`.yellow)
       const input = await jimp.read(buffer)
       const output = await new jimp(tileset.width, tileset.height, 0x0)
       for (let y = 0; y < tileset.tiles.y; y++) {
         for (let x = 0; x < tileset.tiles.x; x++) { 
-          process.stdout.write(`Composing       ${y*tileset.tiles.x}/${tileset.tiles.total}\r`.yellow)
+          process.stdout.write(`${"Composing".padEnd(PAD)} ${y*tileset.tiles.x}/${tileset.tiles.total}\r`.yellow)
           const cropped = input.clone().crop(tileset.margin.full + x*(tile.extruded.spaced.width), tileset.margin.full + y*(tile.extruded.spaced.height), tile.extruded.width, tile.extruded.height)
           output.composite(cropped, tileset.margin.half+x*tile.extruded.width, tileset.margin.half+y*tile.extruded.height)
         }
       }
-      process.stdout.write(`Composing       Done${" ".repeat(16)}\n`.green)
+      process.stdout.write(`${"Composing".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
           
     //Save
-      process.stdout.write(`Saving          ...\r`.yellow)
+      process.stdout.write(`${"Saving".padEnd(PAD)} ...\r`.yellow)
       output.write(tileset.destination)
-      process.stdout.write(`Saving          Done\n`.green)
+      process.stdout.write(`${"Saving".padEnd(PAD)} OK \n`.green)
+
+    //Success
+      process.stdout.write(`Success \n\n`.green)
         
   })()

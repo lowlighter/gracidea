@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>npcs.png</filename>
+        <filename>textures.png</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -132,7 +132,7 @@
             <key>data</key>
             <struct type="DataFile">
                 <key>name</key>
-                <filename>npcs.json</filename>
+                <filename>textures.json</filename>
             </struct>
         </map>
         <key>multiPack</key>

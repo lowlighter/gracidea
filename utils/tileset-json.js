@@ -10,6 +10,10 @@
   const util = require("util")
   const colors = require("colors")
   const fs = require("fs")
+  const PAD = 48
+
+//Die on unhandled promises
+  process.on("unhandledRejection", error => { throw error })
 
 //Process
   ;(async () => {
@@ -28,10 +32,10 @@
         width:argv.tilesetWidth||2036,
         height:argv.tilesetHeight||2036,
         margin:argv.margin||0,
-        get destination() { return path.join(__dirname, argv.destination) },
+        get destination() { return path.join(__dirname, "..", argv.destination) },
       }
       ;[["tile", tile], ["tileset", tileset]].map(([name, object]) => process.stdout.write(`${name} => ${util.inspect(object, {getters:true}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan))
-      process.stdout.write(`\nPROCESSING : \n`)
+      process.stdout.write(`\nTILESET-JSON : \n`)
 
     //Instantiate metadata
       let i = 0
@@ -49,9 +53,10 @@
       }
 
     //Generate frames
-      process.stdout.write(`Generating frames   ...\r`.yellow)
+      process.stdout.write(`${"Generating frames".padEnd(PAD)} ...\r`.yellow)
       for (let y = tileset.margin; y < tileset.height; y+=tile.spaced.height) {
         for (let x = tileset.margin; x < tileset.width; x+=tile.spaced.width) {
+          process.stdout.write(`${"Generating frames".padEnd(PAD)} ${i}\r`.yellow)
           json.frames[i++] = {
             frame:{x, y, w:tile.width, h:tile.height},
             rotated:false,
@@ -59,14 +64,16 @@
             spriteSourceSize:{x:0, y:0, w:tile.width, h:tile.height},
             sourceSize:{w:tile.width, h:tile.height}
           }
-          process.stdout.write(`Generating frames   n°${i}\r`.yellow)
         }
       }
-      process.stdout.write(`Generating frames   Done${" ".repeat(16)}\n`.green)  
+      process.stdout.write(`${"Generating frames".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
           
     //Save
-      process.stdout.write(`Saving              ...\r`.yellow)
+      process.stdout.write(`${"Saving".padEnd(PAD)} ...\r`.yellow)
       fs.writeFileSync(tileset.destination, JSON.stringify(json))
-      process.stdout.write(`Saving              Done\n`.green)
+      process.stdout.write(`${"Saving".padEnd(PAD)} OK \n`.green)
+
+    //Success
+      process.stdout.write(`Success \n\n`.green)
         
   })()

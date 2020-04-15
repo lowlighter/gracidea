@@ -69,7 +69,7 @@
         //Load world
           world:async () => {
             //Load creatures textures
-              App.loader.renderer.add(`/maps/creatures/creatures.json`)
+              App.loader.renderer.add(`/maps/creatures/textures.json`)
             //Load map data
               const {layers, tilesets} = (await axios.get(`/maps/${this.name}/map.json`)).data
             //Load map tilesets

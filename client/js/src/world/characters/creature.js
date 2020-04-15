@@ -32,7 +32,7 @@
       }
 
     //Textures
-      static textures({species}) { return App.loader.renderer.resources["/maps/creatures/creatures.json"].data.animations[species].map(PIXI.Texture.from) }
+      static textures({species}) { return App.loader.renderer.resources["/maps/creatures/textures.json"].data.animations[species].map(PIXI.Texture.from) }
 
     //Wander
       wander() {
