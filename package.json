@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "node utils/check-integrity.js",
+    "test-and-fix": "node utils/check-integrity.js --fix --die",
     "start": "node server/app.js",
-    "start-dev": "node server/app.js --dev 1",
+    "start-dev": "node server/app.js --dev",
     "build": "npx run-s build-code build-sprite",
     "build-code": "npx run-s build-transpile build-bundle build-minify",
     "build-transpile": "npx babel client/js/src --out-dir client/js/build/ --delete-dir-on-start --plugins \"@babel/proposal-class-properties\" --no-comments",
