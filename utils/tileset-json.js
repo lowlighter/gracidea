@@ -27,6 +27,9 @@
           get width() { return tile.width+tile.spacing },
           get height() { return tile.height+tile.spacing },
         },
+        half:{
+          get spacing() { return Math.floor(tile.spacing/2) }
+        }
       }
       const tileset = {
         width:argv.tilesetWidth||2036,
@@ -54,8 +57,8 @@
 
     //Generate frames
       process.stdout.write(`${"Generating frames".padEnd(PAD)} ...\r`.yellow)
-      for (let y = tileset.margin; y < tileset.height; y+=tile.spaced.height) {
-        for (let x = tileset.margin; x < tileset.width; x+=tile.spaced.width) {
+      for (let y = tileset.margin + tile.half.spacing; y < tileset.height; y+=tile.spaced.height) {
+        for (let x = tileset.margin + tile.half.spacing; x < tileset.width; x+=tile.spaced.width) {
           process.stdout.write(`${"Generating frames".padEnd(PAD)} ${i}\r`.yellow)
           json.frames[i++] = {
             frame:{x, y, w:tile.width, h:tile.height},
