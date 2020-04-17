@@ -49,7 +49,7 @@
         } 
         catch(error) {  
           if (fix)
-            process.stdout.write(`${name.padEnd(PAD)} KO`.red+` (can be possibly fixed by running --fix)\n`.yellow)
+            process.stdout.write(`${name.padEnd(PAD)} Need --fix\n`.yellow)
           else
             process.stdout.write(`${name.padEnd(PAD)} KO${" ".repeat(16)}\n`.red)
           result = error
@@ -144,18 +144,7 @@
             checks.status &= await check({
               name:"tileset.textures.png",
               when:fs.existsSync(tileset.raw),
-              async assert() { 
-                const used = {mtimeMs:await new Promise(solve => {
-                  fs.createReadStream(tileset.used)
-                  .pipe(pngitxt.get("generated", (error, data) =>  {
-                    if (error)
-                      throw error
-                    solve(data.value.length ? Number(data.value) : null)
-                  }))
-                })}
-                const raw = fs.statSync(tileset.raw)
-                return ((used.mtimeMs === null)&&(raw.ctimeMs === raw.mtimeMs))||(used.mtimeMs >= raw.mtimeMs)
-              },
+              async assert() { try { return exec(`npm run build-tileset-sprite-${map} -- --check`, {stdio:"ignore"}), true } catch { return false } },
               fix() { return exec(`npm run build-tileset-sprite-${map}`), true },
               verbose:true
             })
