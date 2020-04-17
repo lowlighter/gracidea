@@ -12,6 +12,7 @@
   const path = require("path")
   const util = require("util")
   const fs = require("fs")
+  const pngitxt = require("png-itxt")
   const colors = require("colors")
   const PAD = 48
 
@@ -56,6 +57,7 @@
         get height() { return tileset.margin.full + tileset.tiles.y*tile.extruded.height },
         get source() { return path.join(__dirname, "..", argv.source) },
         get destination() { return path.join(__dirname, "..", argv.destination||argv.source.replace(/\.raw\.png$/, ".png")) },
+        get tmp() { return this.destination.replace(/\.png/, ".tmp.png") },
         get options() { return {mime:"image/png", margin:tileset.margin.full, spacing:tile.spacing, extrusion:tile.extrusion} }
       }
       ;[["tile", tile], ["tileset", tileset]].map(([name, object]) => process.stdout.write(`${name} => ${util.inspect(object, {getters:true}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan))
@@ -84,12 +86,24 @@
         }
       }
       process.stdout.write(`${"Composing".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
-          
+      
     //Save
       process.stdout.write(`${"Saving".padEnd(PAD)} ...\r`.yellow)
-      output.write(tileset.destination)
+      await output.writeAsync(tileset.tmp)
       process.stdout.write(`${"Saving".padEnd(PAD)} OK \n`.green)
 
+    //Updating itxt metadata
+      process.stdout.write(`${"Updating itxt".padEnd(PAD)} ...\r`.yellow)
+      await new Promise(solve => {
+        const out = fs.createWriteStream(tileset.destination)
+        out.on("finish", solve)
+        fs.createReadStream(tileset.tmp)
+          .pipe(pngitxt.set({keyword:"generated", value:`${fs.statSync(tileset.source).mtimeMs}`}))
+          .pipe(out)
+      })
+      fs.unlinkSync(tileset.tmp)
+      process.stdout.write(`${"Updating itxt".padEnd(PAD)} OK \n`.green)
+      
     //Success
       process.stdout.write(`Success \n\n`.green)
         

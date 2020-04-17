@@ -108,3 +108,4 @@ dist
 /client/js/build
 /client/js/gracidea.js
 /client/js/gracidea.min.js
+*.tmp.png

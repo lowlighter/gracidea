@@ -13,6 +13,7 @@
   const { execSync:exec } = require("child_process")
   const git = require("simple-git/promise")(path.join(__dirname, ".."))
   const xml2js = require("xml2js")
+  const pngitxt = require("png-itxt")
   const PAD = 48
   let checks = {}
   
@@ -24,7 +25,7 @@
   })
 
 //Check
-  async function check({name, when = true, assert = () => true, fix, verbose}) {
+  async function check({name, when = true, assert = async () => true, fix, verbose}) {
     //Check if applicable
       if (when) {
         let result = false
@@ -143,10 +144,17 @@
             checks.status &= await check({
               name:"tileset.textures.png",
               when:fs.existsSync(tileset.raw),
-              assert() { 
-                const used = fs.statSync(tileset.used)
+              async assert() { 
+                const used = {mtimeMs:await new Promise(solve => {
+                  fs.createReadStream(tileset.used)
+                  .pipe(pngitxt.get("generated", (error, data) =>  {
+                    if (error)
+                      throw error
+                    solve(data.value.length ? Number(data.value) : null)
+                  }))
+                })}
                 const raw = fs.statSync(tileset.raw)
-                return ((used.ctimeMs === used.mtimeMs)&&(raw.ctimeMs === raw.mtimeMs))||(used.mtimeMs > raw.mtimeMs)
+                return ((used.mtimeMs === null)&&(raw.ctimeMs === raw.mtimeMs))||(used.mtimeMs >= raw.mtimeMs)
               },
               fix() { return exec(`npm run build-tileset-sprite-${map}`), true },
               verbose:true
