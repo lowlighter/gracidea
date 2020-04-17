@@ -4,11 +4,7 @@
 - [ ] You labelled correctly your pull request with either *bug-fix*, *enhancement*, *map revision* or *sprite revision*
 - [ ] All build passes, and that there are no conflicts
 
-<<<<<<< Updated upstream
-**What this pull request if for ?**
-=======
 **What this pull request is for ?**
->>>>>>> Stashed changes
 A clear and concise description of what this solves.
 
 **Screenshots**
