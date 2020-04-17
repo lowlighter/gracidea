@@ -63,7 +63,7 @@
         get options() { return {mime:"image/png", margin:tileset.margin.full, spacing:tile.spacing, extrusion:tile.extrusion} }
       }
       tileset.hash = {
-        current:fs.existsSync(tileset.destination) ? await new Promise((solve, reject) => fs.createReadStream(tileset.destination).pipe(pngitxt.get("generated-for", (error, data) => error ? reject(error) : solve(data.value)))) : null,
+        current:fs.existsSync(tileset.destination) ? await new Promise((solve, reject) => fs.createReadStream(tileset.destination).pipe(pngitxt.get("generated-for", (error, data) => error ? reject(error) : solve(data ? data.value : "")))) : null,
         generated:crypto.createHash("md5").update(fs.readFileSync(tileset.source).toString()).digest("hex"),
       }
 
