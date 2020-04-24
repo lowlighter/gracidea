@@ -4,7 +4,7 @@
 
 ![](https://github.com/lowlighter/gracidea/blob/master/.github/README/animated_map.gif)
 
-[Check it out live here !](https://pokemap.lecoq.io/)
+[Check it out live here !](https://gracidea.lecoq.io/)
 
 **Gracidea** is a project which aims to gather all known *Pokémon* regions into a single 2D map, keeping maximum fidelity to core games while taking the liberty to fill blanks trough official artworks and make minor arangements so everything fits.
 
