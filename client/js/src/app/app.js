@@ -3,9 +3,9 @@
   import settings from "./settings.js"
   import u from "./utils.js"
 
-/** 
+/**
  * Application.
- * 
+ *
  * This is the main handler for the application.
  * It instantiates renderer, viewport, controller, url params and other stuff.
  */
@@ -49,18 +49,18 @@
       }
 
     //Renderer reference
-      renderer = new PIXI.Application({width:document.body.clientWidth, height:document.body.clientHeight, transparent:true, resizeTo:window, antialias:true})
-  
+      renderer = new PIXI.Application({width:document.body.clientWidth, height:document.body.clientHeight, transparent:true, resizeTo:window, antialias:true, resolution:window.devicePixelRatio})
+
     //Viewport reference
       viewport = new Viewport.Viewport({screenWidth: window.innerWidth, screenHeight: window.innerHeight, interaction:this.renderer.renderer.plugins.interaction})
-  
+
     //View reference
       view = this.renderer.stage.addChild(this.viewport)
 
     //Controller reference
       controller = new Vue({
         //Selector
-          el:"#app", 
+          el:"#app",
         //Data and methods
           data:this.data, methods:this.methods,
         //Mounted callback
@@ -79,7 +79,7 @@
               },
             //Params map
               map:new URLSearchParams(window.location.search),
-          } 
+          }
       }
 
     //Constructor
@@ -127,7 +127,7 @@
               const cached = target.cacheAsBitmap
               target.cacheAsBitmap = false
             //Tween
-              this.tween.property({target, change:"alpha", from, to, duration, callback:() => {  
+              this.tween.property({target, change:"alpha", from, to, duration, callback:() => {
                 target.cacheAsBitmap = cached
                 if (callback)
                   callback()

@@ -9,9 +9,9 @@
   import Creature from "./characters/creature.js"
   import Wild from "./areas/wild.js"
 
-/** 
+/**
  * World.
- * 
+ *
  * This class is the main renderer for the world.
  * It handles chunks data and rendering, instantiated characters and world data.
  */
@@ -73,14 +73,14 @@
             //Load map data
               const {layers, tilesets} = (await axios.get(`/maps/${this.name}/map.json`)).data
             //Load map tilesets
-              for (let tileset of tilesets) 
+              for (let tileset of tilesets)
                 App.loader.renderer.add(`/maps/${this.name}/${u.basename({path:tileset.source, extension:false})}.textures.json`)
             //Load map layers
               for (let layer of layers)
                 switch (layer.type) {
                   //Tile layer
                     case "tilelayer":{
-                      for (let chunk of layer.chunks) 
+                      for (let chunk of layer.chunks)
                         await u.mget({map:this.chunks, key:World.Chunk.key(chunk), create:key => new World.Chunk({world:this, key})}).load({layer, chunk})
                       break
                     }
@@ -125,8 +125,10 @@
           clearTimeout(this._render)
           this._render = setTimeout(async () => {
             //Compute radius
-              if (radius === "auto")
-                radius = Math.ceil(1.5 * Math.max(u.to.coord.tile(this.app.renderer.view.height), u.to.coord.tile(this.app.renderer.view.width)))
+              if (radius === "auto") {
+                const resolution = this.app.renderer.renderer.resolution
+                radius = Math.ceil(1.5 * Math.max(u.to.coord.tile(this.app.renderer.view.height/resolution), u.to.coord.tile(this.app.renderer.view.width/resolution)))
+              }
             //Apply offset
               if (offset)
                 center = {x:center.x + offset.x, y:center.y + offset.y}
@@ -143,7 +145,7 @@
             //Play animated tiles after rendering
               await Promise.all(renders)
               animated.forEach(tile => (tile.play(), tile.parent.cacheAsBitmap = false))
-            //Refresh world sea position 
+            //Refresh world sea position
               this.sea.refresh(this.app.data.user.position)
             //Display characters layer
               this.layers.global.characters.visible = true
@@ -193,7 +195,7 @@
 
     //Sea class reference
       static Sea = Sea
-      
+
     //Area class reference
       static Area = Area
 
