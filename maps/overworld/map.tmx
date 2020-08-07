@@ -119918,7 +119918,7 @@
    </properties>
    <polygon points="0,0 192,0 192,80 176,80 176,112 160,112 160,128 112,128 112,144 64,144 64,128 32,128 32,112 0,112 0,96 -16,96 -16,16 0,16 0,0"/>
   </object>
-  <object id="9" x="5376" y="-15632">
+  <object id="9" name="3-103-1" type="wild" x="5376" y="-15632">
    <properties>
     <property name="pk_poochyena" type="float" value="0.6"/>
     <property name="pk_wingull" type="float" value="0.2"/>
@@ -119926,7 +119926,7 @@
    </properties>
    <polygon points="0,0 96,0 96,-32 112,-32 112,-64 96,-64 96,-80 32,-80 32,-48 -16,-48 -16,-16 0,-16"/>
   </object>
-  <object id="10" x="5312" y="-15696">
+  <object id="10" name="3-103-2" type="wild" x="5312" y="-15696">
    <properties>
     <property name="pk_poochyena" type="float" value="0.6"/>
     <property name="pk_wingull" type="float" value="0.2"/>
@@ -119934,7 +119934,7 @@
    </properties>
    <polygon points="0,0 0,-32 16,-32 16,-96 -32,-96 -32,-112 -64,-112 -64,-128 -96,-128 -96,-32 -64,-32 -64,0"/>
   </object>
-  <object id="12" x="5344" y="-15856">
+  <object id="12" name="3-103-3" type="wild" x="5344" y="-15856">
    <properties>
     <property name="pk_poochyena" type="float" value="0.6"/>
     <property name="pk_wingull" type="float" value="0.2"/>
@@ -120242,16 +120242,43 @@
    </properties>
    <polygon points="0,0 -144,0 -144,80 -112,112 0,112"/>
   </object>
-  <object id="57" x="6512" y="-16416">
+  <object id="57" name="3-110-4" type="wild" x="6512" y="-16416">
+   <properties>
+    <property name="pk_electrike" type="float" value="0.3"/>
+    <property name="pk_gulpin" type="float" value="0.15"/>
+    <property name="pk_minun" type="float" value="0.15"/>
+    <property name="pk_oddish" type="float" value="0.1"/>
+    <property name="pk_plusle" type="float" value="0.02"/>
+    <property name="pk_poochyena" type="float" value="0.2"/>
+    <property name="pk_wingull" type="float" value="0.08"/>
+   </properties>
    <polygon points="0,0 48,0 48,192 112,192 112,240 0,240 0,16"/>
   </object>
-  <object id="58" x="6736" y="-16224">
+  <object id="58" name="3-110-3" type="wild" x="6736" y="-16224">
+   <properties>
+    <property name="pk_electrike" type="float" value="0.3"/>
+    <property name="pk_gulpin" type="float" value="0.15"/>
+    <property name="pk_minun" type="float" value="0.15"/>
+    <property name="pk_oddish" type="float" value="0.1"/>
+    <property name="pk_plusle" type="float" value="0.02"/>
+    <property name="pk_poochyena" type="float" value="0.2"/>
+    <property name="pk_wingull" type="float" value="0.08"/>
+   </properties>
    <polygon points="0,0 0,48 240,48 240,176 320,176 320,0"/>
   </object>
-  <object id="59" x="6848" y="-15744">
+  <object id="59" name="3-110-1" type="wild" x="6848" y="-15744">
+   <properties>
+    <property name="pk_electrike" type="float" value="0.3"/>
+    <property name="pk_gulpin" type="float" value="0.15"/>
+    <property name="pk_minun" type="float" value="0.15"/>
+    <property name="pk_oddish" type="float" value="0.1"/>
+    <property name="pk_plusle" type="float" value="0.02"/>
+    <property name="pk_poochyena" type="float" value="0.2"/>
+    <property name="pk_wingull" type="float" value="0.08"/>
+   </properties>
    <polygon points="0,0 0,48 224,48 224,-48 112,-48 112,0"/>
   </object>
-  <object id="61" x="6992" y="-16048">
+  <object id="61" name="3-110-2" type="wild" x="6992" y="-16048">
    <properties>
     <property name="pk_electrike" type="float" value="0.3"/>
     <property name="pk_gulpin" type="float" value="0.15"/>
