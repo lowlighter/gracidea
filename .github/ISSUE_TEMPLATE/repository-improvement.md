@@ -2,7 +2,7 @@
 name: Repository improvement
 about: Suggest repository flows and control changes
 title: ''
-labels: ''
+labels: repository
 assignees: ''
 
 ---
