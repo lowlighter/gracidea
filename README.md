@@ -20,6 +20,8 @@ The *Pokémon* world is huge, and so is the amount of work needed to map it. Wet
 
 And if you're not very talented apart from knowing your type advantages, you can always reports bugs and other stuff in issues ! 
 
+Checkout the [Wiki](https://github.com/lowlighter/gracidea/wiki) to learn more about contributing !
+
 #### Additional notes
 - You can fork this repo, but if you're making a feature which could be integrated in the [original repo](https://github.com/lowlighter/gracidea), you're encouraged to submit a pull request so everyone can enjoy it !
 - Note however that this is only a mapping project, not a game project. Thus, suggestions like adding battles, characters dialogs, gym badges, story progression, and other stuff like this will be rejected from this repo. 
