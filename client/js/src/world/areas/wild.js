@@ -2,7 +2,7 @@
   import Area from "./area.js"
   import u from "../../app/utils.js"
 
-/** 
+/**
  * World wild area.
  */
   export default class Wild extends Area {
@@ -29,12 +29,12 @@
           for (let name of species) {
             const dp = this.properties[name]
             this.species[`${p}-${p+dp}`] = name.replace(Wild.species.property, "")
-            p = dp
+            p += dp
           }
         //Spawn parameters
           this.spawns = {
-            max:{creatures:Math.ceil(this.properties.max_creatures||Math.max(1, Math.log2(this.area.size)-2))},
-            probability:0.4
+            max:{creatures:Math.ceil(this.properties.max_creatures||Math.max(1, 0.5*Math.log2(this.area.size)-1))},
+            probability:0.1
           }
       }
 
@@ -80,7 +80,7 @@
         //Heritage
           await super.update(...arguments)
         //Add creature if possible
-          if ((this.creatures.size < this.spawns.max.creatures)&&(u.rand() < this.spawns.probability)) 
+          if ((this.creatures.size < this.spawns.max.creatures)&&(u.rand() < this.spawns.probability))
             this.spawn()
         //Wander
           this.creatures.forEach(creature => creature.update())
