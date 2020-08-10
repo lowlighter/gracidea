@@ -181,6 +181,12 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">raw/azurill_0.png</key>
+            <key type="filename">raw/azurill_1.png</key>
+            <key type="filename">raw/baltoy_0.png</key>
+            <key type="filename">raw/baltoy_1.png</key>
+            <key type="filename">raw/cacnea_0.png</key>
+            <key type="filename">raw/cacnea_1.png</key>
             <key type="filename">raw/electrike_0.png</key>
             <key type="filename">raw/electrike_1.png</key>
             <key type="filename">raw/gulpin_0.png</key>
@@ -201,6 +207,8 @@
             <key type="filename">raw/oddish_1.png</key>
             <key type="filename">raw/pelipper_0.png</key>
             <key type="filename">raw/pelipper_1.png</key>
+            <key type="filename">raw/pichu_0.png</key>
+            <key type="filename">raw/pichu_1.png</key>
             <key type="filename">raw/plusle_0.png</key>
             <key type="filename">raw/plusle_1.png</key>
             <key type="filename">raw/poochyena_0.png</key>
@@ -209,12 +217,16 @@
             <key type="filename">raw/porygon2_1.png</key>
             <key type="filename">raw/ralts_0.png</key>
             <key type="filename">raw/ralts_1.png</key>
+            <key type="filename">raw/sandshrew_0.png</key>
+            <key type="filename">raw/sandshrew_1.png</key>
             <key type="filename">raw/seedot_0.png</key>
             <key type="filename">raw/seedot_1.png</key>
             <key type="filename">raw/smeargle_0.png</key>
             <key type="filename">raw/smeargle_1.png</key>
             <key type="filename">raw/tentacool_0.png</key>
             <key type="filename">raw/tentacool_1.png</key>
+            <key type="filename">raw/trapinch_0.png</key>
+            <key type="filename">raw/trapinch_1.png</key>
             <key type="filename">raw/wailmer_0.png</key>
             <key type="filename">raw/wailmer_1.png</key>
             <key type="filename">raw/wingull_0.png</key>
