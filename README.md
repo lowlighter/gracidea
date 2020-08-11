@@ -6,13 +6,25 @@
 
 [Check it out live here !](https://gracidea.lecoq.io/)
 
-**Gracidea** is a project which aims to gather all known *Pokémon* regions into a single 2D map, keeping maximum fidelity to core games while taking the liberty to fill blanks trough official artworks and make minor arangements so everything fits.
+**Gracidea** is a project which aims to gather all known *Pokémon* regions into a single 2D map, keeping fidelity to core games while taking the liberty to fill blanks trough official artworks and anime. Minors arangements are sometimes made so everything fits.
+
+### Features
+
+**Gracidea** is not an ordinary world map ! See below a short list of the awesome features embedded in it :
+
+* **Faithful maps** : Maps are based first on core games and then filled with region knowledge and interpretations
+* **Wild areas** : *Pokémon* can spawn in wild areas ! Maybe you'll be able to see rare encounters ?
+* **World map** : A world map for quick access to cities and special locations will help you to navigate faster
+* *New features will be implemented at a later date !*
+
+### Maps
 
 Since *Pokémon* franchise has remakes, third versions and sequels, it sometimes results in redesigns in maps.
-Also, as the core games switched to 3D graphics starting on generation 6 and onwards, the maps of newer regions are interpretations of what they could have been if they were in 2D.  
+Also, as the core games switched to 3D graphics starting on generation 6 and onwards, the maps of newer regions are interpretations of what they could have been if they were in 2D. 
 
 Here are the games which were chosen for representing each region : 
-* **Hoenn** : *Pokémon Emerald* 
+* **Hoenn** : *Pokémon Emerald*
+* *Others regions will follow at a later date !*
 
 ## ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/contribute.png) Contributing
 
@@ -23,10 +35,12 @@ And if you're not very talented apart from knowing your type advantages, you can
 Checkout the [Wiki](https://github.com/lowlighter/gracidea/wiki) to learn more about contributing !
 
 #### Additional notes
-- You can fork this repo, but if you're making a feature which could be integrated in the [original repo](https://github.com/lowlighter/gracidea), you're encouraged to submit a pull request so everyone can enjoy it !
-- Note however that this is only a mapping project, not a game project. Thus, suggestions like adding battles, characters dialogs, gym badges, story progression, and other stuff like this will be rejected from this repo. 
-- Despite *Gracidea* being based on *Pokémon* franchise, its code must be able to be dissociated from it (this is why the code never mentions *Pokémon* directly). This means that in case of legal issues with the usage of the franchise, licensed sprites will be removed from repo but the rest will be kept intact.
-- The maintainers of this repo cannot be held responsible of the usage of it from other users.
+
+* You can fork this repo, but if you're making a feature which could be integrated in the [original repo](https://github.com/lowlighter/gracidea), you're encouraged to submit a pull request so everyone can enjoy it !
+* Note however that this is only a mapping project, not a game project. Thus, suggestions like adding battles, captures, gym badges, story progression, and other stuff like this will always been rejected. 
+* Despite *Gracidea* being based on *Pokémon* franchise, its code must be able to be dissociated from it (this is why the code never mentions *Pokémon* directly, except in documentation). This means that in case of legal issues with the usage of the franchise, licensed sprites will be removed from repo but the code can be kept intact.
+* The maintainers of this repo cannot be held responsible of the usage of it from other users.
+* **Star** this repo if you like it ! 
 
 ## ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/licenses.png) License and copyright
 
@@ -38,6 +52,5 @@ Sprites has been ripped, sorted and edited by [@lowlighter](https://github.com/l
 
 ## ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/map.png) Note from the cartographer
 
-Each *Pokémon* player always had a favorite generation in its heart, and mine belongs to Hoenn. This is why I chose to normalize and serve each region with the tileset of the third generation. 
-
-Maybe this is nostalgia or "It was better then", but I always found that 2D *Pokémon* games had their own charm and this is what gave birth to this project. I hope you'll be able to rediscover this marvellous franchise with this extensive map !
+I always thought 2D *Pokémon* games had their own charm, and this is what gave birth to this project. 
+I hope you'll be able to enjoy and (re)discover this marvellous franchise with this extensive map !
