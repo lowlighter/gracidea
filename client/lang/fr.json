@@ -6,6 +6,7 @@
     },
     "debug":{
         "title":"Dev tools",
+        "sea":"Afficher la mer",
         "areas":"Afficher les polygones de zones",
         "chunks":"Afficher les limites des chunks",
         "tweens":"Activer les transitions",

@@ -37,6 +37,7 @@
           },
         //Debug
           debug:{
+            sea:true,
             areas:false,
             chunks:false,
             tweens:false,
