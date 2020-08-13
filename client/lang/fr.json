@@ -11,6 +11,7 @@
         "tweens":"Activer les transitions",
         "pause":"Mettre en pause le rendu",
         "branch":"Branche git",
+        "diff":"Diff. git",
         "fps":"FPS"
     },
     "loading":{

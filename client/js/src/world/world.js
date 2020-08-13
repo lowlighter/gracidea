@@ -73,7 +73,7 @@
             //Load map data
               const {layers, tilesets} = (await axios.get(`${this.app.endpoints.maps}/${this.name}/map.json`)).data
               let diff = null
-              if (true || this.app.data.debug.diff) {
+              if (this.app.data.debug.diff) {
                 const {layers} = (await axios.get(`${this.app.endpoints.repo.master}/maps/overworld/map.json`)).data
                 diff = Object.fromEntries(layers.map(layer => [layer.name, layer]))
               }
@@ -96,24 +96,19 @@
                   switch (layer.type) {
                     //Tile layer
                       case "tilelayer":{
-
-                        if (diff) {
-                          const pre = Object.fromEntries(diff[layer.name].chunks.map(chunk => [World.Chunk.key(chunk), chunk]))
-
-                    for (let chunk of layer.chunks) {
-                      const key = World.Chunk.key(chunk)
-                      if (key in pre) {
-                        console.log(chunk.data, pre[key].data)
-                        chunk.data = chunk.data.map((tile, index) => tile === pre[key].data[index] ? 0 : tile)
-                        console.log(key, chunk.data)
-                      }
-                    }
-                        }
-
-
-                        for (let chunk of layer.chunks)
-                          await u.mget({map:this.chunks, key:World.Chunk.key(chunk), create:key => new World.Chunk({world:this, key})}).load({layer, chunk})
-                        break
+                        //Compute diff if needed
+                          if (diff) {
+                            const pre = Object.fromEntries(diff[layer.name].chunks.map(chunk => [World.Chunk.key(chunk), chunk]))
+                            for (let chunk of layer.chunks) {
+                              const key = World.Chunk.key(chunk)
+                              if (key in pre)
+                                chunk.data = chunk.data.map((tile, index) => tile === pre[key].data[index] ? 0 : tile)
+                            }
+                          }
+                        //Compute chunks
+                          for (let chunk of layer.chunks)
+                            await u.mget({map:this.chunks, key:World.Chunk.key(chunk), create:key => new World.Chunk({world:this, key})}).load({layer, chunk})
+                          break
                       }
                     //Object group
                       case "objectgroup":{

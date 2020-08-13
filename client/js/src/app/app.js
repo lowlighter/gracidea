@@ -43,6 +43,7 @@
             tweens:false,
             pause:false,
             branch:"master",
+            diff:false,
           }
       }
 
@@ -124,13 +125,14 @@
           this.view.on("zoomed-end", () => this.methods.render())
           this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
           this.view.scale.set(1)
-        //Branch
+        //Branch and diff
           const branch = this.params.get.map.get("branch")
           if (branch) {
             this.data.debug.branch = branch
             this.endpoints.maps = `${this.endpoints.repo.raw}/${branch}/maps`
             this.endpoints.lang = `${this.endpoints.repo.raw}/${branch}/client/lang`
           }
+          this.data.debug.diff = this.params.get.map.get("diff")
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
             //Load language

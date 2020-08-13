@@ -48,6 +48,7 @@
       <div class="debug" v-if="(show.debug)&&(lang.debug)">
         <label v-for="x in ['areas', 'chunks', 'tweens', 'pause']" :key="x">{{ lang.debug[x] }}<input type="checkbox" v-model="debug[x]" @change="debug_render"></label>
         <label>{{ lang.debug.branch }}<input type="text" v-model="debug.branch" disabled></label>
+        <label>{{ lang.debug.diff }}<input type="checkbox" v-model="debug.diff" disabled></label>
         <label>{{ lang.debug.fps }}<input type="text" v-model="debug.fps" disabled></label>
       </div>
     </template>
