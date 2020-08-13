@@ -3,7 +3,7 @@
   import App from "../../app/app.js"
   import u from "../../app/utils.js"
 
-/** 
+/**
  * Creatures.
  */
   export default class Creature extends NPC {
@@ -16,7 +16,7 @@
           this.species = species
           this.area = area
         //Sprite creation
-          this.sprite = new PIXI.AnimatedSprite(Creature.textures({species}))
+          this.sprite = new PIXI.AnimatedSprite(Creature.textures({endpoint:this.world.app.endpoints.maps, species}))
           this.world.layers.global.characters.addChild(this.sprite)
           this.sprite.animationSpeed = 0.125
           this.sprite.anchor.set(0.5, 1)
@@ -32,7 +32,7 @@
       }
 
     //Textures
-      static textures({species}) { return App.loader.renderer.resources["/maps/creatures/textures.json"].data.animations[species].map(PIXI.Texture.from) }
+      static textures({endpoint = "", species}) { return App.loader.renderer.resources[`${endpoint}/creatures/textures.json`].data.animations[species].map(PIXI.Texture.from) }
 
     //Wander
       wander() {
@@ -62,7 +62,7 @@
           else {
             this.area.creatures.delete(this)
             this.world.app.tween.fade({target:this.sprite, from:1, to:0, duration:32, callback:() => this.destroy()})
-          }    
+          }
       }
 
     //Special processing when inside
@@ -72,7 +72,7 @@
             //Apply mask
               const mask = new PIXI.Graphics().beginFill(0x000000).drawRect(-this.sprite.width/2, -this.sprite.height, this.sprite.width, this.sprite.height-12).endFill()
               this.sprite.addChild(mask)
-              this.sprite.mask = mask       
+              this.sprite.mask = mask
           }
       }
 

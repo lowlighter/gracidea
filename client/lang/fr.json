@@ -10,6 +10,7 @@
         "chunks":"Afficher les limites des chunks",
         "tweens":"Activer les transitions",
         "pause":"Mettre en pause le rendu",
+        "branch":"Branche git",
         "fps":"FPS"
     },
     "loading":{
@@ -30,7 +31,7 @@
             "mauville":"Lavandia",
             "verdanturf":"Vergazon",
             "fallarbor":"Autéquia",
-            "lavaridge":"Lavaridge Town"
+            "lavaridge":"Vermilava"
         }
     }
 }

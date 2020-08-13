@@ -41,6 +41,7 @@
             chunks:false,
             tweens:false,
             pause:false,
+            branch:"master",
           }
       }
 
@@ -100,6 +101,15 @@
           }
       }
 
+    //Endpoints
+      endpoints = {
+        repo:{
+          raw:"https://raw.githubusercontent.com/lowlighter/gracidea"
+        },
+        lang:"/lang",
+        maps:"/maps",
+      }
+
     //Constructor
       constructor({world}) {
         //Apply settings
@@ -112,17 +122,26 @@
           this.view.on("zoomed-end", () => this.methods.render())
           this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
           this.view.scale.set(1)
+        //Branch
+          const branch = this.params.get.map.get("branch")
+          if (branch) {
+            this.data.debug.branch = branch
+            this.endpoints.maps = `${this.endpoints.repo.raw}/${branch}/maps`
+            this.endpoints.lang = `${this.endpoints.repo.raw}/${branch}/client/lang`
+          }
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
             //Load language
               this.data.loading.state = "Loading"
-              try {
-                const {data:lang} = await axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)
-                this.data.lang = lang
-              } catch (error) {
-                this.data.loading.state = `An error occured during loading :(`
-                reject(error)
+              for (let lg of [this.params.get.map.get("lang") ?? "en", "en"]) {
+                try {
+                  const {data:lang} = await axios.get(`${this.endpoints.lang}/${lg}.json`)
+                  this.data.lang = lang
+                  break
+                } catch (error) { console.warn(`Could not load language [${lg}]`) }
               }
+              if (!Object.keys(this.data.lang).length)
+                reject(this.data.loading.state = `An error occured while loading language :(`)
             //Load world
               this.data.loading.state = this.data.lang.loading.world
               await this.world.load.world()
@@ -140,6 +159,8 @@
                   this.world.start()
                   await this.world.cache.rendered
                   this.data.loading.done = true
+                //Count fps
+                  this.renderer.ticker.add(() => this.data.debug.fps = this.renderer.ticker.FPS|0)
                   solve()
               })
             })
@@ -193,6 +214,4 @@
     //Loaders
       static loader = {renderer:PIXI.Loader.shared}
 
-    //Debug mode
-      static debug = false
   }

@@ -10,6 +10,7 @@
         "chunks":"Show chunks limits",
         "tweens":"Enable transitions",
         "pause":"Pause rendering",
+        "branch":"Git branch",
         "fps":"FPS"
     },
     "loading":{

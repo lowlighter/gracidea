@@ -231,3 +231,16 @@
     .debug label:hover {
       background-color: #3F4448;
     }
+
+    .debug input[type="text"] {
+      border-radius: .25rem;
+      outline: none;
+      border: none;
+      padding: .125rem .5rem .25rem;
+      background-color: #24292E;
+      width: 4rem;
+    }
+
+    .debug input[type="text"][disabled] {
+      cursor: not-allowed;
+    }

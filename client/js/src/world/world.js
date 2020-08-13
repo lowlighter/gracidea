@@ -69,12 +69,12 @@
         //Load world
           world:async () => {
             //Load creatures textures
-              App.loader.renderer.add(`/maps/creatures/textures.json`)
+              App.loader.renderer.add(`${this.app.endpoints.maps}/creatures/textures.json`)
             //Load map data
-              const {layers, tilesets} = (await axios.get(`/maps/${this.name}/map.json`)).data
+              const {layers, tilesets} = (await axios.get(`${this.app.endpoints.maps}/${this.name}/map.json`)).data
             //Load map tilesets
               for (let tileset of tilesets)
-                App.loader.renderer.add(`/maps/${this.name}/${u.basename({path:tileset.source, extension:false})}.textures.json`)
+                App.loader.renderer.add(`${this.app.endpoints.maps}/${this.name}/${u.basename({path:tileset.source, extension:false})}.textures.json`)
             //Load map layers
               for (let layer of layers) {
                 //Boundaries layers
@@ -105,7 +105,7 @@
               this.app.viewport.worldWidth = u.to.coord.px(this.width)
               this.app.viewport.worldHeight = u.to.coord.px(this.height)
             //Update maps locations
-              this.app.data.maps = (await axios.get(`/maps/${this.name}/locations.json`)).data
+              this.app.data.maps = (await axios.get(`${this.app.endpoints.maps}/${this.name}/locations.json`)).data
             //Update quadtrees
               this.qt.chunks.resize({...this.origin, width:this.width, height:this.height}).clear()
               this.chunks.forEach(chunk => this.qt.chunks.add(chunk))
