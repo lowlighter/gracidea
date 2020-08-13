@@ -33,6 +33,7 @@
         //Loading status
           loading:{
             state:"Loading...",
+            substate:"",
             done:false
           },
         //Debug
@@ -104,7 +105,8 @@
     //Endpoints
       endpoints = {
         repo:{
-          raw:"https://raw.githubusercontent.com/lowlighter/gracidea"
+          raw:"https://raw.githubusercontent.com/lowlighter/gracidea",
+          master:"https://raw.githubusercontent.com/lowlighter/gracidea/master",
         },
         lang:"/lang",
         maps:"/maps",
@@ -133,7 +135,7 @@
           this.ready = new Promise(async (solve, reject) => {
             //Load language
               this.data.loading.state = "Loading"
-              for (let lg of [this.params.get.map.get("lang") ?? "en", "en"]) {
+              for (let lg of [this.params.get.map.get("lang") || "en", "en"]) {
                 try {
                   const {data:lang} = await axios.get(`${this.endpoints.lang}/${lg}.json`)
                   this.data.lang = lang

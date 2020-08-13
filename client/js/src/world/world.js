@@ -72,11 +72,20 @@
               App.loader.renderer.add(`${this.app.endpoints.maps}/creatures/textures.json`)
             //Load map data
               const {layers, tilesets} = (await axios.get(`${this.app.endpoints.maps}/${this.name}/map.json`)).data
+              let diff = null
+              if (true || this.app.data.debug.diff) {
+                const {layers} = (await axios.get(`${this.app.endpoints.repo.master}/maps/overworld/map.json`)).data
+                diff = Object.fromEntries(layers.map(layer => [layer.name, layer]))
+              }
             //Load map tilesets
-              for (let tileset of tilesets)
+              for (let tileset of tilesets) {
+                this.app.data.loading.substate = `${this.app.data.lang.loading.tileset} : ${tileset}`
                 App.loader.renderer.add(`${this.app.endpoints.maps}/${this.name}/${u.basename({path:tileset.source, extension:false})}.textures.json`)
+              }
             //Load map layers
               for (let layer of layers) {
+                //Layer loading
+                  this.app.data.loading.substate = `${this.app.data.lang.loading.layer} : ${layer.name}`
                 //Boundaries layers
                   if (layer.name === World.layers.boundaries) {
                     this.origin = {x:layer.startx, y:layer.starty}
@@ -87,6 +96,21 @@
                   switch (layer.type) {
                     //Tile layer
                       case "tilelayer":{
+
+                        if (diff) {
+                          const pre = Object.fromEntries(diff[layer.name].chunks.map(chunk => [World.Chunk.key(chunk), chunk]))
+
+                    for (let chunk of layer.chunks) {
+                      const key = World.Chunk.key(chunk)
+                      if (key in pre) {
+                        console.log(chunk.data, pre[key].data)
+                        chunk.data = chunk.data.map((tile, index) => tile === pre[key].data[index] ? 0 : tile)
+                        console.log(key, chunk.data)
+                      }
+                    }
+                        }
+
+
                         for (let chunk of layer.chunks)
                           await u.mget({map:this.chunks, key:World.Chunk.key(chunk), create:key => new World.Chunk({world:this, key})}).load({layer, chunk})
                         break
@@ -113,6 +137,7 @@
               this.areas.forEach(area => this.qt.areas.add(area))
             //Update sprite position and create sprite
               this.sprite.position.set(u.to.coord.px(-this.origin.x), u.to.coord.px(-this.origin.y))
+              this.app.data.loading.substate = ""
           },
         //Load sea
           sea:async () => {

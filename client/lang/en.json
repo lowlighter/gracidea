@@ -17,7 +17,9 @@
         "world":"Loading world...",
         "sea":"Loading sea...",
         "camera":"Loading camera...",
-        "render":"Waiting for first rendering..."
+        "render":"Waiting for first rendering...",
+        "tileset":"Loading tileset : ",
+        "layer":"Loading layer : "
     },
     "map":{
         "locations":{

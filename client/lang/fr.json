@@ -17,7 +17,9 @@
         "world":"Préparation du monde...",
         "sea":"Préparation de l'océan...",
         "camera":"Préparation de la caméra...",
-        "render":"En attente du premier rendu..."
+        "render":"En attente du premier rendu...",
+        "tileset":"Chargement des textures : ",
+        "layer":"Chargement de la couche : "
     },
     "map":{
         "locations":{
