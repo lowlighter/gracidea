@@ -243,4 +243,5 @@
 
     .debug input[type="text"][disabled] {
       cursor: not-allowed;
+      color: white;
     }

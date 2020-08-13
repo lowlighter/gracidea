@@ -42,11 +42,13 @@
       <div class="view"></div>
       <div class="loading" v-if="!loading.done">
         <img src="imgs/icons/loading.gif" alt="">
-        {{ loading.state }}
+        <span>{{ loading.state }}</span>
+        <span>{{ loading.substate || "" }}</span>
       </div>
       <div class="debug" v-if="(show.debug)&&(lang.debug)">
         <label v-for="x in ['sea', 'areas', 'chunks', 'tweens', 'pause']" :key="x">{{ lang.debug[x] }}<input type="checkbox" v-model="debug[x]" @change="debug_render"></label>
         <label>{{ lang.debug.branch }}<input type="text" v-model="debug.branch" disabled></label>
+        <label>{{ lang.debug.diff }}<input type="checkbox" v-model="debug.diff" disabled></label>
         <label>{{ lang.debug.fps }}<input type="text" v-model="debug.fps" disabled></label>
       </div>
     </template>
