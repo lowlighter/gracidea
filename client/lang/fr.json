@@ -11,13 +11,16 @@
         "tweens":"Activer les transitions",
         "pause":"Mettre en pause le rendu",
         "branch":"Branche git",
+        "diff":"Diff. git",
         "fps":"FPS"
     },
     "loading":{
         "world":"Préparation du monde...",
         "sea":"Préparation de l'océan...",
         "camera":"Préparation de la caméra...",
-        "render":"En attente du premier rendu..."
+        "render":"En attente du premier rendu...",
+        "tileset":"Chargement des textures : ",
+        "layer":"Chargement de la couche : "
     },
     "map":{
         "locations":{

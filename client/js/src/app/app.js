@@ -33,6 +33,7 @@
         //Loading status
           loading:{
             state:"Loading...",
+            substate:"",
             done:false
           },
         //Debug
@@ -42,6 +43,7 @@
             tweens:false,
             pause:false,
             branch:"master",
+            diff:false,
           }
       }
 
@@ -104,7 +106,8 @@
     //Endpoints
       endpoints = {
         repo:{
-          raw:"https://raw.githubusercontent.com/lowlighter/gracidea"
+          raw:"https://raw.githubusercontent.com/lowlighter/gracidea",
+          master:"https://raw.githubusercontent.com/lowlighter/gracidea/master",
         },
         lang:"/lang",
         maps:"/maps",
@@ -122,18 +125,19 @@
           this.view.on("zoomed-end", () => this.methods.render())
           this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
           this.view.scale.set(1)
-        //Branch
+        //Branch and diff
           const branch = this.params.get.map.get("branch")
           if (branch) {
             this.data.debug.branch = branch
             this.endpoints.maps = `${this.endpoints.repo.raw}/${branch}/maps`
             this.endpoints.lang = `${this.endpoints.repo.raw}/${branch}/client/lang`
           }
+          this.data.debug.diff = this.params.get.map.get("diff")
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
             //Load language
               this.data.loading.state = "Loading"
-              for (let lg of [this.params.get.map.get("lang") ?? "en", "en"]) {
+              for (let lg of [this.params.get.map.get("lang") || "en", "en"]) {
                 try {
                   const {data:lang} = await axios.get(`${this.endpoints.lang}/${lg}.json`)
                   this.data.lang = lang

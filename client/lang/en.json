@@ -11,13 +11,16 @@
         "tweens":"Enable transitions",
         "pause":"Pause rendering",
         "branch":"Git branch",
+        "diff":"Git diff",
         "fps":"FPS"
     },
     "loading":{
         "world":"Loading world...",
         "sea":"Loading sea...",
         "camera":"Loading camera...",
-        "render":"Waiting for first rendering..."
+        "render":"Waiting for first rendering...",
+        "tileset":"Loading tileset : ",
+        "layer":"Loading layer : "
     },
     "map":{
         "locations":{
