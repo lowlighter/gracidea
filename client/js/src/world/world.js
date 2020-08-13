@@ -102,7 +102,7 @@
                             for (let chunk of layer.chunks) {
                               const key = World.Chunk.key(chunk)
                               if (key in pre)
-                                chunk.data = chunk.data.map((tile, index) => tile === pre[key].data[index] ? 0 : tile)
+                                chunk.data = chunk.data.map((tile, index) => tile === pre[key].data[index] ? 113 : tile)
                             }
                           }
                         //Compute chunks
