@@ -12,16 +12,20 @@
         "tweens":"Enable transitions",
         "pause":"Pause rendering",
         "branch":"Git branch",
+        "branch_tips":"Reload page with \"&branch=<string>\" to udpate value",
         "diff":"Git diff",
-        "fps":"FPS"
+        "diff_tips":"Reload page with \"&diff=<boolean>\" to udpate value",
+        "fps":"FPS",
+        "lang":"Language",
+        "lang_tips":"Reload page with \"&lang=<en|fr>\" to udpate value"
     },
     "loading":{
         "world":"Loading world...",
         "sea":"Loading sea...",
         "camera":"Loading camera...",
         "render":"Waiting for first rendering...",
-        "tileset":"Loading tileset : ",
-        "layer":"Loading layer : "
+        "tileset":"Loading tileset",
+        "layer":"Loading layer"
     },
     "map":{
         "locations":{

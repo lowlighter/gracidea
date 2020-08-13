@@ -72,10 +72,12 @@
               App.loader.renderer.add(`${this.app.endpoints.maps}/creatures/textures.json`)
             //Load map data
               const {layers, tilesets} = (await axios.get(`${this.app.endpoints.maps}/${this.name}/map.json`)).data
-              let diff = null
               if (this.app.data.debug.diff) {
-                const {layers} = (await axios.get(`${this.app.endpoints.repo.master}/maps/overworld/map.json`)).data
-                diff = Object.fromEntries(layers.map(layer => [layer.name, layer]))
+                const layers =  Object.fromEntries((await axios.get(`${this.app.endpoints.repo.master}/maps/overworld/map.json`)).data.layers.map(layer => [layer.name, layer]))
+                this.diff = {}
+                for (let layer of Object.keys(layers))
+                  if (layers[layer].chunks)
+                    this.diff[layer] = Object.fromEntries(layers[layer].chunks.map(chunk => [World.Chunk.key(chunk), chunk]))
               }
             //Load map tilesets
               for (let tileset of tilesets) {
@@ -96,15 +98,6 @@
                   switch (layer.type) {
                     //Tile layer
                       case "tilelayer":{
-                        //Compute diff if needed
-                          if (diff) {
-                            const pre = Object.fromEntries(diff[layer.name].chunks.map(chunk => [World.Chunk.key(chunk), chunk]))
-                            for (let chunk of layer.chunks) {
-                              const key = World.Chunk.key(chunk)
-                              if (key in pre)
-                                chunk.data = chunk.data.map((tile, index) => tile === pre[key].data[index] ? 113 : tile)
-                            }
-                          }
                         //Compute chunks
                           for (let chunk of layer.chunks)
                             await u.mget({map:this.chunks, key:World.Chunk.key(chunk), create:key => new World.Chunk({world:this, key})}).load({layer, chunk})

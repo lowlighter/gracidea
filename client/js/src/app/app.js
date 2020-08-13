@@ -45,6 +45,7 @@
             pause:false,
             branch:"master",
             diff:false,
+            lang:"en",
           }
       }
 
@@ -95,8 +96,15 @@
           get:{
             //Update params
               update:(properties) => {
-                for (let [key, value] of Object.entries(properties))
+                for (let [key, value] of Object.entries(properties)) {
+                  if (/^\d+$/.test(value))
+                    value = Number(value)
+                  if (/^true$/.test(value))
+                    value = true
+                  if (/^false$/.test(value))
+                    value = false
                   this.params.get.map.set(key, value)
+                }
                 window.history.pushState("", "", `/?${this.params.get.map.toString()}`)
               },
             //Params map
@@ -134,6 +142,9 @@
             this.endpoints.lang = `${this.endpoints.repo.raw}/${branch}/client/lang`
           }
           this.data.debug.diff = this.params.get.map.get("diff")
+        //Other params
+          this.data.debug.sea = this.params.get.map.has("sea") ? this.params.get.map.get("sea") : true
+          this.data.debug.lang = this.params.get.map.get("lang") || "en"
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
             //Load language

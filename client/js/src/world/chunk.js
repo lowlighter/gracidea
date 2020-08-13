@@ -64,25 +64,45 @@
               chunk.cacheAsBitmap = false
               chunk.removeChildren()
               for (let [index, texture] of tiles.entries()) {
-                //Skip if unknown texture
+                //Check texture
                   let tile = null
-                  if (--texture < 0)
-                    continue
-                //Animated texture
-                  if (texture in textures.animated) {
-                    tile = chunk.addChild(new PIXI.AnimatedSprite(textures.animated[texture].frames.map(PIXI.Texture.from)))
-                    tile.animationSpeed = textures.animated[texture].speed
-                    if (animated) {
-                      animated.add(tile)
-                      flags.local.animated = true
-                    }
+                  if (--texture >= 0) {
+                    //Animated texture
+                      if (texture in textures.animated) {
+                        tile = chunk.addChild(new PIXI.AnimatedSprite(textures.animated[texture].frames.map(PIXI.Texture.from)))
+                        tile.animationSpeed = textures.animated[texture].speed
+                        if (animated) {
+                          animated.add(tile)
+                          flags.local.animated = true
+                        }
+                      }
+                    //Static texture
+                      else
+                        tile = chunk.addChild(new PIXI.Sprite.from(`${texture}`))
+                    //Set position and size
+                      tile.position.set(u.to.coord.px(index%width), u.to.coord.px(~~(index/width)))
+                      tile.width = tile.height = World.Chunk.tile.size
                   }
-                //Static texture
-                  else
-                    tile = chunk.addChild(new PIXI.Sprite.from(`${texture}`))
-                //Set position and size
-                  tile.position.set(u.to.coord.px(index%width), u.to.coord.px(~~(index/width)))
-                  tile.width = tile.height = World.Chunk.tile.size
+                //Compute diff
+                  if ((this.world.app.data.debug.diff)&&(this.world.diff)) {
+                    const prev = this.world.diff[layer][this.key].data[index]-1
+                    //New texture
+                      if ((prev === -1)&&(texture >= 0))
+                        tile.tint = 0x00FF00
+                    //Deleted texture
+                      else if ((texture === -1)&&(prev >= 0)) {
+                        tile = chunk.addChild(new PIXI.Sprite.from(`${prev}`))
+                        tile.position.set(u.to.coord.px(index%width), u.to.coord.px(~~(index/width)))
+                        tile.width = tile.height = World.Chunk.tile.size
+                        tile.tint = 0xFF0000
+                      }
+                    //Untouched texture
+                      else if ((prev === texture)&&(texture >= 0))
+                        tile.alpha = .15
+                    //Edited texture
+                      else if ((prev >= 0)&&(texture >= 0))
+                        tile.tint = 0xFFFF00
+                  }
               }
             //Cache sprite if needed
               if (cache)

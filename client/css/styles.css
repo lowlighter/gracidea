@@ -239,9 +239,11 @@
       padding: .125rem .5rem .25rem;
       background-color: #24292E;
       width: 4rem;
+      color: white;
     }
 
-    .debug input[type="text"][disabled] {
+    .debug input[disabled], .debug .disabled {
       cursor: not-allowed;
-      color: white;
+      color: inherit;
+      opacity: .5;
     }
