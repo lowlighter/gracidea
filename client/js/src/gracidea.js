@@ -10,4 +10,4 @@
   ;(async function () {
     const app = new App({world:"overworld"})
     await app.ready
-  })() 
+  })()

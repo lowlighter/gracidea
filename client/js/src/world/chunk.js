@@ -4,9 +4,9 @@
   import textures from "./../app/textures.js"
   import Element from "./element.js"
 
-/** 
+/**
  * World chunk.
- * 
+ *
  * This class allows to split the world into smaller chunks for improved rendering.
  * Chunk are also divided internally into layers.
  */
@@ -27,7 +27,7 @@
           this.sprite.name = this.key
       }
 
-    //Load a chunk layer 
+    //Load a chunk layer
       async load({layer:{name:layer}, chunk:{x, y, width, height, data}}) {
         //Save layer data
           this.layers.set(layer, {x, y, width, height, data})

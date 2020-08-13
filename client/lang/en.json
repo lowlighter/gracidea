@@ -1,4 +1,21 @@
 {
+    "nav":{
+        "map":"Map",
+        "dev":"Debug",
+        "github":"Github"
+    },
+    "debug":{
+        "title":"Dev tools",
+        "areas":"Areas polygons",
+        "chunks":"Chunks limits",
+        "fps":"FPS"
+    },
+    "loading":{
+        "world":"Loading world...",
+        "sea":"Loading sea...",
+        "camera":"Loading camera...",
+        "render":"Waiting for first rendering..."
+    },
     "map":{
         "locations":{
             "littleroot":"Littleroot Town",
@@ -9,7 +26,9 @@
             "faraway_island":"Faraway Island",
             "slateport":"Slateport City",
             "mauville":"Mauville City",
-            "verdanturf":"Verdanturf Town"
+            "verdanturf":"Verdanturf Town",
+            "fallarbor":"Fallarbor Town",
+            "lavaridge":"Lavaridge Town"
         }
     }
 }

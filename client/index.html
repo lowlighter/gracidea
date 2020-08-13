@@ -21,8 +21,9 @@
             {{ user.position.x }};{{ user.position.y }}
           </div>
           <nav class="menu">
-            <div @click="show.map = !show.map" class="button" :class="{active:show.map}"><img src="imgs/icons/map.png">Map</div>
-            <div @click="redirect('https://github.com/lowlighter/gracidea')" class="button"><img src="imgs/icons/pokedoll.png">GitHub</div>
+            <div @click="show.map = !show.map" class="button" :class="{active:show.map}"><img src="imgs/icons/map.png">{{ lang?.nav?.map || "Map" }}</div>
+            <div @click="show.debug = !show.debug" class="button" :class="{active:show.debug}"><img src="imgs/icons/licenses.png">{{ lang?.nav?.dev || "Debug" }}</div>
+            <div @click="redirect('https://github.com/lowlighter/gracidea')" class="button"><img src="imgs/icons/pokedoll.png">{{ lang?.nav?.github || "GitHub" }}</div>
           </nav>
         </header>
         <transition name="fade">
@@ -43,6 +44,9 @@
         <img src="imgs/icons/loading.gif" alt="">
         {{ loading.state }}
       </div>
+      <div class="debug" v-if="(show.debug)&&(lang.debug)">
+        <label>{{ lang.debug.areas }}<input type="checkbox" v-model="debug.areas"></label>
+      </div>
     </template>
   </main>
 
@@ -52,6 +56,6 @@
   <script src="js/axios.js"></script>
   <script src="js/vue.min.js"></script>
   <script type="module" src="js/gracidea.min.js"></script>
-  
+
 </body>
 </html>

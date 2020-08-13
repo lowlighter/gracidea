@@ -76,21 +76,29 @@
               for (let tileset of tilesets)
                 App.loader.renderer.add(`/maps/${this.name}/${u.basename({path:tileset.source, extension:false})}.textures.json`)
             //Load map layers
-              for (let layer of layers)
-                switch (layer.type) {
-                  //Tile layer
-                    case "tilelayer":{
-                      for (let chunk of layer.chunks)
-                        await u.mget({map:this.chunks, key:World.Chunk.key(chunk), create:key => new World.Chunk({world:this, key})}).load({layer, chunk})
-                      break
-                    }
-                  //Object group
-                    case "objectgroup":{
-                      for (let object of layer.objects)
-                        await u.mget({map:this.areas, key:object.name||World.Area.uid++, create:key => World.Area.from({world:this, key, object})}).load({object})
-                      break
-                    }
-                }
+              for (let layer of layers) {
+                //Boundaries layers
+                  if (layer.name === World.layers.boundaries) {
+                    this.origin = {x:layer.startx, y:layer.starty}
+                    this.boundary = {x:this.origin.x+layer.width, y:this.origin.y+layer.height}
+                    continue
+                  }
+                //Regular layer
+                  switch (layer.type) {
+                    //Tile layer
+                      case "tilelayer":{
+                        for (let chunk of layer.chunks)
+                          await u.mget({map:this.chunks, key:World.Chunk.key(chunk), create:key => new World.Chunk({world:this, key})}).load({layer, chunk})
+                        break
+                      }
+                    //Object group
+                      case "objectgroup":{
+                        for (let object of layer.objects)
+                          await u.mget({map:this.areas, key:object.name||World.Area.uid++, create:key => World.Area.from({world:this, key, object})}).load({object})
+                        break
+                      }
+                  }
+              }
             //Update world boundaries
               this.app.viewport.left = u.to.coord.px(this.origin.x)
               this.app.viewport.top = u.to.coord.px(this.origin.y)
@@ -120,7 +128,7 @@
       }
 
     //Render world
-      async render({center = this.app.data.user.position, delay = 100, radius = "auto", offset  = this.origin, force = false} = {}) {
+      async render({center = this.app.data.user.position, delay = 150, radius = "auto", offset  = this.origin, force = false} = {}) {
         //Delay rendering
           clearTimeout(this._render)
           this._render = setTimeout(async () => {
@@ -158,10 +166,11 @@
       }
 
     //Set camera position
-      camera({x, y, offset = this.origin}) {
+      camera({x, y, offset = this.origin, render = true}) {
         this.app.viewport.moveCenter({x:u.to.coord.px(x-offset.x), y:u.to.coord.px(y-offset.y)})
         this.app.methods.update()
-        this.render()
+        if (render)
+          this.render()
       }
 
     //Start
@@ -171,7 +180,7 @@
       }
 
     //Ticker for world
-      ticker(dt) {
+      ticker() {
         //Update each second
           if (App.time - this.cache.ticked > 1000) {
             //Prepare update
@@ -187,7 +196,8 @@
 
     //Layers options
       static layers = {
-        ignored:new Set(["00-boundaries"])
+        ignored:new Set(["00-boundaries"]),
+        boundaries:"00-boundaries",
       }
 
     //Chunk class reference

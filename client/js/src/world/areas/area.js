@@ -1,9 +1,8 @@
 //Imports
   import u from "../../app/utils.js"
   import Element from "../element.js"
-  import App from "../../app/app.js"
 
-/** 
+/**
  * World area.
  */
   export default class Area extends Element {
@@ -20,7 +19,7 @@
           this.sprite.visible = false
           this.world.layers.global.areas.addChild(this.sprite)
       }
-      
+
     //Load
       async load({object:data}) {
         //Load data
@@ -57,7 +56,7 @@
           for (let i = 0, j = vertices.length-1; i < vertices.length; j = i++) {
             const xi = vertices[i][0], yi = vertices[i][1]
             const xj = vertices[j][0], yj = vertices[j][1]
-            if (((yi > y) !== (yj > y))&&(x < (xj - xi) * (y - yi) / (yj - yi) + xi)) 
+            if (((yi > y) !== (yj > y))&&(x < (xj - xi) * (y - yi) / (yj - yi) + xi))
               inside = !inside
           }
           return inside
@@ -66,7 +65,7 @@
     //Render
       async render() {
         //Debug
-          if (App.debug) {
+          if (this.world.app.data.debug.areas) {
             //Draw graphics
               this.sprite.removeChildren()
               this.graphics = this.sprite.addChild(new PIXI.Graphics())
@@ -80,6 +79,8 @@
                 point.anchor.set(0.5)
               }
           }
+          else if (this.sprite.children.length)
+            this.sprite.removeChildren()
       }
 
     //Update

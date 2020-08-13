@@ -25,7 +25,8 @@
           maps:[],
         //Show states
           show:{
-            map:false
+            map:false,
+            debug:false,
           },
         //Lang data
           lang:{},
@@ -33,6 +34,11 @@
           loading:{
             state:"Loading...",
             done:false
+          },
+        //Debug
+          debug:{
+            areas:false,
+            chunks:false,
           }
       }
 
@@ -43,13 +49,13 @@
         //Update user position
           update:() => this.data.user.position = {x:u.to.coord.tile(this.view.center.x), y:u.to.coord.tile(this.view.center.y)},
         //Render world
-          render:() => this.world.render(),
+          render:() => this.data.loading.done ? this.world.render() : null,
         //Redirect
           redirect:(url) => window.location.replace(url)
       }
 
     //Renderer reference
-      renderer = new PIXI.Application({width:document.body.clientWidth, height:document.body.clientHeight, transparent:true, resizeTo:window, antialias:true, resolution:window.devicePixelRatio})
+      renderer = new PIXI.Application({width:document.body.clientWidth, height:document.body.clientHeight, transparent:true, resizeTo:window, autoDensity:true})
 
     //Viewport reference
       viewport = new Viewport.Viewport({screenWidth: window.innerWidth, screenHeight: window.innerHeight, interaction:this.renderer.renderer.plugins.interaction})
@@ -95,26 +101,36 @@
           this.view.drag().pinch().wheel().decelerate().clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
           this.view.scale.set(1)
         //Deffered constructor
-          this.ready = new Promise(async solve => {
-            const lang = axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)
-            this.data.loading.state = "Loading world..."
-            await this.world.load.world()
-            App.loader.renderer.load(async () => {
-              this.data.loading.state = "Loading sea..."
-              await this.world.load.sea()
-              this.data.loading.state = "Loading camera..."
-              this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x"))||0, y:Number(this.params.get.map.get("y"))||0, offset:{x:0, y:0}} : {x:329, y:-924})
-              this.methods.update()
-              this.data.loading.state = "Loading life..."
-              this.world.start()
-              this.data.loading.state = "Loading lang..."
-              this.data.lang = (await lang).data
-              this.data.loading.state = "Waiting for first rendering..."
-              await this.world.render({delay:0, fade:false})
-              await this.world.cache.rendered
-              this.data.loading.done = true
+          this.ready = new Promise(async (solve, reject) => {
+            //Load language
+              this.data.loading.state = "Loading"
+              try {
+                const {data:lang} = await axios.get(`/lang/${this.params.get.map.get("lang")||"en"}.json`)
+                this.data.lang = lang
+              } catch (error) {
+                this.data.loading.state = `An error occured during loading :(`
+                reject(error)
+              }
+            //Load world
+              this.data.loading.state = this.data.lang.loading.world
+              await this.world.load.world()
+            //Rendering
+              App.loader.renderer.load(async () => {
+                //Load sea
+                  this.data.loading.state = this.data.lang.loading.sea
+                  await this.world.load.sea()
+                //Set camera
+                  this.data.loading.state = this.data.lang.loading.camera
+                  this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x"))||0, y:Number(this.params.get.map.get("y"))||0, offset:{x:0, y:0}, render:false} : {x:329, y:-924, render:false})
+                  this.methods.update()
+                //First render
+                  this.data.loading.state = this.data.lang.loading.render
+                  this.world.start()
+                  await this.world.cache.rendered
+                  this.data.loading.done = true
+                  solve()
+              })
             })
-          })
       }
 
     //Tweening

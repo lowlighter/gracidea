@@ -10,7 +10,9 @@
       {"id":"rustboro", "type":"city", "x":220, "y":-1054, "css":{"x":8, "y":48}},
       {"id":"slateport", "type":"city", "x":423, "y":-934, "css":{"x":28, "y":65}},
       {"id":"mauville", "type":"city", "x":426, "y":-1068, "css":{"x":28, "y":48}},
-      {"id":"verdanturf", "type":"city", "x":340, "y":-1070, "css":{"x":20, "y":48}}
+      {"id":"verdanturf", "type":"city", "x":340, "y":-1070, "css":{"x":20, "y":48}},
+      {"id":"fallarbor", "type":"city", "x":298, "y":-1205, "css":{"x":8, "y":12}},
+      {"id":"lavaridge", "type":"city", "x":353, "y":-1146, "css":{"x":25, "y":24}}
     ]
   },
   {

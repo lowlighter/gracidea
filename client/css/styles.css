@@ -23,7 +23,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: black;
+    background-color: #24292E;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -156,7 +156,7 @@
 
 /* No scrollbars */
   *::-webkit-scrollbar {
-    display: none; 
+    display: none;
   }
 
 /* Transitions */
@@ -198,3 +198,28 @@
     border: .25rem  solid black;
     border-color: black transparent transparent transparent;
   }
+
+/* Debug */
+  .debug {
+    position: fixed;
+    top: 2rem;
+    right: 0;
+    color: white;
+    background-color: #24292EE0;
+    border-bottom-left-radius: .5rem;
+    padding: 1rem .5rem .5rem;
+    display: flex;
+    flex-direction: column;
+  }
+
+    .debug .title {
+      font-weight: bold;
+      font-size: 1.1rem;
+    }
+
+    .debug label {
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }

@@ -1,0 +1,34 @@
+{
+    "nav":{
+        "map":"Carte",
+        "dev":"Debug",
+        "github":"Github"
+    },
+    "debug":{
+        "title":"Dev tools",
+        "areas":"Polygones de zones",
+        "chunks":"Limites des chunks",
+        "fps":"FPS"
+    },
+    "loading":{
+        "world":"Préparation du monde...",
+        "sea":"Préparation de l'océan...",
+        "camera":"Préparation de la caméra...",
+        "render":"En attente du premier rendu..."
+    },
+    "map":{
+        "locations":{
+            "littleroot":"Bourg-en-Vol",
+            "oldale":"Rosyères",
+            "petalburg":"Clementi-Ville",
+            "dewford":"Myokara",
+            "rustboro":"Mérouville",
+            "faraway_island":"Île Lointaine",
+            "slateport":"Poivressel",
+            "mauville":"Lavandia",
+            "verdanturf":"Vergazon",
+            "fallarbor":"Autéquia",
+            "lavaridge":"Lavaridge Town"
+        }
+    }
+}
