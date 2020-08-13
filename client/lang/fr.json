@@ -6,8 +6,10 @@
     },
     "debug":{
         "title":"Dev tools",
-        "areas":"Polygones de zones",
-        "chunks":"Limites des chunks",
+        "areas":"Afficher les polygones de zones",
+        "chunks":"Afficher les limites des chunks",
+        "tweens":"Activer les transitions",
+        "pause":"Mettre en pause le rendu",
         "fps":"FPS"
     },
     "loading":{

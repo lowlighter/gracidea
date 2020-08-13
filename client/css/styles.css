@@ -207,7 +207,7 @@
     color: white;
     background-color: #24292EE0;
     border-bottom-left-radius: .5rem;
-    padding: 1rem .5rem .5rem;
+    padding: 1.5rem .5rem .5rem;
     display: flex;
     flex-direction: column;
   }
@@ -222,4 +222,12 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      transition: background-color .2s ease;
+      padding: .25rem;
+      border-radius: .25rem;
+      cursor: pointer;
+    }
+
+    .debug label:hover {
+      background-color: #3F4448;
     }

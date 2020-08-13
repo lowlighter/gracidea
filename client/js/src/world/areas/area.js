@@ -64,10 +64,12 @@
 
     //Render
       async render() {
+        //Clean
+          if (this.sprite.children.length)
+            this.sprite.removeChildren()
         //Debug
           if (this.world.app.data.debug.areas) {
             //Draw graphics
-              this.sprite.removeChildren()
               this.graphics = this.sprite.addChild(new PIXI.Graphics())
               this.graphics.beginFill(0xFF0000, .5).drawPolygon(this.area.px.flat()).endFill()
               this.sprite.visible = true
@@ -79,8 +81,6 @@
                 point.anchor.set(0.5)
               }
           }
-          else if (this.sprite.children.length)
-            this.sprite.removeChildren()
       }
 
     //Update

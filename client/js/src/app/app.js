@@ -39,6 +39,8 @@
           debug:{
             areas:false,
             chunks:false,
+            tweens:false,
+            pause:false,
           }
       }
 
@@ -51,7 +53,17 @@
         //Render world
           render:() => this.data.loading.done ? this.world.render() : null,
         //Redirect
-          redirect:(url) => window.location.replace(url)
+          redirect:(url) => window.location.replace(url),
+        //Render world (debug)
+          debug_render:() => {
+            //Rendering state
+              if (this.data.debug.pause)
+                return this.renderer.ticker.stop()
+              if (!this.renderer.ticker.started)
+                this.renderer.ticker.start()
+            //Render
+              this.methods.render()
+          }
       }
 
     //Renderer reference
@@ -98,7 +110,7 @@
           this.view.on("moved", () => this.methods.update())
           this.view.on("moved-end", () => this.methods.render())
           this.view.on("zoomed-end", () => this.methods.render())
-          this.view.drag().pinch().wheel().decelerate().clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
+          this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
           this.view.scale.set(1)
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
@@ -149,8 +161,13 @@
                   callback()
               }})
           },
-        //Property
+        //Property (/* Experimental feature */)
           property:({target, change, from, to, duration, callback}) => {
+            //Debug
+              if (!this.world.app.data.debug.tweens) {
+                target[change] = to
+                return
+              }
             //Prepare tween
               let t = 0, op = to > from ? Math.min : Math.max
             //Tween

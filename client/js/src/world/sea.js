@@ -3,9 +3,9 @@
   import textures from "./../app/textures.js"
   import u from "./../app/utils.js"
 
-/** 
+/**
  * World sea.
- * 
+ *
  * This is a special chunk which contains animated tiles of water.
  * It is rendered once and for all and moved each time camera is moved.
  */

@@ -98,6 +98,20 @@
                 this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:16})
             //Add sprite
               this.world.layers.global.world.addChild(this.sprite)
+            //Debug
+              if (this.world.app.data.debug.chunks) {
+                if (!this.graphics) {
+                  this.graphics = this.sprite.addChild(new PIXI.Graphics())
+                  this.graphics.lineStyle(1, 0x0000FF, .5).beginFill(0x0000FF, .25).drawRect(this.x*Chunk.tile.size, this.y*Chunk.tile.size, Chunk.tile.size*Chunk.tile.batch, Chunk.tile.size*Chunk.tile.batch).endFill()
+                  this.graphics.addChild(new PIXI.Text(this.key, {fill:"#00F", stroke:"#FFF", strokeThickness:1, fontSize:12})).position.set(this.x*Chunk.tile.size, this.y*Chunk.tile.size)
+                }
+                else
+                  this.sprite.addChild(this.sprite.removeChild(this.graphics))
+              }
+              else if (this.graphics) {
+                this.sprite.removeChild(this.graphics).destroy(true)
+                this.graphics = null
+              }
           }
       }
 
@@ -105,5 +119,5 @@
       static key({x, y}) { return `${x};${y}` }
 
     //Tile general properties
-      static tile = {size:16}
+      static tile = {size:16, batch:16}
   }
