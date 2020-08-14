@@ -29,7 +29,7 @@
     //Compute and display parameters
       diffs = {
         branch:{
-          remote:argv.branch||"lowlighter.master",
+          remote:argv.branch||"lowlighter:master",
           local:(await git.status()).current
         },
         map:{
@@ -47,9 +47,9 @@
 
     //Load local branch
       try {
-        process.stdout.write(`${`Retrieve local.${diffs.branch.local} content`.padEnd(PAD)} ...\r`.yellow)
+        process.stdout.write(`${`Retrieve (local):${diffs.branch.local} content`.padEnd(PAD)} ...\r`.yellow)
         data.local = parse({data:JSON.parse(fs.readFileSync(diffs.map.path).toString())})
-        process.stdout.write(`${`Retrieve local.${diffs.branch.local} content`.padEnd(PAD)} OK \n`.green)
+        process.stdout.write(`${`Retrieve (local):${diffs.branch.local} content`.padEnd(PAD)} OK \n`.green)
       }
       catch (error) {
         process.stdout.write(`${`Retrieve ${diffs.branch.local} content`.padEnd(PAD)} KO \n`.red)
@@ -59,7 +59,7 @@
     //Load remote branch
       try {
         process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} ...\r`.yellow)
-        const [,user, branch] = diffs.branch.remote.match(/^(.+?)[.](.+)$/)
+        const [,user, branch] = diffs.branch.remote.match(/^(.+?):(.+)$/)
         data.remote = parse(await axios.get(`https://raw.githubusercontent.com/${user}/gracidea/${branch}/maps/${diffs.map.name}/map.json`))
         process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} OK \n`.green)
       }
@@ -112,7 +112,7 @@
             diff["-"] ? `-- ${diff["-"]} removed tile${diff["-"] > 1 ? "s" : ""}` : "",
             diff["="] ? `== ${diff["="]} unchanged tile${diff["="] > 1 ? "s" : ""}` : "",
             "```",
-            `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}.${branch}&diff=true)`,
+            `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)`,
           ].filter(line => line.length).join("\n")
         })
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} OK \n`.green)

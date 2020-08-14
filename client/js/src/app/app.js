@@ -139,7 +139,7 @@
         //Branch and diff
           let branch = this.params.get.map.get("branch")
           if (branch) {
-            const [,owner, name] = branch.match(/^([\w-]+)[.]([\w-]+)$/)||["", "lowlighter", "master"]
+            const [,owner, name] = branch.match(/^([\w-]+):([\w-]+)$/)||["", "lowlighter", "master"]
             this.data.debug.branch = name
             this.data.debug.branch_owner = owner
             this.endpoints.repo.user = `${this.endpoints.repo.raw}/${owner}/gracidea`
