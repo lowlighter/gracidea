@@ -10,11 +10,15 @@
 
 /* Main */
   main {
-    background-color: black;
+    background-color: #24292E;
   }
 
   main.ready {
     background-color: #5068D0;
+  }
+
+  main.ready.no-sea {
+    background-color: #24292E;
   }
 
   main .loading {

@@ -7,6 +7,7 @@
     "debug":{
         "title":"Dev tools",
         "sea":"Afficher la mer",
+        "characters":"Afficher les personnages",
         "areas":"Afficher les polygones de zones",
         "chunks":"Afficher les limites des chunks",
         "tweens":"Activer les transitions",
@@ -21,6 +22,7 @@
         "lang_tips":"Recharger la page avec \"&lang=<en|fr>\" pour modifier la valeur"
     },
     "loading":{
+        "params":"Chargement des options...",
         "world":"Préparation du monde...",
         "sea":"Préparation de l'océan...",
         "camera":"Préparation de la caméra...",

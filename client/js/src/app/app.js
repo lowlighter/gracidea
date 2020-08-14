@@ -39,6 +39,7 @@
         //Debug
           debug:{
             sea:true,
+            characters:true,
             areas:false,
             chunks:false,
             tweens:false,
@@ -136,20 +137,6 @@
           this.view.on("zoomed-end", () => this.methods.render())
           this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
           this.view.scale.set(1)
-        //Branch and diff
-          let branch = this.params.get.map.get("branch")
-          if (branch) {
-            const [,owner, name] = branch.match(/^([\w-]+):([\w-]+)$/)||["", "lowlighter", "master"]
-            this.data.debug.branch = name
-            this.data.debug.branch_owner = owner
-            this.endpoints.repo.user = `${this.endpoints.repo.raw}/${owner}/gracidea`
-            this.endpoints.maps = `${this.endpoints.repo.user}/${name}/maps`
-            this.endpoints.lang = `${this.endpoints.repo.user}/${name}/client/lang`
-          }
-          this.data.debug.diff = this.params.get.map.get("diff")
-        //Other params
-          this.data.debug.sea = this.params.get.map.has("sea") ? this.params.get.map.get("sea") : true
-          this.data.debug.lang = this.params.get.map.get("lang") || "en"
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
             //Load language
@@ -163,6 +150,28 @@
               }
               if (!Object.keys(this.data.lang).length)
                 reject(this.data.loading.state = `An error occured while loading language :(`)
+            //Load parameters
+              this.data.loading.state = this.data.lang.loading.params
+              this.data.debug.sea = this.params.get.map.has("sea") ? this.params.get.map.get("sea") : true
+              this.data.debug.characters = this.params.get.map.has("characters") ? this.params.get.map.get("characters") : true
+              this.data.debug.areas = this.params.get.map.get("areas") || false
+              this.data.debug.chunks = this.params.get.map.get("chunks") || false
+              this.data.debug.diff = this.params.get.map.get("diff") || false
+            //Branch and diff
+              const branch = this.params.get.map.get("branch")
+              if (branch) {
+                const [,owner, name] = decodeURIComponent(branch).match(/^([\w-]+):([\w-]+)$/)||["", "lowlighter", "master"]
+                this.data.debug.branch = name
+                this.data.debug.branch_owner = owner
+                this.endpoints.repo.user = `${this.endpoints.repo.raw}/${owner}/gracidea`
+                this.endpoints.maps = `${this.endpoints.repo.user}/${name}/maps`
+                this.endpoints.lang = `${this.endpoints.repo.user}/${name}/client/lang`
+              }
+              if (this.data.debug.diff) {
+                this.data.debug.sea = false
+                this.data.debug.characters = false
+                this.data.debug.tweens = false
+              }
             //Load world
               this.data.loading.state = this.data.lang.loading.world
               await this.world.load.world()

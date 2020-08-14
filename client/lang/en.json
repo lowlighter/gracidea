@@ -7,6 +7,7 @@
     "debug":{
         "title":"Dev tools",
         "sea":"Show sea",
+        "characters":"Show characters",
         "areas":"Show areas polygons",
         "chunks":"Show chunks limits",
         "tweens":"Enable transitions",
@@ -21,6 +22,7 @@
         "lang_tips":"Reload page with \"&lang=<en|fr>\" to udpate value"
     },
     "loading":{
+        "params":"Loading params...",
         "world":"Loading world...",
         "sea":"Loading sea...",
         "camera":"Loading camera...",

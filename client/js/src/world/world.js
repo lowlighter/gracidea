@@ -169,7 +169,10 @@
             //Refresh world sea position
               this.sea.refresh(this.app.data.user.position)
             //Display characters layer
-              this.layers.global.characters.visible = true
+              if (this.app.data.debug.characters)
+                this.layers.global.characters.visible = true
+              else
+                this.layers.global.characters.visible = false
             //Update parameters
               this.app.params.get.update({x:this.app.data.user.position.x, y:this.app.data.user.position.y})
             //Update cache rendered value

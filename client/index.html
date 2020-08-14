@@ -9,7 +9,7 @@
 </head>
 <body>
   <!-- App -->
-  <main id="app" :class="{ready:loading.done}">
+  <main id="app" :class="{ready:loading.done, 'no-sea':!debug.sea}">
     <template>
       <div class="ui">
         <header>
@@ -46,7 +46,7 @@
         <span>{{ loading.substate || "" }}</span>
       </div>
       <div class="debug" v-if="(show.debug)&&(lang.debug)">
-        <label v-for="x in ['sea', 'areas', 'chunks', 'tweens', 'pause']" :key="x">
+        <label v-for="x in ['sea', 'characters', 'areas', 'chunks', 'tweens', 'pause']" :key="x">
           {{ lang.debug[x] }}
           <input type="checkbox" v-model="debug[x]" :name="x" @change="debug_render">
         </label>
