@@ -113,14 +113,13 @@
             diff["="] ? `== ${diff["="]} unchanged tile${diff["="] > 1 ? "s" : ""}` : "",
             "```",
             `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)`,
-            "<details>",
-            "  <summary>📝 See impacted chunks</summary>",
-            "  <p>",
-            "   ```text",
+            "<details><summary>📝 See impacted chunks</summary><p>",
+            " ",
+            "```text",
                 [...diff.chunks].join(" "),
-            "   ```",
-            "  </p>",
-            "</details>",
+            "```",
+            " ",
+            "</p></details>",
           ].filter(line => line.length).join("\n")
         })
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} OK \n`.green)
