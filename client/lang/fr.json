@@ -13,6 +13,7 @@
         "pause":"Mettre en pause le rendu",
         "branch":"Branche git",
         "branch_tips":"Recharger la page avec \"&branch=<string>\" pour modifier la valeur",
+        "branch_owner":"Créateur de la branche git",
         "diff":"Diff. git",
         "diff_tips":"Recharger la page avec \"&diff=<boolean>\" pour modifier la valeur",
         "fps":"FPS",

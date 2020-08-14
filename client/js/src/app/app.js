@@ -44,6 +44,7 @@
             tweens:false,
             pause:false,
             branch:"master",
+            branch_owner:"lowlighter",
             diff:false,
             lang:"en",
           }
@@ -115,7 +116,8 @@
     //Endpoints
       endpoints = {
         repo:{
-          raw:"https://raw.githubusercontent.com/lowlighter/gracidea",
+          raw:"https://raw.githubusercontent.com",
+          user:"https://raw.githubusercontent.com/lowlighter/gracidea",
           master:"https://raw.githubusercontent.com/lowlighter/gracidea/master",
         },
         lang:"/lang",
@@ -135,11 +137,14 @@
           this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
           this.view.scale.set(1)
         //Branch and diff
-          const branch = this.params.get.map.get("branch")
+          let branch = this.params.get.map.get("branch")
           if (branch) {
-            this.data.debug.branch = branch
-            this.endpoints.maps = `${this.endpoints.repo.raw}/${branch}/maps`
-            this.endpoints.lang = `${this.endpoints.repo.raw}/${branch}/client/lang`
+            const [,owner, name] = branch.match(/^([\w-]+)[.]([\w-]+)$/)||["", "lowlighter", "master"]
+            this.data.debug.branch = name
+            this.data.debug.branch_owner = owner
+            this.endpoints.repo.user = `${this.endpoints.repo.raw}/${owner}/gracidea`
+            this.endpoints.maps = `${this.endpoints.repo.user}/${name}/maps`
+            this.endpoints.lang = `${this.endpoints.repo.user}/${name}/client/lang`
           }
           this.data.debug.diff = this.params.get.map.get("diff")
         //Other params

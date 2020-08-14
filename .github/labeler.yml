@@ -6,9 +6,9 @@ repository:
   - SECURITY.md
   - LICENSE
   - utils/**
+  - package.json
 
 dependencies:
-  - package.json
   - package-lock.json
 
 map revision:

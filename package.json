@@ -17,7 +17,8 @@
     "build-tileset-json": "npx run-s build-tileset-json-overworld",
     "build-tileset-sprite": "npx run-s build-tileset-sprite-overworld",
     "build-tileset-json-overworld": "node utils/tileset-json.js --margin --spacing 2 --destination maps/overworld/tileset.textures.json",
-    "build-tileset-sprite-overworld": "node utils/tileset-sprite.js --margin 2 --spacing 2 --extrusion 1 --source maps/overworld/tileset.textures.raw.png"
+    "build-tileset-sprite-overworld": "node utils/tileset-sprite.js --margin 2 --spacing 2 --extrusion 1 --source maps/overworld/tileset.textures.raw.png",
+    "diff-overworld": "node utils/map-branch-diff.js --map=overworld"
   },
   "author": "lowlighter",
   "license": "AGPL-3.0",
@@ -33,6 +34,7 @@
     "@babel/cli": "^7.10.5",
     "@babel/core": "^7.11.1",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@octokit/rest": "^18.0.3",
     "babel-preset-minify": "^0.5.1",
     "colors": "^1.4.0",
     "jimp": "^0.14.0",

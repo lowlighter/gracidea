@@ -46,25 +46,14 @@
         <span>{{ loading.substate || "" }}</span>
       </div>
       <div class="debug" v-if="(show.debug)&&(lang.debug)">
-        <label v-for="x in ['sea', 'areas', 'chunks', 'tweens', 'pause']" :key="x">{{ lang.debug[x] }}<input type="checkbox" v-model="debug[x]" @change="debug_render"></label>
-        <label class="disabled tips">
-          {{ lang.debug.branch }}
-          <input type="text" v-model="debug.branch" disabled>
-          <div class="tips-text">{{ lang.debug.branch_tips }}</div>
+        <label v-for="x in ['sea', 'areas', 'chunks', 'tweens', 'pause']" :key="x">
+          {{ lang.debug[x] }}
+          <input type="checkbox" v-model="debug[x]" :name="x" @change="debug_render">
         </label>
-        <label class="disabled tips">
-          {{ lang.debug.diff }}
-          <input type="checkbox" v-model="debug.diff" disabled>
-          <div class="tips-text">{{ lang.debug.diff_tips }}</div>
-        </label>
-        <label class="disabled">
-          {{ lang.debug.fps }}
-          <input type="text" v-model="debug.fps" disabled>
-        </label>
-        <label class="disabled tips">
-          {{ lang.debug.lang }}
-          <input type="text" v-model="debug.lang" disabled>
-          <div class="tips-text">{{ lang.debug.lang_tips }}</div>
+        <label class="disabled tips" v-for="{x, t:type = 'text', tips = true} in [{x:'branch'}, {x:'branch_owner', tips:false}, {x:'diff', t:'checkbox'}, {x:'fps', tips:false}, {x:'lang'}]" :key="x">
+          {{ lang.debug[x] }}
+          <input :type="type" v-model="debug[x]" :name="x" disabled>
+          <div class="tips-text" v-if="tips" v-once>{{ lang.debug[`${x}_tips`] }}</div>
         </label>
       </div>
     </template>

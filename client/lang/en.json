@@ -13,6 +13,7 @@
         "pause":"Pause rendering",
         "branch":"Git branch",
         "branch_tips":"Reload page with \"&branch=<string>\" to udpate value",
+        "branch_owner":"Git branch owner",
         "diff":"Git diff",
         "diff_tips":"Reload page with \"&diff=<boolean>\" to udpate value",
         "fps":"FPS",
