@@ -38,6 +38,7 @@
         },
         bot:{
           token:argv.token||null,
+          event:argv.event||"",
           pr:{
             id:argv.pr||NaN,
             owner:argv.owner||"",

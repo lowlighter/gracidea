@@ -16,7 +16,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [12.x]
+        node-version: [14.x]
 
     steps:
     - uses: actions/checkout@v2
@@ -28,4 +28,4 @@ jobs:
     - run: npm test
       env:
         CI: true
-    - run: npm run diff-overworld -- --token=${{ secrets.BOT_TOKEN }} --pr=${{github.event.issue.number}} --owner=${{ github.actor }}
+    - run: npm run diff-overworld -- --token=${{ secrets.BOT_TOKEN }} --event=${{ github.event_path }} --owner=${{ github.actor }}
