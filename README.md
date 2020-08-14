@@ -1,6 +1,6 @@
 # ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/gracidea.png) Gracidea
 
-![Integrity checks](https://github.com/lowlighter/gracidea/workflows/Integrity%20checks/badge.svg)
+![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
 
 ![](https://github.com/lowlighter/gracidea/blob/master/.github/README/animated_map.gif)
 
