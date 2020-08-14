@@ -85,7 +85,7 @@
                   }
                 //Compute diff
                   if ((this.world.app.data.debug.diff)&&(this.world.diff)) {
-                    const prev = this.world.diff[layer][this.key].data[index]-1
+                    const prev = (this.world.diff[layer]?.[this.key]?.data?.[index]||0)-1
                     //New texture
                       if ((prev === -1)&&(texture >= 0))
                         tile.tint = 0x00FF00
