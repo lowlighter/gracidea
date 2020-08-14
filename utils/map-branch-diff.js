@@ -39,7 +39,7 @@
         bot:{
           token:argv.token||null,
           pr:{
-            event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8")) : null,
+            event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()) : null,
             id:argv.pr||NaN,
             owner:argv.owner||"",
           }
