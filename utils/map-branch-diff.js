@@ -38,8 +38,8 @@
         },
         bot:{
           token:argv.token||null,
-          event:argv.event||"",
           pr:{
+            event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8")).pull_request : null,
             id:argv.pr||NaN,
             owner:argv.owner||"",
           }
