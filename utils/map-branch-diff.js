@@ -40,7 +40,7 @@
           token:argv.token||null,
           pr:{
             event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()) : null,
-            id:argv.pr||NaN,
+            get id() { return diffs.bot.pr.event?.number || NaN },
             owner:argv.owner||"",
           }
         }
@@ -101,7 +101,7 @@
       process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK  (${JSON.stringify(diff)})\n`.green)
 
     //Bot recap comment
-      if (diffs.bot.token) {
+      if ((diffs.bot.token)&&(diffs.bot.pr.id)) {
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} ...\r`.yellow)
         octokit = new Octokit({auth:diffs.bot.token})
         await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:diffs.bot.pr.id,
