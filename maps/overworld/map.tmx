@@ -4,7 +4,7 @@
   <export target="map.json" format="json"/>
  </editorsettings>
  <tileset firstgid="1" source="tileset.tsx"/>
- <layer id="13" name="00-boundaries" width="100" height="100">
+ <layer id="13" name="00-boundaries" width="880" height="1568">
   <data encoding="csv">
    <chunk x="-64" y="-1456" width="16" height="16">
 1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,
@@ -5444,7 +5444,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="2" name="01-ground" width="100" height="100">
+ <layer id="2" name="01-ground" width="704" height="1312">
   <data encoding="csv">
    <chunk x="224" y="-1232" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -13224,7 +13224,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="3" name="02-ground" width="100" height="100">
+ <layer id="3" name="02-ground" width="688" height="1312">
   <data encoding="csv">
    <chunk x="224" y="-1232" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -20302,7 +20302,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="5" name="03-ground" width="100" height="100">
+ <layer id="5" name="03-ground" width="528" height="1312">
   <data encoding="csv">
    <chunk x="224" y="-1232" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -21170,7 +21170,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="6" name="11-elements" width="100" height="100">
+ <layer id="6" name="11-elements" width="656" height="1296">
   <data encoding="csv">
    <chunk x="256" y="-1216" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -22321,6 +22321,24 @@
 331,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
+</chunk>
+   <chunk x="464" y="-1088" width="16" height="16">
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,114,0,0,0,114,114,114,114,0,0,0,0,0,
+0,0,0,0,0,0,0,114,114,114,114,0,0,0,0,0,
+0,0,0,0,0,0,0,114,114,114,114,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
@@ -23892,7 +23910,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="7" name="12-elements" width="100" height="100">
+ <layer id="7" name="12-elements" width="704" height="1312">
   <data encoding="csv">
    <chunk x="224" y="-1232" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -31402,7 +31420,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="8" name="13-elements" width="100" height="100">
+ <layer id="8" name="13-elements" width="704" height="1280">
   <data encoding="csv">
    <chunk x="272" y="-1216" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
