@@ -38,7 +38,7 @@
         },
         bot:{
           token:argv.token||null,
-          pr:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()).pull_request : null
+          pr:argv.event ? {event:JSON.parse(fs.readFileSync(argv.event, "utf8").toString()).pull_request} : null
         }
       }
       const data = {remote:null, local:null}
@@ -72,7 +72,6 @@
       const diff = {"+":0, "-":0, "~":0, "=":0}
       process.stdout.write(`${`Compute diff`.padEnd(PAD)} ...\r`.yellow)
       for (let layer of Object.keys(data.local)) {
-        layer= "01-ground"
         for (let chunk of Object.keys(data.local[layer])) {
           for (let [index, texture] of Object.entries(data.local[layer][chunk].data)) {
             //Adjust index
@@ -97,12 +96,12 @@
       process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK  (${JSON.stringify(diff)})\n`.green)
 
     //Bot recap comment
-      if ((diffs.bot.token)&&(diffs.bot.pr)) {
+      if ((diffs.bot.token)&&(diffs.bot.pr.event)) {
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} ...\r`.yellow)
         const octokit = new Octokit({auth:diffs.bot.token})
-        const branch = diffs.bot.pr.head.ref
-        const owner = diffs.bot.pr.user.login
-        const pr = diffs.bot.pr.number
+        const branch = diffs.bot.pr.event.head.ref
+        const owner = diffs.bot.pr.event.user.login
+        const pr = diffs.bot.pr.event.number
         await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
           body:[
             "```diff",
