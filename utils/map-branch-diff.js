@@ -85,7 +85,7 @@
                 (diff["-"]++, diff.chunks.add(chunk))
             //Untouched texture
               else if ((prev === texture)&&(texture >= 0))
-                (diff["="]++, diff.chunks.add(chunk))
+                diff["="]++
             //Edited texture
               else if ((prev >= 0)&&(texture >= 0))
                 (diff["~"]++, diff.chunks.add(chunk))
@@ -112,12 +112,15 @@
             diff["-"] ? `-- ${diff["-"]} removed tile${diff["-"] > 1 ? "s" : ""}` : "",
             diff["="] ? `== ${diff["="]} unchanged tile${diff["="] > 1 ? "s" : ""}` : "",
             "```",
-            "<details><summary>📝 See impacted chunks</summary><p>",
-            "```",
-            [...diff.chunks].join(" "),
-            "```",
-            "</p></details>",
             `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)`,
+            "<details>",
+            "  <summary>📝 See impacted chunks</summary>",
+            "  <p>",
+            "   ```text",
+                [...diff.chunks].join(" "),
+            "   ```",
+            "  </p>",
+            "</details>",
           ].filter(line => line.length).join("\n")
         })
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} OK \n`.green)
