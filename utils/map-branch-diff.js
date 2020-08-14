@@ -21,7 +21,7 @@
     const layers = Object.fromEntries(map.data.layers.map(layer => [layer.name, layer]))
     for (let layer of Object.keys(layers))
       if (layers[layer].chunks)
-        parsed[layer] = Object.fromEntries(layers[layer].chunks.map(chunk => [`${chunk.x};${chunk.y}`, chunk]))
+        parsed[layer] = Object.fromEntries(layers[layer].chunks.map(chunk => [`[x:${chunk.x}, y${chunk.y}]`, chunk]))
     return parsed
   }
 
@@ -69,7 +69,7 @@
       }
 
   //Compute diff
-      const diff = {"+":0, "-":0, "~":0, "=":0}
+      const diff = {"+":0, "-":0, "~":0, "=":0, chunks:new Set()}
       process.stdout.write(`${`Compute diff`.padEnd(PAD)} ...\r`.yellow)
       for (let layer of Object.keys(data.local)) {
         for (let chunk of Object.keys(data.local[layer])) {
@@ -79,21 +79,22 @@
               texture--
             //New texture
               if ((prev === -1)&&(texture >= 0))
-                diff["+"]++
+                (diff["+"]++, diff.chunks.add(chunk))
             //Deleted texture
               else if ((texture === -1)&&(prev >= 0))
-                diff["-"]++
+                (diff["-"]++, diff.chunks.add(chunk))
             //Untouched texture
               else if ((prev === texture)&&(texture >= 0))
-                diff["="]++
+                (diff["="]++, diff.chunks.add(chunk))
             //Edited texture
               else if ((prev >= 0)&&(texture >= 0))
-                diff["~"]++
+                (diff["~"]++, diff.chunks.add(chunk))
           }
         }
-        process.stdout.write(`${`Compute diff`.padEnd(PAD)} ... (${JSON.stringify(diff)})\r`.yellow)
+        process.stdout.write(`${`Compute diff`.padEnd(PAD)} ...\r`.yellow)
       }
-      process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK  (${JSON.stringify(diff)})\n`.green)
+      process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK \n`.green)
+      process.stdout.write(`\nresult => ${util.inspect(diff)}\n`.cyan)
 
     //Bot recap comment
       if ((diffs.bot.token)&&(diffs.bot.pr.event)) {
@@ -105,12 +106,17 @@
         await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
           body:[
             "```diff",
-            "@@ Map revision diff @@",
+            `@@ ${diff.chunks.size} chunk${diff.chunks.size > 1 ? "s" : ""} impacted @@`,
             diff["+"] ? `++ ${diff["+"]} added tile${diff["+"] > 1 ? "s" : ""}` : "",
             diff["~"] ? `+~ ${diff["~"]} edited tile${diff["~"] > 1 ? "s" : ""}` : "",
             diff["-"] ? `-- ${diff["-"]} removed tile${diff["-"] > 1 ? "s" : ""}` : "",
             diff["="] ? `== ${diff["="]} unchanged tile${diff["="] > 1 ? "s" : ""}` : "",
             "```",
+            "<details><summary>📝 See impacted chunks</summary><p>",
+            "```",
+            [...diff.chunks].join(" "),
+            "```",
+            "</p></details>",
             `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)`,
           ].filter(line => line.length).join("\n")
         })
