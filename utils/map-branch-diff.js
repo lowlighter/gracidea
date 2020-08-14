@@ -102,7 +102,7 @@
         const octokit = new Octokit({auth:diffs.bot.token})
         const branch = diffs.bot.pr.head.ref
         const owner = diffs.bot.pr.user.login
-        const pr = iffs.bot.pr.number
+        const pr = diffs.bot.pr.number
         await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
           body:[
             "```diff",
