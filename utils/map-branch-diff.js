@@ -29,7 +29,7 @@
     //Compute and display parameters
       diffs = {
         branch:{
-          remote:argv.branch||"lowlighter.master",
+          remote:argv.branch||"lowlighter:master",
           local:(await git.status()).current
         },
         map:{
@@ -38,22 +38,18 @@
         },
         bot:{
           token:argv.token||null,
-          pr:{
-            event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()) : null,
-            id:argv.pr||NaN,
-            owner:argv.owner||"",
-          }
+          pr:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()).pull_request : null
         }
       }
       const data = {remote:null, local:null}
-      process.stdout.write(`diffs => ${util.inspect(diffs, {getters:true, depth:8}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan)
+      process.stdout.write(`diffs => ${util.inspect(diffs, {getters:true}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan)
       process.stdout.write(`\nMAP-BRANCH-DIFF : \n`)
 
     //Load local branch
       try {
-        process.stdout.write(`${`Retrieve local.${diffs.branch.local} content`.padEnd(PAD)} ...\r`.yellow)
+        process.stdout.write(`${`Retrieve (local):${diffs.branch.local} content`.padEnd(PAD)} ...\r`.yellow)
         data.local = parse({data:JSON.parse(fs.readFileSync(diffs.map.path).toString())})
-        process.stdout.write(`${`Retrieve local.${diffs.branch.local} content`.padEnd(PAD)} OK \n`.green)
+        process.stdout.write(`${`Retrieve (local):${diffs.branch.local} content`.padEnd(PAD)} OK \n`.green)
       }
       catch (error) {
         process.stdout.write(`${`Retrieve ${diffs.branch.local} content`.padEnd(PAD)} KO \n`.red)
@@ -63,7 +59,7 @@
     //Load remote branch
       try {
         process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} ...\r`.yellow)
-        const [,user, branch] = diffs.branch.remote.match(/^(.+?)[.](.+)$/)
+        const [,user, branch] = diffs.branch.remote.match(/^(.+?):(.+)$/)
         data.remote = parse(await axios.get(`https://raw.githubusercontent.com/${user}/gracidea/${branch}/maps/${diffs.map.name}/map.json`))
         process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} OK \n`.green)
       }
@@ -101,10 +97,13 @@
       process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK  (${JSON.stringify(diff)})\n`.green)
 
     //Bot recap comment
-      if (diffs.bot.token) {
+      if ((diffs.bot.token)&&(diffs.bot.pr)) {
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} ...\r`.yellow)
-        octokit = new Octokit({auth:diffs.bot.token})
-        await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:diffs.bot.pr.id,
+        const octokit = new Octokit({auth:diffs.bot.token})
+        const branch = diffs.bot.pr.head.ref
+        const owner = diffs.bot.pr.user.login
+        const pr = diffs.bot.pr.number
+        await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
           body:[
             "```diff",
             "@@ Map revision diff @@",
@@ -113,7 +112,7 @@
             diff["-"] ? `-- ${diff["-"]} removed tile${diff["-"] > 1 ? "s" : ""}` : "",
             diff["="] ? `== ${diff["="]} unchanged tile${diff["="] > 1 ? "s" : ""}` : "",
             "```",
-            `[🗺️ See map diff for pull request #${diffs.bot.pr.id} @${diffs.bot.pr.owner}/${diffs.branch.local}](https://gracidea.lecoq.io/?branch=${diffs.bot.pr.owner}.${diffs.branch.local}&diff=true)`,
+            `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)`,
           ].filter(line => line.length).join("\n")
         })
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} OK \n`.green)
