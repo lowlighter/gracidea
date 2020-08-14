@@ -46,7 +46,7 @@
         }
       }
       const data = {remote:null, local:null}
-      process.stdout.write(`diffs => ${util.inspect(diffs, {getters:true}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan)
+      process.stdout.write(`diffs => ${util.inspect(diffs, {getters:true, depth:8}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan)
       process.stdout.write(`\nMAP-BRANCH-DIFF : \n`)
 
     //Load local branch
