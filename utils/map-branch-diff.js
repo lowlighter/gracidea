@@ -42,7 +42,7 @@
         }
       }
       const data = {remote:null, local:null}
-      process.stdout.write(`diffs => ${util.inspect(diffs, {getters:true, depth:8}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan)
+      process.stdout.write(`diffs => ${util.inspect(diffs, {getters:true}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan)
       process.stdout.write(`\nMAP-BRANCH-DIFF : \n`)
 
     //Load local branch
@@ -100,9 +100,9 @@
       if ((diffs.bot.token)&&(diffs.bot.pr)) {
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} ...\r`.yellow)
         const octokit = new Octokit({auth:diffs.bot.token})
-        const branch = diffs.bot.pr.event.head.ref
-        const owner = diffs.bot.pr.event.user.login
-        const pr = iffs.bot.pr.event.number
+        const branch = diffs.bot.pr.head.ref
+        const owner = diffs.bot.pr.user.login
+        const pr = iffs.bot.pr.number
         await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
           body:[
             "```diff",
