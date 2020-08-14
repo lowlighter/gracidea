@@ -39,7 +39,7 @@
         bot:{
           token:argv.token||null,
           pr:{
-            event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8")).pull_request : null,
+            event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8")) : null,
             id:argv.pr||NaN,
             owner:argv.owner||"",
           }
@@ -103,7 +103,7 @@
     //Bot recap comment
       if (diffs.bot.token) {
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} ...\r`.yellow)
-        octokit = new Octokit({auth:diffs.bot.token, log: console})
+        octokit = new Octokit({auth:diffs.bot.token})
         await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:diffs.bot.pr.id,
           body:[
             "```diff",
