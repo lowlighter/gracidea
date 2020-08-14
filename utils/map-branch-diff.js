@@ -38,11 +38,7 @@
         },
         bot:{
           token:argv.token||null,
-          pr:{
-            event:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()) : null,
-            get id() { return diffs.bot.pr.event?.number || NaN },
-            owner:argv.owner||"",
-          }
+          pr:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()).pull_request : null
         }
       }
       const data = {remote:null, local:null}
@@ -101,10 +97,13 @@
       process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK  (${JSON.stringify(diff)})\n`.green)
 
     //Bot recap comment
-      if ((diffs.bot.token)&&(diffs.bot.pr.id)) {
+      if ((diffs.bot.token)&&(diffs.bot.pr)) {
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} ...\r`.yellow)
-        octokit = new Octokit({auth:diffs.bot.token})
-        await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:diffs.bot.pr.id,
+        const octokit = new Octokit({auth:diffs.bot.token})
+        const branch = diffs.bot.pr.event.head.ref
+        const owner = diffs.bot.pr.event.user.login
+        const pr = iffs.bot.pr.event.number
+        await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
           body:[
             "```diff",
             "@@ Map revision diff @@",
@@ -113,7 +112,7 @@
             diff["-"] ? `-- ${diff["-"]} removed tile${diff["-"] > 1 ? "s" : ""}` : "",
             diff["="] ? `== ${diff["="]} unchanged tile${diff["="] > 1 ? "s" : ""}` : "",
             "```",
-            `[🗺️ See map diff for pull request #${diffs.bot.pr.id} @${diffs.bot.pr.owner}/${diffs.branch.local}](https://gracidea.lecoq.io/?branch=${diffs.bot.pr.owner}.${diffs.branch.local}&diff=true)`,
+            `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}.${branch}&diff=true)`,
           ].filter(line => line.length).join("\n")
         })
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} OK \n`.green)
