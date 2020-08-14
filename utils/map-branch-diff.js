@@ -21,7 +21,7 @@
     const layers = Object.fromEntries(map.data.layers.map(layer => [layer.name, layer]))
     for (let layer of Object.keys(layers))
       if (layers[layer].chunks)
-        parsed[layer] = Object.fromEntries(layers[layer].chunks.map(chunk => [`${chunk.x};${chunk.y}`, chunk]))
+        parsed[layer] = Object.fromEntries(layers[layer].chunks.map(chunk => [`[x:${chunk.x}, y${chunk.y}]`, chunk]))
     return parsed
   }
 
@@ -38,7 +38,7 @@
         },
         bot:{
           token:argv.token||null,
-          pr:argv.event ? JSON.parse(fs.readFileSync(argv.event, "utf8").toString()).pull_request : null
+          pr:argv.event ? {event:JSON.parse(fs.readFileSync(argv.event, "utf8").toString()).pull_request} : null
         }
       }
       const data = {remote:null, local:null}
@@ -69,10 +69,9 @@
       }
 
   //Compute diff
-      const diff = {"+":0, "-":0, "~":0, "=":0}
+      const diff = {"+":0, "-":0, "~":0, "=":0, chunks:new Set()}
       process.stdout.write(`${`Compute diff`.padEnd(PAD)} ...\r`.yellow)
       for (let layer of Object.keys(data.local)) {
-        layer= "01-ground"
         for (let chunk of Object.keys(data.local[layer])) {
           for (let [index, texture] of Object.entries(data.local[layer][chunk].data)) {
             //Adjust index
@@ -80,39 +79,47 @@
               texture--
             //New texture
               if ((prev === -1)&&(texture >= 0))
-                diff["+"]++
+                (diff["+"]++, diff.chunks.add(chunk))
             //Deleted texture
               else if ((texture === -1)&&(prev >= 0))
-                diff["-"]++
+                (diff["-"]++, diff.chunks.add(chunk))
             //Untouched texture
               else if ((prev === texture)&&(texture >= 0))
                 diff["="]++
             //Edited texture
               else if ((prev >= 0)&&(texture >= 0))
-                diff["~"]++
+                (diff["~"]++, diff.chunks.add(chunk))
           }
         }
-        process.stdout.write(`${`Compute diff`.padEnd(PAD)} ... (${JSON.stringify(diff)})\r`.yellow)
+        process.stdout.write(`${`Compute diff`.padEnd(PAD)} ...\r`.yellow)
       }
-      process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK  (${JSON.stringify(diff)})\n`.green)
+      process.stdout.write(`${`Compute diff`.padEnd(PAD)} OK \n`.green)
+      process.stdout.write(`\nresult => ${util.inspect(diff)}\n`.cyan)
 
     //Bot recap comment
-      if ((diffs.bot.token)&&(diffs.bot.pr)) {
+      if ((diffs.bot.token)&&(diffs.bot.pr.event)) {
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} ...\r`.yellow)
         const octokit = new Octokit({auth:diffs.bot.token})
-        const branch = diffs.bot.pr.head.ref
-        const owner = diffs.bot.pr.user.login
-        const pr = diffs.bot.pr.number
+        const branch = diffs.bot.pr.event.head.ref
+        const owner = diffs.bot.pr.event.user.login
+        const pr = diffs.bot.pr.event.number
         await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
           body:[
             "```diff",
-            "@@ Map revision diff @@",
+            `@@ ${diff.chunks.size} chunk${diff.chunks.size > 1 ? "s" : ""} impacted @@`,
             diff["+"] ? `++ ${diff["+"]} added tile${diff["+"] > 1 ? "s" : ""}` : "",
             diff["~"] ? `+~ ${diff["~"]} edited tile${diff["~"] > 1 ? "s" : ""}` : "",
             diff["-"] ? `-- ${diff["-"]} removed tile${diff["-"] > 1 ? "s" : ""}` : "",
             diff["="] ? `== ${diff["="]} unchanged tile${diff["="] > 1 ? "s" : ""}` : "",
             "```",
             `[🗺️ See map diff for pull request #${pr} @${owner}/${branch}](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)`,
+            "<details><summary>📝 See impacted chunks</summary><p>",
+            " ",
+            "```text",
+                [...diff.chunks].join(" "),
+            "```",
+            " ",
+            "</p></details>",
           ].filter(line => line.length).join("\n")
         })
         process.stdout.write(`${`Bot comment`.padEnd(PAD)} OK \n`.green)
