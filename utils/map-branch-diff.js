@@ -47,6 +47,7 @@
           width:argv.tilesetWidth||2036,
           height:argv.tilesetHeight||2036,
           get path() { return path.join(__dirname, "../maps", diffs.map.name, "tileset.textures.png") },
+          get tmp() { return this.path.replace(/\.png/, ".tmp.png") },
         },
         bot:{
           token:argv.token||null,
@@ -73,9 +74,16 @@
       try {
         process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} ...\r`.yellow)
         const [,user, branch] = diffs.branch.remote.match(/^(.+?):(.+)$/)
+        process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} map.json\r`.yellow)
         data.remote.map = parse(await axios.get(`https://raw.githubusercontent.com/${user}/gracidea/${branch}/maps/${diffs.map.name}/map.json`))
-        data.remote.tileset = await jimp.read((await axios(`https://raw.githubusercontent.com/${user}/gracidea/${branch}/maps/${diffs.map.name}/tileset.textures.png?raw=true`, {responseType:"blob"})).data)
-        process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} OK \n`.green)
+        process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} tileset.textures.png\r`.yellow)
+        const writer = fs.createWriteStream(diffs.tileset.tmp)
+        const response = await axios(`https://raw.githubusercontent.com/${user}/gracidea/${branch}/maps/${diffs.map.name}/tileset.textures.png?raw=true`, {responseType:"stream"})
+        response.data.pipe(writer)
+        await new Promise((solve, reject) => (writer.on("finish", solve), writer.on("error", reject)))
+        data.remote.tileset = fs.readFileSync(diffs.tileset.tmp)
+        fs.unlinkSync(diffs.tileset.tmp)
+        process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} OK                     \n`.green)
       }
       catch (error) {
         process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} KO \n`.red)
