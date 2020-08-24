@@ -82,7 +82,6 @@
         response.data.pipe(writer)
         await new Promise((solve, reject) => (writer.on("finish", solve), writer.on("error", reject)))
         data.remote.tileset = fs.readFileSync(diffs.tileset.tmp)
-        fs.unlinkSync(diffs.tileset.tmp)
         process.stdout.write(`${`Retrieve ${diffs.branch.remote} content`.padEnd(PAD)} OK                     \n`.green)
       }
       catch (error) {
@@ -92,7 +91,7 @@
 
     //Compute diff
       //Map diff
-        const diff = {"+":0, "-":0, "~":0, "=":0, chunks:new Set(), tileset:{image:null, "~":0}}
+        const diff = {"+":0, "-":0, "~":0, "=":0, chunks:new Set(), tileset:{image:{"-":null, "+":null}, "~":0}}
         process.stdout.write(`${`Compute map diff`.padEnd(PAD)} ...\r`.yellow)
         for (let layer of Object.keys(data.local.map)) {
           for (let chunk of Object.keys(data.local.map[layer])) {
@@ -120,12 +119,15 @@
       //Tileset diff
         process.stdout.write(`${"Compute tileset diff".padEnd(PAD)} ...\r`.yellow)
         //Pixelmatch
-          diff.tileset.image = new PNG({width:diffs.tileset.width, height:diffs.tileset.height})
-          pixelmatch(PNG.sync.read(data.local.tileset).data, PNG.sync.read(data.remote.tileset).data, diff.tileset.image.data, diffs.tileset.width, diffs.tileset.height, {threshold:0, includeAA:true, diffColor:[255, 165, 0], diffMask:true})
-        //Generate diff image
-          diff.tileset.image = await jimp.read(PNG.sync.write(diff.tileset.image))
-          const original = await jimp.read(diffs.tileset.path)
-          diff.tileset.image = await original.clone().mask(diff.tileset.image, 0, 0).composite(original.greyscale().opacity(.05), 0, 0).getBufferAsync(jimp.MIME_PNG)
+          let mask = new PNG({width:diffs.tileset.width, height:diffs.tileset.height})
+          pixelmatch(PNG.sync.read(data.local.tileset).data, PNG.sync.read(data.remote.tileset).data, mask.data, diffs.tileset.width, diffs.tileset.height, {threshold:0, includeAA:true, diffColor:[255, 165, 0], diffMask:true})
+        //Generate diff images
+          mask = await jimp.read(PNG.sync.write(mask))
+          const before = await jimp.read(diffs.tileset.tmp)
+          diff.tileset.image.before = await before.clone().mask(mask, 0, 0).composite(before.greyscale().opacity(.05), 0, 0).getBufferAsync(jimp.MIME_PNG)
+          fs.unlinkSync(diffs.tileset.tmp)
+          const after = await jimp.read(diffs.tileset.path)
+          diff.tileset.image.after = await after.clone().mask(mask, 0, 0).composite(after.greyscale().opacity(.05), 0, 0).getBufferAsync(jimp.MIME_PNG)
         //Compute edited pixels
           diff.tileset["~"] = Math.round(jimp.diff(await jimp.read(data.local.tileset), await jimp.read(data.remote.tileset), 0).percent * diffs.tileset.width * diffs.tileset.height)
         process.stdout.write(`${"Compute diff".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
@@ -143,21 +145,24 @@
         //Attached files
           if (revision.tileset) {
             process.stdout.write(`${`Bot file upload`.padEnd(PAD)} ...\r`.yellow)
-            await octokit.repos.createOrUpdateFileContents({
-              owner:"botlighter",
-              repo:"storage",
-              path:`gracidea/${diffs.bot.pr.event.id}.png`,
-              message:"Upload attached file",
-              content:diff.tileset.image.toString("base64"),
-            })
-            process.stdout.write(`${`Bot file upload`.padEnd(PAD)} OK \n`.green)
+            for (let file of ["before", "after"]) {
+              process.stdout.write(`${`Bot file upload`.padEnd(PAD)} ${file}      \r`.yellow)
+              await octokit.repos.createOrUpdateFileContents({
+                owner:"botlighter",
+                repo:"storage",
+                path:`gracidea/${diffs.bot.pr.event.id}_${file}.png`,
+                message:"Upload attached file",
+                content:diff.tileset.image[file].toString("base64"),
+              })
+            }
+            process.stdout.write(`${`Bot file upload`.padEnd(PAD)} OK      \n`.green)
           }
         //
           if ((revision.map)||(revision.tileset)) {
             process.stdout.write(`${`Bot recap comment`.padEnd(PAD)} ...\r`.yellow)
             await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
               body:[
-                "#${pr} @${owner}/${branch}",
+                `### Pull request #${pr} @${owner}/${branch} summary`,
                 "```diff",
                 revision.map ? "@@ Map revision @@" : "",
                 revision.map ? `## ${diff.chunks.size} chunk${diff.chunks.size > 1 ? "s" : ""} impacted` : "",
@@ -169,19 +174,26 @@
                 revision.tileset ? "@@ Tileset revision @@" : "",
                 revision.tileset && diff.tileset["~"] ? `+~ ${diff.tileset["~"]} edited pixel${diff.tileset["~"] > 1 ? "s" : ""} (estimatation)` : "",
                 "```",
-                revision.map ? `🔗[🗺️ Map diff](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)` : "",
-                revision.map ? "<details><summary>📝 Edited chunk list</summary><p>" : "",
+                revision.map ? `[🗺️ Map diff](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)` : "",
+                revision.map ? "<details><summary>📝 Edited chunks list</summary><p>" : "",
                 revision.map ? " " : "",
                 revision.map ? "```text" : "",
                 revision.map ? [...diff.chunks].join(" ") : "",
                 revision.map ? "```" : "",
                 revision.map ? " " : "",
                 revision.map ? "</p></details>" : "",
-                revision.tileset ? "<details><summary>🖼️ Edited tileset</summary><p>" : "",
+                revision.map && revision.tileset ? " " : "",
+                revision.tileset ? "<details><summary>🖼️ Tileset diff</summary><p>" : "",
                 revision.tileset ? " " : "",
-                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${diffs.bot.pr.event.id}.png?raw=true)` : "",
+                revision.tileset ? "#### Revision" : "",
+                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${diffs.bot.pr.event.id}_after.png?raw=true)` : "",
+                revision.tileset ? "#### Head" : "",
+                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${diffs.bot.pr.event.id}_before.png?raw=true)` : "",
                 revision.tileset ? " " : "",
                 revision.tileset ? "</p></details>" : "",
+                revision.map && revision.tileset ? " " : "",
+                "___",
+                `*This report was auto-generated on ${new Date()}*`
               ].filter(line => line.length).join("\n")
             })
             process.stdout.write(`${`Bot recap comment`.padEnd(PAD)} OK \n`.green)
