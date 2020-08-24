@@ -143,7 +143,7 @@
           const branch = diffs.bot.pr.event.head.ref
           const owner = diffs.bot.pr.event.user.login
           const pr = diffs.bot.pr.event.number
-          const uid = `${diffs.bot.pr.event.id}_${Date.now()}_`
+          const uid = `${diffs.bot.pr.event.id}_${Date.now()}`
         //Attached files
           if (revision.tileset) {
             process.stdout.write(`${`Bot file upload`.padEnd(PAD)} ...\r`.yellow)
@@ -152,7 +152,7 @@
               await octokit.repos.createOrUpdateFileContents({
                 owner:"botlighter",
                 repo:"storage",
-                path:`gracidea/${uid}${file}.png`,
+                path:`gracidea/${uid}_${file}.png`,
                 message:"Upload attached file",
                 content:diff.tileset.image[file].toString("base64"),
               })
