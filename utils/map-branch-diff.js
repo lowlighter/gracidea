@@ -143,6 +143,7 @@
           const branch = diffs.bot.pr.event.head.ref
           const owner = diffs.bot.pr.event.user.login
           const pr = diffs.bot.pr.event.number
+          const uid = `${diffs.bot.pr.event.id}_${Date.now()}_`
         //Attached files
           if (revision.tileset) {
             process.stdout.write(`${`Bot file upload`.padEnd(PAD)} ...\r`.yellow)
@@ -151,14 +152,14 @@
               await octokit.repos.createOrUpdateFileContents({
                 owner:"botlighter",
                 repo:"storage",
-                path:`gracidea/${diffs.bot.pr.event.id}_${file}.png`,
+                path:`gracidea/${uid}${file}.png`,
                 message:"Upload attached file",
                 content:diff.tileset.image[file].toString("base64"),
               })
             }
             process.stdout.write(`${`Bot file upload`.padEnd(PAD)} OK      \n`.green)
           }
-        //
+        //Comment recap
           if ((revision.map)||(revision.tileset)) {
             process.stdout.write(`${`Bot recap comment`.padEnd(PAD)} ...\r`.yellow)
             await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
@@ -188,9 +189,9 @@
                 revision.tileset ? "<details><summary>🖼️ Tileset diff</summary><p>" : "",
                 revision.tileset ? " " : "",
                 revision.tileset ? "#### Revision" : "",
-                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${diffs.bot.pr.event.id}_after.png?raw=true)` : "",
+                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${uid}_after.png?raw=true)` : "",
                 revision.tileset ? "#### Head" : "",
-                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${diffs.bot.pr.event.id}_before.png?raw=true)` : "",
+                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${uid}_before.png?raw=true)` : "",
                 revision.tileset ? " " : "",
                 revision.tileset ? "</p></details>" : "",
                 revision.map && revision.tileset ? " " : "",
