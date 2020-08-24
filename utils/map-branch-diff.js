@@ -130,6 +130,7 @@
           diff.tileset.image.after = await after.clone().mask(mask, 0, 0).composite(after.greyscale().opacity(.05), 0, 0).getBufferAsync(jimp.MIME_PNG)
         //Compute edited pixels
           diff.tileset["~"] = Math.round(jimp.diff(await jimp.read(data.local.tileset), await jimp.read(data.remote.tileset), 0).percent * diffs.tileset.width * diffs.tileset.height)
+          diff.tileset["="] = diffs.tileset.width * diffs.tileset.height - diff.tileset["~"]
         process.stdout.write(`${"Compute diff".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
       process.stdout.write(`\nresult => ${util.inspect(diff)}\n`.cyan)
 
@@ -162,7 +163,7 @@
             process.stdout.write(`${`Bot recap comment`.padEnd(PAD)} ...\r`.yellow)
             await octokit.issues.createComment({owner:"lowlighter", repo:"gracidea", issue_number:pr,
               body:[
-                `### Pull request #${pr} @${owner}/${branch} summary`,
+                `### [Summary of pull request #${pr} @${owner}/${branch}]()`,
                 "```diff",
                 revision.map ? "@@ Map revision @@" : "",
                 revision.map ? `## ${diff.chunks.size} chunk${diff.chunks.size > 1 ? "s" : ""} impacted` : "",
@@ -173,6 +174,7 @@
                 revision.map && revision.tileset ? " " : "",
                 revision.tileset ? "@@ Tileset revision @@" : "",
                 revision.tileset && diff.tileset["~"] ? `+~ ${diff.tileset["~"]} edited pixel${diff.tileset["~"] > 1 ? "s" : ""} (estimatation)` : "",
+                revision.tileset && diff.tileset["~"] ? `== ${diff.tileset["="]} unchanged pixel${diff.tileset["~"] > 1 ? "s" : ""} (estimatation)` : "",
                 "```",
                 revision.map ? `[🗺️ Map diff](https://gracidea.lecoq.io/?branch=${owner}:${branch}&diff=true)` : "",
                 revision.map ? "<details><summary>📝 Edited chunks list</summary><p>" : "",
@@ -192,7 +194,9 @@
                 revision.tileset ? " " : "",
                 revision.tileset ? "</p></details>" : "",
                 revision.map && revision.tileset ? " " : "",
+                " ",
                 "___",
+                " ",
                 `*This report was auto-generated on ${new Date()}*`
               ].filter(line => line.length).join("\n")
             })
