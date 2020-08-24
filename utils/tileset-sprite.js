@@ -68,8 +68,8 @@
       }
 
     //Check mode
-      if (argv.check) 
-      process.exit((tileset.hash.current === tileset.hash.generated) ? 0 : 1)
+      if (argv.check)
+        process.exit((tileset.hash.current === tileset.hash.generated) ? 0 : 1)
 
     //Display parameters
       ;[["tile", tile], ["tileset", tileset]].map(([name, object]) => process.stdout.write(`${name} => ${util.inspect(object, {getters:true}).replace(/\[Getter:?(.*?)\]/g, "$1")}\n`.cyan))
@@ -91,14 +91,14 @@
       const input = await jimp.read(buffer)
       const output = await new jimp(tileset.width, tileset.height, 0x0)
       for (let y = 0; y < tileset.tiles.y; y++) {
-        for (let x = 0; x < tileset.tiles.x; x++) { 
+        for (let x = 0; x < tileset.tiles.x; x++) {
           process.stdout.write(`${"Composing".padEnd(PAD)} ${y*tileset.tiles.x}/${tileset.tiles.total}\r`.yellow)
           const cropped = input.clone().crop(tileset.margin.full + x*(tile.extruded.spaced.width), tileset.margin.full + y*(tile.extruded.spaced.height), tile.extruded.width, tile.extruded.height)
           output.composite(cropped, tileset.margin.half+x*tile.extruded.width, tileset.margin.half+y*tile.extruded.height)
         }
       }
       process.stdout.write(`${"Composing".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
-      
+
     //Save
       process.stdout.write(`${"Saving".padEnd(PAD)} ...\r`.yellow)
       await output.writeAsync(tileset.tmp)
@@ -115,8 +115,8 @@
       })
       fs.unlinkSync(tileset.tmp)
       process.stdout.write(`${"Updating itxt".padEnd(PAD)} OK \n`.green)
-      
+
     //Success
       process.stdout.write(`Success \n\n`.green)
-        
+
   })()

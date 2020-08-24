@@ -16,9 +16,9 @@
   const pngitxt = require("png-itxt")
   const PAD = 48
   let checks = {}
-  
+
 //Die on unhandled promises
-  process.on("unhandledRejection", error => { 
+  process.on("unhandledRejection", error => {
     process.stdout.write(`\nA fatal error occured \n\n`.red)
     console.error(error)
     process.exit(2)
@@ -32,7 +32,7 @@
         process.stdout.write(`${name.padEnd(PAD)} ...\r`.yellow)
         try {
           //Check if assertion is verified
-            if (await assert()) 
+            if (await assert())
               result = true
           //Try to fix problem if possible
             else if ((checks.and.fix)&&(fix)) {
@@ -46,8 +46,8 @@
           //Fail
             else
               throw false
-        } 
-        catch(error) {  
+        }
+        catch(error) {
           if (fix)
             process.stdout.write(`${name.padEnd(PAD)} Need --fix\n`.yellow)
           else
@@ -60,7 +60,7 @@
               process.stdout.write(`${name.padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
               return true
             }
-          //Die 
+          //Die
             if (checks.and.die)
               throw result
           return false
@@ -93,13 +93,13 @@
 
     //Status
       const status = await git.status()
-   
+
     //Check source code and rebuild it if needed
       {
         process.stdout.write(`Source code\n`)
         checks.status &= await check({
-          name:"Build", 
-          when:status.modified.filter(file => file.startsWith("client/js/src/")).length, 
+          name:"Build",
+          when:status.modified.filter(file => file.startsWith("client/js/src/")).length,
           assert() { return false },
           fix() { return exec("npm run build-code"), true },
           verbose:true
@@ -112,8 +112,8 @@
         const langs = fs.readdirSync(checks.paths.lang)
         for (let lang of langs)
           checks.status &= await check({
-            name:lang, 
-            assert() { return JSON.parse(fs.readFileSync(path.join(checks.paths.lang, lang)).toString()), true } 
+            name:lang,
+            assert() { return JSON.parse(fs.readFileSync(path.join(checks.paths.lang, lang)).toString()), true }
           })
       }
 
@@ -122,23 +122,23 @@
         process.stdout.write(`Maps files\n`)
         const maps = fs.readdirSync(checks.paths.maps).filter(entry => fs.statSync(path.join(checks.paths.maps, entry)).isDirectory())
         for (let map of maps) {
-          
+
           //Check json files integrity
-            for (let json of ["map.json", "locations.json", "tileset.textures.json", "textures.json"]) 
+            for (let json of ["map.json", "locations.json", "tileset.textures.json", "textures.json"])
               checks.status &= await check({
                 name:path.join(map, json),
                 when:fs.existsSync(path.join(checks.paths.maps, map, json)),
                 async assert() { return JSON.parse(fs.readFileSync(path.join(checks.paths.maps, map, json)).toString()), true }
               })
-            
+
           //Check xml files integrity
-            for (let xml of ["map.tmx", "tileset.tsx", "textures.tps"]) 
+            for (let xml of ["map.tmx", "tileset.tsx", "textures.tps"])
               checks.status &= await check({
                 name:path.join(map, xml),
                 when:fs.existsSync(path.join(checks.paths.maps, map, xml)),
                 async assert() { return await (new xml2js.Parser()).parseStringPromise(fs.readFileSync(path.join(checks.paths.maps, map, xml)).toString()), true }
               })
-              
+
           //Check tileset and rebuild if needed
             const tileset = {raw:path.join(checks.paths.maps, map, "tileset.textures.raw.png"), used:path.join(checks.paths.maps, map, "tileset.textures.png")}
             checks.status &= await check({
@@ -148,9 +148,9 @@
               fix() { return exec(`npm run build-tileset-sprite-${map}`), true },
               verbose:true
             })
-              
+
         }
-        
+
         process.stdout.write(`\n`)
       }
 
@@ -162,8 +162,8 @@
 
     //Success
       process.stdout.write(`\nSuccess \n\n`.green)
-    
+
   })()
 
- 
+
 

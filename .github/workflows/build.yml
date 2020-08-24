@@ -20,7 +20,7 @@ jobs:
     - run: npm test
       env:
         CI: true
-    - run: npm run diff-overworld -- --token=${{ secrets.BOT_TOKEN }} --event=${{ github.event_path }} --owner=${{ github.actor }}
+    - run: npm run diff-map-overworld -- --token=${{ secrets.BOT_TOKEN }} --event=${{ github.event_path }} --owner=${{ github.actor }}
 
   codeql:
     name: CodeQL

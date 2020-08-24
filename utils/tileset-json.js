@@ -70,7 +70,7 @@
         }
       }
       process.stdout.write(`${"Generating frames".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
-          
+
     //Save
       process.stdout.write(`${"Saving".padEnd(PAD)} ...\r`.yellow)
       fs.writeFileSync(tileset.destination, JSON.stringify(json))
@@ -78,5 +78,5 @@
 
     //Success
       process.stdout.write(`Success \n\n`.green)
-        
+
   })()
