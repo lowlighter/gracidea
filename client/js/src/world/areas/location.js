@@ -31,7 +31,7 @@
             user.location = this.location
         //Reset location if outside but previous key still reference this location
           else if (user.location.key === this.key)
-            user.location = this.location
+            user.location = {}
       }
 
   }

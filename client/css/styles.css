@@ -103,11 +103,17 @@
       align-items: center;
       justify-content: center;
       flex-direction: column;
+      padding-left: 1rem;
+      padding-right: 1rem;
     }
 
     header .position small {
       opacity: .5;
       font-size: .7rem;
+    }
+
+    header .position span, header .position small {
+      white-space: pre;
     }
 
   /* Buttons */
