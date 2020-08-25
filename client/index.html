@@ -18,7 +18,8 @@
             <div>Gracidea</div>
           </div>
           <div class="position">
-            {{ user.position.x }};{{ user.position.y }}
+            {{ user.location.name || "-" }}
+            <small>{{ user.position.x }};{{ user.position.y }}</small>
           </div>
           <nav class="menu">
             <div @click="show.map = !show.map" class="button" :class="{active:show.map}"><img src="imgs/icons/map.png">{{ lang?.nav?.map || "Map" }}</div>
@@ -32,7 +33,7 @@
               <div v-for="map in maps" :style="{top:map.css.y+'px', left:map.css.x+'px'}" class="area">
                 <img :src="'imgs/regions/'+map.id+'.png'">
                 <div class="location tips" v-for="location in map.locations" :class="{[location.type]:true, disabled:location.disabled}" :style="{top:location.css.y+'%', left:location.css.x+'%', zIndex:location.css.y}" @click="!location.disabled ? (camera(location), show.map = false) : null">
-                  <div class="tips-text">{{ lang.map.locations[location.id]}}</div>
+                  <div class="tips-text">{{ lang.map.locations[location.id] }}</div>
                 </div>
               </div>
             </div>
@@ -43,7 +44,9 @@
       <div class="loading" v-if="!loading.done">
         <img src="imgs/icons/loading.gif" alt="">
         <span>{{ loading.state }}</span>
-        <span>{{ loading.substate || "" }}</span>
+        <ul class="stated">
+          <li v-for="stated in loading.stated" :key="stated">{{ stated }}</li>
+        </ul>
       </div>
       <div class="debug" v-if="(show.debug)&&(lang.debug)">
         <label v-for="x in ['sea', 'characters', 'areas', 'chunks', 'tweens', 'pause']" :key="x">

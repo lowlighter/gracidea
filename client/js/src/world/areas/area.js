@@ -23,7 +23,11 @@
     //Load
       async load({object:data}) {
         //Load data
-          const {polygon:points, x:X, y:Y, properties = []} = data
+          const {polygon, x:X, y:Y, width, height, properties = []} = data
+          let points = polygon
+          //Rectangle
+            if (!polygon)
+              points = [{x:0, y:0}, {x:width, y:0}, {x:width, y:height}, {x:0, y:height}]
         //Save properties
           this.properties = {}
           properties.map(({name, value}) => this.properties[name] = value)
@@ -68,18 +72,22 @@
           if (this.sprite.children.length)
             this.sprite.removeChildren()
         //Debug
-          if (this.world.app.data.debug.areas) {
+          if ((this.world.app.data.debug.areas)&&(this.constructor.debug)) {
             //Draw graphics
               this.graphics = this.sprite.addChild(new PIXI.Graphics())
-              this.graphics.beginFill(0xFF0000, .5).drawPolygon(this.area.px.flat()).endFill()
+              this.graphics.lineStyle(1, this.constructor.debug.color, this.constructor.debug.opacity).beginFill(this.constructor.debug.color, this.constructor.debug.opacity).drawPolygon(this.area.px.flat()).endFill()
               this.sprite.visible = true
             //Polygon points
               const points = this.area.px
               for (let i = 0; i < points.length; i++) {
-                const point = this.graphics.addChild(new PIXI.Text(i, {fontSize:12}))
+                const point = this.graphics.addChild(new PIXI.Text(i, {fontSize:9}))
                 point.position.set(points[i][0], points[i][1])
                 point.anchor.set(0.5)
               }
+            //Name
+              const name = this.graphics.addChild(new PIXI.Text(`[${this.key}]`, {fontSize:12, fontWeight:"bold"}))
+              name.position.set(points.reduce((X, [x, y]) => X + x, 0)/points.length, points.reduce((Y, [x, y]) => Y + y, 0)/points.length)
+              name.anchor.set(0.5)
           }
       }
 
@@ -118,6 +126,9 @@
         //Wild area
           if (type === "wild")
             return new Area.Wild(...arguments)
+        //Location area
+          if (type === "location")
+            return new Area.Location(...arguments)
         //General area
           return new Area({world, key})
       }

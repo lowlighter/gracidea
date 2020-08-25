@@ -8,6 +8,7 @@
   import Element from "./element.js"
   import Creature from "./characters/creature.js"
   import Wild from "./areas/wild.js"
+  import Location from "./areas/location.js"
 
 /**
  * World.
@@ -39,6 +40,9 @@
           rendered:new Promise(solve => this._rendered = solve),
       }
 
+    //Started
+      started = false
+
     //Constructor
       constructor({app, name}) {
         //Heritage
@@ -62,6 +66,7 @@
           this.layers.global.characters.visible = false
         //Update static values
           Area.Wild = Wild
+          Area.Location = Location
       }
 
     //Loaders
@@ -80,14 +85,10 @@
                     this.diff[layer] = Object.fromEntries(layers[layer].chunks.map(chunk => [World.Chunk.key(chunk), chunk]))
               }
             //Load map tilesets
-              for (let tileset of tilesets) {
-                this.app.data.loading.substate = `${this.app.data.lang.loading.tileset} : ${tileset}`
+              for (let tileset of tilesets)
                 App.loader.renderer.add(`${this.app.endpoints.maps}/${this.name}/${u.basename({path:tileset.source, extension:false})}.textures.json`)
-              }
             //Load map layers
               for (let layer of layers) {
-                //Layer loading
-                  this.app.data.loading.substate = `${this.app.data.lang.loading.layer} : ${layer.name}`
                 //Boundaries layers
                   if (layer.name === World.layers.boundaries) {
                     this.origin = {x:layer.startx, y:layer.starty}
@@ -110,6 +111,8 @@
                         break
                       }
                   }
+                //Layer loaded
+                  this.app.data.loading.stated.unshift(`${this.app.data.lang.loading.loaded.layer} : ${layer.name}`)
               }
             //Update world boundaries
               this.app.viewport.left = u.to.coord.px(this.origin.x)
@@ -125,7 +128,6 @@
               this.areas.forEach(area => this.qt.areas.add(area))
             //Update sprite position and create sprite
               this.sprite.position.set(u.to.coord.px(-this.origin.x), u.to.coord.px(-this.origin.y))
-              this.app.data.loading.substate = ""
           },
         //Load sea
           sea:async () => {
@@ -141,7 +143,7 @@
       }
 
     //Render world
-      async render({center = this.app.data.user.position, delay = 150, radius = "auto", offset  = this.origin, force = false} = {}) {
+      async render({center = this.app.data.user.position, delay = 150, radius = "auto", offset = this.origin, force = false} = {}) {
         //Delay rendering
           clearTimeout(this._render)
           this._render = setTimeout(async () => {
@@ -191,8 +193,14 @@
 
     //Start
       start() {
+        //Avoid starting multiple times
+          if (this.started)
+            return
+          this.started
         //Ticker
           this.app.renderer.ticker.add(() => this.ticker())
+        //World started
+          this.app.data.loading.stated.unshift(this.app.data.lang.loading.loaded.world_started)
       }
 
     //Ticker for world
@@ -203,7 +211,7 @@
               const center = this.app.data.user.position
               const radius = Math.max(u.to.coord.tile(this.app.renderer.view.height), u.to.coord.tile(this.app.renderer.view.width))
             //Update areas
-              const areas = this.qt.areas.get({x:center.x-radius, y:center.y-radius, width:2*radius, height:2*radius})
+              const areas = this.qt.areas.get({x:center.x-radius, y:center.y-radius, width:1.5*radius, height:1.5*radius})
               areas.forEach(area => area.update({center, radius}))
             //Update last ticked time
               this.cache.ticked = App.time

@@ -3,22 +3,22 @@
     "id":"hoenn",
     "css":{"x":100, "y":260},
     "locations":[
-      {"id":"petalburg", "type":"city", "x":264, "y":-966, "css":{"x":12, "y":58}},
-      {"id":"oldale", "type":"city", "x":330, "y":-956, "css":{"x":20, "y":58}},
-      {"id":"littleroot", "type":"city", "x":329, "y":-924, "css":{"x":20, "y":70}},
-      {"id":"dewford", "type":"city", "x":266, "y":-842, "css":{"x":14, "y":78}},
-      {"id":"rustboro", "type":"city", "x":220, "y":-1054, "css":{"x":8, "y":48}},
-      {"id":"slateport", "type":"city", "x":423, "y":-934, "css":{"x":28, "y":65}},
-      {"id":"mauville", "type":"city", "x":426, "y":-1068, "css":{"x":28, "y":48}},
-      {"id":"verdanturf", "type":"city", "x":340, "y":-1070, "css":{"x":20, "y":48}},
-      {"id":"fallarbor", "type":"city", "x":298, "y":-1205, "css":{"x":8, "y":12}},
-      {"id":"lavaridge", "type":"city", "x":353, "y":-1146, "css":{"x":25, "y":24}}
+      {"id":"3-petalburg", "type":"city", "x":264, "y":-966, "css":{"x":12, "y":58}},
+      {"id":"3-oldale", "type":"city", "x":330, "y":-956, "css":{"x":20, "y":58}},
+      {"id":"3-littleroot", "type":"city", "x":329, "y":-924, "css":{"x":20, "y":70}},
+      {"id":"3-dewford", "type":"city", "x":266, "y":-842, "css":{"x":14, "y":78}},
+      {"id":"3-rustboro", "type":"city", "x":220, "y":-1054, "css":{"x":8, "y":48}},
+      {"id":"3-slateport", "type":"city", "x":423, "y":-934, "css":{"x":28, "y":65}},
+      {"id":"3-mauville", "type":"city", "x":426, "y":-1068, "css":{"x":28, "y":48}},
+      {"id":"3-verdanturf", "type":"city", "x":340, "y":-1070, "css":{"x":20, "y":48}},
+      {"id":"3-fallarbor", "type":"city", "x":298, "y":-1205, "css":{"x":8, "y":12}},
+      {"id":"3-lavaridge", "type":"city", "x":353, "y":-1146, "css":{"x":25, "y":24}}
     ]
   },
   {
     "id":"faraway_island", "css":{"x":100, "y":420},
     "locations":[
-      {"id":"faraway_island", "type":"interest", "x":-14, "y":65, "css":{"x":0, "y":40}}
+      {"id":"0-faraway_island", "type":"interest", "x":-14, "y":65, "css":{"x":0, "y":40}}
     ]
   }
 ]
