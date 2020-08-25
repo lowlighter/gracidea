@@ -104,4 +104,12 @@
           property:/^pk_/
       }
 
+    //Debug
+      static debug = {
+        //Debug color
+          color:0x00FF00,
+        //Debug opacity
+          opacity:.5,
+      }
+
   }

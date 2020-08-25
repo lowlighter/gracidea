@@ -8,6 +8,7 @@
   import Element from "./element.js"
   import Creature from "./characters/creature.js"
   import Wild from "./areas/wild.js"
+  import Location from "./areas/location.js"
 
 /**
  * World.
@@ -62,6 +63,7 @@
           this.layers.global.characters.visible = false
         //Update static values
           Area.Wild = Wild
+          Area.Location = Location
       }
 
     //Loaders
@@ -141,7 +143,7 @@
       }
 
     //Render world
-      async render({center = this.app.data.user.position, delay = 150, radius = "auto", offset  = this.origin, force = false} = {}) {
+      async render({center = this.app.data.user.position, delay = 150, radius = "auto", offset = this.origin, force = false} = {}) {
         //Delay rendering
           clearTimeout(this._render)
           this._render = setTimeout(async () => {
@@ -203,7 +205,7 @@
               const center = this.app.data.user.position
               const radius = Math.max(u.to.coord.tile(this.app.renderer.view.height), u.to.coord.tile(this.app.renderer.view.width))
             //Update areas
-              const areas = this.qt.areas.get({x:center.x-radius, y:center.y-radius, width:2*radius, height:2*radius})
+              const areas = this.qt.areas.get({x:center.x-radius, y:center.y-radius, width:1.5*radius, height:1.5*radius})
               areas.forEach(area => area.update({center, radius}))
             //Update last ticked time
               this.cache.ticked = App.time

@@ -69,6 +69,12 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      flex-direction: column;
+    }
+
+    header .position small {
+      opacity: .5;
+      font-size: .7rem;
     }
 
   /* Buttons */

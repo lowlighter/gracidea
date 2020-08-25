@@ -19,7 +19,9 @@
         //User data
           user:{
             //User position
-              position:{x:0, y:0}
+              position:{x:0, y:0},
+            //User location
+              location:{},
           },
         //Maps data (like locations and interests points)
           maps:[],
