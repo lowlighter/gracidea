@@ -40,6 +40,9 @@
           rendered:new Promise(solve => this._rendered = solve),
       }
 
+    //Started
+      started = false
+
     //Constructor
       constructor({app, name}) {
         //Heritage
@@ -82,14 +85,10 @@
                     this.diff[layer] = Object.fromEntries(layers[layer].chunks.map(chunk => [World.Chunk.key(chunk), chunk]))
               }
             //Load map tilesets
-              for (let tileset of tilesets) {
-                this.app.data.loading.substate = `${this.app.data.lang.loading.tileset} : ${tileset}`
+              for (let tileset of tilesets)
                 App.loader.renderer.add(`${this.app.endpoints.maps}/${this.name}/${u.basename({path:tileset.source, extension:false})}.textures.json`)
-              }
             //Load map layers
               for (let layer of layers) {
-                //Layer loading
-                  this.app.data.loading.substate = `${this.app.data.lang.loading.layer} : ${layer.name}`
                 //Boundaries layers
                   if (layer.name === World.layers.boundaries) {
                     this.origin = {x:layer.startx, y:layer.starty}
@@ -112,6 +111,8 @@
                         break
                       }
                   }
+                //Layer loaded
+                  this.app.data.loading.stated.unshift(`${this.app.data.lang.loading.loaded.layer} : ${layer.name}`)
               }
             //Update world boundaries
               this.app.viewport.left = u.to.coord.px(this.origin.x)
@@ -127,7 +128,6 @@
               this.areas.forEach(area => this.qt.areas.add(area))
             //Update sprite position and create sprite
               this.sprite.position.set(u.to.coord.px(-this.origin.x), u.to.coord.px(-this.origin.y))
-              this.app.data.loading.substate = ""
           },
         //Load sea
           sea:async () => {
@@ -193,8 +193,14 @@
 
     //Start
       start() {
+        //Avoid starting multiple times
+          if (this.started)
+            return
+          this.started
         //Ticker
           this.app.renderer.ticker.add(() => this.ticker())
+        //World started
+          this.app.data.loading.stated.unshift(this.app.data.lang.loading.loaded.world_started)
       }
 
     //Ticker for world

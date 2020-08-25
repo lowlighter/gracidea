@@ -28,7 +28,17 @@
         "camera":"Loading camera...",
         "render":"Waiting for first rendering...",
         "tileset":"Loading tileset",
-        "layer":"Loading layer"
+        "layer":"Loading layer",
+        "loaded":{
+            "lang":"English text files loaded",
+            "params":"Params loaded",
+            "world":"World loaded",
+            "world_started":"World started",
+            "sea":"Sea loaded",
+            "camera":"Camera loaded",
+            "tileset":"Tileset loaded",
+            "layer":"Layer loaded"
+        }
     },
     "map":{
         "locations":{

@@ -28,7 +28,17 @@
         "camera":"Préparation de la caméra...",
         "render":"En attente du premier rendu...",
         "tileset":"Chargement des textures",
-        "layer":"Chargement de la couche"
+        "layer":"Chargement de la couche",
+        "loaded":{
+            "lang":"Fichiers de textes français chargés",
+            "params":"Options chargées et appliquées",
+            "world":"Rendu du monde prêt",
+            "world_started":"Monde démaré",
+            "sea":"Rendu de l'océan prêt",
+            "camera":"Camera prête",
+            "tileset":"Textures chargés",
+            "layer":"Couche chargée"
+        }
     },
     "map":{
         "locations":{

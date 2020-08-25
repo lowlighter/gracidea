@@ -36,6 +36,7 @@
           loading:{
             state:"Loading...",
             substate:"",
+            stated:[],
             done:false
           },
         //Debug
@@ -152,6 +153,7 @@
               }
               if (!Object.keys(this.data.lang).length)
                 reject(this.data.loading.state = `An error occured while loading language :(`)
+              this.data.loading.stated.unshift(this.data.lang.loading.loaded.lang)
             //Load parameters
               this.data.loading.state = this.data.lang.loading.params
               this.data.debug.sea = this.params.get.map.has("sea") ? this.params.get.map.get("sea") : true
@@ -174,18 +176,23 @@
                 this.data.debug.characters = false
                 this.data.debug.tweens = false
               }
+              this.data.loading.stated.unshift(this.data.lang.loading.loaded.params)
             //Load world
               this.data.loading.state = this.data.lang.loading.world
               await this.world.load.world()
+              this.data.loading.stated.unshift(this.data.lang.loading.loaded.world)
             //Rendering
+              App.loader.renderer.onProgress.add((loader, resource) => this.data.loading.stated.unshift(`${this.data.lang.loading.loaded.tileset} : ${resource.name}`))
               App.loader.renderer.load(async () => {
                 //Load sea
                   this.data.loading.state = this.data.lang.loading.sea
                   await this.world.load.sea()
+                  this.data.loading.stated.unshift(this.data.lang.loading.loaded.sea)
                 //Set camera
                   this.data.loading.state = this.data.lang.loading.camera
                   this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x"))||0, y:Number(this.params.get.map.get("y"))||0, offset:{x:0, y:0}, render:false} : {x:329, y:-924, render:false})
                   this.methods.update()
+                  this.data.loading.stated.unshift(this.data.lang.loading.loaded.camera)
                 //First render
                   this.data.loading.state = this.data.lang.loading.render
                   this.world.start()
