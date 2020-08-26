@@ -47,6 +47,7 @@
     "rollup": "^2.26.5",
     "simple-git": "^2.20.1",
     "tile-extruder": "^2.0.6",
+    "webp-converter": "^2.3.0",
     "xml2js": "^0.4.23"
   }
 }

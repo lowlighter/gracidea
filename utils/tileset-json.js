@@ -45,7 +45,7 @@
       const json = {
         meta:{
           format:"RGBA8888",
-          image:"tileset.textures.png",
+          image:"tileset.textures.webp",
           size:{
             w:tileset.width,
             h:tileset.height,

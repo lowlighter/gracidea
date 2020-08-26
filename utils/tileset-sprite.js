@@ -15,6 +15,7 @@
   const pngitxt = require("png-itxt")
   const colors = require("colors")
   const crypto = require("crypto")
+  const webp=require("webp-converter")
   const PAD = 48
 
 //Die on unhandled promises
@@ -59,6 +60,7 @@
         get height() { return tileset.margin.full + tileset.tiles.y*tile.extruded.height },
         get source() { return path.join(__dirname, "..", argv.source) },
         get destination() { return path.join(__dirname, "..", argv.destination||argv.source.replace(/\.raw\.png$/, ".png")) },
+        get webp() { return path.join(__dirname, "..", argv.destination||argv.source.replace(/\.raw\.png$/, ".webp")) },
         get tmp() { return this.destination.replace(/\.png/, ".tmp.png") },
         get options() { return {mime:"image/png", margin:tileset.margin.full, spacing:tile.spacing, extrusion:tile.extrusion} }
       }
@@ -78,43 +80,49 @@
     //Check if rebuild is needed
       if ((tileset.hash.current === tileset.hash.generated)&&(!tileset.force)) {
         process.stdout.write(`Skipped because tileset has already be generated for source image [hash#${tileset.hash.current}]\n`.gray)
-        return
+      }
+      else {
+        //Extrude
+          process.stdout.write(`${"Extruding".padEnd(PAD)} ...\r`.yellow)
+          const buffer = await extruder(tile.width, tile.height, tileset.source, tileset.options)
+          process.stdout.write(`${"Extruding".padEnd(PAD)} OK \n`.green)
+
+        //Compose
+          process.stdout.write(`${"Composing".padEnd(PAD)} ...\r`.yellow)
+          const input = await jimp.read(buffer)
+          const output = await new jimp(tileset.width, tileset.height, 0x0)
+          for (let y = 0; y < tileset.tiles.y; y++) {
+            for (let x = 0; x < tileset.tiles.x; x++) {
+              process.stdout.write(`${"Composing".padEnd(PAD)} ${y*tileset.tiles.x}/${tileset.tiles.total}\r`.yellow)
+              const cropped = input.clone().crop(tileset.margin.full + x*(tile.extruded.spaced.width), tileset.margin.full + y*(tile.extruded.spaced.height), tile.extruded.width, tile.extruded.height)
+              output.composite(cropped, tileset.margin.half+x*tile.extruded.width, tileset.margin.half+y*tile.extruded.height)
+            }
+          }
+          process.stdout.write(`${"Composing".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
+
+        //Save
+          process.stdout.write(`${"Saving".padEnd(PAD)} ...\r`.yellow)
+          await output.writeAsync(tileset.tmp)
+          process.stdout.write(`${"Saving".padEnd(PAD)} OK \n`.green)
+
+        //Updating itxt metadata
+          process.stdout.write(`${"Updating itxt".padEnd(PAD)} ...\r`.yellow)
+          await new Promise(solve => {
+            const out = fs.createWriteStream(tileset.destination)
+            out.on("finish", solve)
+            fs.createReadStream(tileset.tmp)
+              .pipe(pngitxt.set({keyword:"generated-for", value:tileset.hash.generated}))
+              .pipe(out)
+          })
+          fs.unlinkSync(tileset.tmp)
+          process.stdout.write(`${"Updating itxt".padEnd(PAD)} OK \n`.green)
       }
 
-    //Extrude
-      process.stdout.write(`${"Extruding".padEnd(PAD)} ...\r`.yellow)
-      const buffer = await extruder(tile.width, tile.height, tileset.source, tileset.options)
-      process.stdout.write(`${"Extruding".padEnd(PAD)} OK \n`.green)
-
-    //Compose
-      process.stdout.write(`${"Composing".padEnd(PAD)} ...\r`.yellow)
-      const input = await jimp.read(buffer)
-      const output = await new jimp(tileset.width, tileset.height, 0x0)
-      for (let y = 0; y < tileset.tiles.y; y++) {
-        for (let x = 0; x < tileset.tiles.x; x++) {
-          process.stdout.write(`${"Composing".padEnd(PAD)} ${y*tileset.tiles.x}/${tileset.tiles.total}\r`.yellow)
-          const cropped = input.clone().crop(tileset.margin.full + x*(tile.extruded.spaced.width), tileset.margin.full + y*(tile.extruded.spaced.height), tile.extruded.width, tile.extruded.height)
-          output.composite(cropped, tileset.margin.half+x*tile.extruded.width, tileset.margin.half+y*tile.extruded.height)
-        }
-      }
-      process.stdout.write(`${"Composing".padEnd(PAD)} OK${" ".repeat(16)}\n`.green)
-
-    //Save
-      process.stdout.write(`${"Saving".padEnd(PAD)} ...\r`.yellow)
-      await output.writeAsync(tileset.tmp)
-      process.stdout.write(`${"Saving".padEnd(PAD)} OK \n`.green)
-
-    //Updating itxt metadata
-      process.stdout.write(`${"Updating itxt".padEnd(PAD)} ...\r`.yellow)
-      await new Promise(solve => {
-        const out = fs.createWriteStream(tileset.destination)
-        out.on("finish", solve)
-        fs.createReadStream(tileset.tmp)
-          .pipe(pngitxt.set({keyword:"generated-for", value:tileset.hash.generated}))
-          .pipe(out)
-      })
-      fs.unlinkSync(tileset.tmp)
-      process.stdout.write(`${"Updating itxt".padEnd(PAD)} OK \n`.green)
+    //Conversion
+      process.stdout.write(`${"Converting to webp format".padEnd(PAD)} ...\r`.yellow)
+      webp.grant_permission()
+      await webp.cwebp(tileset.destination, tileset.webp, "-lossless -q 100 -alpha_q 100 -m 6 -mt")
+      process.stdout.write(`${"Converting to webp format".padEnd(PAD)} OK \n`.green)
 
     //Success
       process.stdout.write(`Success \n\n`.green)

@@ -105,6 +105,7 @@
       flex-direction: column;
       padding-left: 1rem;
       padding-right: 1rem;
+      min-width: 8rem;
     }
 
     header .position small {
