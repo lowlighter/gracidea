@@ -30,9 +30,13 @@
               points = [{x:0, y:0}, {x:width, y:0}, {x:width, y:height}, {x:0, y:height}]
         //Save properties
           this.name = data.name
-          if (!Area.shared.properties.has(`${this.constructor.name}#${this.name}`))
-            Area.shared.properties.set(`${this.constructor.name}#${this.name}`, {})
-          this.properties = Area.shared.properties.get(`${this.constructor.name}#${this.name}`)
+          if (this.name.length) {
+            if (!Area.shared.properties.has(`${this.constructor.name}#${this.name}`))
+              Area.shared.properties.set(`${this.constructor.name}#${this.name}`, {})
+            this.properties = Area.shared.properties.get(`${this.constructor.name}#${this.name}`)
+          }
+          else
+            this.properties = {}
           properties.map(({name, value}) => this.properties[name] = value)
         //Update data origin and boundary
           const xs = points.map(point => u.to.coord.tile(X+point.x)), ys = points.map(point => u.to.coord.tile(Y+point.y))

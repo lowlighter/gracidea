@@ -181,10 +181,22 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">raw/guy_down_0.png</key>
-            <key type="filename">raw/guy_left_0.png</key>
-            <key type="filename">raw/guy_right_0.png</key>
-            <key type="filename">raw/guy_up_0.png</key>
+            <key type="filename">raw/guy_0_down_0.png</key>
+            <key type="filename">raw/guy_0_left_0.png</key>
+            <key type="filename">raw/guy_0_right_0.png</key>
+            <key type="filename">raw/guy_0_up_0.png</key>
+            <key type="filename">raw/guy_1_down_0.png</key>
+            <key type="filename">raw/guy_1_left_0.png</key>
+            <key type="filename">raw/guy_1_right_0.png</key>
+            <key type="filename">raw/guy_1_up_0.png</key>
+            <key type="filename">raw/little_girl_0_down_0.png</key>
+            <key type="filename">raw/little_girl_0_left_0.png</key>
+            <key type="filename">raw/little_girl_0_right_0.png</key>
+            <key type="filename">raw/little_girl_0_up_0.png</key>
+            <key type="filename">raw/youngster_down_0.png</key>
+            <key type="filename">raw/youngster_left_0.png</key>
+            <key type="filename">raw/youngster_right_0.png</key>
+            <key type="filename">raw/youngster_up_0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>

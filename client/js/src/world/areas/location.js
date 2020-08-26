@@ -16,8 +16,9 @@
 
     //Location
       get location() {
-        const name = this.world.app.data.lang.map.locations[this.key]
-        return {key:this.key, name}
+        const key = this.name
+        const name = this.world.app.data.lang.map.locations[key]
+        return {key, name}
       }
 
     //Update

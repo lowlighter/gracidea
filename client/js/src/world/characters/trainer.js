@@ -54,7 +54,7 @@
               }
           }
           else
-            this.track = [x, y]
+            this.track = [[x, y]]
           this.track = this.track.map(([x, y]) => ({x, y}))
           this.track.index = 0
       }
@@ -68,7 +68,8 @@
     //Textures
       static textures({endpoint = "", categorie, direction = "down"}) {
         const key = `${categorie}_${direction}`
-        return App.loader.renderer.resources[`${endpoint}/trainers/textures.json`].data.animations[key]?.map(PIXI.Texture.from) ?? [PIXI.Texture.from(`${key}_0`) ?? PIXI.Texture.EMPTY]
+        const textures = App.loader.renderer.resources[`${endpoint}/trainers/textures.json`].data
+        return textures.animations[key]?.map(PIXI.Texture.from) ?? [`${key}_0` in textures.frames ? PIXI.Texture.from(`${key}_0`) : PIXI.Texture.EMPTY]
       }
 
     //Move
@@ -149,7 +150,7 @@
         //Prepare movement
           const {dx, dy} = [{dx:0, dy:0}, {dx:0, dy:0}, {dx:0, dy:0}, {dx:0, dy:0}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:-1}, {dx:0, dy:+1}][Math.floor(u.rand()/0.125)]
         //Move if still inside forced area
-          if ((dx || dy)&&(this.area.inside({x:x+dx, y:y+dy}))) {
+          if (dx || dy) {
             if (dx < 0)
               this.look.left()
             if (dx > 0)

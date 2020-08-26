@@ -10,8 +10,8 @@
       create() {
         //Instantiate trainer
           if (!this.trainer) {
-            const {categorie = "guy"} = this.properties
-            this.trainer = this.world.add.trainer({categorie, x:this.origin.x, y:this.origin.y, area:this})
+            const {categorie} = this.properties
+            this.trainer = this.world.add.trainer({categorie, x:this.area.tiled[0][0], y:this.area.tiled[0][1], area:this})
           }
       }
 

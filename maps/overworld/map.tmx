@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="21" nextobjectid="124">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="21" nextobjectid="127">
  <editorsettings>
   <export target="map.json" format="json"/>
  </editorsettings>
@@ -39956,10 +39956,31 @@
  <objectgroup id="20" name="22-trainers">
   <object id="123" type="trainer" x="5344" y="-14752">
    <properties>
-    <property name="categorie" value="guy"/>
+    <property name="categorie" value="guy_0"/>
     <property name="path" value="wander"/>
    </properties>
    <polygon points="0,0 80,0 80,80 0,80"/>
+  </object>
+  <object id="124" type="trainer" x="5344" y="-14672">
+   <properties>
+    <property name="categorie" value="guy_1"/>
+    <property name="path" value="wander"/>
+   </properties>
+   <polygon points="0,0 80,0 80,-32 128,-32 128,32 96,32 96,64 0,64"/>
+  </object>
+  <object id="125" type="trainer" x="5296" y="-14896">
+   <properties>
+    <property name="categorie" value="little_girl_0"/>
+    <property name="path" value="fixed"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="126" type="trainer" x="5440" y="-15120">
+   <properties>
+    <property name="categorie" value="youngster"/>
+    <property name="path" value="lookaround"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
  </objectgroup>
 </map>
