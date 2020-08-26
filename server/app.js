@@ -4,6 +4,7 @@
   const argv = require("minimist")(process.argv.slice(2))
   const path = require("path")
   const colors = require("colors")
+  const compression = require("compression")
 
 //Dev mode
   if (argv.dev) {
@@ -12,6 +13,9 @@
     app.use("/js", express.static("client/js/src"))
     app.get("/maps/:map/tileset.textures.webp", (req, res) => res.sendFile(path.join(__dirname, "..", "/maps/", req.params.map,"/tileset.textures.raw.png")))
   }
+
+//Compression
+  app.use(compression({filter(req, res) { return req.headers["gracidea-no-compression"] ? false : compression.filter(req, res) } }))
 
 //Serve client files
   app.use("/", express.static("client"))
