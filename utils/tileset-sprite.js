@@ -116,13 +116,13 @@
           })
           fs.unlinkSync(tileset.tmp)
           process.stdout.write(`${"Updating itxt".padEnd(PAD)} OK \n`.green)
-      }
 
-    //Conversion
-      process.stdout.write(`${"Converting to webp format".padEnd(PAD)} ...\r`.yellow)
-      webp.grant_permission()
-      await webp.cwebp(tileset.destination, tileset.webp, "-lossless -q 100 -alpha_q 100 -m 6 -mt")
-      process.stdout.write(`${"Converting to webp format".padEnd(PAD)} OK \n`.green)
+        //Conversion
+          process.stdout.write(`${"Converting to webp format".padEnd(PAD)} ...\r`.yellow)
+          webp.grant_permission()
+          await webp.cwebp(tileset.destination, tileset.webp, "-lossless -q 100 -alpha_q 100 -m 6 -mt")
+          process.stdout.write(`${"Converting to webp format".padEnd(PAD)} OK \n`.green)
+      }
 
     //Success
       process.stdout.write(`Success \n\n`.green)
