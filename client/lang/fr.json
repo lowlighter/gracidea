@@ -29,6 +29,10 @@
         "render":"En attente du premier rendu...",
         "tileset":"Chargement des textures",
         "layer":"Chargement de la couche",
+        "renderer":"Chargement du moteur de rendu..",
+        "view":"Chargement du visuel...",
+        "scripts":"Téléchargement des scripts...",
+        "script":"Chargement du script",
         "loaded":{
             "lang":"Fichiers de textes français chargés",
             "params":"Options chargées et appliquées",
@@ -37,7 +41,11 @@
             "sea":"Rendu de l'océan prêt",
             "camera":"Camera prête",
             "tileset":"Textures chargés",
-            "layer":"Couche chargée"
+            "layer":"Couche chargée",
+            "renderer":"Moteur de rendu prêt",
+            "view":"Visuel prêt",
+            "scripts":"Scripts requis chargés",
+            "script":"Script chargé"
         }
     },
     "map":{

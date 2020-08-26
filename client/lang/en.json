@@ -29,6 +29,10 @@
         "render":"Waiting for first rendering...",
         "tileset":"Loading tileset",
         "layer":"Loading layer",
+        "renderer":"Loading renderer...",
+        "view":"Loading view...",
+        "scripts":"Waiting for scripts...",
+        "script":"Loading script",
         "loaded":{
             "lang":"English text files loaded",
             "params":"Params loaded",
@@ -37,7 +41,11 @@
             "sea":"Sea loaded",
             "camera":"Camera loaded",
             "tileset":"Tileset loaded",
-            "layer":"Layer loaded"
+            "layer":"Layer loaded",
+            "renderer":"Renderer loaded",
+            "view":"View loaded",
+            "scripts":"All scripts loaded",
+            "script":"Script loaded"
         }
     },
     "map":{

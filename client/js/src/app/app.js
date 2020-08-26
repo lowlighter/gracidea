@@ -14,6 +14,9 @@
     //Promise which tell if app is ready
       ready = new Promise(solve => null)
 
+    //Mounted
+      mounted = new Promise((solve, reject) => this._mounted = solve)
+
     //Data reference
       data = {
         //User data
@@ -76,15 +79,6 @@
           }
       }
 
-    //Renderer reference
-      renderer = new PIXI.Application({width:document.body.clientWidth, height:document.body.clientHeight, transparent:true, resizeTo:window, autoDensity:true})
-
-    //Viewport reference
-      viewport = new Viewport.Viewport({screenWidth: window.innerWidth, screenHeight: window.innerHeight, interaction:this.renderer.renderer.plugins.interaction})
-
-    //View reference
-      view = this.renderer.stage.addChild(this.viewport)
-
     //Controller reference
       controller = new Vue({
         //Selector
@@ -92,7 +86,7 @@
         //Data and methods
           data:this.data, methods:this.methods,
         //Mounted callback
-          mounted:() => document.querySelector("#app .view").appendChild(this.renderer.view),
+          mounted:() => this._mounted(),
       })
 
     //URL params
@@ -130,16 +124,6 @@
 
     //Constructor
       constructor({world}) {
-        //Apply settings
-          settings()
-        //Load world
-          this.world = new World({app:this, name:world})
-        //Configure viewport
-          this.view.on("moved", () => this.methods.update())
-          this.view.on("moved-end", () => this.methods.render())
-          this.view.on("zoomed-end", () => this.methods.render())
-          this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
-          this.view.scale.set(1)
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
             //Load language
@@ -154,6 +138,22 @@
               if (!Object.keys(this.data.lang).length)
                 reject(this.data.loading.state = `An error occured while loading language :(`)
               this.data.loading.stated.unshift(this.data.lang.loading.loaded.lang)
+            //Load scripts
+              this.data.loading.state = this.data.lang.loading.scripts
+              const scripts = new Promise(async (solve) => {
+                for (let script of ["js/pixi.min.js", "js/viewport.js"]) {
+                  this.data.loading.state = `${this.data.lang.loading.script} : ${script}`
+                  let el = document.createElement("script")
+                  el.src = script
+                  el.type = "text/javascript"
+                  await new Promise ((loaded) => {
+                    el.onload = loaded
+                    document.querySelector("body").appendChild(el)
+                    this.data.loading.stated.unshift(`${this.data.lang.loading.loaded.script} : ${script}`)
+                  })
+                }
+                solve()
+              })
             //Load parameters
               this.data.loading.state = this.data.lang.loading.params
               this.data.debug.sea = this.params.get.map.has("sea") ? this.params.get.map.get("sea") : true
@@ -177,8 +177,30 @@
                 this.data.debug.tweens = false
               }
               this.data.loading.stated.unshift(this.data.lang.loading.loaded.params)
+            //Wait for additional scripts to be loaded
+              this.data.loading.state = this.data.lang.loading.scripts
+              await scripts
+              this.data.loading.stated.unshift(this.data.lang.loading.loaded.scripts)
+            //Renderer reference
+              this.data.loading.state = this.data.lang.loading.renderer
+              settings()
+              this.renderer = new PIXI.Application({width:document.body.clientWidth, height:document.body.clientHeight, transparent:true, resizeTo:window, autoDensity:true})
+              this.data.loading.stated.unshift(this.data.lang.loading.loaded.renderer)
+            //Configure viewport
+              this.data.loading.state = this.data.lang.loading.view
+              this.viewport = new Viewport.Viewport({screenWidth: window.innerWidth, screenHeight: window.innerHeight, interaction:this.renderer.renderer.plugins.interaction})
+              this.view = this.renderer.stage.addChild(this.viewport)
+              this.view.on("moved", () => this.methods.update())
+              this.view.on("moved-end", () => this.methods.render())
+              this.view.on("zoomed-end", () => this.methods.render())
+              this.view.drag().pinch().wheel().decelerate({friction:0.5}).clamp({direction:"all"}).clampZoom({minScale:0.5, maxScale:1})
+              this.view.scale.set(1)
+              await this.mounted
+              document.querySelector("#app .view").appendChild(this.renderer.view)
+              this.data.loading.stated.unshift(this.data.lang.loading.loaded.view)
             //Load world
               this.data.loading.state = this.data.lang.loading.world
+              this.world = new World({app:this, name:world})
               await this.world.load.world()
               this.data.loading.stated.unshift(this.data.lang.loading.loaded.world)
             //Rendering
@@ -251,6 +273,6 @@
       static get time() { return PIXI.Ticker.shared.lastTime }
 
     //Loaders
-      static loader = {renderer:PIXI.Loader.shared}
+      static get loader() { return {renderer:PIXI.Loader.shared} }
 
   }
