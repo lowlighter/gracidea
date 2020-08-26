@@ -1,6 +1,6 @@
 {"frames": {
 
-"npc_3001_00":
+"guy_down_0":
 {
 	"frame": {"x":1,"y":1,"w":18,"h":22},
 	"rotated": false,
@@ -8,32 +8,31 @@
 	"spriteSourceSize": {"x":3,"y":2,"w":18,"h":22},
 	"sourceSize": {"w":24,"h":24}
 },
-"npc_3001_10":
+"guy_left_0":
 {
 	"frame": {"x":41,"y":1,"w":17,"h":22},
+	"rotated": false,
+	"trimmed": true,
+	"spriteSourceSize": {"x":3,"y":2,"w":17,"h":22},
+	"sourceSize": {"w":24,"h":24}
+},
+"guy_right_0":
+{
+	"frame": {"x":60,"y":1,"w":17,"h":22},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":4,"y":2,"w":17,"h":22},
 	"sourceSize": {"w":24,"h":24}
 },
-"npc_3001_20":
+"guy_up_0":
 {
 	"frame": {"x":21,"y":1,"w":18,"h":22},
 	"rotated": false,
 	"trimmed": true,
 	"spriteSourceSize": {"x":3,"y":2,"w":18,"h":22},
 	"sourceSize": {"w":24,"h":24}
-},
-"npc_3001_30":
-{
-	"frame": {"x":60,"y":1,"w":17,"h":22},
-	"rotated": false,
-	"trimmed": true,
-	"spriteSourceSize": {"x":3,"y":2,"w":17,"h":22},
-	"sourceSize": {"w":24,"h":24}
 }},
 "animations": {
-	"npc_3001": ["npc_3001_00","npc_3001_10","npc_3001_20","npc_3001_30"]
 },
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
@@ -42,6 +41,6 @@
 	"format": "RGBA8888",
 	"size": {"w":78,"h":24},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:bc9cb68b449a4568e8cfd7e2ec023b6e:f43210324305a679eefeb16f196d53fb:cf827d152df04949dfee256cd0c8efd8$"
+	"smartupdate": "$TexturePacker:SmartUpdate:4abb41241db92a9ebc759d64d8e1d11d:12d36a2db43c896a20ac22bb557e1245:cf827d152df04949dfee256cd0c8efd8$"
 }
 }

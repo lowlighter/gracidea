@@ -181,10 +181,10 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
-            <key type="filename">raw/npc_3001_00.png</key>
-            <key type="filename">raw/npc_3001_10.png</key>
-            <key type="filename">raw/npc_3001_20.png</key>
-            <key type="filename">raw/npc_3001_30.png</key>
+            <key type="filename">raw/guy_down_0.png</key>
+            <key type="filename">raw/guy_left_0.png</key>
+            <key type="filename">raw/guy_right_0.png</key>
+            <key type="filename">raw/guy_up_0.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>

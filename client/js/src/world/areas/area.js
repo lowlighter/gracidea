@@ -29,7 +29,10 @@
             if (!polygon)
               points = [{x:0, y:0}, {x:width, y:0}, {x:width, y:height}, {x:0, y:height}]
         //Save properties
-          this.properties = {}
+          this.name = data.name
+          if (!Area.shared.properties.has(`${this.constructor.name}#${this.name}`))
+            Area.shared.properties.set(`${this.constructor.name}#${this.name}`, {})
+          this.properties = Area.shared.properties.get(`${this.constructor.name}#${this.name}`)
           properties.map(({name, value}) => this.properties[name] = value)
         //Update data origin and boundary
           const xs = points.map(point => u.to.coord.tile(X+point.x)), ys = points.map(point => u.to.coord.tile(Y+point.y))
@@ -129,11 +132,17 @@
         //Location area
           if (type === "location")
             return new Area.Location(...arguments)
+        //Trainer area
+          if (type === "trainer")
+            return new Area.Trainer(...arguments)
         //General area
           return new Area({world, key})
       }
 
-    //Unique id
-      static uid = 0
+    //Shared
+      static shared = {
+        //Shared properties
+          properties:new Map()
+      }
 
   }

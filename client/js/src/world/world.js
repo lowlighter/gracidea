@@ -7,8 +7,10 @@
   import Quadtree from "./../structs/quadtree.js"
   import Element from "./element.js"
   import Creature from "./characters/creature.js"
-  import Wild from "./areas/wild.js"
-  import Location from "./areas/location.js"
+  import Trainer from "./characters/trainer.js"
+  import WildArea from "./areas/wild.js"
+  import LocationArea from "./areas/location.js"
+  import TrainerArea from "./areas/trainer.js"
 
 /**
  * World.
@@ -65,16 +67,18 @@
           }
           this.layers.global.characters.visible = false
         //Update static values
-          Area.Wild = Wild
-          Area.Location = Location
+          Area.Wild = WildArea
+          Area.Location = LocationArea
+          Area.Trainer = TrainerArea
       }
 
     //Loaders
       load = {
         //Load world
           world:async () => {
-            //Load creatures textures
+            //Load creatures and trainers textures
               App.loader.renderer.add(`${this.app.endpoints.maps}/creatures/textures.json`)
+              App.loader.renderer.add(`${this.app.endpoints.maps}/trainers/textures.json`)
             //Load map data
               const {layers, tilesets} = (await axios.get(`${this.app.endpoints.maps}/${this.name}/map.json`)).data
               if (this.app.data.debug.diff) {
@@ -107,7 +111,7 @@
                     //Object group
                       case "objectgroup":{
                         for (let object of layer.objects)
-                          await u.mget({map:this.areas, key:object.name||World.Area.uid++, create:key => World.Area.from({world:this, key, object})}).load({object})
+                          await u.mget({map:this.areas, key:`${object.id}#${object.name}`, create:key => World.Area.from({world:this, key, object})}).load({object})
                         break
                       }
                   }
@@ -139,7 +143,9 @@
     //Create entities
       add = {
         //Add creature
-          creature:({species, x, y, area}) => new Creature({world:this, x, y, area, species})
+          creature:({species, x, y, area}) => new Creature({world:this, x, y, area, species}),
+        //Add trainer
+          trainer:({categorie, x, y, area}) => new Trainer({world:this, x, y, area, categorie})
       }
 
     //Render world

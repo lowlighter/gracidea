@@ -50,7 +50,7 @@
               if (World.layers.ignored.has(layer))
                 continue
             //Retrieve chunk sprite
-              const chunk = this.sprite.getChildByName(layer) || this.sprite.addChild(new PIXI.Container())
+              const chunk = this.sprite.getChildByName(layer) ?? this.sprite.addChild(new PIXI.Container())
               chunk.name = layer
               chunk.position.set(u.to.coord.px(x), u.to.coord.px(y))
             //Skip rendering if already rendered
@@ -85,7 +85,7 @@
                   }
                 //Compute diff
                   if ((this.world.app.data.debug.diff)&&(this.world.diff)) {
-                    const prev = (this.world.diff[layer]?.[this.key]?.data?.[index]||0)-1
+                    const prev = (this.world.diff[layer]?.[this.key]?.data?.[index] ?? 0)-1
                     //New texture
                       if ((prev === -1)&&(texture >= 0))
                         tile.tint = 0x00FF00

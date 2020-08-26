@@ -15532,7 +15532,7 @@
         {
          "draworder":"topdown",
          "id":19,
-         "name":"20-location-areas",
+         "name":"20-locations",
          "objects":[
                 {
                  "height":352,
@@ -15627,7 +15627,7 @@
                  "id":91,
                  "name":"3-lavaridge",
                  "rotation":0,
-                 "type":"locatiion",
+                 "type":"location",
                  "visible":true,
                  "width":464,
                  "x":5504,
@@ -15860,7 +15860,7 @@
                  "rotation":0,
                  "type":"location",
                  "visible":true,
-                 "width":351.333333333332,
+                 "width":351.333,
                  "x":23728,
                  "y":-26528
                 }, 
@@ -15895,12 +15895,12 @@
         {
          "draworder":"topdown",
          "id":15,
-         "name":"21-wild-areas",
+         "name":"21-creatures",
          "objects":[
                 {
                  "height":0,
                  "id":3,
-                 "name":"3-101-1",
+                 "name":"3-101",
                  "polygon":[
                         {
                          "x":0,
@@ -15984,7 +15984,7 @@
                 {
                  "height":0,
                  "id":4,
-                 "name":"3-101-2",
+                 "name":"3-101",
                  "polygon":[
                         {
                          "x":0,
@@ -16053,22 +16053,6 @@
                         {
                          "x":0,
                          "y":0
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.45
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.45
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.1
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -16080,7 +16064,7 @@
                 {
                  "height":0,
                  "id":5,
-                 "name":"3-101-3",
+                 "name":"3-101",
                  "polygon":[
                         {
                          "x":0,
@@ -16129,22 +16113,6 @@
                         {
                          "x":0,
                          "y":-48
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.45
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.45
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.1
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -16156,7 +16124,7 @@
                 {
                  "height":0,
                  "id":6,
-                 "name":"3-101-4",
+                 "name":"3-101",
                  "polygon":[
                         {
                          "x":0,
@@ -16213,22 +16181,6 @@
                         {
                          "x":-32,
                          "y":0
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.45
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.45
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.1
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -16339,7 +16291,7 @@
                 {
                  "height":0,
                  "id":9,
-                 "name":"3-103-1",
+                 "name":"3-103",
                  "polygon":[
                         {
                          "x":0,
@@ -16415,7 +16367,7 @@
                 {
                  "height":0,
                  "id":10,
-                 "name":"3-103-2",
+                 "name":"3-103",
                  "polygon":[
                         {
                          "x":0,
@@ -16464,22 +16416,6 @@
                         {
                          "x":-64,
                          "y":0
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.6
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.2
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -16491,7 +16427,7 @@
                 {
                  "height":0,
                  "id":12,
-                 "name":"3-103-3",
+                 "name":"3-103",
                  "polygon":[
                         {
                          "x":0,
@@ -16541,22 +16477,6 @@
                          "x":0,
                          "y":16
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.6
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.2
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -16567,7 +16487,7 @@
                 {
                  "height":0,
                  "id":13,
-                 "name":"",
+                 "name":"3-102",
                  "polygon":[
                         {
                          "x":0,
@@ -16642,7 +16562,7 @@
                 {
                  "height":0,
                  "id":14,
-                 "name":"",
+                 "name":"3-102-7",
                  "polygon":[
                         {
                          "x":0,
@@ -16669,7 +16589,7 @@
                          "y":80
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":5024,
@@ -16678,7 +16598,7 @@
                 {
                  "height":0,
                  "id":15,
-                 "name":"",
+                 "name":"3-102",
                  "polygon":[
                         {
                          "x":0,
@@ -16731,37 +16651,6 @@
                         {
                          "x":0,
                          "y":0
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_lotad",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_ralts",
-                         "type":"float",
-                         "value":0.04
-                        }, 
-                        {
-                         "name":"pk_seedot",
-                         "type":"float",
-                         "value":0.01
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.15
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -16773,7 +16662,7 @@
                 {
                  "height":0,
                  "id":16,
-                 "name":"",
+                 "name":"3-102",
                  "polygon":[
                         {
                          "x":0,
@@ -16830,37 +16719,6 @@
                         {
                          "x":80,
                          "y":0
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_lotad",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_ralts",
-                         "type":"float",
-                         "value":0.04
-                        }, 
-                        {
-                         "name":"pk_seedot",
-                         "type":"float",
-                         "value":0.01
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.15
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -16872,7 +16730,7 @@
                 {
                  "height":0,
                  "id":17,
-                 "name":"",
+                 "name":"3-102",
                  "polygon":[
                         {
                          "x":0,
@@ -16957,37 +16815,6 @@
                         {
                          "x":0,
                          "y":-64
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_lotad",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_ralts",
-                         "type":"float",
-                         "value":0.04
-                        }, 
-                        {
-                         "name":"pk_seedot",
-                         "type":"float",
-                         "value":0.01
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.15
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -16999,7 +16826,7 @@
                 {
                  "height":0,
                  "id":18,
-                 "name":"",
+                 "name":"3-102",
                  "polygon":[
                         {
                          "x":0,
@@ -17032,37 +16859,6 @@
                         {
                          "x":0,
                          "y":96
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_lotad",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_ralts",
-                         "type":"float",
-                         "value":0.04
-                        }, 
-                        {
-                         "name":"pk_seedot",
-                         "type":"float",
-                         "value":0.01
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.15
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -17074,7 +16870,7 @@
                 {
                  "height":0,
                  "id":19,
-                 "name":"",
+                 "name":"3-102",
                  "polygon":[
                         {
                          "x":0,
@@ -17131,37 +16927,6 @@
                         {
                          "x":0,
                          "y":32
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_lotad",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_ralts",
-                         "type":"float",
-                         "value":0.04
-                        }, 
-                        {
-                         "name":"pk_seedot",
-                         "type":"float",
-                         "value":0.01
-                        }, 
-                        {
-                         "name":"pk_wurmple",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_zigzagoon",
-                         "type":"float",
-                         "value":0.15
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -17173,7 +16938,7 @@
                 {
                  "height":0,
                  "id":20,
-                 "name":"",
+                 "name":"3-petalburg",
                  "polygon":[
                         {
                          "x":0,
@@ -17200,7 +16965,7 @@
                          "y":224
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3936,
@@ -17209,7 +16974,7 @@
                 {
                  "height":0,
                  "id":21,
-                 "name":"",
+                 "name":"3-petalburg",
                  "polygon":[
                         {
                          "x":0,
@@ -17236,7 +17001,7 @@
                          "y":96
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":4208,
@@ -17245,7 +17010,7 @@
                 {
                  "height":0,
                  "id":22,
-                 "name":"",
+                 "name":"3-104",
                  "polygon":[
                         {
                          "x":0,
@@ -17320,7 +17085,7 @@
                          "y":0
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3584,
@@ -17329,7 +17094,7 @@
                 {
                  "height":0,
                  "id":23,
-                 "name":"",
+                 "name":"3-104",
                  "polygon":[
                         {
                          "x":0,
@@ -17380,7 +17145,7 @@
                          "y":48
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3376,
@@ -17389,7 +17154,7 @@
                 {
                  "height":0,
                  "id":24,
-                 "name":"",
+                 "name":"3-104",
                  "polygon":[
                         {
                          "x":0,
@@ -17416,7 +17181,7 @@
                          "y":0
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3456,
@@ -17425,7 +17190,7 @@
                 {
                  "height":0,
                  "id":25,
-                 "name":"",
+                 "name":"3-104",
                  "polygon":[
                         {
                          "x":0,
@@ -17492,7 +17257,7 @@
                          "y":96
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3296,
@@ -17501,7 +17266,7 @@
                 {
                  "height":0,
                  "id":26,
-                 "name":"",
+                 "name":"3-116",
                  "polygon":[
                         {
                          "x":0,
@@ -17564,7 +17329,7 @@
                          "y":0
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3968,
@@ -17573,7 +17338,7 @@
                 {
                  "height":0,
                  "id":27,
-                 "name":"",
+                 "name":"3-116",
                  "polygon":[
                         {
                          "x":0,
@@ -17672,7 +17437,7 @@
                          "y":0
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":4032,
@@ -17681,7 +17446,7 @@
                 {
                  "height":0,
                  "id":28,
-                 "name":"",
+                 "name":"3-116",
                  "polygon":[
                         {
                          "x":0,
@@ -17748,7 +17513,7 @@
                          "y":0
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":4240,
@@ -17757,7 +17522,7 @@
                 {
                  "height":0,
                  "id":29,
-                 "name":"",
+                 "name":"3-104",
                  "polygon":[
                         {
                          "x":0,
@@ -17784,7 +17549,7 @@
                          "y":96
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3680,
@@ -17793,7 +17558,7 @@
                 {
                  "height":0,
                  "id":30,
-                 "name":"",
+                 "name":"3-104",
                  "polygon":[
                         {
                          "x":0,
@@ -17844,7 +17609,7 @@
                          "y":128
                         }],
                  "rotation":0,
-                 "type":"",
+                 "type":"wild",
                  "visible":true,
                  "width":0,
                  "x":3648,
@@ -17853,7 +17618,7 @@
                 {
                  "height":0,
                  "id":37,
-                 "name":"3-105-1",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -17912,7 +17677,7 @@
                 {
                  "height":0,
                  "id":38,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -17950,37 +17715,6 @@
                          "x":16,
                          "y":80
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -17991,7 +17725,7 @@
                 {
                  "height":0,
                  "id":39,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -18017,37 +17751,6 @@
                          "x":0,
                          "y":48
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18058,7 +17761,7 @@
                 {
                  "height":0,
                  "id":40,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -18080,37 +17783,6 @@
                          "x":144,
                          "y":0
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18121,7 +17793,7 @@
                 {
                  "height":0,
                  "id":41,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -18143,37 +17815,6 @@
                          "x":16,
                          "y":48
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18184,7 +17825,7 @@
                 {
                  "height":0,
                  "id":42,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -18202,37 +17843,6 @@
                          "x":0,
                          "y":176
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18243,7 +17853,7 @@
                 {
                  "height":0,
                  "id":43,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -18261,37 +17871,6 @@
                          "x":-64,
                          "y":224
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18302,7 +17881,7 @@
                 {
                  "height":0,
                  "id":44,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -18328,37 +17907,6 @@
                          "x":0,
                          "y":128
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18369,7 +17917,7 @@
                 {
                  "height":0,
                  "id":45,
-                 "name":"",
+                 "name":"3-105",
                  "polygon":[
                         {
                          "x":0,
@@ -18391,37 +17939,6 @@
                          "x":64,
                          "y":0
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18432,7 +17949,7 @@
                 {
                  "height":0,
                  "id":46,
-                 "name":"",
+                 "name":"3-106",
                  "polygon":[
                         {
                          "x":0,
@@ -18499,7 +18016,7 @@
                 {
                  "height":0,
                  "id":47,
-                 "name":"",
+                 "name":"3-106",
                  "polygon":[
                         {
                          "x":0,
@@ -18516,37 +18033,6 @@
                         {
                          "x":0,
                          "y":64
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -18558,7 +18044,7 @@
                 {
                  "height":0,
                  "id":48,
-                 "name":"",
+                 "name":"3-106",
                  "polygon":[
                         {
                          "x":0,
@@ -18575,37 +18061,6 @@
                         {
                          "x":256,
                          "y":0
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -18617,7 +18072,7 @@
                 {
                  "height":0,
                  "id":49,
-                 "name":"",
+                 "name":"3-106",
                  "polygon":[
                         {
                          "x":0,
@@ -18642,37 +18097,6 @@
                         {
                          "x":176,
                          "y":0
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -18684,7 +18108,7 @@
                 {
                  "height":0,
                  "id":50,
-                 "name":"",
+                 "name":"3-107",
                  "polygon":[
                         {
                          "x":0,
@@ -18710,37 +18134,6 @@
                          "x":-192,
                          "y":0
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18751,7 +18144,7 @@
                 {
                  "height":0,
                  "id":51,
-                 "name":"",
+                 "name":"3-107",
                  "polygon":[
                         {
                          "x":0,
@@ -18785,37 +18178,6 @@
                          "x":0,
                          "y":128
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18826,7 +18188,7 @@
                 {
                  "height":0,
                  "id":52,
-                 "name":"",
+                 "name":"3-107",
                  "polygon":[
                         {
                          "x":0,
@@ -18852,37 +18214,6 @@
                          "x":0,
                          "y":144
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18893,7 +18224,7 @@
                 {
                  "height":0,
                  "id":53,
-                 "name":"",
+                 "name":"3-107",
                  "polygon":[
                         {
                          "x":0,
@@ -18915,37 +18246,6 @@
                          "x":0,
                          "y":144
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_magikarp",
-                         "type":"float",
-                         "value":0.093
-                        }, 
-                        {
-                         "name":"pk_pelipper",
-                         "type":"float",
-                         "value":0.0425
-                        }, 
-                        {
-                         "name":"pk_tentacool",
-                         "type":"float",
-                         "value":0.547
-                        }, 
-                        {
-                         "name":"pk_wailmer",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.2975
-                        }, 
-                        {
-                         "name":"water",
-                         "type":"bool",
-                         "value":true
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -18956,7 +18256,7 @@
                 {
                  "height":0,
                  "id":54,
-                 "name":"",
+                 "name":"3-107",
                  "polygon":[
                         {
                          "x":0,
@@ -19019,7 +18319,7 @@
                 {
                  "height":0,
                  "id":57,
-                 "name":"3-110-4",
+                 "name":"3-110",
                  "polygon":[
                         {
                          "x":0,
@@ -19049,42 +18349,6 @@
                          "x":0,
                          "y":16
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_electrike",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_gulpin",
-                         "type":"float",
-                         "value":0.15
-                        }, 
-                        {
-                         "name":"pk_minun",
-                         "type":"float",
-                         "value":0.15
-                        }, 
-                        {
-                         "name":"pk_oddish",
-                         "type":"float",
-                         "value":0.1
-                        }, 
-                        {
-                         "name":"pk_plusle",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.08
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -19095,7 +18359,7 @@
                 {
                  "height":0,
                  "id":58,
-                 "name":"3-110-3",
+                 "name":"3-110",
                  "polygon":[
                         {
                          "x":0,
@@ -19121,42 +18385,6 @@
                          "x":320,
                          "y":0
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_electrike",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_gulpin",
-                         "type":"float",
-                         "value":0.15
-                        }, 
-                        {
-                         "name":"pk_minun",
-                         "type":"float",
-                         "value":0.15
-                        }, 
-                        {
-                         "name":"pk_oddish",
-                         "type":"float",
-                         "value":0.1
-                        }, 
-                        {
-                         "name":"pk_plusle",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.08
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -19167,7 +18395,7 @@
                 {
                  "height":0,
                  "id":59,
-                 "name":"3-110-1",
+                 "name":"3-110",
                  "polygon":[
                         {
                          "x":0,
@@ -19239,7 +18467,7 @@
                 {
                  "height":0,
                  "id":61,
-                 "name":"3-110-2",
+                 "name":"3-110",
                  "polygon":[
                         {
                          "x":0,
@@ -19256,42 +18484,6 @@
                         {
                          "x":0,
                          "y":256
-                        }],
-                 "properties":[
-                        {
-                         "name":"pk_electrike",
-                         "type":"float",
-                         "value":0.3
-                        }, 
-                        {
-                         "name":"pk_gulpin",
-                         "type":"float",
-                         "value":0.15
-                        }, 
-                        {
-                         "name":"pk_minun",
-                         "type":"float",
-                         "value":0.15
-                        }, 
-                        {
-                         "name":"pk_oddish",
-                         "type":"float",
-                         "value":0.1
-                        }, 
-                        {
-                         "name":"pk_plusle",
-                         "type":"float",
-                         "value":0.02
-                        }, 
-                        {
-                         "name":"pk_poochyena",
-                         "type":"float",
-                         "value":0.2
-                        }, 
-                        {
-                         "name":"pk_wingull",
-                         "type":"float",
-                         "value":0.08
                         }],
                  "rotation":0,
                  "type":"wild",
@@ -19302,108 +18494,8 @@
                 }, 
                 {
                  "height":0,
-                 "id":62,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":48,
-                         "y":0
-                        }, 
-                        {
-                         "x":48,
-                         "y":64
-                        }, 
-                        {
-                         "x":0,
-                         "y":64
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":5776,
-                 "y":-16960
-                }, 
-                {
-                 "height":0,
-                 "id":63,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":16
-                        }, 
-                        {
-                         "x":112,
-                         "y":16
-                        }, 
-                        {
-                         "x":112,
-                         "y":32
-                        }, 
-                        {
-                         "x":0,
-                         "y":32
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":5632,
-                 "y":-17152
-                }, 
-                {
-                 "height":0,
-                 "id":65,
-                 "name":"",
-                 "polygon":[
-                        {
-                         "x":0,
-                         "y":0
-                        }, 
-                        {
-                         "x":64,
-                         "y":0
-                        }, 
-                        {
-                         "x":112,
-                         "y":48
-                        }, 
-                        {
-                         "x":112,
-                         "y":80
-                        }, 
-                        {
-                         "x":64,
-                         "y":80
-                        }, 
-                        {
-                         "x":0,
-                         "y":48
-                        }],
-                 "rotation":0,
-                 "type":"",
-                 "visible":true,
-                 "width":0,
-                 "x":5952,
-                 "y":-16944
-                }, 
-                {
-                 "height":0,
                  "id":66,
-                 "name":"3-117-1",
+                 "name":"3-117-daycare",
                  "polygon":[
                         {
                          "x":0,
@@ -19475,7 +18567,7 @@
                 {
                  "height":0,
                  "id":67,
-                 "name":"3-111-1",
+                 "name":"3-111",
                  "polygon":[
                         {
                          "x":0,
@@ -19552,7 +18644,7 @@
                 {
                  "height":0,
                  "id":68,
-                 "name":"3-111-6",
+                 "name":"3-111",
                  "polygon":[
                         {
                          "x":0,
@@ -19586,27 +18678,6 @@
                          "x":0,
                          "y":80
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_baltoy",
-                         "type":"float",
-                         "value":0.24
-                        }, 
-                        {
-                         "name":"pk_cacnea",
-                         "type":"float",
-                         "value":0.06
-                        }, 
-                        {
-                         "name":"pk_sandshrew",
-                         "type":"float",
-                         "value":0.35
-                        }, 
-                        {
-                         "name":"pl_trapinch",
-                         "type":"float",
-                         "value":0.35
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -19617,7 +18688,7 @@
                 {
                  "height":0,
                  "id":69,
-                 "name":"3-111-5",
+                 "name":"3-111",
                  "polygon":[
                         {
                          "x":0,
@@ -19659,27 +18730,6 @@
                          "x":0,
                          "y":0
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_baltoy",
-                         "type":"float",
-                         "value":0.24
-                        }, 
-                        {
-                         "name":"pk_cacnea",
-                         "type":"float",
-                         "value":0.06
-                        }, 
-                        {
-                         "name":"pk_sandshrew",
-                         "type":"float",
-                         "value":0.35
-                        }, 
-                        {
-                         "name":"pl_trapinch",
-                         "type":"float",
-                         "value":0.35
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -19690,7 +18740,7 @@
                 {
                  "height":0,
                  "id":70,
-                 "name":"3-111-4",
+                 "name":"3-111",
                  "polygon":[
                         {
                          "x":0,
@@ -19720,27 +18770,6 @@
                          "x":0,
                          "y":48
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_baltoy",
-                         "type":"float",
-                         "value":0.24
-                        }, 
-                        {
-                         "name":"pk_cacnea",
-                         "type":"float",
-                         "value":0.06
-                        }, 
-                        {
-                         "name":"pk_sandshrew",
-                         "type":"float",
-                         "value":0.35
-                        }, 
-                        {
-                         "name":"pl_trapinch",
-                         "type":"float",
-                         "value":0.35
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -19751,7 +18780,7 @@
                 {
                  "height":0,
                  "id":71,
-                 "name":"3-111-3",
+                 "name":"3-111",
                  "polygon":[
                         {
                          "x":0,
@@ -19797,27 +18826,6 @@
                          "x":-48,
                          "y":16
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_baltoy",
-                         "type":"float",
-                         "value":0.24
-                        }, 
-                        {
-                         "name":"pk_cacnea",
-                         "type":"float",
-                         "value":0.06
-                        }, 
-                        {
-                         "name":"pk_sandshrew",
-                         "type":"float",
-                         "value":0.35
-                        }, 
-                        {
-                         "name":"pl_trapinch",
-                         "type":"float",
-                         "value":0.35
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -19828,7 +18836,7 @@
                 {
                  "height":0,
                  "id":72,
-                 "name":"3-111-2",
+                 "name":"3-111",
                  "polygon":[
                         {
                          "x":0,
@@ -19866,27 +18874,6 @@
                          "x":0,
                          "y":64
                         }],
-                 "properties":[
-                        {
-                         "name":"pk_baltoy",
-                         "type":"float",
-                         "value":0.24
-                        }, 
-                        {
-                         "name":"pk_cacnea",
-                         "type":"float",
-                         "value":0.06
-                        }, 
-                        {
-                         "name":"pk_sandshrew",
-                         "type":"float",
-                         "value":0.35
-                        }, 
-                        {
-                         "name":"pl_trapinch",
-                         "type":"float",
-                         "value":0.35
-                        }],
                  "rotation":0,
                  "type":"wild",
                  "visible":true,
@@ -19899,9 +18886,59 @@
          "visible":true,
          "x":0,
          "y":0
+        }, 
+        {
+         "draworder":"topdown",
+         "id":20,
+         "name":"22-trainers",
+         "objects":[
+                {
+                 "height":0,
+                 "id":123,
+                 "name":"",
+                 "polygon":[
+                        {
+                         "x":0,
+                         "y":0
+                        }, 
+                        {
+                         "x":80,
+                         "y":0
+                        }, 
+                        {
+                         "x":80,
+                         "y":80
+                        }, 
+                        {
+                         "x":0,
+                         "y":80
+                        }],
+                 "properties":[
+                        {
+                         "name":"categorie",
+                         "type":"string",
+                         "value":"guy"
+                        }, 
+                        {
+                         "name":"path",
+                         "type":"string",
+                         "value":"wander"
+                        }],
+                 "rotation":0,
+                 "type":"trainer",
+                 "visible":true,
+                 "width":0,
+                 "x":5344,
+                 "y":-14752
+                }],
+         "opacity":1,
+         "type":"objectgroup",
+         "visible":true,
+         "x":0,
+         "y":0
         }],
- "nextlayerid":20,
- "nextobjectid":121,
+ "nextlayerid":21,
+ "nextobjectid":124,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.3.3",

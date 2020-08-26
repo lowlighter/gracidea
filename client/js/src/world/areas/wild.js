@@ -13,12 +13,6 @@
     //Species in wild area (associated to spawn probability)
       species = {}
 
-    //Constructor
-      constructor() {
-        //Heritage
-          super(...arguments)
-      }
-
     //Load
       async load() {
         //Heritage
@@ -33,7 +27,7 @@
           }
         //Spawn parameters
           this.spawns = {
-            max:{creatures:Math.ceil(this.properties.max_creatures||Math.max(1, 0.5*Math.log2(this.area.size)-1))},
+            max:{creatures:Math.ceil(this.properties.max_creatures ?? Math.max(1, 0.5*Math.log2(this.area.size)-1))},
             probability:0.1
           }
       }

@@ -144,7 +144,7 @@
           this.ready = new Promise(async (solve, reject) => {
             //Load language
               this.data.loading.state = "Loading"
-              for (let lg of [this.params.get.map.get("lang") || "en", "en"]) {
+              for (let lg of [this.params.get.map.get("lang") ?? "en", "en"]) {
                 try {
                   const {data:lang} = await axios.get(`${this.endpoints.lang}/${lg}.json`)
                   this.data.lang = lang
@@ -158,13 +158,13 @@
               this.data.loading.state = this.data.lang.loading.params
               this.data.debug.sea = this.params.get.map.has("sea") ? this.params.get.map.get("sea") : true
               this.data.debug.characters = this.params.get.map.has("characters") ? this.params.get.map.get("characters") : true
-              this.data.debug.areas = this.params.get.map.get("areas") || false
-              this.data.debug.chunks = this.params.get.map.get("chunks") || false
-              this.data.debug.diff = this.params.get.map.get("diff") || false
+              this.data.debug.areas = this.params.get.map.get("areas") ?? false
+              this.data.debug.chunks = this.params.get.map.get("chunks") ?? false
+              this.data.debug.diff = this.params.get.map.get("diff") ?? false
             //Branch and diff
               const branch = this.params.get.map.get("branch")
               if (branch) {
-                const [,owner, name] = decodeURIComponent(branch).match(/^([\w-]+):([\w-]+)$/)||["", "lowlighter", "master"]
+                const [,owner, name] = decodeURIComponent(branch).match(/^([\w-]+):([\w-]+)$/) ?? ["", "lowlighter", "master"]
                 this.data.debug.branch = name
                 this.data.debug.branch_owner = owner
                 this.endpoints.repo.user = `${this.endpoints.repo.raw}/${owner}/gracidea`
@@ -190,7 +190,7 @@
                   this.data.loading.stated.unshift(this.data.lang.loading.loaded.sea)
                 //Set camera
                   this.data.loading.state = this.data.lang.loading.camera
-                  this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x"))||0, y:Number(this.params.get.map.get("y"))||0, offset:{x:0, y:0}, render:false} : {x:329, y:-924, render:false})
+                  this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x")) ?? 0, y:Number(this.params.get.map.get("y")) ?? 0, offset:{x:0, y:0}, render:false} : {x:329, y:-924, render:false})
                   this.methods.update()
                   this.data.loading.stated.unshift(this.data.lang.loading.loaded.camera)
                 //First render

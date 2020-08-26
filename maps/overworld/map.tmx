@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="20" nextobjectid="121">
+<map version="1.2" tiledversion="1.3.3" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="21" nextobjectid="124">
  <editorsettings>
   <export target="map.json" format="json"/>
  </editorsettings>
@@ -39686,7 +39686,7 @@
 </chunk>
   </data>
  </layer>
- <objectgroup id="19" name="20-location-areas">
+ <objectgroup id="19" name="20-locations">
   <object id="74" name="3-littleroot" type="location" x="5152" y="-14928" width="384" height="352"/>
   <object id="76" name="3-oldale" type="location" x="5152" y="-15568" width="384" height="320"/>
   <object id="77" name="3-101" type="location" x="5152" y="-15248" width="384" height="320"/>
@@ -39695,7 +39695,7 @@
   <object id="83" name="3-102" type="location" x="4368" y="-15584" width="784" height="368"/>
   <object id="88" name="3-rustboro" type="location" x="3264" y="-17392" width="624" height="848"/>
   <object id="89" name="3-fallarbor" type="location" x="4480" y="-19392" width="496" height="336"/>
-  <object id="91" name="3-lavaridge" type="locatiion" x="5504" y="-18448" width="464" height="336"/>
+  <object id="91" name="3-lavaridge" type="location" x="5504" y="-18448" width="464" height="336"/>
   <object id="92" name="3-mauville" type="location" x="6448" y="-17232" width="736" height="400"/>
   <object id="93" name="3-slateport" type="location" x="6464" y="-15152" width="656" height="864"/>
   <object id="95" name="3-104" type="location" x="3264" y="-16544" width="624" height="1360"/>
@@ -39720,8 +39720,8 @@
   <object id="119" name="1-viridian" type="location" x="23568" y="-27808" width="656" height="592"/>
   <object id="120" name="1-1" type="location" x="23728" y="-27216" width="352" height="688"/>
  </objectgroup>
- <objectgroup id="15" name="21-wild-areas">
-  <object id="3" name="3-101-1" type="wild" x="5216" y="-15040">
+ <objectgroup id="15" name="21-creatures">
+  <object id="3" name="3-101" type="wild" x="5216" y="-15040">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
     <property name="pk_wurmple" type="float" value="0.45"/>
@@ -39729,28 +39729,13 @@
    </properties>
    <polygon points="0,0 32,0 32,16 48,16 48,32 64,32 64,64 48,64 48,80 0,80 0,48 -32,48 -32,16 0,16"/>
   </object>
-  <object id="4" name="3-101-2" type="wild" x="5360" y="-15088">
-   <properties>
-    <property name="pk_poochyena" type="float" value="0.45"/>
-    <property name="pk_wurmple" type="float" value="0.45"/>
-    <property name="pk_zigzagoon" type="float" value="0.1"/>
-   </properties>
+  <object id="4" name="3-101" type="wild" x="5360" y="-15088">
    <polygon points="0,0 32,0 32,-16 64,-16 64,0 80,0 80,16 96,16 96,64 80,64 80,96 48,96 48,64 16,64 16,48 0,48 0,0"/>
   </object>
-  <object id="5" name="3-101-3" type="wild" x="5376" y="-15152">
-   <properties>
-    <property name="pk_poochyena" type="float" value="0.45"/>
-    <property name="pk_wurmple" type="float" value="0.45"/>
-    <property name="pk_zigzagoon" type="float" value="0.1"/>
-   </properties>
+  <object id="5" name="3-101" type="wild" x="5376" y="-15152">
    <polygon points="0,0 16,0 16,16 64,16 64,0 96,0 96,-32 64,-32 64,-64 16,-64 16,-48 0,-48"/>
   </object>
-  <object id="6" name="3-101-4" type="wild" x="5248" y="-15136">
-   <properties>
-    <property name="pk_poochyena" type="float" value="0.45"/>
-    <property name="pk_wurmple" type="float" value="0.45"/>
-    <property name="pk_zigzagoon" type="float" value="0.1"/>
-   </properties>
+  <object id="6" name="3-101" type="wild" x="5248" y="-15136">
    <polygon points="0,0 0,-16 16,-16 16,-32 32,-32 32,-64 16,-64 16,-80 -32,-80 -32,-48 -64,-48 -64,-16 -32,-16 -32,0"/>
   </object>
   <object id="7" name="3-999-1" type="wild" x="-80" y="-160">
@@ -39760,7 +39745,7 @@
    </properties>
    <polygon points="0,0 192,0 192,80 176,80 176,112 160,112 160,128 112,128 112,144 64,144 64,128 32,128 32,112 0,112 0,96 -16,96 -16,16 0,16 0,0"/>
   </object>
-  <object id="9" name="3-103-1" type="wild" x="5376" y="-15632">
+  <object id="9" name="3-103" type="wild" x="5376" y="-15632">
    <properties>
     <property name="pk_poochyena" type="float" value="0.6"/>
     <property name="pk_wingull" type="float" value="0.2"/>
@@ -39768,23 +39753,13 @@
    </properties>
    <polygon points="0,0 96,0 96,-32 112,-32 112,-64 96,-64 96,-80 32,-80 32,-48 -16,-48 -16,-16 0,-16"/>
   </object>
-  <object id="10" name="3-103-2" type="wild" x="5312" y="-15696">
-   <properties>
-    <property name="pk_poochyena" type="float" value="0.6"/>
-    <property name="pk_wingull" type="float" value="0.2"/>
-    <property name="pk_zigzagoon" type="float" value="0.2"/>
-   </properties>
+  <object id="10" name="3-103" type="wild" x="5312" y="-15696">
    <polygon points="0,0 0,-32 16,-32 16,-96 -32,-96 -32,-112 -64,-112 -64,-128 -96,-128 -96,-32 -64,-32 -64,0"/>
   </object>
-  <object id="12" name="3-103-3" type="wild" x="5344" y="-15856">
-   <properties>
-    <property name="pk_poochyena" type="float" value="0.6"/>
-    <property name="pk_wingull" type="float" value="0.2"/>
-    <property name="pk_zigzagoon" type="float" value="0.2"/>
-   </properties>
+  <object id="12" name="3-103" type="wild" x="5344" y="-15856">
    <polygon points="0,0 96,0 96,32 128,32 128,64 64,64 64,48 48,48 48,32 16,32 16,16 0,16"/>
   </object>
-  <object id="13" type="wild" x="5024" y="-15536">
+  <object id="13" name="3-102" type="wild" x="5024" y="-15536">
    <properties>
     <property name="pk_lotad" type="float" value="0.2"/>
     <property name="pk_poochyena" type="float" value="0.3"/>
@@ -39795,98 +39770,58 @@
    </properties>
    <polygon points="0,0 0,80 -32,80 -32,64 -48,64 -48,48 -64,48 -64,0"/>
   </object>
-  <object id="14" x="5024" y="-15536">
+  <object id="14" name="3-102-7" type="wild" x="5024" y="-15536">
    <polygon points="0,0 64,0 64,32 96,32 96,80 0,80"/>
   </object>
-  <object id="15" type="wild" x="4832" y="-15360">
-   <properties>
-    <property name="pk_lotad" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.3"/>
-    <property name="pk_ralts" type="float" value="0.04"/>
-    <property name="pk_seedot" type="float" value="0.01"/>
-    <property name="pk_wurmple" type="float" value="0.3"/>
-    <property name="pk_zigzagoon" type="float" value="0.15"/>
-   </properties>
+  <object id="15" name="3-102" type="wild" x="4832" y="-15360">
    <polygon points="0,0 32,0 32,-16 64,-16 64,16 80,16 80,32 64,32 64,48 16,48 16,32 0,32 0,0"/>
   </object>
-  <object id="16" type="wild" x="4688" y="-15280">
-   <properties>
-    <property name="pk_lotad" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.3"/>
-    <property name="pk_ralts" type="float" value="0.04"/>
-    <property name="pk_seedot" type="float" value="0.01"/>
-    <property name="pk_wurmple" type="float" value="0.3"/>
-    <property name="pk_zigzagoon" type="float" value="0.15"/>
-   </properties>
+  <object id="16" name="3-102" type="wild" x="4688" y="-15280">
    <polygon points="0,0 0,-32 16,-32 16,-48 64,-48 64,-32 112,-32 112,-16 128,-16 128,0 144,0 144,32 80,32 80,0"/>
   </object>
-  <object id="17" type="wild" x="4640" y="-15344">
-   <properties>
-    <property name="pk_lotad" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.3"/>
-    <property name="pk_ralts" type="float" value="0.04"/>
-    <property name="pk_seedot" type="float" value="0.01"/>
-    <property name="pk_wurmple" type="float" value="0.3"/>
-    <property name="pk_zigzagoon" type="float" value="0.15"/>
-   </properties>
+  <object id="17" name="3-102" type="wild" x="4640" y="-15344">
    <polygon points="0,0 32,0 32,-16 48,-16 48,-32 64,-32 64,-48 96,-48 96,-64 128,-64 128,-80 144,-80 144,-112 64,-112 64,-96 48,-96 32,-96 32,-80 16,-80 16,-64 0,-64"/>
   </object>
-  <object id="18" type="wild" x="4480" y="-15376">
-   <properties>
-    <property name="pk_lotad" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.3"/>
-    <property name="pk_ralts" type="float" value="0.04"/>
-    <property name="pk_seedot" type="float" value="0.01"/>
-    <property name="pk_wurmple" type="float" value="0.3"/>
-    <property name="pk_zigzagoon" type="float" value="0.15"/>
-   </properties>
+  <object id="18" name="3-102" type="wild" x="4480" y="-15376">
    <polygon points="0,0 32,0 32,32 48,32 48,64 64,64 64,96 0,96"/>
   </object>
-  <object id="19" type="wild" x="4416" y="-15504">
-   <properties>
-    <property name="pk_lotad" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.3"/>
-    <property name="pk_ralts" type="float" value="0.04"/>
-    <property name="pk_seedot" type="float" value="0.01"/>
-    <property name="pk_wurmple" type="float" value="0.3"/>
-    <property name="pk_zigzagoon" type="float" value="0.15"/>
-   </properties>
+  <object id="19" name="3-102" type="wild" x="4416" y="-15504">
    <polygon points="0,0 96,0 96,-32 144,-32 144,16 128,16 128,48 96,48 96,64 32,64 32,48 16,48 16,32 0,32"/>
   </object>
-  <object id="20" x="3936" y="-15504">
+  <object id="20" name="3-petalburg" type="wild" x="3936" y="-15504">
    <polygon points="0,0 80,0 80,144 160,144 160,224 0,224"/>
   </object>
-  <object id="21" x="4208" y="-15680">
+  <object id="21" name="3-petalburg" type="wild" x="4208" y="-15680">
    <polygon points="0,0 48,0 48,-16 112,-16 112,96 0,96"/>
   </object>
-  <object id="22" x="3584" y="-15600">
+  <object id="22" name="3-104" type="wild" x="3584" y="-15600">
    <polygon points="0,0 0,-32 16,-32 16,-48 80,-48 80,-64 128,-64 128,-32 160,-32 160,16 112,16 112,32 80,32 80,64 32,64 32,32 16,32 16,0"/>
   </object>
-  <object id="23" x="3376" y="-15872">
+  <object id="23" name="3-104" type="wild" x="3376" y="-15872">
    <polygon points="0,0 48,0 48,64 176,64 176,80 192,80 192,96 64,96 64,80 16,80 16,48 0,48"/>
   </object>
-  <object id="24" x="3456" y="-15872">
+  <object id="24" name="3-104" type="wild" x="3456" y="-15872">
    <polygon points="0,0 0,32 80,32 80,16 64,16 64,0"/>
   </object>
-  <object id="25" x="3296" y="-16432">
+  <object id="25" name="3-104" type="wild" x="3296" y="-16432">
    <polygon points="0,0 64,0 64,-32 96,-32 96,0 128,0 128,48 96,48 96,64 64,64 64,96 32,96 32,112 16,112 16,96 0,96"/>
   </object>
-  <object id="26" x="3968" y="-17200">
+  <object id="26" name="3-116" type="wild" x="3968" y="-17200">
    <polygon points="0,0 0,-80 16,-80 16,-96 32,-96 32,-80 64,-80 64,-64 160,-64 160,-16 160,0 176,0 176,16 128,16 128,0"/>
   </object>
-  <object id="27" x="4032" y="-17360">
+  <object id="27" name="3-116" type="wild" x="4032" y="-17360">
    <polygon points="0,0 0,-16 16,-16 16,-32 64,-32 64,-48 80,-48 80,-32 96,-32 96,-16 128,-16 128,0 160,0 160,16 176,16 176,32 160,32 160,48 144,48 144,64 64,64 64,32 32,32 32,0"/>
   </object>
-  <object id="28" x="4240" y="-17168">
+  <object id="28" name="3-116" type="wild" x="4240" y="-17168">
    <polygon points="0,0 0,-16 16,-16 16,-48 32,-48 32,-96 48,-96 48,-112 240,-112 240,-96 256,-96 256,-48 240,-48 240,-32 112,-32 112,0"/>
   </object>
-  <object id="29" x="3680" y="-16384">
+  <object id="29" name="3-104" type="wild" x="3680" y="-16384">
    <polygon points="0,0 192,0 192,208 96,208 96,96 0,96"/>
   </object>
-  <object id="30" x="3648" y="-16384">
+  <object id="30" name="3-104" type="wild" x="3648" y="-16384">
    <polygon points="0,0 -64,0 -64,48 -128,48 -128,64 -160,64 -160,96 -176,96 -176,208 96,208 96,128 0,128"/>
   </object>
-  <object id="37" name="3-105-1" type="wild" x="3520" y="-15184">
+  <object id="37" name="3-105" type="wild" x="3520" y="-15184">
    <properties>
     <property name="pk_magikarp" type="float" value="0.093"/>
     <property name="pk_pelipper" type="float" value="0.0425"/>
@@ -39897,95 +39832,31 @@
    </properties>
    <polygon points="0,0 160,0 160,144 32,144"/>
   </object>
-  <object id="38" type="wild" x="3568" y="-15024">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="38" name="3-105" type="wild" x="3568" y="-15024">
    <polygon points="0,0 112,0 112,16 160,16 160,96 128,96 128,112 16,112 16,80"/>
   </object>
-  <object id="39" type="wild" x="3568" y="-14896">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="39" name="3-105" type="wild" x="3568" y="-14896">
    <polygon points="0,0 160,0 160,160 0,160 -32,112 0,48"/>
   </object>
-  <object id="40" type="wild" x="3568" y="-14704">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="40" name="3-105" type="wild" x="3568" y="-14704">
    <polygon points="0,0 0,64 32,112 144,112 144,0"/>
   </object>
-  <object id="41" type="wild" x="3552" y="-14576">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="41" name="3-105" type="wild" x="3552" y="-14576">
    <polygon points="0,0 176,0 176,176 16,176 16,48"/>
   </object>
-  <object id="42" type="wild" x="3568" y="-14384">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="42" name="3-105" type="wild" x="3568" y="-14384">
    <polygon points="0,0 160,0 160,176 0,176"/>
   </object>
-  <object id="43" type="wild" x="3552" y="-14192">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="43" name="3-105" type="wild" x="3552" y="-14192">
    <polygon points="0,0 176,0 176,224 -64,224"/>
   </object>
-  <object id="44" type="wild" x="3344" y="-14832">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="44" name="3-105" type="wild" x="3344" y="-14832">
    <polygon points="0,0 144,0 144,80 96,80 96,128 0,128"/>
   </object>
-  <object id="45" type="wild" x="3360" y="-14672">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="45" name="3-105" type="wild" x="3360" y="-14672">
    <polygon points="0,0 -32,48 -32,160 64,160 64,0"/>
   </object>
-  <object id="46" type="wild" x="3456" y="-13952">
+  <object id="46" name="3-106" type="wild" x="3456" y="-13952">
    <properties>
     <property name="pk_magikarp" type="float" value="0.093"/>
     <property name="pk_pelipper" type="float" value="0.0425"/>
@@ -39996,84 +39867,28 @@
    </properties>
    <polygon points="0,0 240,0 240,176 112,176 112,112 0,112"/>
   </object>
-  <object id="47" type="wild" x="3712" y="-13856">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="47" name="3-106" type="wild" x="3712" y="-13856">
    <polygon points="0,0 240,0 240,64 0,64"/>
   </object>
-  <object id="48" type="wild" x="3968" y="-13856">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="48" name="3-106" type="wild" x="3968" y="-13856">
    <polygon points="0,0 0,64 256,64 256,0"/>
   </object>
-  <object id="49" type="wild" x="4240" y="-13856">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="49" name="3-106" type="wild" x="4240" y="-13856">
    <polygon points="0,0 0,80 96,80 96,112 176,112 176,0"/>
   </object>
-  <object id="50" type="wild" x="5488" y="-13568">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="50" name="3-107" type="wild" x="5488" y="-13568">
    <polygon points="0,0 0,160 -80,160 -80,128 -192,128 -192,0"/>
   </object>
-  <object id="51" type="wild" x="5280" y="-13552">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="51" name="3-107" type="wild" x="5280" y="-13552">
    <polygon points="0,0 -160,0 -160,112 -128,112 -96,176 -64,176 -32,128 0,128"/>
   </object>
-  <object id="52" type="wild" x="5104" y="-13568">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="52" name="3-107" type="wild" x="5104" y="-13568">
    <polygon points="0,0 -144,0 -144,160 -48,160 -48,144 0,144"/>
   </object>
-  <object id="53" type="wild" x="4944" y="-13536">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="53" name="3-107" type="wild" x="4944" y="-13536">
    <polygon points="0,0 -128,0 -128,112 -32,144 0,144"/>
   </object>
-  <object id="54" type="wild" x="4800" y="-13536">
+  <object id="54" name="3-107" type="wild" x="4800" y="-13536">
    <properties>
     <property name="pk_magikarp" type="float" value="0.093"/>
     <property name="pk_pelipper" type="float" value="0.0425"/>
@@ -40084,31 +39899,13 @@
    </properties>
    <polygon points="0,0 -144,0 -144,80 -112,112 0,112"/>
   </object>
-  <object id="57" name="3-110-4" type="wild" x="6512" y="-16416">
-   <properties>
-    <property name="pk_electrike" type="float" value="0.3"/>
-    <property name="pk_gulpin" type="float" value="0.15"/>
-    <property name="pk_minun" type="float" value="0.15"/>
-    <property name="pk_oddish" type="float" value="0.1"/>
-    <property name="pk_plusle" type="float" value="0.02"/>
-    <property name="pk_poochyena" type="float" value="0.2"/>
-    <property name="pk_wingull" type="float" value="0.08"/>
-   </properties>
+  <object id="57" name="3-110" type="wild" x="6512" y="-16416">
    <polygon points="0,0 48,0 48,192 112,192 112,240 0,240 0,16"/>
   </object>
-  <object id="58" name="3-110-3" type="wild" x="6736" y="-16224">
-   <properties>
-    <property name="pk_electrike" type="float" value="0.3"/>
-    <property name="pk_gulpin" type="float" value="0.15"/>
-    <property name="pk_minun" type="float" value="0.15"/>
-    <property name="pk_oddish" type="float" value="0.1"/>
-    <property name="pk_plusle" type="float" value="0.02"/>
-    <property name="pk_poochyena" type="float" value="0.2"/>
-    <property name="pk_wingull" type="float" value="0.08"/>
-   </properties>
+  <object id="58" name="3-110" type="wild" x="6736" y="-16224">
    <polygon points="0,0 0,48 240,48 240,176 320,176 320,0"/>
   </object>
-  <object id="59" name="3-110-1" type="wild" x="6848" y="-15744">
+  <object id="59" name="3-110" type="wild" x="6848" y="-15744">
    <properties>
     <property name="pk_electrike" type="float" value="0.3"/>
     <property name="pk_gulpin" type="float" value="0.15"/>
@@ -40120,28 +39917,10 @@
    </properties>
    <polygon points="0,0 0,48 224,48 224,-48 112,-48 112,0"/>
   </object>
-  <object id="61" name="3-110-2" type="wild" x="6992" y="-16048">
-   <properties>
-    <property name="pk_electrike" type="float" value="0.3"/>
-    <property name="pk_gulpin" type="float" value="0.15"/>
-    <property name="pk_minun" type="float" value="0.15"/>
-    <property name="pk_oddish" type="float" value="0.1"/>
-    <property name="pk_plusle" type="float" value="0.02"/>
-    <property name="pk_poochyena" type="float" value="0.2"/>
-    <property name="pk_wingull" type="float" value="0.08"/>
-   </properties>
+  <object id="61" name="3-110" type="wild" x="6992" y="-16048">
    <polygon points="0,0 48,0 48,256 0,256"/>
   </object>
-  <object id="62" x="5776" y="-16960">
-   <polygon points="0,0 48,0 48,64 0,64"/>
-  </object>
-  <object id="63" x="5632" y="-17152">
-   <polygon points="0,0 64,0 64,16 112,16 112,32 0,32"/>
-  </object>
-  <object id="65" x="5952" y="-16944">
-   <polygon points="0,0 64,0 112,48 112,80 64,80 0,48"/>
-  </object>
-  <object id="66" name="3-117-1" type="wild" x="6128" y="-17184">
+  <object id="66" name="3-117-daycare" type="wild" x="6128" y="-17184">
    <properties>
     <property name="max_creatures" type="int" value="2"/>
     <property name="pk_azurill" type="float" value="0.4"/>
@@ -40149,7 +39928,7 @@
    </properties>
    <polygon points="0,0 0,64 0,80 48,80 64,96 176,96 176,48 128,48 128,0 0,0 -6,2"/>
   </object>
-  <object id="67" name="3-111-1" type="wild" x="7024" y="-17904">
+  <object id="67" name="3-111" type="wild" x="7024" y="-17904">
    <properties>
     <property name="pk_baltoy" type="float" value="0.24"/>
     <property name="pk_cacnea" type="float" value="0.06"/>
@@ -40158,50 +39937,29 @@
    </properties>
    <polygon points="0,0 -48,0 -48,48 -80,48 -80,128 -32,160 -16,160 -16,128 -32,128 -32,48 0,16"/>
   </object>
-  <object id="68" name="3-111-6" type="wild" x="6816" y="-18432">
-   <properties>
-    <property name="pk_baltoy" type="float" value="0.24"/>
-    <property name="pk_cacnea" type="float" value="0.06"/>
-    <property name="pk_sandshrew" type="float" value="0.35"/>
-    <property name="pl_trapinch" type="float" value="0.35"/>
-   </properties>
+  <object id="68" name="3-111" type="wild" x="6816" y="-18432">
    <polygon points="0,0 64,0 64,48 160,48 160,144 -16,144 -16,80 0,80"/>
   </object>
-  <object id="69" name="3-111-5" type="wild" x="6976" y="-18368">
-   <properties>
-    <property name="pk_baltoy" type="float" value="0.24"/>
-    <property name="pk_cacnea" type="float" value="0.06"/>
-    <property name="pk_sandshrew" type="float" value="0.35"/>
-    <property name="pl_trapinch" type="float" value="0.35"/>
-   </properties>
+  <object id="69" name="3-111" type="wild" x="6976" y="-18368">
    <polygon points="0,0 32,0 80,-48 80,32 96,32 96,144 32,144 32,112 0,80 0,0"/>
   </object>
-  <object id="70" name="3-111-4" type="wild" x="6816" y="-18272">
-   <properties>
-    <property name="pk_baltoy" type="float" value="0.24"/>
-    <property name="pk_cacnea" type="float" value="0.06"/>
-    <property name="pk_sandshrew" type="float" value="0.35"/>
-    <property name="pl_trapinch" type="float" value="0.35"/>
-   </properties>
+  <object id="70" name="3-111" type="wild" x="6816" y="-18272">
    <polygon points="0,0 144,0 160,64 160,112 64,112 48,64 0,48"/>
   </object>
-  <object id="71" name="3-111-3" type="wild" x="6928" y="-18112">
-   <properties>
-    <property name="pk_baltoy" type="float" value="0.24"/>
-    <property name="pk_cacnea" type="float" value="0.06"/>
-    <property name="pk_sandshrew" type="float" value="0.35"/>
-    <property name="pl_trapinch" type="float" value="0.35"/>
-   </properties>
+  <object id="71" name="3-111" type="wild" x="6928" y="-18112">
    <polygon points="0,0 48,-48 80,-96 144,-96 144,-48 128,-32 128,48 64,16 32,48 -16,48 -48,16"/>
   </object>
-  <object id="72" name="3-111-2" type="wild" x="6832" y="-18176">
-   <properties>
-    <property name="pk_baltoy" type="float" value="0.24"/>
-    <property name="pk_cacnea" type="float" value="0.06"/>
-    <property name="pk_sandshrew" type="float" value="0.35"/>
-    <property name="pl_trapinch" type="float" value="0.35"/>
-   </properties>
+  <object id="72" name="3-111" type="wild" x="6832" y="-18176">
    <polygon points="0,0 32,0 80,32 80,64 32,80 32,144 -32,144 -32,80 0,64"/>
+  </object>
+ </objectgroup>
+ <objectgroup id="20" name="22-trainers">
+  <object id="123" type="trainer" x="5344" y="-14752">
+   <properties>
+    <property name="categorie" value="guy"/>
+    <property name="path" value="wander"/>
+   </properties>
+   <polygon points="0,0 80,0 80,80 0,80"/>
   </object>
  </objectgroup>
 </map>
