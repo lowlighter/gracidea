@@ -56,7 +56,6 @@
           else
             this.track = [x, y]
           this.track = this.track.map(([x, y]) => ({x, y}))
-          console.log(this.track)
           this.track.index = 0
       }
 
@@ -69,7 +68,6 @@
     //Textures
       static textures({endpoint = "", categorie, direction = "down"}) {
         const key = `${categorie}_${direction}`
-        console.log(key)
         return App.loader.renderer.resources[`${endpoint}/trainers/textures.json`].data.animations[key]?.map(PIXI.Texture.from) ?? [PIXI.Texture.from(`${key}_0`) ?? PIXI.Texture.EMPTY]
       }
 
