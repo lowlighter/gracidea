@@ -57,6 +57,9 @@
             this.track = [[x, y]]
           this.track = this.track.map(([x, y]) => ({x, y}))
           this.track.index = 0
+        //Locked direction
+          for (let direction of ["left", "right", "up", "down"])
+            this.look.disabled[direction] = this.area.properties[`no_looking_${direction}`] ?? false
       }
 
 
@@ -113,6 +116,13 @@
         //Down
           down:() => {
             this.sprite.textures = this.textures({direction:"down"})
+          },
+        //Disabled
+          disabled:{
+            left:false,
+            right:false,
+            up:false,
+            down:false
           }
       }
 
@@ -151,13 +161,13 @@
           const {dx, dy} = [{dx:0, dy:0}, {dx:0, dy:0}, {dx:0, dy:0}, {dx:0, dy:0}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:-1}, {dx:0, dy:+1}][Math.floor(u.rand()/0.125)]
         //Move if still inside forced area
           if (dx || dy) {
-            if (dx < 0)
+            if ((dx < 0)&&(!this.look.disabled.left))
               this.look.left()
-            if (dx > 0)
+            if ((dx > 0)&&(!this.look.disabled.right))
               this.look.right()
-            if (dy < 0)
+            if ((dy < 0)&&(!this.look.disabled.up))
               this.look.up()
-            if (dy > 0)
+            if ((dy > 0)&&(!this.look.disabled.down))
               this.look.down()
           }
       }
