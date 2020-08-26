@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/styles.css">
   <link rel="icon" type="image/png" href="/imgs/icons/gracidea.png">
   <title>Gracidea | Pokémon Live Map</title>
@@ -15,7 +15,7 @@
       <div class="ui">
         <header>
           <div class="title">
-            <img src="imgs/icons/gracidea.png" alt="">
+            <img src="imgs/icons/gracidea.png" alt="" width="24" height="24">
             <div>Gracidea</div>
           </div>
           <div class="position">
@@ -23,9 +23,9 @@
             <small>{{ user.position.x }};{{ user.position.y }}</small>
           </div>
           <nav class="menu">
-            <div @click="show.map = !show.map" class="button" :class="{active:show.map}"><img src="imgs/icons/map.png" alt="">{{ lang?.nav?.map || "Map" }}</div>
-            <div @click="show.debug = !show.debug" class="button" :class="{active:show.debug}"><img src="imgs/icons/debug.png" alt="">{{ lang?.nav?.dev || "Debug" }}</div>
-            <div @click="redirect('https://github.com/lowlighter/gracidea')" class="button"><img src="imgs/icons/pokedoll.png" alt="">{{ lang?.nav?.github || "GitHub" }}</div>
+            <div @click="show.map = !show.map" class="button" :class="{active:show.map}"><img src="imgs/icons/map.png" alt="" width="24" height="24">{{ lang?.nav?.map || "Map" }}</div>
+            <div @click="show.debug = !show.debug" class="button" :class="{active:show.debug}"><img src="imgs/icons/debug.png" alt="" width="24" height="24">{{ lang?.nav?.dev || "Debug" }}</div>
+            <div @click="redirect('https://github.com/lowlighter/gracidea')" class="button"><img src="imgs/icons/pokedoll.png" alt="" width="24" height="24">{{ lang?.nav?.github || "GitHub" }}</div>
           </nav>
         </header>
         <transition name="fade">
@@ -43,7 +43,7 @@
       </div>
       <div class="view"></div>
       <div class="loading" v-if="!loading.done">
-        <img src="imgs/icons/loading.gif" alt="">
+        <img src="imgs/icons/loading.gif" alt="" width="36" height="36">
         <span>{{ loading.state }}</span>
         <ul class="stated">
           <li v-for="stated in loading.stated" :key="stated">{{ stated }}</li>
