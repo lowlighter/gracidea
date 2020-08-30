@@ -60,6 +60,10 @@
     "map":{
         "locations":{
             "0-faraway_island":"Faraway Island",
+            "1-pallet":"Pallet Town",
+            "1-viridian":"Viridian City",
+            "1-cinnabar":"Cinnabar Island",
+            "1-fuchsia":"Fuchsia City",
             "3-littleroot":"Littleroot Town",
             "3-oldale":"Oldale Town",
             "3-oldale-ruins":"Oldale Ruins",
@@ -71,6 +75,7 @@
             "3-verdanturf":"Verdanturf Town",
             "3-fallarbor":"Fallarbor Town",
             "3-lavaridge":"Lavaridge Town",
+            "3-fortree":"Fortree City",
             "3-101":"Route 101",
             "3-102":"Route 102",
             "3-103":"Route 103",

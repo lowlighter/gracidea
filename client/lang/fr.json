@@ -60,6 +60,10 @@
     "map":{
         "locations":{
             "0-faraway_island":"Île Lointaine",
+            "1-pallet":"Bourg Palette",
+            "1-viridian":"Jadielle",
+            "1-cinnabar":"Cramois'Île",
+            "1-fuchsia":"Parmanie",
             "3-littleroot":"Bourg-en-Vol",
             "3-oldale":"Rosyères",
             "3-oldale-ruins":"Ruines de Rosyères",
@@ -71,6 +75,7 @@
             "3-verdanturf":"Vergazon",
             "3-fallarbor":"Autéquia",
             "3-lavaridge":"Vermilava",
+            "3-fortree":" Cimetronelle",
             "3-101":"Route 101",
             "3-102":"Route 102",
             "3-103":"Route 103",

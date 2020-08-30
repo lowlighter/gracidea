@@ -1,5 +1,21 @@
 [
   {
+    "id":"kanto",
+    "css":{"x":370, "y":130},
+    "locations":[
+      {"id":"1-pallet", "type":"city", "x":1488, "y":-1651, "css":{"x":6, "y":58}},
+      {"id":"1-viridian", "type":"city", "x":1496, "y":-1712, "css":{"x":6, "y":44}},
+      {"id":"1-cinnabar", "type":"city", "x":1495, "y":-1527, "css":{"x":6, "y":75}},
+      {"id":"1-fuchsia", "type":"city", "x":1639, "y":-1587, "css":{"x":55, "y":63}}
+    ]
+  },
+  {
+    "id":"johto",
+    "css":{"x":205, "y":130},
+    "locations":[
+    ]
+  },
+  {
     "id":"hoenn",
     "css":{"x":100, "y":260},
     "locations":[
@@ -12,7 +28,14 @@
       {"id":"3-mauville", "type":"city", "x":426, "y":-1068, "css":{"x":28, "y":48}},
       {"id":"3-verdanturf", "type":"city", "x":340, "y":-1070, "css":{"x":20, "y":48}},
       {"id":"3-fallarbor", "type":"city", "x":298, "y":-1205, "css":{"x":8, "y":12}},
-      {"id":"3-lavaridge", "type":"city", "x":353, "y":-1146, "css":{"x":25, "y":24}}
+      {"id":"3-lavaridge", "type":"city", "x":353, "y":-1146, "css":{"x":25, "y":24}},
+      {"id":"3-fortree", "type":"city", "x":529, "y":-1206, "css":{"x":36, "y":12}}
+    ]
+  },
+  {
+    "id":"sevii_islands",
+    "css":{"x":370, "y":240},
+    "locations":[
     ]
   },
   {
