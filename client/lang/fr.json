@@ -1,4 +1,9 @@
 {
+    "id":"fr",
+    "wiki":{
+        "url":"https://www.pokepedia.fr",
+        "close":"Fermer la page"
+    },
     "nav":{
         "map":"Carte",
         "dev":"Debug",
@@ -12,6 +17,7 @@
         "chunks":"Afficher les limites des chunks",
         "tweens":"Activer les transitions",
         "pause":"Mettre en pause le rendu",
+        "wiki":"Activer l'affichage des wiki",
         "branch":"Branche git",
         "branch_tips":"Recharger la page avec \"&branch=<string>\" pour modifier la valeur",
         "branch_owner":"Créateur de la branche git",
@@ -19,7 +25,9 @@
         "diff_tips":"Recharger la page avec \"&diff=<boolean>\" pour modifier la valeur",
         "fps":"FPS",
         "lang":"Langue",
-        "lang_tips":"Recharger la page avec \"&lang=<en|fr>\" pour modifier la valeur"
+        "lang_tips":"Recharger la page avec \"&lang=<en|fr>\" pour modifier la valeur",
+        "history":"Mettre à jour l'historique et l'URL",
+        "history_tips":"Recharger la page avec \"&history=<boolean>\" pour modifier la valeur"
     },
     "loading":{
         "params":"Chargement des options...",
@@ -33,6 +41,7 @@
         "view":"Chargement du visuel...",
         "scripts":"Téléchargement des scripts...",
         "script":"Chargement du script",
+        "wiki":"Chargement du wiki...",
         "loaded":{
             "lang":"Fichiers de textes français chargés",
             "params":"Options chargées et appliquées",
@@ -53,6 +62,7 @@
             "0-faraway_island":"Île Lointaine",
             "3-littleroot":"Bourg-en-Vol",
             "3-oldale":"Rosyères",
+            "3-oldale-ruins":"Ruines de Rosyères",
             "3-petalburg":"Clementi-Ville",
             "3-dewford":"Myokara",
             "3-rustboro":"Mérouville",

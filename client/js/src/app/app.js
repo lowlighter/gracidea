@@ -32,6 +32,13 @@
           show:{
             map:false,
             debug:false,
+            wiki:{
+              enabled:false,
+              _page:"",
+              set page(page) { this._page = page ; this.loading = true },
+              get page() { return this._page },
+              loading:false
+            }
           },
         //Lang data
           lang:{},
@@ -44,16 +51,18 @@
           },
         //Debug
           debug:{
-            sea:true,
-            characters:true,
-            areas:false,
-            chunks:false,
-            tweens:false,
-            pause:false,
+            sea:null,
+            characters:null,
+            areas:null,
+            chunks:null,
+            tweens:null,
+            pause:null,
             branch:"master",
             branch_owner:"lowlighter",
-            diff:false,
-            lang:"en",
+            diff:null,
+            lang:null,
+            history:null,
+            wiki:null
           }
       }
 
@@ -71,11 +80,21 @@
           debug_render:() => {
             //Rendering state
               if (this.data.debug.pause)
-                return this.renderer.ticker.stop()
+                return this.methods.pause()
               if (!this.renderer.ticker.started)
-                this.renderer.ticker.start()
+                this.methods.resume()
             //Render
               this.methods.render()
+          },
+        //Pause renderer
+          pause:() => {
+            this.renderer.ticker.stop()
+            this.viewport.pause = true
+          },
+        //Resume renderer
+          resume:() => {
+            this.renderer.ticker.start()
+            this.viewport.pause = false
           }
       }
 
@@ -94,21 +113,43 @@
         //Get params
           get:{
             //Update params
-              update:(properties) => {
-                for (let [key, value] of Object.entries(properties)) {
-                  if (/^\d+$/.test(value))
-                    value = Number(value)
-                  if (/^true$/.test(value))
-                    value = true
-                  if (/^false$/.test(value))
-                    value = false
-                  this.params.get.map.set(key, value)
-                }
-                window.history.pushState("", "", `/?${this.params.get.map.toString()}`)
+              update:() => {
+                //Skip if history update is disabled
+                  if (!this.data.debug.history)
+                    return
+                //Compute properties
+                  const properties = {...this.data.user.position, ...JSON.parse(JSON.stringify(this.data.debug))}
+                  properties.branch = `${properties.branch_owner}:${properties.branch}`
+                  delete properties.fps
+                  delete properties.branch_owner
+                  for (let i in properties)
+                    if (App.debug.defaults[i] === properties[i])
+                      delete properties[i]
+                  window.history.pushState("", "", `/?${(new URLSearchParams(properties)).toString()}`)
               },
-            //Params map
-              map:new URLSearchParams(window.location.search),
-          }
+            //Parse url params
+              parse:(params) => {
+                //Parse values
+                  params = Object.fromEntries([...params])
+                  for (let [key, value] of Object.entries(params)) {
+                    if ((/^\d+$/.test(value))||(/^NaN$/.test(value)))
+                      value = Number(value)
+                    if (/^true$/.test(value))
+                      value = true
+                    if (/^false$/.test(value))
+                      value = false
+                    if (/^null$/.test(value))
+                      value = null
+                    params[key] = value
+                  }
+                //Return parsed map
+                  return new Map(Object.entries(params))
+              },
+            //Parsed params
+              parsed:new Map(),
+            //Url search params
+              usp:new URLSearchParams(window.location.search)
+          },
       }
 
     //Endpoints
@@ -124,11 +165,13 @@
 
     //Constructor
       constructor({world}) {
+        //
+          Object.defineProperty(this.data.show.wiki, "enabled", {get:() => this.data.debug.wiki})
         //Deffered constructor
           this.ready = new Promise(async (solve, reject) => {
             //Load language
               this.data.loading.state = "Loading"
-              for (let lg of [this.params.get.map.get("lang") ?? "en", "en"]) {
+              for (let lg of [this.params.get.usp.get("lang") ?? "en", "en"]) {
                 try {
                   const {data:lang} = await axios.get(`${this.endpoints.lang}/${lg}.json`)
                   this.data.lang = lang
@@ -137,6 +180,7 @@
               }
               if (!Object.keys(this.data.lang).length)
                 reject(this.data.loading.state = `An error occured while loading language :(`)
+              this.data.lang.creatures = (await axios.get(`/maps/creatures/name/${this.data.lang.id}`)).data
               this.data.loading.stated.unshift(this.data.lang.loading.loaded.lang)
             //Load scripts
               this.data.loading.state = this.data.lang.loading.scripts
@@ -155,16 +199,25 @@
                 solve()
               })
             //Load parameters
+              const params = this.params.get.parsed = this.params.get.parse(this.params.get.usp)
+              window.test = params.get("history")
               this.data.loading.state = this.data.lang.loading.params
-              this.data.debug.sea = this.params.get.map.has("sea") ? this.params.get.map.get("sea") : true
-              this.data.debug.characters = this.params.get.map.has("characters") ? this.params.get.map.get("characters") : true
-              this.data.debug.areas = this.params.get.map.get("areas") ?? false
-              this.data.debug.chunks = this.params.get.map.get("chunks") ?? false
-              this.data.debug.diff = this.params.get.map.get("diff") ?? false
+              this.data.debug.lang = this.data.lang.id
+              this.data.debug.sea = params.has("sea") ? params.get("sea") : App.debug.defaults.sea
+              this.data.debug.characters = params.has("characters") ? params.get("characters") : App.debug.defaults.characters
+              this.data.debug.areas = params.get("areas") ?? App.debug.defaults.areas
+              this.data.debug.tweens = params.get("tweens") ?? App.debug.defaults.tweens
+              this.data.debug.pause = params.get("pause") ?? App.debug.defaults.pause
+              this.data.debug.chunks = params.get("chunks") ?? App.debug.defaults.chunks
+              this.data.debug.diff = params.get("diff") ?? App.debug.defaults.diff
+              this.data.debug.history = params.get("history") ?? App.debug.defaults.history
+              this.data.debug.highlights = params.get("highlights") ?? App.debug.defaults.highlights
+              this.data.debug.wiki = params.get("wiki") ?? App.debug.defaults.wiki
+              this.data.debug.header = params.get("header") ?? App.debug.defaults.header
             //Branch and diff
-              const branch = this.params.get.map.get("branch")
-              if (branch) {
-                const [,owner, name] = decodeURIComponent(branch).match(/^([\w-]+):([\w-]+)$/) ?? ["", "lowlighter", "master"]
+              const branch = decodeURIComponent(params.get("branch") ?? App.debug.defaults.branch)
+              if ((branch !== App.debug.defaults.branch)&&(/^([\w-]+):([\w-]+)$/.test(branch))) {
+                const [,owner, name] = branch.match(/^([\w-]+):([\w-]+)$/) ?? ["", "lowlighter", "master"]
                 this.data.debug.branch = name
                 this.data.debug.branch_owner = owner
                 this.endpoints.repo.user = `${this.endpoints.repo.raw}/${owner}/gracidea`
@@ -212,7 +265,7 @@
                   this.data.loading.stated.unshift(this.data.lang.loading.loaded.sea)
                 //Set camera
                   this.data.loading.state = this.data.lang.loading.camera
-                  this.methods.camera(this.params.get.map.has("x")&&this.params.get.map.has("y") ? {x:Number(this.params.get.map.get("x")) ?? 0, y:Number(this.params.get.map.get("y")) ?? 0, offset:{x:0, y:0}, render:false} : {x:329, y:-924, render:false})
+                  this.methods.camera(params.has("x")&&params.has("y") ? {x:Number(params.get("x")) ?? 0, y:Number(params.get("y")) ?? 0, offset:{x:0, y:0}, render:false} : {x:329, y:-924, render:false})
                   this.methods.update()
                   this.data.loading.stated.unshift(this.data.lang.loading.loaded.camera)
                 //First render
@@ -274,5 +327,24 @@
 
     //Loaders
       static get loader() { return {renderer:PIXI.Loader.shared} }
+
+      static debug = {
+        defaults:{
+          sea:true,
+          characters:true,
+          areas:false,
+          tweens:true,
+          chunks:false,
+          diff:false,
+          history:true,
+          highlights:false,
+          pause:false,
+          branch:"lowlighter:master",
+          history:true,
+          wiki:true,
+          lang:"en",
+          header:true,
+        }
+      }
 
   }

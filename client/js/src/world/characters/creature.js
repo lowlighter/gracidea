@@ -29,7 +29,13 @@
         //Special processing if in water
           if (this.area.water)
             this.in.water()
+        //Interactions
+          this.sprite.interactive = true
+          this.sprite.buttonMode = true
+          this.sprite.on("click", () => this.world.app.data.show.wiki.page = this.name)
       }
+
+      get name() { return this.world.app.data.lang.creatures[this.species][this.world.app.data.lang.id] }
 
     //Textures
       static textures({endpoint = "", species}) { return App.loader.renderer.resources[`${endpoint}/creatures/textures.json`].data.animations?.[species]?.map(PIXI.Texture.from) ?? [PIXI.Texture.EMPTY] }

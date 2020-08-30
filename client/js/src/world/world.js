@@ -170,7 +170,7 @@
                 this.layers.global.world.removeChildren()
               //Render chunks
                 for (let chunk of renderable)
-                  renders.push(chunk.render({force, animated, fade:delay && !rendered.includes(chunk.sprite)}))
+                  renders.push(chunk.render({force, animated}))
             //Play animated tiles after rendering
               await Promise.all(renders)
               animated.forEach(tile => (tile.play(), tile.parent.cacheAsBitmap = false))
@@ -182,7 +182,7 @@
               else
                 this.layers.global.characters.visible = false
             //Update parameters
-              this.app.params.get.update({x:this.app.data.user.position.x, y:this.app.data.user.position.y})
+              this.app.params.get.update()
             //Update cache rendered value
               if (this.cache.rendered !== true)
                 (this._rendered(), this.cache.rendered = true)

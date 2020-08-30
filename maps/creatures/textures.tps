@@ -225,8 +225,16 @@
             <key type="filename">raw/sandshrew_1.png</key>
             <key type="filename">raw/seedot_0.png</key>
             <key type="filename">raw/seedot_1.png</key>
+            <key type="filename">raw/skarmory_0.png</key>
+            <key type="filename">raw/skarmory_1.png</key>
+            <key type="filename">raw/slugma_0.png</key>
+            <key type="filename">raw/slugma_1.png</key>
             <key type="filename">raw/smeargle_0.png</key>
             <key type="filename">raw/smeargle_1.png</key>
+            <key type="filename">raw/spinda_0.png</key>
+            <key type="filename">raw/spinda_1.png</key>
+            <key type="filename">raw/taillow_0.png</key>
+            <key type="filename">raw/taillow_1.png</key>
             <key type="filename">raw/tentacool_0.png</key>
             <key type="filename">raw/tentacool_1.png</key>
             <key type="filename">raw/trapinch_0.png</key>

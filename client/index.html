@@ -13,11 +13,11 @@
   <main id="app" :class="{ready:loading.done, 'no-sea':!debug.sea}">
     <template>
       <div class="ui">
-        <header>
-          <div class="title">
+        <header :class={hidden:!debug.header}>
+          <a href="#" @click="redirect('https://github.com/lowlighter/gracidea')" class="title">
             <img src="imgs/icons/gracidea.png" alt="" width="24" height="24">
             <div>Gracidea</div>
-          </div>
+          </a>
           <div class="position">
             <span>{{ user.location.name || "-" }}</span>
             <small>{{ user.position.x }};{{ user.position.y }}</small>
@@ -50,15 +50,24 @@
         </ul>
       </div>
       <div class="debug" v-if="(show.debug)&&(lang.debug)">
-        <label v-for="x in ['sea', 'characters', 'areas', 'chunks', 'tweens', 'pause']" :key="x">
+        <label v-for="x in ['sea', 'characters', 'areas', 'chunks', 'tweens', 'pause', 'wiki']" :key="x">
           {{ lang.debug[x] }}
           <input type="checkbox" v-model="debug[x]" :name="x" @change="debug_render">
         </label>
-        <label class="disabled tips" v-for="{x, t:type = 'text', tips = true} in [{x:'branch'}, {x:'branch_owner', tips:false}, {x:'diff', t:'checkbox'}, {x:'fps', tips:false}, {x:'lang'}]" :key="x">
+        <label class="disabled tips" v-for="{x, t:type = 'text', tips = true} in [{x:'branch'}, {x:'branch_owner', tips:false}, {x:'diff', t:'checkbox'}, {x:'fps', tips:false}, {x:'lang'}, {x:'history', t:'checkbox'}]" :key="x">
           {{ lang.debug[x] }}
           <input :type="type" v-model="debug[x]" :name="x" disabled>
           <div class="tips-text" v-if="tips" v-once>{{ lang.debug[`${x}_tips`] }}</div>
         </label>
+      </div>
+      <div class="wiki" v-if="(show.wiki.enabled)&&(show.wiki.page)">
+        <div class="close" @click="show.wiki.page = ''">{{ lang.wiki.close }}</div>
+        <iframe :src="`${lang.wiki.url}/${show.wiki.page}`" frameborder="0" @load="show.wiki.loading = false" v-show="!show.wiki.loading"></iframe>
+        <div class="wiki-loading" v-show="show.wiki.loading">
+          <img src="imgs/icons/loading.gif" alt="" width="36" height="36">
+          {{ lang.loading.wiki }}
+          <small>{{ lang.wiki.url }}/{{ show.wiki.page }}</small>
+        </div>
       </div>
     </template>
   </main>

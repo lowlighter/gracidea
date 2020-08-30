@@ -5,6 +5,7 @@
   const path = require("path")
   const colors = require("colors")
   const compression = require("compression")
+  const creature = require("pokemon")
 
 //Dev mode
   if (argv.dev) {
@@ -24,6 +25,10 @@
   app.use("/js", express.static("node_modules/axios/dist"))
   app.use("/js", express.static("node_modules/vue/dist"))
   app.use("/maps", express.static("maps"))
+
+//Serve creatures name
+  const creatures = Object.fromEntries(creature.all("en").map((name, id) => [name.toLocaleLowerCase(), Object.fromEntries(["en", "fr", "ja", "ko", "zh-Hans", "zh-Hant", "ru", "de"].map(lang => [lang, creature.getName(id+1, lang)]))]))
+  app.get("/maps/creatures/name/:lang", (req, res) => res.json(creatures))
 
 //Start server
   const port = argv.port||3000

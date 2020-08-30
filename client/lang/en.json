@@ -1,4 +1,9 @@
 {
+    "id":"en",
+    "wiki":{
+        "url":"https://bulbapedia.bulbagarden.net/wiki",
+        "close":"Close page"
+    },
     "nav":{
         "map":"Map",
         "dev":"Debug",
@@ -12,6 +17,7 @@
         "chunks":"Show chunks limits",
         "tweens":"Enable transitions",
         "pause":"Pause rendering",
+        "wiki":"Enable wiki pages",
         "branch":"Git branch",
         "branch_tips":"Reload page with \"&branch=<string>\" to udpate value",
         "branch_owner":"Git branch owner",
@@ -19,7 +25,9 @@
         "diff_tips":"Reload page with \"&diff=<boolean>\" to udpate value",
         "fps":"FPS",
         "lang":"Language",
-        "lang_tips":"Reload page with \"&lang=<en|fr>\" to udpate value"
+        "lang_tips":"Reload page with \"&lang=<en|fr>\" to udpate value",
+        "history":"Update history and URL",
+        "history_tips":"Reload page with \"&history=<boolean>\" to udpate value"
     },
     "loading":{
         "params":"Loading params...",
@@ -33,6 +41,7 @@
         "view":"Loading view...",
         "scripts":"Waiting for scripts...",
         "script":"Loading script",
+        "wiki":"Loading wiki page...",
         "loaded":{
             "lang":"English text files loaded",
             "params":"Params loaded",
@@ -53,6 +62,7 @@
             "0-faraway_island":"Faraway Island",
             "3-littleroot":"Littleroot Town",
             "3-oldale":"Oldale Town",
+            "3-oldale-ruins":"Oldale Ruins",
             "3-petalburg":"Petalburg City",
             "3-dewford":"Dewford Town",
             "3-rustboro":"Rustboro City",

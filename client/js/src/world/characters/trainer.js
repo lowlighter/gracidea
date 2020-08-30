@@ -23,6 +23,7 @@
           this.sprite.play()
           this.x = x
           this.y = y
+          this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:16})
         //Track computation
           if ((this.path === "loop")||(this.path === "patrol")) {
             //Prepare track

@@ -20,7 +20,8 @@
         //Heritage
           await super.update(...arguments)
         //Update trainer
-          this.trainer.update()
+          if (this.trainer)
+            this.trainer.update()
       }
 
     //Reset
