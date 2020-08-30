@@ -14,7 +14,11 @@
 
 * **Faithful maps** : Maps are based first on core games and then filled with region knowledge and interpretations
 * **Wild areas** : *Pokémon* can spawn in wild areas ! Maybe you'll be able to see rare encounters ?
+* **Liveful cities** : Humans are also present !
 * **World map** : A world map for quick access to cities and special locations will help you to navigate faster
+* **Integrated wiki** : Some elements are interactive (like *Pokémon*s) and will open the associated bulbapedia entry !
+* **Reactive GPS** : Current location and coordinates are displayed so you never get lost !
+* **Customisable interface** : Most of options can be passed through URL so you can easily share your favorites locations with your friends !
 * *New features will be implemented at a later date !*
 
 ### Maps
@@ -23,8 +27,16 @@ Since *Pokémon* franchise has remakes, third versions and sequels, it sometimes
 Also, as the core games switched to 3D graphics starting on generation 6 and onwards, the maps of newer regions are interpretations of what they could have been if they were in 2D. 
 
 Here are the games which were chosen for representing each region : 
+* **Kanto** : *Pokémon FireRef and LeafGreen*
 * **Hoenn** : *Pokémon Emerald*
 * *Others regions will follow at a later date !*
+
+#### Current progress
+
+| Kanto | Johto | Hoenn |
+| :---: | :---: | :---: |
+| ![Kanto](https://github.com/lowlighter/gracidea/blob/master/client/imgs/regions/kanto.png) | ![Johto](https://github.com/lowlighter/gracidea/blob/master/client/imgs/regions/johto.png) | ![Hoenn](https://github.com/lowlighter/gracidea/blob/master/client/imgs/regions/hoenn.png) |
+
 
 ## ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/contribute.png) Contributing
 
