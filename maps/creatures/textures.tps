@@ -187,8 +187,12 @@
             <key type="filename">raw/baltoy_1.png</key>
             <key type="filename">raw/cacnea_0.png</key>
             <key type="filename">raw/cacnea_1.png</key>
+            <key type="filename">raw/corphish_0.png</key>
+            <key type="filename">raw/corphish_1.png</key>
             <key type="filename">raw/electrike_0.png</key>
             <key type="filename">raw/electrike_1.png</key>
+            <key type="filename">raw/goldeen_0.png</key>
+            <key type="filename">raw/goldeen_1.png</key>
             <key type="filename">raw/gulpin_0.png</key>
             <key type="filename">raw/gulpin_1.png</key>
             <key type="filename">raw/lotad_0.png</key>
