@@ -31,6 +31,8 @@
             this.in.air()
           if (this.area.water)
             this.in.water()
+          if (this.area.tallgrass)
+            this.in.tallgrass()
         //Interactions
           this.sprite.interactive = true
           this.sprite.buttonMode = true
@@ -102,6 +104,18 @@
             //Shadow
               const mask = new PIXI.Graphics().beginFill(0x000000, 0.5).drawEllipse(0, -u.to.coord.px(this.offset.y), this.sprite.width/3, this.sprite.height/4).endFill()
               this.sprite.addChild(mask)
+          },
+        //When in tall grass
+          tallgrass:() => {
+            //Compute water coverage
+              const uncovered = 1-this.offset.y-0.5
+            //If completely over water, no need to add mask
+              if (uncovered >= 1)
+                return
+            //Apply mask
+              const mask = new PIXI.Graphics().beginFill(0x000000, 0.5).drawRect(-this.sprite.width/2, -this.sprite.height, this.sprite.width, this.sprite.height*uncovered).endFill()
+              this.sprite.addChild(mask)
+              this.sprite.mask = mask
           }
       }
 

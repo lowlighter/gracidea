@@ -92,6 +92,9 @@
     //Area is water
       get water() { return this.properties.water }
 
+    //Area is tallgrass
+      get tallgrass() { return this.properties.tallgrass }
+
     //Species variable
       static species = {
         //Property associated to species
