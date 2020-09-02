@@ -18,6 +18,7 @@
         "tweens":"Enable transitions",
         "pause":"Pause rendering",
         "wiki":"Enable wiki pages",
+        "shiny":"Shiny spawn rate",
         "branch":"Git branch",
         "branch_tips":"Reload page with \"&branch=<string>\" to udpate value",
         "branch_owner":"Git branch owner",

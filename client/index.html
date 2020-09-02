@@ -50,9 +50,10 @@
         </ul>
       </div>
       <div class="debug" v-if="(show.debug)&&(lang.debug)">
-        <label v-for="x in ['sea', 'characters', 'areas', 'chunks', 'tweens', 'pause', 'wiki']" :key="x">
+        <label v-for="{x, t:type = 'checkbox'} in [{x:'sea'}, {x:'characters'}, {x:'areas'}, {x:'shiny', t:'number'}, {x:'chunks'}, {x:'tweens'}, {x:'pause'}, {x:'wiki'}]" :key="x">
           {{ lang.debug[x] }}
-          <input type="checkbox" v-model="debug[x]" :name="x" @change="debug_render">
+          <input type="checkbox" v-model="debug[x]" :name="x" @change="debug_render" v-if="type === 'checkbox'">
+          <input type="number" v-model="debug[x]" :name="x" @change="debug_render" step="0.01" v-if="type === 'number'">
         </label>
         <label class="disabled tips" v-for="{x, t:type = 'text', tips = true} in [{x:'branch'}, {x:'branch_owner', tips:false}, {x:'diff', t:'checkbox'}, {x:'fps', tips:false}, {x:'lang'}, {x:'history', t:'checkbox'}]" :key="x">
           {{ lang.debug[x] }}

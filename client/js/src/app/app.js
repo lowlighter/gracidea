@@ -62,7 +62,10 @@
             diff:null,
             lang:null,
             history:null,
-            wiki:null
+            wiki:null,
+            _shiny:null,
+            set shiny(shiny) { this._shiny = Math.max(0, Math.min(1, Number(shiny))) },
+            get shiny() { return this._shiny }
           }
       }
 
@@ -123,7 +126,9 @@
                   delete properties.fps
                   delete properties.branch_owner
                   for (let i in properties)
-                    if (App.debug.defaults[i] === properties[i])
+                    if (/^_/.test(i))
+                      delete properties[i]
+                    else if (App.debug.defaults[i] === properties[i])
                       delete properties[i]
                   window.history.pushState("", "", `/?${(new URLSearchParams(properties)).toString()}`)
               },
@@ -132,7 +137,7 @@
                 //Parse values
                   params = Object.fromEntries([...params])
                   for (let [key, value] of Object.entries(params)) {
-                    if ((/^\d+$/.test(value))||(/^NaN$/.test(value)))
+                    if ((/^\d*.?\d+$/.test(value))||(/^NaN$/.test(value)))
                       value = Number(value)
                     if (/^true$/.test(value))
                       value = true
@@ -214,6 +219,7 @@
               this.data.debug.highlights = params.get("highlights") ?? App.debug.defaults.highlights
               this.data.debug.wiki = params.get("wiki") ?? App.debug.defaults.wiki
               this.data.debug.header = params.get("header") ?? App.debug.defaults.header
+              this.data.debug.shiny = params.get("shiny") ?? App.debug.defaults.shiny
             //Branch and diff
               const branch = decodeURIComponent(params.get("branch") ?? App.debug.defaults.branch)
               if ((branch !== App.debug.defaults.branch)&&(/^([\w-]+):([\w-]+)$/.test(branch))) {
@@ -344,6 +350,7 @@
           wiki:true,
           lang:"en",
           header:true,
+          shiny:1/4096,
         }
       }
 

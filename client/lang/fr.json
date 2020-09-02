@@ -18,6 +18,7 @@
         "tweens":"Activer les transitions",
         "pause":"Mettre en pause le rendu",
         "wiki":"Activer l'affichage des wiki",
+        "shiny":"Taux d'apparition chromatique",
         "branch":"Branche git",
         "branch_tips":"Recharger la page avec \"&branch=<string>\" pour modifier la valeur",
         "branch_owner":"Créateur de la branche git",

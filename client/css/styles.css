@@ -241,6 +241,7 @@
     justify-content: center;
     align-items: center;
     background-color: #24292E;
+    color: white;
   }
 
   .wiki .wiki-loading {
@@ -365,7 +366,7 @@
       background-color: #3F4448;
     }
 
-    .debug input[type="text"] {
+    .debug input[type="text"], .debug input[type="number"] {
       border-radius: .25rem;
       outline: none;
       border: none;
