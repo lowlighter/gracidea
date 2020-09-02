@@ -1,6 +1,5 @@
 //Imports
   import NPC from "./npc.js"
-  import App from "../../app/app.js"
   import u from "../../app/utils.js"
 
 /**
@@ -9,14 +8,15 @@
   export default class Creature extends NPC {
 
     //Constructor
-      constructor({species, x, y, area}) {
+      constructor({species, x, y, area, shiny}) {
         //Heritage
           super(...arguments)
         //Reference
           this.species = species
           this.area = area
         //Sprite creation
-          this.sprite = new PIXI.AnimatedSprite(Creature.textures({endpoint:this.world.app.endpoints.maps, species}))
+          this.shiny = shiny ?? (u.rand() > (1 - this.world.app.data.debug.shiny))
+          this.sprite = new PIXI.AnimatedSprite(Creature.textures({endpoint:this.world.app.endpoints.maps, species, shiny:this.shiny}))
           this.world.layers.global.characters.addChild(this.sprite)
           this.sprite.animationSpeed = 0.125
           this.sprite.anchor.set(0.5, 1)
@@ -35,10 +35,13 @@
           this.sprite.on("click", () => this.world.app.data.show.wiki.page = this.name)
       }
 
+    //Creature name (in correct lang)
       get name() { return this.world.app.data.lang.creatures[this.species][this.world.app.data.lang.id] }
 
     //Textures
-      static textures({endpoint = "", species}) { return App.loader.renderer.resources[`${endpoint}/creatures/textures.json`].data.animations?.[species]?.map(PIXI.Texture.from) ?? [PIXI.Texture.EMPTY] }
+      static textures({endpoint = "", species, defaults = "egg", shiny}) {
+        return super.textures({endpoint:`${endpoint}/creatures`, key:`${shiny ? "shiny" : "regular"}/${species}`})
+      }
 
     //Wander
       wander() {

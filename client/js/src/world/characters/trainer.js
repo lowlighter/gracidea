@@ -1,6 +1,5 @@
 //Imports
   import NPC from "./npc.js"
-  import App from "../../app/app.js"
   import u from "../../app/utils.js"
 
 /**
@@ -71,9 +70,7 @@
 
     //Textures
       static textures({endpoint = "", categorie, direction = "down"}) {
-        const key = `${categorie}_${direction}`
-        const textures = App.loader.renderer.resources[`${endpoint}/trainers/textures.json`].data
-        return textures.animations[key]?.map(PIXI.Texture.from) ?? [`${key}_0` in textures.frames ? PIXI.Texture.from(`${key}_0`) : PIXI.Texture.EMPTY]
+        return super.textures({endpoint:`${endpoint}/trainers`, key:`${categorie}_${direction}`})
       }
 
     //Move
