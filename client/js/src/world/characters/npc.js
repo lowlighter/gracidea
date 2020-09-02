@@ -23,7 +23,7 @@
       set x(x) {
         this._x = x
         if (this.sprite)
-          this.sprite.position.x = u.to.coord.px(this.x) + World.Chunk.tile.size/2
+          this.sprite.position.x = u.to.coord.px(this.x + this.offset.x) + World.Chunk.tile.size/2
       }
       get x() { return this._x }
 
@@ -32,9 +32,12 @@
       set y(y) {
         this._y = y
         if (this.sprite)
-          this.sprite.position.y = u.to.coord.px(this.y) + (this.sprite.height - World.Chunk.tile.size)
+          this.sprite.position.y = u.to.coord.px(this.y + this.offset.y) + World.Chunk.tile.size
       }
       get y() { return this._y }
+
+    //Offset coordinate
+      offset = {x:0, y:0}
 
     //Update
       update() {}

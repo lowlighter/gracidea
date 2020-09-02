@@ -64,7 +64,7 @@
     //Create
       create() {
         //Create creatures
-          for (let i = 0; i < this.creatures.size; i++)
+          for (let i = 0; i < 2*this.spawns.max.creatures; i++)
             if (u.rand() < this.spawns.probability)
               this.spawn()
       }

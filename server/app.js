@@ -27,7 +27,7 @@
   app.use("/maps", express.static("maps"))
 
 //Serve creatures name
-  const creatures = Object.fromEntries(creature.all("en").map((name, id) => [name.toLocaleLowerCase(), Object.fromEntries(["en", "fr", "ja", "ko", "zh-Hans", "zh-Hant", "ru", "de"].map(lang => [lang, creature.getName(id+1, lang)]))]))
+  const creatures = Object.fromEntries(creature.all("en").map((name, id) => [name.toLocaleLowerCase(), Object.fromEntries([["id", id+1], ...["en", "fr", "ja", "ko", "zh-Hans", "zh-Hant", "ru", "de"].map(lang => [lang, creature.getName(id+1, lang)])])]))
   app.get("/maps/creatures/name/:lang", (req, res) => res.json(creatures))
 
 //Start server

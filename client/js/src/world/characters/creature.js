@@ -26,7 +26,9 @@
           this.world.app.tween.fade({target:this.sprite, from:0, to:1, duration:16})
         //Lifetime
           this.lifetime = u.rand({a:16, b:32, int:true})
-        //Special processing if in water
+        //Special processing
+          if (Creature.species.flying.has(this.dex))
+            this.in.air()
           if (this.area.water)
             this.in.water()
         //Interactions
@@ -37,6 +39,9 @@
 
     //Creature name (in correct lang)
       get name() { return this.world.app.data.lang.creatures[this.species][this.world.app.data.lang.id] }
+
+    //Creature dex id
+      get dex() { return this.world.app.data.lang.creatures[this.species].id }
 
     //Textures
       static textures({endpoint = "", species, defaults = "egg", shiny}) {
@@ -78,11 +83,31 @@
       in = {
         //When inside water
           water:() => {
+            //Compute water coverage
+              const uncovered = 1-this.offset.y-0.30
+            //If completely over water, no need to add mask
+              if (uncovered >= 1)
+                return
             //Apply mask
-              const mask = new PIXI.Graphics().beginFill(0x000000).drawRect(-this.sprite.width/2, -this.sprite.height, this.sprite.width, this.sprite.height-12).endFill()
+              const mask = new PIXI.Graphics().beginFill(0x000000, 0.5).drawRect(-this.sprite.width/2, -this.sprite.height, this.sprite.width, this.sprite.height*uncovered).endFill()
               this.sprite.addChild(mask)
               this.sprite.mask = mask
+          },
+        //When in air
+          air:() => {
+            //Apply vertical offset
+              this.offset.y = -.30
+              if (this.area.water)
+                this.offset.y *= 2
+            //Shadow
+              const mask = new PIXI.Graphics().beginFill(0x000000, 0.5).drawEllipse(0, -u.to.coord.px(this.offset.y), this.sprite.width/3, this.sprite.height/4).endFill()
+              this.sprite.addChild(mask)
           }
       }
 
+    //Species data
+      static species = {
+        //Flying species
+          flying:new Set([6, 41, 42, 83, 142, 144, 145, 146, 149, 166, 169, 176, 187, 188, 189, 193, 207, 249, 250, 278, 279, 284, 291, 333, 334, 373, 384, 414, 415, 416, 425, 426, 468, 469, 472, 479, 492, 527, 528, 561, 566, 567, 628, 642, 645, 666, 717, 774, 797])
+      }
   }
