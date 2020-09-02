@@ -33,8 +33,8 @@
     "vue": "^2.6.12"
   },
   "devDependencies": {
-    "@babel/cli": "^7.10.5",
-    "@babel/core": "^7.11.4",
+    "@babel/cli": "^7.11.5",
+    "@babel/core": "^7.11.5",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
     "@babel/plugin-proposal-optional-chaining": "^7.11.0",
@@ -46,7 +46,7 @@
     "pixelmatch": "^5.2.1",
     "png-itxt": "^2.0.0",
     "pngjs": "^5.0.0",
-    "rollup": "^2.26.8",
+    "rollup": "^2.26.9",
     "simple-git": "^2.20.1",
     "tile-extruder": "^2.0.6",
     "webp-converter": "^2.3.0",
