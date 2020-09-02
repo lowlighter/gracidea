@@ -34,7 +34,7 @@
         <key>dataFormat</key>
         <string>pixijs4</string>
         <key>textureFileName</key>
-        <filename>textures.png</filename>
+        <filename>textures.webp</filename>
         <key>flipPVR</key>
         <false/>
         <key>pvrCompressionQuality</key>
@@ -82,7 +82,7 @@
         <key>atfFormats</key>
         <string></string>
         <key>textureFormat</key>
-        <enum type="SettingsBase::TextureFormat">png</enum>
+        <enum type="SettingsBase::TextureFormat">webp</enum>
         <key>borderPadding</key>
         <uint>0</uint>
         <key>maxTextureSize</key>
@@ -140,7 +140,7 @@
         <key>forceIdenticalLayout</key>
         <false/>
         <key>outputFormat</key>
-        <enum type="SettingsBase::OutputFormat">RGBA8888</enum>
+        <enum type="SettingsBase::OutputFormat">RGBA5551</enum>
         <key>alphaHandling</key>
         <enum type="SettingsBase::AlphaHandling">ClearTransparentPixels</enum>
         <key>contentProtection</key>
