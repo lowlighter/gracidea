@@ -37,6 +37,7 @@
           this.sprite.interactive = true
           this.sprite.buttonMode = true
           this.sprite.on("click", () => this.world.app.data.show.wiki.page = this.name)
+          this.sprite.on("tap", () => this.world.app.data.show.wiki.page = this.name)
       }
 
     //Creature name (in correct lang)

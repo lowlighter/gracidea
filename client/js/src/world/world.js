@@ -173,7 +173,7 @@
                   renders.push(chunk.render({force, animated}))
             //Play animated tiles after rendering
               await Promise.all(renders)
-              animated.forEach(tile => (tile.play(), tile.parent.cacheAsBitmap = false))
+              animated.forEach(tile => tile.play())
             //Refresh world sea position
               this.sea.refresh(this.app.data.user.position)
             //Display characters layer

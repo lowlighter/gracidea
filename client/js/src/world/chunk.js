@@ -41,7 +41,7 @@
       }
 
     //Render chunk
-      async render({force, animated, cache, fade}) {
+      async render({force, animated, fade}) {
         //Global flags
           const flags = {rendered:false}
         //Render layers
@@ -58,9 +58,15 @@
                 flags.rendered = true
                 continue
               }
+            //Animated chunk
+              if (animated) {
+                chunk.animated = chunk.animated ?? this.sprite.getChildByName(`${layer}_animated`) ?? this.sprite.addChild(new PIXI.Container())
+                chunk.animated.name = `${layer}_animated`
+                chunk.animated.position.set(u.to.coord.px(x), u.to.coord.px(y))
+                chunk.animated.removeChildren()
+              }
             //Render tiles
               flags.rendered = true
-              flags.local = {}
               chunk.cacheAsBitmap = false
               chunk.removeChildren()
               for (let [index, texture] of tiles.entries()) {
@@ -69,12 +75,10 @@
                   if (--texture >= 0) {
                     //Animated texture
                       if (texture in textures.animated) {
-                        tile = chunk.addChild(new PIXI.AnimatedSprite(textures.animated[texture].frames.map(PIXI.Texture.from)))
+                        tile = chunk.animated.addChild(new PIXI.AnimatedSprite(textures.animated[texture].frames.map(PIXI.Texture.from)))
                         tile.animationSpeed = textures.animated[texture].speed
-                        if (animated) {
+                        if (animated)
                           animated.add(tile)
-                          flags.local.animated = true
-                        }
                       }
                     //Static texture
                       else
@@ -104,12 +108,8 @@
                         tile.tint = 0xFFFF00
                   }
               }
-            //Cache sprite if needed
-              if (cache)
-                chunk.cacheAsBitmap = true
-            //Cache sprite if not animated
-              if (!flags.local.animated)
-                chunk.cacheAsBitmap = true
+            //Cache
+              chunk.cacheAsBitmap = true
           }
         //Additional processing if chunk has been rendered
           if (flags.rendered) {
