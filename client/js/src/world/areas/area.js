@@ -120,6 +120,7 @@
           if (this.created) {
             //Clear sprite
               this.sprite.visible = false
+              this.sprite.children.map(child => child.destroy())
               this.sprite.removeChildren()
             //Reset state
               this.created = false
