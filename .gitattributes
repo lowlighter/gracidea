@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Linguist ignore
+maps/* linguist-vendored
+.github/* linguist-vendored
