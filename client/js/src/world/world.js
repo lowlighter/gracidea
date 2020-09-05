@@ -31,7 +31,7 @@
         //Chunks quadtree
           chunks:new Quadtree({max:{items:128, depth:64}}),
         //Areas quadtree
-          areas:new Quadtree({max:{items:128, depth:64}}),
+          areas:new Quadtree({max:{items:512, depth:64}}),
       }
 
     //Cache

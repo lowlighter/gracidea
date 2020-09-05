@@ -31,7 +31,7 @@
           if (this.inside(position))
             user.location = this.location
         //Reset location if outside but previous key still reference this location
-          else if (user.location.key === this.key)
+          else if (user.location.key === this.name)
             user.location = {}
       }
 
