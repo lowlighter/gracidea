@@ -150,11 +150,12 @@
             for (let file of ["before", "after"]) {
               process.stdout.write(`${`Bot file upload`.padEnd(PAD)} ${file}      \r`.yellow)
               await octokit.repos.createOrUpdateFileContents({
-                owner:"botlighter",
-                repo:"storage",
-                path:`gracidea/${uid}_${file}.png`,
+                owner:"lowlighter",
+                repo:"gracidea",
+                path:`${uid}_${file}.png`,
                 message:"Upload attached file",
                 content:diff.tileset.image[file].toString("base64"),
+                branch:"meta-pull-requests-attachments",
               })
             }
             process.stdout.write(`${`Bot file upload`.padEnd(PAD)} OK      \n`.green)
@@ -189,9 +190,9 @@
                 revision.tileset ? "<details><summary>🖼️ Tileset diff</summary><p>" : "",
                 revision.tileset ? " " : "",
                 revision.tileset ? "#### Revision" : "",
-                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${uid}_after.png?raw=true)` : "",
+                revision.tileset ? `![tileset.png](https://github.com/lowlighter/gracidea/blob/meta-pull-requests-attachments/${uid}_after.png?raw=true)` : "",
                 revision.tileset ? "#### Head" : "",
-                revision.tileset ? `![tileset.png](https://github.com/botlighter/storage/blob/master/gracidea/${uid}_before.png?raw=true)` : "",
+                revision.tileset ? `![tileset.png](https://github.com/lowlighter/gracidea/blob/meta-pull-requests-attachments/${uid}_before.png?raw=true)` : "",
                 revision.tileset ? " " : "",
                 revision.tileset ? "</p></details>" : "",
                 revision.map && revision.tileset ? " " : "",
