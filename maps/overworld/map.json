@@ -22551,6 +22551,50 @@
                  "width":688,
                  "x":9968,
                  "y":-17808
+                }, 
+                {
+                 "height":704,
+                 "id":217,
+                 "name":"3-132",
+                 "rotation":0,
+                 "type":"location",
+                 "visible":true,
+                 "width":2544,
+                 "x":7120,
+                 "y":-15280
+                }, 
+                {
+                 "height":704,
+                 "id":218,
+                 "name":"3-133",
+                 "rotation":0,
+                 "type":"location",
+                 "visible":true,
+                 "width":1280,
+                 "x":9664,
+                 "y":-15280
+                }, 
+                {
+                 "height":704,
+                 "id":219,
+                 "name":"3-pacifidlog",
+                 "rotation":0,
+                 "type":"location",
+                 "visible":true,
+                 "width":320,
+                 "x":10944,
+                 "y":-15280
+                }, 
+                {
+                 "height":528,
+                 "id":221,
+                 "name":"3-sky-pillar",
+                 "rotation":0,
+                 "type":"location",
+                 "visible":true,
+                 "width":400,
+                 "x":11648,
+                 "y":-15632
                 }],
          "opacity":1,
          "type":"objectgroup",
@@ -27593,7 +27637,7 @@
          "y":0
         }],
  "nextlayerid":22,
- "nextobjectid":217,
+ "nextobjectid":224,
  "orientation":"orthogonal",
  "renderorder":"right-down",
  "tiledversion":"1.4.2",
