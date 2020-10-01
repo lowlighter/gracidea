@@ -81,6 +81,12 @@
             "3-safari":"Safari Zone",
             "3-pyre":"Mt. Pyre",
             "3-lilycove":"Lilycove City",
+            "3-mossdeep":"Mossdeep City",
+            "3-pacifidlog":"Pacifidlog Town",
+            "3-sky-pillar":"Sky pillar",
+            "3-sootopolis":"Sootopolis City",
+            "3-victory-road":"Victory Road",
+            "3-ever-grande":"Ever Grande City",
             "3-101":"Route 101",
             "3-102":"Route 102",
             "3-103":"Route 103",
@@ -110,7 +116,11 @@
             "3-127":"Route 127",
             "3-128":"Route 128",
             "3-129":"Route 129",
-            "3-130":"Route 130"
+            "3-130":"Route 130",
+            "3-131":"Route 131",
+            "3-132":"Route 132",
+            "3-133":"Route 133",
+            "3-134":"Route 134"
         }
     }
 }
