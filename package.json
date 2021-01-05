@@ -23,7 +23,7 @@
   "author": "lowlighter",
   "license": "AGPL-3.0",
   "dependencies": {
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "minimist": "^1.2.5",
