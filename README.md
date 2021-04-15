@@ -6,7 +6,7 @@
 
 [Check it out live here !](https://gracidea.lecoq.io/)
 
-**Gracidea** is a project which aims to gather all known *Pokémon* regions into a single 2D map, keeping fidelity to core games while taking the liberty to fill blanks trough official artworks and anime. Minors arangements are sometimes made so everything fits.
+**Gracidea** is a project which aims to gather all known *Pokémon* regions into a single 2D map, keeping fidelity to core games while taking the liberty to fill blanks trough official artworks and anime. Minors arrangements are sometimes made so everything fits.
 
 ### Features
 
