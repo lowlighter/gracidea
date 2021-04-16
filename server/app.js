@@ -20,7 +20,7 @@
 
 //Serve client files
   app.use("/", express.static("client"))
-  app.use("/js", express.static("node_modules/pixi.js/dist"))
+  app.use("/js", express.static("node_modules/pixi.js/dist/browser"))
   app.use("/js", express.static("node_modules/pixi-viewport/dist"))
   app.use("/js", express.static("node_modules/axios/dist"))
   app.use("/js", express.static("node_modules/vue/dist"))
