@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="22" nextobjectid="222">
  <editorsettings>
-  <export target="map.gracidea" format="gracidea"/>
+  <export target="../../app/server/static/maps/overworld.gracidea" format="gracidea"/>
  </editorsettings>
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="2" name="01-ground" width="704" height="1312">

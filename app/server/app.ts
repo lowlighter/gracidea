@@ -27,7 +27,10 @@ router
     const DY = Number(context.request.url.searchParams.get("DY"))
 
     context.response.headers.set("Content-Type", "application/json")
-    const partial = {chunks:{} as {[key:string]:any}}
+    const partial = {
+      areas:(maps as any)[MAP].areas,
+      chunks:{} as {[key:string]:any},
+    }
 
     for (let x = X-DX; x <= X+DX; x++) {
       for (let y = Y-DY; y <= Y+DY; y++) {
