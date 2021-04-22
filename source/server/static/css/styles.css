@@ -1,0 +1,36 @@
+/* Body */
+  body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    font-family: "Lato", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+    background-image: url(/textures/sea.gif);
+    background-repeat: repeat;
+  }
+
+/* Main */
+  main {
+
+  }
+
+  #location {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 200px;
+  }
+
+  nav {
+    position: fixed;
+    top: 30px;
+    right: 0;
+    border: 4px solid #4A4969;
+    background-color: #F8F8F8;
+    box-shadow: 0 0 0 2px #293133;
+    display: flex;
+    flex-direction: column;
+    padding: .25rem;
+    border-radius: .25rem;
+  }

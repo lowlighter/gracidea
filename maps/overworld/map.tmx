@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="22" nextobjectid="222">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="24" nextobjectid="231">
  <editorsettings>
   <export target="../../app/server/static/maps/overworld.gracidea" format="gracidea"/>
  </editorsettings>
  <tileset firstgid="1" source="tileset.tsx"/>
- <layer id="2" name="01-ground" width="704" height="1312">
+ <layer id="2" name="1A" width="704" height="1312">
   <data encoding="csv">
    <chunk x="-32" y="-1792" width="16" height="16">
 114,114,114,114,114,0,0,0,0,0,0,0,0,0,0,0,
@@ -13688,7 +13688,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="3" name="02-ground" width="688" height="1312">
+ <layer id="3" name="1B" width="688" height="1312">
   <data encoding="csv">
    <chunk x="1488" y="-1792" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -27264,7 +27264,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="5" name="03-ground" width="528" height="1312">
+ <layer id="5" name="1C" width="528" height="1312">
   <data encoding="csv">
    <chunk x="224" y="-1232" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -29284,7 +29284,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="6" name="11-elements" width="656" height="1296">
+ <layer id="6" name="2A" width="656" height="1296">
   <data encoding="csv">
    <chunk x="1488" y="-1792" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -34634,7 +34634,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="7" name="12-elements" width="704" height="1312">
+ <layer id="7" name="2B" width="704" height="1312">
   <data encoding="csv">
    <chunk x="1472" y="-1792" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -48498,7 +48498,7 @@
 </chunk>
   </data>
  </layer>
- <layer id="8" name="13-elements" width="704" height="1280">
+ <layer id="8" name="2C" width="704" height="1280">
   <data encoding="csv">
    <chunk x="1472" y="-1760" width="16" height="16">
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -56129,7 +56129,7 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+0,0,0,0,0,0,0,0,0,0,218,0,0,0,0,0,
 0,0,0,0,218,218,218,0,0,0,0,0,0,0,0,0
 </chunk>
    <chunk x="16" y="-32" width="16" height="16">
@@ -56175,15 +56175,15 @@
 0,0,0,0,0,0,0,0,0,0,218,0,0,0,0,0,
 0,0,0,0,0,218,0,0,218,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,0,
-0,0,0,0,218,0,218,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,218,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,218,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,218,0,0,0,0,
+0,0,0,0,218,0,218,0,0,0,0,94,94,94,94,94,
+0,0,0,0,0,0,0,0,0,0,94,94,94,94,94,94,
+0,0,0,0,0,0,0,0,0,0,94,94,0,94,94,94,
+0,0,0,0,0,0,0,0,218,0,94,94,0,94,94,94,
+0,0,0,0,0,0,0,0,0,0,94,94,94,94,94,94,
+0,0,0,0,0,0,0,0,0,0,94,94,94,94,94,94,
+0,0,0,0,0,0,0,0,0,218,0,94,94,94,94,94,
+0,0,0,0,0,0,0,0,0,0,218,0,0,94,94,94,
+0,0,0,0,0,0,0,0,0,0,0,218,0,0,0,94,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </chunk>
    <chunk x="0" y="-16" width="16" height="16">
@@ -56193,15 +56193,15 @@
 0,0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,218,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,218,0,0,0,0,0,0,0,0,0,
-0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+94,94,94,94,94,94,94,0,0,0,0,0,0,0,0,0,
+94,0,94,94,94,0,94,218,0,0,0,0,0,0,0,0,
+94,0,94,94,94,0,94,0,0,0,0,0,0,0,0,0,
+94,94,94,94,94,94,94,0,218,0,0,0,0,0,0,0,
+0,94,94,94,94,94,94,0,0,0,0,0,0,0,0,0,
+0,94,94,94,94,94,0,218,0,0,0,0,0,0,0,0,
+0,94,94,94,94,94,0,0,0,0,0,0,0,0,0,0,
+94,94,94,94,94,0,218,0,0,0,0,0,0,0,0,0,
+94,94,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
 0,0,0,0,0,218,0,0,0,0,0,0,0,0,0,0
 </chunk>
    <chunk x="16" y="-16" width="16" height="16">
@@ -56422,7 +56422,7 @@
 </chunk>
   </data>
  </layer>
- <objectgroup id="19" name="20-locations">
+ <objectgroup id="19" name="locations">
   <object id="74" name="3-littleroot" type="location" x="5152" y="-14928" width="384" height="352"/>
   <object id="76" name="3-oldale" type="location" x="5152" y="-15568" width="384" height="320"/>
   <object id="77" name="3-101" type="location" x="5152" y="-15248" width="384" height="320"/>
@@ -56451,7 +56451,7 @@
   <object id="111" name="3-117" type="location" x="5536" y="-17184" width="912" height="352"/>
   <object id="113" name="3-112" type="location" x="5968" y="-19088" width="576" height="976"/>
   <object id="114" name="3-111" type="location" x="6544" y="-19392" width="576" height="2160"/>
-  <object id="117" name="0-faraway_island" type="location" x="-464" y="-720" width="1008" height="1872"/>
+  <object id="117" name="0-faraway_island" type="1-interest" x="-464" y="-720" width="1008" height="1872"/>
   <object id="118" name="1-pallet" type="location" x="23728" y="-26528" width="351.333" height="320"/>
   <object id="119" name="1-viridian" type="location" x="23568" y="-27808" width="656" height="592"/>
   <object id="120" name="1-1" type="location" x="23728" y="-27216" width="352" height="688"/>
@@ -56483,7 +56483,11 @@
   <object id="219" name="3-pacifidlog" type="location" x="10944" y="-15280" width="320" height="704"/>
   <object id="221" name="3-sky-pillar" type="location" x="11648" y="-15632" width="400" height="528"/>
  </objectgroup>
- <objectgroup id="15" name="21-creatures">
+ <objectgroup id="23" name="pins">
+  <object id="226" name="0-faraway_island" x="-240" y="1040" width="16" height="16"/>
+  <object id="230" name="3-littleroot" type="1-town" x="5264" y="-14784" width="16" height="16"/>
+ </objectgroup>
+ <objectgroup id="15" name="wild">
   <object id="3" name="3-101-g" type="wild" x="5216" y="-15040">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
@@ -56964,7 +56968,7 @@
    <polygon points="0,0 48,0 48,96 0,144"/>
   </object>
  </objectgroup>
- <objectgroup id="20" name="22-trainers">
+ <objectgroup id="20" name="people">
   <object id="123" type="trainer" x="5344" y="-14752">
    <properties>
     <property name="categorie" value="guy_0"/>
