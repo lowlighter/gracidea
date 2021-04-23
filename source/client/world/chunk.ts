@@ -39,6 +39,8 @@
     /** Layers */
       readonly layers = new Map()
 
+      readonly areas = new Set()
+
     /** Constructor */
       constructor({id, world}:{id:string, world:World}) {
         super({world})
@@ -54,6 +56,8 @@
       destructor() {
         if (App.debugChunks)
           console.debug(`unloaded loaded chunk: ${this.id}`)
+        this.layers.clear()
+        this.areas.clear()
         return super.destructor()
       }
 

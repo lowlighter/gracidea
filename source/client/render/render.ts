@@ -62,7 +62,7 @@
       }
 
     /** Graphics */
-      static Graphics({z = NaN, stroke, fill, text, textStyle, textPosition, rect, circle, polygon}:{z?:number, stroke?:any, fill?:any, text?:string, textStyle?:any, textPosition?:{x:number, y:number}, rect?:number[], circle?:number[], polygon?:number[]}) {
+      static Graphics({z = NaN, stroke, fill, text, textStyle, textPosition, rect, circle, ellipse, polygon}:{z?:number, stroke?:any, fill?:any, text?:string, textStyle?:any, textPosition?:{x:number, y:number}, rect?:number[], circle?:number[], ellipse?:number[], polygon?:number[]}) {
         const graphics = new Render.engine.Graphics()
           if (stroke)
             graphics.lineStyle(...stroke)
@@ -72,6 +72,8 @@
             graphics.drawRect(...rect.map(n => n*TILE_SIZE))
           if (circle)
             graphics.drawCircle(...circle.map(n => n*TILE_SIZE))
+          if (ellipse)
+            graphics.drawEllipse(...ellipse.map(n => n*TILE_SIZE))
           if (polygon) {
             if (polygon instanceof Render.engine.Polygon)
               graphics.drawPolygon(polygon)

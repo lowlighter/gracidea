@@ -79,6 +79,14 @@
             }
           })
         //
+          const areas = new Set()
+          this.world.loaded.chunks.forEach(chunk => chunk.areas.forEach(area => areas.add(area)))
+          this.world.loaded.areas.forEach((area, id) => {
+            if (!areas.has(area)) {
+              this.world.loaded.areas.delete(id)
+              area.destructor()
+            }
+          })
 
 
 

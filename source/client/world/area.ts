@@ -5,12 +5,13 @@
   import type { World } from "./world.ts"
   import type { Chunk } from "./chunk.ts"
   import { App } from "./../app.ts"
+  import { NPC } from "./npc.ts"
 
 /** Area data */
   type AreaData = {
     id:number
     points:number[]
-    properties:{}
+    properties:{[key:string]:unknown}
   }
 
 /**
@@ -40,6 +41,7 @@
         this.sprite = Render.Container()
         if (App.debugLogs)
           console.debug(`loaded area: ${this.id}`)
+        //setTimeout(() => this.spawn(), 1000)
       }
 
     /** Test if point is within area */
@@ -52,6 +54,43 @@
         (this as any)._debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
         return super.show()
       }
+
+
+      spawn() {
+        console.log(this.data.properties)
+
+        //max_creatures: 1, pk_mew: 1
+
+         // new NPC({world:this.world, area:this}).show()
+
+        /*
+        //Add creature if possible
+          if (this.creatures.size < this.spawns.max.creatures) {
+            //Generate a species
+              let species = null
+              const r = u.rand()
+              for (let p in this.species) {
+                const [a, b] = p.split("-").map(Number)
+                if ((a < r)&&(r < b)) {
+                  species = this.species[p]
+                  break
+                }
+              }
+            //Generate spawn point (random point inside polygon)
+              let [x, y] = [NaN, NaN]
+              for (let i = 0; i < 128; i++, x = u.rand({a:this.origin.x, b:this.boundary.x, int:true}), y = u.rand({a:this.origin.y, b:this.boundary.y, int:true}))
+                if (this.inside({x, y}))
+                  break
+                else
+                  [x, y] = [NaN, NaN]
+            //Create creature
+              if ((species)&&(Number.isFinite(x))&&(Number.isFinite(y))) {
+                const creature = this.world.add.creature({species, x, y, area:this})
+                this.creatures.add(creature)
+              }
+          }*/
+      }
+
 
     /** Render */
       render() {
@@ -70,6 +109,8 @@
         const id = `${data.id}`
         if (!chunk.world.loaded.areas.has(id))
           chunk.world.loaded.areas.set(id, new Area({id, data, world:chunk.world}))
-        return chunk.world.loaded.areas.get(id) as Area
+        const area = chunk.world.loaded.areas.get(id) as Area
+        chunk.areas.add(area)
+        return area
       }
   }

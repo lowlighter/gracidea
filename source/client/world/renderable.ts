@@ -15,6 +15,9 @@
     /** Rendered flag */
       rendered = false
 
+    /** Destroyed flag */
+      destroyed = false
+
     /** Debug sprite */
       private _debug:ReturnType<typeof Render.Graphics>|null
 
@@ -28,6 +31,8 @@
 
     /** Show sprite (call render method if needed) */
       show() {
+        if (this.destroyed)
+          return
         if (!this.rendered) {
           this.rendered = true
           this.render()
@@ -51,6 +56,9 @@
 
     /** Destructor */
       destructor() {
+        this.destroyed = true
+        this.rendered = false
+        this.sprite.visible = false
         this.sprite.removeChildren().forEach((child:ReturnType<typeof Render.Container>) => child.destroy({children:true}))
         this.debug(false)
       }
