@@ -1,13 +1,23 @@
 //Imports
   import { Render } from "../render/render.ts"
   import { Renderable } from "./renderable.ts"
+  import { Area } from "./area.ts"
   import { CHUNK_SIZE } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import { App } from "./../app.ts"
 
 /** Chunk data */
   type ChunkData = {
-    layers:{[key:string]:number[]}
+    id:string
+    chunk:{
+      layers:{[key:string]:number[]}
+    },
+    areas:Array<{
+      id:number
+      name:string,
+      points:number[],
+      properties:{[key:string]:unknown}
+    }>
   }
 
 /**
@@ -23,11 +33,6 @@
     /** Sprite */
       readonly sprite:ReturnType<typeof Render.Container>
 
-    /** Sprites */
-      readonly sprites:{
-        placeholder:ReturnType<typeof Render.Sprite>|null
-      }
-
     /** Chunk data */
       private data = null as ChunkData|null
 
@@ -41,23 +46,24 @@
         ;[this.x, this.y] = this.id.split(";").map(n => Number(n)*CHUNK_SIZE)
         this.width = this.height = CHUNK_SIZE
         this.sprite = this.world.sprites.chunks.addChild(Render.Container({x:this.x, y:this.y, sorted:true}))
-        this.sprites = {placeholder:null}
-        console.debug(`loaded chunk: ${this.id}`)
+        if (App.debugChunks)
+          console.debug(`loaded chunk: ${this.id}`)
       }
 
     /** Destructor */
       destructor() {
-        console.debug(`unloaded loaded chunk: ${this.id}`)
+        if (App.debugChunks)
+          console.debug(`unloaded loaded chunk: ${this.id}`)
         return super.destructor()
+      }
+
+      show() {
+        super.show()
+        this.data?.areas?.forEach(area => Area.from({data:area, chunk:this})?.show())
       }
 
     /** Render */
       async render() {
-        //Placeholder
-          if (this.sprites.placeholder)
-            this.sprites.placeholder.visible = true
-          else
-            this.sprites.placeholder = this.sprite.addChild(Render.Sprite({z:99, frame:"0", scale:[CHUNK_SIZE, CHUNK_SIZE]}))
         //Debug
           this.debug(App.debugChunks, () => this.world.sprites.debug.addChild(Render.Graphics({z:100, text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x0000FF, .5], fill:[0x0000FF, .25], rect:[0, 0, this.width, this.height]})))
         //Load chunk data
@@ -75,7 +81,7 @@
             //Render sublayers
               for (let z = 0; z < sublayers.length; z++) {
                 //Load tiles
-                  const tiles = this.data?.layers?.[sublayers[z]]
+                  const tiles = this.data?.chunk?.layers?.[sublayers[z]]
                   if (!tiles)
                     continue
                 //Render tiles
@@ -90,13 +96,14 @@
                   }
               }
           }
-        //Hide placeholder
-          if (this.sprites.placeholder)
-            this.sprites.placeholder.visible = false
-      }
+        //
+
+
+
+        }
 
       tileEnvAt({x, y}:{x:number, y:number}) {
-        return this.data?.layers?.["1A"]?.[x*CHUNK_SIZE+y] ?? NaN > 0 ? "GROUND" : "WATER"
+        return this.data?.chunk?.layers?.["1A"]?.[x*CHUNK_SIZE+y] ?? NaN > 0 ? "GROUND" : "WATER"
       }
 
   }

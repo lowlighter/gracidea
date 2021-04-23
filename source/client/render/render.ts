@@ -1,6 +1,12 @@
 //Imports
   import { TILE_SIZE, ANIMATED } from "./settings.ts"
 
+//Imports
+  const imports = [
+    "https://cdn.skypack.dev/pin/pixi.js@v6.0.2-CZevJC3fF8RRAzKDzCQR/mode=imports,min/optimized/pixijs.js",
+    "https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js",
+  ]
+
 /** Window */
   const global = globalThis as any
 
@@ -19,7 +25,7 @@
     /** Render setup */
       static async setup() {
         //Load dependencies
-          const [PIXI, {default:StatsJS}] = await Promise.all([import("https://cdn.skypack.dev/pixi.js@6.0.2"), import("https://cdn.skypack.dev/stats.js")])
+          const [PIXI, {default:StatsJS}] = await Promise.all(imports.map(dep => import(dep)))
         //Load and configure PIXI
           this.engine = PIXI
           this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST

@@ -4,7 +4,6 @@
   import { TILE_SIZE, CHUNK_SIZE } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import { Chunk } from "./chunk.ts"
-  import { Area } from "./area.ts"
   import { App } from "./../app.ts"
 
 /** Window */
@@ -79,34 +78,16 @@
               }
             }
           })
+        //
 
-        //Load visible locations
-          {
-            const data = await fetch(`/map/overworld/locations`).then(res => res.json())
-            //Display loaded elements
-              data.locations.forEach((location:any) => {
-                const id = `${location.name}`
-                if (!this.world.loaded.locations.has(id))
-                  this.world.loaded.locations.set(id, new Area({id, data:location as any, world:this.world}))
-                this.world.loaded.locations.get(id)?.show()
-              })
-            //Hide unused elements
-              /*unused.forEach(id => {
-                const chunk = this.loaded..get(id)
-                if (chunk)
-                  chunk.hide()
-                if (Math.sqrt((chunk.x-X)**2+(chunk.y-Y)**2) > 3) {
-                  this.loaded..delete(id)
-                  chunk.destructor()
-                }
-              })*/
-          }
 
+
+          /*
           {
             const data = await fetch(`/map/overworld/pins`).then(res => res.json())
             console.log(data)
           }
-
+*/
 
 
         setTimeout(() => {
@@ -114,14 +95,13 @@
           if (this.debounce) {
             this.debounce = false
             this.render()
-            console.log(this.location)
           }
         }, 200)
 
       }
 
       get location() {
-        return [...this.world.loaded.locations.values()].filter(location => location.contains(this)).map(({id}) => id)
+        return []// [...this.world.loaded.locations.values()].filter(location => location.contains(this)).map(({name}) => name)
       }
 
     /** Move camera to given position */

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="24" nextobjectid="231">
  <editorsettings>
-  <export target="../../app/server/static/maps/overworld.gracidea" format="gracidea"/>
+  <export target="../../source/server/assets/maps/overworld.gracidea" format="gracidea"/>
  </editorsettings>
  <tileset firstgid="1" source="tileset.tsx"/>
  <layer id="2" name="1A" width="704" height="1312">
@@ -56483,11 +56483,7 @@
   <object id="219" name="3-pacifidlog" type="location" x="10944" y="-15280" width="320" height="704"/>
   <object id="221" name="3-sky-pillar" type="location" x="11648" y="-15632" width="400" height="528"/>
  </objectgroup>
- <objectgroup id="23" name="pins">
-  <object id="226" name="0-faraway_island" x="-240" y="1040" width="16" height="16"/>
-  <object id="230" name="3-littleroot" type="1-town" x="5264" y="-14784" width="16" height="16"/>
- </objectgroup>
- <objectgroup id="15" name="wild">
+ <objectgroup id="15" name="creatures">
   <object id="3" name="3-101-g" type="wild" x="5216" y="-15040">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
@@ -56997,5 +56993,9 @@
    </properties>
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
+ </objectgroup>
+ <objectgroup id="23" name="pins">
+  <object id="226" name="0-faraway_island" x="-240" y="1040" width="16" height="16"/>
+  <object id="230" name="3-littleroot" type="1-town" x="5264" y="-14784" width="16" height="16"/>
  </objectgroup>
 </map>

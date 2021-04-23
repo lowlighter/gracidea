@@ -22,7 +22,6 @@
       readonly loaded = {
         chunks:new Map<string, Chunk>(),
         areas:new Map<string, Area>(),
-        locations:new Map<string, Area>(),
       }
 
     /** Camera */

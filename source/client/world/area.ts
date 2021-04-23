@@ -3,13 +3,14 @@
   import { Renderable } from "./renderable.ts"
   import { TILE_SIZE } from "../render/settings.ts"
   import type { World } from "./world.ts"
+  import type { Chunk } from "./chunk.ts"
   import { App } from "./../app.ts"
 
 /** Area data */
   type AreaData = {
-    center:{x:number, y:number}
+    id:number
     points:number[]
-    type:string
+    properties:{}
   }
 
 /**
@@ -39,8 +40,6 @@
         this.sprite = Render.Container()
         if (App.debugLogs)
           console.debug(`loaded area: ${this.id}`)
-        if (this.data.type === "location")
-          this.world.loaded.locations.set(this.id, this)
       }
 
     /** Test if point is within area */
@@ -58,5 +57,19 @@
       render() {
         //Debug
           this.debug(App.debugAreas, () => this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x00FF00, .5], fill:[0x00FF00, .25], polygon:this.polygon})))
+      }
+
+    /** Destructor */
+      destructor() {
+        if (App.debugLogs)
+          console.debug(`unloaded loaded area: ${this.id}`)
+        return super.destructor()
+      }
+
+      static from({data, chunk}:{data:AreaData, chunk:Chunk}) {
+        const id = `${data.id}`
+        if (!chunk.world.loaded.areas.has(id))
+          chunk.world.loaded.areas.set(id, new Area({id, data, world:chunk.world}))
+        return chunk.world.loaded.areas.get(id) as Area
       }
   }
