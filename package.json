@@ -37,7 +37,7 @@
     "@babel/core": "^7.11.6",
     "@babel/plugin-proposal-class-properties": "^7.10.4",
     "@babel/plugin-proposal-nullish-coalescing-operator": "^7.10.4",
-    "@babel/plugin-proposal-optional-chaining": "^7.11.0",
+    "@babel/plugin-proposal-optional-chaining": "^7.13.12",
     "@octokit/rest": "^18.0.6",
     "babel-preset-minify": "^0.5.1",
     "colors": "^1.4.0",
