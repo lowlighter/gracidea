@@ -48,7 +48,7 @@
     "pngjs": "^5.0.0",
     "rollup": "^2.26.11",
     "simple-git": "^2.20.1",
-    "tile-extruder": "^2.0.6",
+    "tile-extruder": "^2.1.0",
     "webp-converter": "^2.3.0",
     "xml2js": "^0.4.23"
   }
