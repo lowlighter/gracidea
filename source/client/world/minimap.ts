@@ -3,11 +3,14 @@
   import { Renderable } from "./renderable.ts"
   import type { World } from "./world.ts"
 
-/** Map data */
+/** Mini-map data */
   type MinimapData = {regions:RegionData[]}
-  type RegionData = {name:string, mx:number, my:number, pins:PinData[]}
-  type PinData = {name:string, mx:number, my:number, x:number, y:number}
 
+/** Mini-map region data */
+  type RegionData = {name:string, mx:number, my:number, pins:PinData[]}
+
+/** Mini-map pin data */
+  type PinData = {name:string, mx:number, my:number, x:number, y:number}
 
 /**
  * World map.
@@ -67,9 +70,6 @@
                 pin.on("tap", () => this.moveTo({x, y}))
               }
           }
-
-          console.log(this.sprite.width, this.sprite.height, this.sprite.x, this.sprite.y)
-
       }
 
     /** Move camera to given position and hide minimap */

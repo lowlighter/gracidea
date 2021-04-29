@@ -75,7 +75,7 @@
 
         const name = global.document.querySelector("#location .name")
         if (name)
-          name.innerHTML = this.world.camera.location.join("<br>")
+          name.innerHTML = "Current location"
         const position = global.document.querySelector("#location .position")
           if (position)
             position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`

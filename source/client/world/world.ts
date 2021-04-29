@@ -47,8 +47,6 @@
         }
         this.camera = new Camera({world:this})
         this.minimap = new Minimap({world:this})
-      //  this.sprites.chunks.visible = false
-        this.sprites.debug.visible = false
 
 
         const textures = [2374, 2375, 2376, 2377, 2378, 2379, 2380, 2381].map(frame => Render.Texture({frame}))

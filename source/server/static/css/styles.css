@@ -18,12 +18,20 @@
     position: fixed;
     top: 0;
     right: 0;
-    width: 200px;
+    padding: 1rem 2rem;
+    background-size: cover;
+    image-rendering: crisp-edges;
+    background-image: url(/imgs/locations/route.png);
   }
+
+  #location .position {
+    font-size: .6rem;
+  }
+
 
   nav {
     position: fixed;
-    top: 30px;
+    top: 4rem;
     right: 0;
     border: 4px solid #4A4969;
     background-color: #F8F8F8;
