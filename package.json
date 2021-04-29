@@ -46,7 +46,7 @@
     "pixelmatch": "^5.2.1",
     "png-itxt": "^2.0.0",
     "pngjs": "^5.0.0",
-    "rollup": "^2.26.11",
+    "rollup": "^2.46.0",
     "simple-git": "^2.20.1",
     "tile-extruder": "^2.0.6",
     "webp-converter": "^2.3.0",
