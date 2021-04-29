@@ -25,10 +25,17 @@
           let timeout = null
           Render.app.view.addEventListener("wheel", (event:any) => {
             event.preventDefault()
-            this.world.sprites.world.position.set(
-              Math.round(this.world.sprites.world.position.x - event.deltaX),
-              Math.round(this.world.sprites.world.position.y - event.deltaY),
+            if (!this.world.minimap.open) {
+              this.world.sprites.world.position.set(
+                Math.round(this.world.sprites.world.position.x - event.deltaX),
+                Math.round(this.world.sprites.world.position.y - event.deltaY),
+              )
+              } else {
+            this.world.minimap.sprite.position.set(
+              Math.round(this.world.minimap.sprite.position.x - event.deltaX),
+              Math.round(this.world.minimap.sprite.position.y - event.deltaY),
             )
+              }
             this.world.camera.render()
             this.updateDOM()
           })
@@ -53,6 +60,10 @@
                 break
             }
             this.updateDOM()
+          })
+
+          global.document.querySelector("[data-for='map']")?.addEventListener("click", () => {
+            this.world.minimap.toggle()
           })
 
           solve()

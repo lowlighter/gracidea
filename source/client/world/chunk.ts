@@ -47,7 +47,7 @@
         this.id = id
         ;[this.x, this.y] = this.id.split(";").map(n => Number(n)*CHUNK_SIZE)
         this.width = this.height = CHUNK_SIZE
-        this.sprite = this.world.sprites.chunks.addChild(Render.Container({x:this.x, y:this.y, sorted:true}))
+        this.sprite = this.world.sprites.chunks.addChild(Render.Container({x:this.x, y:this.y}))
         if (App.debugChunks)
           console.debug(`loaded chunk: ${this.id}`)
       }
@@ -69,10 +69,12 @@
     /** Render */
       async render() {
         //Debug
-          this.debug(App.debugChunks, () => this.world.sprites.debug.addChild(Render.Graphics({z:100, text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x0000FF, .5], fill:[0x0000FF, .25], rect:[0, 0, this.width, this.height]})))
+          this.debug(App.debugChunks, () => this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x0000FF, .5], fill:[0x0000FF, .25], rect:[0, 0, this.width, this.height]})))
         //Load chunk data
           if (!this.data)
             this.data = await fetch(`/map/overworld/${this.id}`).then(res => res.json())
+        //Sea
+          this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({frame:0, width:CHUNK_SIZE, height:CHUNK_SIZE})))
         //Render layers
           for (const {name, sublayers, sorted = false} of [
             {name:"1X", sublayers:["1A", "1B", "1C"]},

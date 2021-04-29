@@ -22,7 +22,7 @@
       private _debug:ReturnType<typeof Render.Graphics>|null
 
     /** Render method */
-      abstract render():void
+      protected abstract render():void
 
     /** Hide sprite */
       hide() {
@@ -40,8 +40,13 @@
         this.sprite.visible = true
       }
 
+    /** Toggle sprite visibilitu */
+      toggle() {
+        return this.sprite.visible ? this.hide() : this.show()
+      }
+
     /** Debug sprite */
-      debug(enabled:boolean = false, constructor:Function|null = null) {
+      protected debug(enabled:boolean = false, constructor:Function|null = null) {
         if (enabled) {
           if (!this._debug)
             this._debug = constructor?.()

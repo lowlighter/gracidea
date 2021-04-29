@@ -3,7 +3,7 @@
 
 //Imports
   const imports = [
-    "https://cdn.skypack.dev/pin/pixi.js@v6.0.2-CZevJC3fF8RRAzKDzCQR/mode=imports,min/optimized/pixijs.js",
+    "https://cdn.skypack.dev/pin/pixi.js@v6.0.2-2cUO8JQP1lUQiq9yVX7X/mode=imports,min/optimized/pixijs.js",
     "https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js",
   ]
 
@@ -110,6 +110,20 @@
         return container
       }
 
+    /** Texture */
+      static Texture({frame = Render.engine.Texture.EMPTY}:{frame:any}) {
+        return Render.engine.Texture.from(`${frame}`)
+      }
+
+    /** Tiling sprite */
+      static TilingSprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, width = 0, height = 0}:{frame?:any, x?:number, y?:number, width?:number, height?:number}) {
+        let sprite = Render.engine.TilingSprite.from(`${frame}`, {width:width*TILE_SIZE, height:height*TILE_SIZE})
+        sprite.position.set(x*TILE_SIZE, y*TILE_SIZE)
+        if (!Number.isNaN(z))
+          sprite.zIndex = z
+        return sprite
+      }
+
     /** Sprite */
       static Sprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, anchor, scale}:{frame?:any, x?:number, y?:number, z?:number, anchor?:[number, number], scale?:[number, number]} = {}) {
         let sprite
@@ -132,21 +146,9 @@
         return sprite
       }
 
-    /*static tween({target, change, from, to, duration, callback}) {
-      let t = 0
-      const op = to > from ? Math.min : Math.max
-      const transition = delta => {
-        //Completed
-          if ((t += delta)/duration >= 1) {
-            target[change] = to
-            Render.engine.Ticker.shared.remove(transition)
-            callback?.()
-          }
-        //In progress
-          else
-            target[change] = op(to, from + (to - from) * (t/duration)**2)
+    /** Filters */
+      static get filters() {
+        return Render.engine.filters
       }
-      Render.engine.Ticker.shared.add(transition)
-    }*/
 
   }

@@ -115,6 +115,7 @@
     /** Move camera to given position */
       moveTo({x, y}:{x:number, y:number}) {
         this.world.sprites.world.position.set(-x*TILE_SIZE + global.document.body.clientWidth/2, -y*TILE_SIZE + global.document.body.clientHeight/2)
+        this.render()
       }
 
   }

@@ -6,11 +6,14 @@
     SOUTH_WEST = 3,
   }
 
+/** Rectangle type */
+  export type Rectangle = {x:number, y:number, width:number, height:number}
+
 /**
  * Quadtree structure.
  * This is a typescript port from https://github.com/lowlighter/quadtree.
  */
-  export class Quadtree<T extends {x:number, y:number, width:number, height:number}> {
+  export class Quadtree<T extends Rectangle> {
 
     /** Parent quadtree */
       private readonly parent = null as Quadtree<T>|null
@@ -58,7 +61,7 @@
       }
 
     /** Compute indexes of item */
-      index({x, y, width, height}:{x:number, y:number, width:number, height:number}) {
+      index({x, y, width, height}:Rectangle) {
         const ah = y + height
         const aw = x + width
         const bh = this.y + this.height/2
@@ -118,7 +121,7 @@
       }
 
     /** Get values contained in given area */
-      get(area:{x:number, y:number, width:number, height:number}, list = new Set<T>()) {
+      get(area:Rectangle, list = new Set<T>()) {
         if (this.nodes === null)
           this.nodeItems.forEach(value => list.add(value))
         else
@@ -136,7 +139,7 @@
       }
 
     /** Construct quadtree from a set of object */
-      static from<T extends {x:number, y:number, width:number, height:number}>(items:T[], options:{[key:string]:unknown} = {}) {
+      static from<T extends Rectangle>(items:T[], options:{[key:string]:unknown} = {}) {
         const ax = Math.min(...items.map(({x}) => x))
         const bx = Math.max(...items.map(({x, width}) => x + width))
         const ay = Math.min(...items.map(({y}) => y))
@@ -144,6 +147,11 @@
         const quadtree = new Quadtree<T>({x:ax, y:ay, width:bx-ax, height:by-ay, ...options})
         items.forEach(item => quadtree.add(item))
         return quadtree
+      }
+
+    /** Test whether rectangle A contains rectangle B */
+      static contains(a:Rectangle, b:Rectangle) {
+        return (a.x+a.width >= b.x)&&(a.x <= b.x+b.width)&&(a.y <= b.y+b.height)&&(a.y+a.height >= b.y)
       }
 
   }

@@ -23,7 +23,7 @@
       height:number
 
     /** Constructor */
-      constructor({world, x = 0, y = 0, width = 0, height = 0}:{world:World, x?:number, y?:number, width?:number, height?:number}) {
+      protected constructor({world, x = 0, y = 0, width = 0, height = 0}:{world:World, x?:number, y?:number, width?:number, height?:number}) {
         this.world = world
         this.x = x
         this.y = y

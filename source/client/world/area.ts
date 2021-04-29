@@ -41,7 +41,7 @@
         this.sprite = Render.Container()
         if (App.debugLogs)
           console.debug(`loaded area: ${this.id}`)
-        //setTimeout(() => this.spawn(), 1000)
+        setTimeout(() => this.spawn(), 1000)
       }
 
     /** Test if point is within area */
@@ -57,11 +57,16 @@
 
 
       spawn() {
-        console.log(this.data.properties)
+        if (this.data.properties.max_creatures) {
+          //const species = Object.key
+
+          //new NPC({world:this.world, area:this}).show()
+        }
+
 
         //max_creatures: 1, pk_mew: 1
 
-         // new NPC({world:this.world, area:this}).show()
+         //
 
         /*
         //Add creature if possible

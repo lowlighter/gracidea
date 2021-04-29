@@ -1,0 +1,54 @@
+{
+  "regions":[
+    {
+      "name":"kanto",
+      "mx":0,
+      "my":0,
+      "pins":[
+        {"name":"pallet", "x":1488, "y":-1651, "mx":10, "my":95},
+        {"name":"cinnabar", "x":1495, "y":-1527, "mx":10, "my":120},
+        {"name":"fuchsia", "x":1639, "y":-1587, "mx":80, "my":105}
+      ]
+    },
+    {
+      "name":"johto",
+      "mx":-166,
+      "my":0,
+      "pins":[]
+    },
+    {
+      "name":"hoenn",
+      "mx":-300,
+      "my":140,
+      "pins":[
+        {"name":"littleroot", "x":329, "y":-924, "mx":58, "my":115},
+        {"name":"oldale", "x":330, "y":-956, "mx":58, "my":100},
+        {"name":"petalburg", "x":264, "y":-966, "mx":40, "my":100},
+        {"name":"verdanturf", "x":340, "y":-1069, "mx":58, "my":85},
+        {"name":"mauville", "x":426, "y":-1067, "mx":75, "my":85},
+        {"name":"slateport", "x":423, "y":-933, "mx":75, "my":110},
+        {"name":"dewford", "x":266, "y":-842, "mx":40, "my":130},
+        {"name":"rustboro", "x":220, "y":-1054, "mx":25, "my":85},
+        {"name":"fallarbor", "x":298, "y":-1205, "mx":25, "my":20},
+        {"name":"chimney", "x":322, "y":-1154, "mx":58, "my":40},
+        {"name":"lavaridge", "x":353, "y":-1146, "mx":70, "my":40},
+        {"name":"fortree", "x":529, "y":-1206, "mx":95, "my":20},
+        {"name":"lilycove", "x":707, "y":-1128, "mx":175, "my":40}
+      ]
+    },
+    {
+      "name":"faraway_island",
+      "mx":-300,
+      "my":290,
+      "pins":[
+        {"name":"faraway_island", "x":-14, "y":65, "mx":2, "my":7}
+      ]
+    },
+    {
+      "name":"sevii_islands",
+      "mx":0,
+      "my":130,
+      "pins":[]
+    }
+  ]
+}
