@@ -27,7 +27,7 @@
     "compression": "^1.7.4",
     "express": "^4.17.1",
     "minimist": "^1.2.5",
-    "pixi-viewport": "^4.23.1",
+    "pixi-viewport": "^4.30.4",
     "pixi.js": "^6.0.2",
     "pokemon": "^2.0.2",
     "vue": "^2.6.12"
