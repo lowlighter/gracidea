@@ -1,14 +1,11 @@
-**Before submitting a pull request, check that :**
-- [ ] No duplicate exists
-- [ ] Link any related issues
-- [ ] You labelled correctly your pull request with either *bug-fix*, *enhancement*, *map revision* or *sprite revision*
-- [ ] All build passes, and that there are no conflicts
+<!--
 
-**What this pull request is for ?**
-A clear and concise description of what this solves.
+  👋 Hi there!
+  Thanks for contributing to gracidea and helping us to improve!
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+  Please:
+    - Read CONTRIBUTING.md first
+    - Check you're not duplicating another existing pull request
+    - Provide a clear and concise description
 
-**Additional context**
-Add any other context about the problem here.
+-->

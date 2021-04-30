@@ -32,7 +32,10 @@
       private readonly data:AreaData
 
     /** Polygon */
-      private readonly polygon:ReturnType<typeof Render.Polygon>
+      readonly polygon:ReturnType<typeof Render.Polygon>
+
+    /** NPCs */
+      readonly npcs = new Set<NPC>()
 
     /** Constructor */
       constructor({id, data, world}:{id:string, data:AreaData, world:World}) {
@@ -52,8 +55,10 @@
 
     /** Show sprite */
       show() {
-        if ((this as any)._debug)
-        (this as any)._debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
+        //deno-lint-ignore no-explicit-any
+        const _debug = (this as any)
+        if (_debug)
+          _debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
         return super.show()
       }
 
@@ -70,6 +75,8 @@
       destructor() {
         if (App.debugLogs)
           console.debug(`unloaded loaded area: ${this.id}`)
+        this.npcs.forEach(npc => npc.destructor())
+        this.npcs.clear()
         return super.destructor()
       }
 
@@ -88,11 +95,10 @@
 
       spawn() {
         console.log(this.data.properties)
-        if (this.data.properties.max_creatures) {
-          //const species = Object.key
 
-          //new NPC({world:this.world, area:this}).show()
-        }
+
+        new NPC({world:this.world, area:this}).show()
+
 
 
         //max_creatures: 1, pk_mew: 1

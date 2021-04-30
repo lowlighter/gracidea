@@ -67,6 +67,8 @@
               chunk.layers.get("0X").texture = textures[tick%textures.length]
           })
 
+          this.loaded.areas.forEach(area => area.npcs.forEach(npc => npc.update(tick)))
+
 
 
         })

@@ -11,6 +11,7 @@
   console.log(argv)
 
 //Load maps
+//deno-lint-ignore no-explicit-any
   const maps = {} as {[key:string]:any}
   for await (const {name:file, isFile} of Deno.readDir(MAPS_DIR)) {
     if ((isFile)&&(/[.]gracidea$/.test(file))) {

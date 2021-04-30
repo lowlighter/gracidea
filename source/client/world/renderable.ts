@@ -46,7 +46,7 @@
       }
 
     /** Debug sprite */
-      protected debug(enabled:boolean = false, constructor:Function|null = null) {
+      protected debug(enabled = false, constructor = null as Function|null) {
         if (enabled) {
           if (!this._debug)
             this._debug = constructor?.()

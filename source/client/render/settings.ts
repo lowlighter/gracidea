@@ -1,4 +1,5 @@
 /** Window */
+//deno-lint-ignore no-explicit-any
   export const global = globalThis as any
 
 /** Tile size in pixels */

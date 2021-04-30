@@ -7,6 +7,13 @@
     "https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js",
   ]
 
+/** Frame */
+  type frame = string|number|ReturnType<typeof Render.Texture>
+
+/** Font style */
+//deno-lint-ignore no-explicit-any
+  type fontstyle = any
+
 /**
  * Render engine.
  * A wrapper around PIXI engine.
@@ -14,9 +21,11 @@
   export class Render {
 
     /** Render engine */
+    //deno-lint-ignore no-explicit-any
       private static engine:any
 
     /** Render application */
+    //deno-lint-ignore no-explicit-any
       static app:any
 
     /** Render setup */
@@ -59,7 +68,7 @@
       }
 
     /** Graphics */
-      static Graphics({z = NaN, stroke, fill, text, textStyle, textPosition, rect, circle, ellipse, polygon}:{z?:number, stroke?:any, fill?:any, text?:string, textStyle?:any, textPosition?:{x:number, y:number}, rect?:number[], circle?:number[], ellipse?:number[], polygon?:number[]}) {
+      static Graphics({z = NaN, stroke, fill, text, textStyle, textPosition, rect, circle, ellipse, polygon}:{z?:number, stroke?:[number, number, number], fill?:[number, number], text?:string, textStyle?:fontstyle, textPosition?:{x:number, y:number}, rect?:number[], circle?:number[], ellipse?:number[], polygon?:number[]}) {
         const graphics = new Render.engine.Graphics()
           if (stroke)
             graphics.lineStyle(...stroke)
@@ -108,13 +117,14 @@
       }
 
     /** Texture */
+    //deno-lint-ignore no-explicit-any
       static Texture({frame = Render.engine.Texture.EMPTY}:{frame:any}) {
         return Render.engine.Texture.from(`${frame}`)
       }
 
     /** Tiling sprite */
-      static TilingSprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, width = 0, height = 0}:{frame?:any, x?:number, y?:number, z?:number, width?:number, height?:number}) {
-        let sprite = Render.engine.TilingSprite.from(`${frame}`, {width:width*TILE_SIZE, height:height*TILE_SIZE})
+      static TilingSprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, width = 0, height = 0}:{frame?:frame, x?:number, y?:number, z?:number, width?:number, height?:number}) {
+        const sprite = Render.engine.TilingSprite.from(`${frame}`, {width:width*TILE_SIZE, height:height*TILE_SIZE})
         sprite.position.set(x*TILE_SIZE, y*TILE_SIZE)
         if (!Number.isNaN(z))
           sprite.zIndex = z
@@ -122,7 +132,7 @@
       }
 
     /** Sprite */
-      static Sprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, anchor, scale}:{frame?:any, x?:number, y?:number, z?:number, anchor?:[number, number], scale?:[number, number]} = {}) {
+      static Sprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, anchor, scale}:{frame?:frame, x?:number, y?:number, z?:number, anchor?:[number, number], scale?:[number, number]} = {}) {
         let sprite
         if (frame instanceof Render.engine.Texture)
           sprite = new Render.engine.Sprite.from(frame)

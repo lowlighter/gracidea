@@ -1,12 +1,12 @@
 //Imports
-  import { Render } from "../render/render.ts"
+ /* import { Render } from "../render/render.ts"
   import { Renderable } from "./renderable.ts"
   import { Area } from "./area.ts"
   import { CHUNK_SIZE } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import { App } from "./../app.ts"
 
-/*
+
   export class Wild extends Area {
 
 

@@ -4,6 +4,10 @@
   import type { App } from "../app.ts"
   import { global } from "./../render/settings.ts"
 
+/** Event */
+//deno-lint-ignore no-explicit-any
+  type event = any
+
 /**
  * Controller
  */
@@ -19,7 +23,7 @@
       constructor({app, world}:{app:App, world:World}) {
         this.app = app
         this.world = world
-        Render.app.view.addEventListener("wheel", (event:any) => {
+        Render.app.view.addEventListener("wheel", (event:event) => {
           event.preventDefault()
           if (!this.world.minimap.open) {
             this.world.sprites.world.position.set(
@@ -34,7 +38,7 @@
           }
           this.world.camera.render()
         })
-        global.document.addEventListener("keydown", ({code}:any) => {
+        global.document.addEventListener("keydown", ({code}:event) => {
           switch (code) {
             case "ArrowLeft":
               this.world.camera.x--

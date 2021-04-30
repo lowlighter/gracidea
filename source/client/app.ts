@@ -17,13 +17,16 @@
 
     /** Constructor */
       constructor() {
+        //deno-lint-ignore no-explicit-any
         const that = this as any
+        //deno-lint-ignore no-explicit-any
         this.world = null as any
+        //deno-lint-ignore no-explicit-any
+        this.controller = null as any
         this.ready = new Promise(async solve => {
           await Render.setup()
           that.world = new World({app:this})
           that.controller = new Controller({app:this, world:this.world})
-
           that.world.camera.moveTo({x:329, y:-924})
           solve()
         })
@@ -37,4 +40,5 @@
   }
 
 //Start app
-  ;(globalThis as any).app = new App()
+//deno-lint-ignore no-explicit-any
+  (globalThis as any).app = new App()

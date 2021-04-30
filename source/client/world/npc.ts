@@ -5,6 +5,17 @@
   import type { World } from "./world.ts"
   import type { Area } from "./area.ts"
 
+/** Patterns */
+  const enum Pattern {
+    patrol = "patrol",
+    loop = "loop",
+    wander = "wander",
+    fixed = "fixed",
+  }
+
+/**
+ * NPC
+ */
   export class NPC extends Renderable {
 
     /** Sprite */
@@ -17,13 +28,25 @@
         shadow:ReturnType<typeof Render.Graphics>|null
       }
 
+    /** Offset */
       readonly offset = {x:0, y:0}
 
+    /** Area */
       readonly area:Area
+
+    /** Track */
+      private readonly track = [] as number[]
+
+    /** Track index */
+      private _track_index = 0
+
+    /** Track pattern */
+      pattern = "fixed" as Pattern
 
     /** Constructor */
       constructor({world, area}:{world:World, area:Area}) {
         super({world})
+        this.area = area
         this.sprite = Render.Container()
         this.sprites = {
           main:this.sprite.addChild(Render.Sprite({frame:"regular/mew", anchor:[0.5, 1]})),
@@ -31,23 +54,76 @@
           shadow:null
         }
         console.debug(`loaded npc:`)
-        this.area = area
-        this.x = 1
-        this.y = -2
-        this.wander()
+        this.x = this.area.polygon.points[0]/TILE_SIZE
+        this.y = this.area.polygon.points[1]/TILE_SIZE
+        this.area.npcs.add(this)
+        if ((this.pattern === "loop")||(this.pattern === "patrol")) {
+          //Compute track
+            const points = this.area.polygon.points.map((n:number) => n/TILE_SIZE) as number[]
+            points.push(points[0], points[1])
+            this.track = [points[0], points[1]]
+            for (let i = 2; i < points.length; i+=2) {
+              const [px, py, nx, ny] = [points[i-2], points[i-1], points[i], points[i+1]]
+              const dx = nx - px
+              const dy = ny - py
+              let [x, y] = [px, py]
+              for (let j = 0; j < Math.abs(dx); j++)
+                this.track.push(x+=Math.sign(dx), y)
+              for (let j = 0; j < Math.abs(dy); j++)
+                this.track.push(x, y+=Math.sign(dy))
+            }
+          //Push reversed track on patrol
+            if (this.pattern === "patrol") {
+              const points = this.track.slice()
+              for (let i = points.length-4; i > 0; i-=2)
+                this.track.push(points[i], points[i+1])
+            }
+          //Remove duplicated cell on loop
+            if ((this.pattern === "loop")&&(this.track[0] === this.track[this.track.length-2])&&(this.track[1] === this.track[this.track.length-1])) {
+              this.track.pop()
+              this.track.pop()
+            }
+        }
       }
 
-      async wander() {
-        console.log("next!")
+    /** Update */
+      update(tick:number) {
+        if (Number.isInteger(tick)) {
+          this[this.pattern]()
+          this.render()
+        }
+      }
+
+    /** Fixed */
+      fixed() {}
+
+    /** Loop (follow track and loop over) */
+      loop() {
+        this._track_index = (this._track_index+2)%this.track.length
+        this.x = this.track[this._track_index]
+        this.y = this.track[this._track_index+1]
+      }
+
+    /** Patrol (follow track and reverse) */
+      patrol() {
+        this.loop()
+      }
+
+    /** Wander */
+      wander() {
         const {dx, dy} = [{dx:0, dy:0}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:-1}, {dx:0, dy:+1}][Math.floor(Math.random()/0.2)]
         if (this.area.contains({x:this.x+dx, y:this.y+dy})) {
           this.x += dx
           this.y += dy
-          this.render()
         }
-        setTimeout(() => this.wander(), 250)
       }
 
+    /** Lookaround */
+      lookaround() {
+        //TODO
+      }
+
+    /** Render */
       render() {
         const chunk = this.world.chunkAt(this)
         if (chunk) {
@@ -72,11 +148,11 @@
 
         }
 
-        if (!this.sprites.shadow) {
+        /*if (!this.sprites.shadow) {
           //Shadow
           const shadow = Render.Graphics({fill:[0, 0.5], ellipse:[0, 0, this.sprites.main.width/TILE_SIZE/3, this.sprites.main.width/TILE_SIZE/4]})
           this.sprites.shadow = this.sprite.addChildAt(shadow, 0)
-        }
+        }*/
 
 
       }

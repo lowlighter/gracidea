@@ -96,7 +96,6 @@
                     const tile = tiles[i]
                     if (tile >= 0) {
                       const y = i%CHUNK_SIZE, x = Math.floor(i/CHUNK_SIZE)
-                      if ((x === 0)&&(y === 1))
                       layer.addChild(Render.Sprite({frame:tile, x, y, z:y*CHUNK_SIZE+z}))
                     }
                   }

@@ -1,38 +1,34 @@
-name: "Build"
-
+name: Build
 on:
   push:
-    branches: [ master ]
+    branches:
+      - master
   pull_request:
-    branches: [ master ]
-
+    branches:
+      - master
 jobs:
-  build:
-    name: Build
+
+  # Run unit tests
+  test: Unit tests
+    name: Analyze code
     runs-on: ubuntu-latest
+      steps:
+        - name: Setup deno
+          uses: denoland/setup-deno@main
+        - name: Run tests
+          run: deno test --unstable --allow-read
 
-    steps:
-    - uses: actions/checkout@v2
-    - uses: actions/setup-node@v1
-      with:
-        node-version: 14.x
-    - run: npm clean-install
-    - run: npm test
-      env:
-        CI: true
-    - run: npm run diff-map-overworld -- --token=${{ secrets.BOT_TOKEN }} --event=${{ github.event_path }} --owner=${{ github.actor }}
-
-  codeql:
-    name: CodeQL
+  # Run CodeQL on branch
+  analyze:
+    name: Analyze code
     runs-on: ubuntu-latest
-
     steps:
-    - uses: actions/checkout@v2
-      with:
-        fetch-depth: 2
-    - run: git checkout HEAD^2
-      if: ${{ github.event_name == 'pull_request' }}
-    - uses: github/codeql-action/init@v1
-      with:
-        languages: javascript
-    - uses: github/codeql-action/analyze@v1
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: typescript
+          config-file: ./.github/config/codeql.yml
+      - name: Analyze code
+        uses: github/codeql-action/analyze@v1
