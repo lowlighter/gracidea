@@ -1,8 +1,8 @@
-# ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/gracidea.png) Gracidea
+# ![](/source/server/static/imgs/icons/gracidea.png) Gracidea
 
 ![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
 
-![](https://github.com/lowlighter/gracidea/blob/master/.github/README/animated_map.gif)
+![](.github/README/animated_map.gif)
 
 [Check it out live here !](https://gracidea.lecoq.io/)
 
@@ -35,10 +35,12 @@ Here are the games which were chosen for representing each region :
 
 | Kanto | Johto | Hoenn |
 | :---: | :---: | :---: |
-| ![Kanto](https://github.com/lowlighter/gracidea/blob/master/client/imgs/regions/kanto.png) | ![Johto](https://github.com/lowlighter/gracidea/blob/master/client/imgs/regions/johto.png) | ![Hoenn](https://github.com/lowlighter/gracidea/blob/master/client/imgs/regions/hoenn.png) |
+| ![Kanto](/source/server/static/imgs/regions/kanto.png) | ![Johto](/source/server/static/imgs/regions/johto.png) | ![Hoenn](/source/server/static/imgs/regions/hoenn.png) |
 
 
-## ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/contribute.png) Contributing
+## ![](/source/server/static/imgs/icons/contribute.png) Contributing
+
+> ⚠️ This project is currently migrating to typescript and deno and is currently being refactored. Contributions are currently disabled but feel free to come back again when it's finished!
 
 The *Pokémon* world is huge, and so is the amount of work needed to map it. Wether you want to complete the mapping, provide new sprites or propose new features, you're encouraged to open a pull request !
 
@@ -54,7 +56,7 @@ Checkout the [Wiki](https://github.com/lowlighter/gracidea/wiki) to learn more a
 * The maintainers of this repo cannot be held responsible of the usage of it from other users.
 * **Star** this repo if you like it !
 
-## ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/licenses.png) License and copyright
+## ![](/source/server/static/imgs/icons/licenses.png) License and copyright
 
 This project is released under the GNU AGPL license, which means that you can reuse this project for other open-source projects, provided that you leave the original license untouched.
 
@@ -62,7 +64,7 @@ This project is released under the GNU AGPL license, which means that you can re
 
 Sprites has been ripped, sorted and edited by [@lowlighter](https://github.com/lowlighter/) using Advance Map on *Pokémon Emerald*.
 
-## ![](https://github.com/lowlighter/gracidea/blob/master/client/imgs/icons/map.png) Note from the cartographer
+## ![](/source/server/static/imgs/icons/map.png) Note from the cartographer
 
 I always thought 2D *Pokémon* games had their own charm, and this is what gave birth to this project.
 I hope you'll be able to enjoy and (re)discover this marvellous franchise with this extensive map !
