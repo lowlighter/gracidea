@@ -6,7 +6,9 @@ tiled.registerMapFormat("gracidea", {
       const TILE_SIZE = 16
       const CHUNK_SIZE = 32
       const exported = {
-        pins:[],
+        pins:{
+          regions:{}
+        },
         areas:[],
         chunks:{},
       }
@@ -53,13 +55,24 @@ tiled.registerMapFormat("gracidea", {
 
                 //Export
                   switch (layer.name) {
+                    case "regions":{
+                      const properties = object.properties()
+                      exported.pins.regions[object.name] = {
+                        id:object.id,
+                        mx:properties.mx,
+                        my:properties.my,
+                        pins:[]
+                      }
+                    }
                     case "pins":{
-                      exported[layer.name].push({
+                      const properties = object.properties()
+                      exported.pins.regions[properties.region].pins.push({
                         id:object.id,
                         name:object.name,
-                        type:object.type,
                         x:points[0],
                         y:points[1],
+                        mx:properties.mx,
+                        my:properties.my
                       })
                       break
                     }
