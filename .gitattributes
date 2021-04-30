@@ -2,6 +2,7 @@
 * text=auto
 
 # Linguist ignore
-maps/* linguist-vendored
 .github/* linguist-vendored
-package-lock.json linguist-generated
+*.tps linguist-generated
+*.tsx linguist-generated
+*.tmx linguist-generated
