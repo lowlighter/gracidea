@@ -52,7 +52,6 @@ tiled.registerMapFormat("gracidea", {
                       bounds.my = Math.max(bounds.my, y)
                       points.push(x, y)
                     })
-
                 //Export
                   switch (layer.name) {
                     case "regions":{
@@ -63,6 +62,7 @@ tiled.registerMapFormat("gracidea", {
                         my:properties.my,
                         pins:[]
                       }
+                      continue
                     }
                     case "pins":{
                       const properties = object.properties()
@@ -74,13 +74,14 @@ tiled.registerMapFormat("gracidea", {
                         mx:properties.mx,
                         my:properties.my
                       })
-                      break
+                      continue
                     }
                     default:{
                       exported.areas.push({
                         id:object.id,
                         name:object.name,
                         points:points,
+                        type:layer.name,
                         bounds:{
                           x:bounds.x,
                           y:bounds.y,
@@ -89,7 +90,7 @@ tiled.registerMapFormat("gracidea", {
                         },
                         properties:object.properties()
                       })
-                      break
+                      continue
                     }
                   }
               }
@@ -99,5 +100,6 @@ tiled.registerMapFormat("gracidea", {
       const file = new TextFile(fileName, TextFile.WriteOnly)
       file.write(JSON.stringify(exported))
       file.commit()
+      tiled.log("Done!")
   },
 })

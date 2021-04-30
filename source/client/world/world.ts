@@ -5,6 +5,7 @@
   import { Camera } from "./camera.ts"
   import { Minimap } from "./minimap.ts"
   import { CHUNK_SIZE } from "../render/settings.ts"
+  import type { App } from "../app.ts"
 
 /**
  * World.
@@ -35,8 +36,12 @@
     /** World name */
       readonly name = "overworld"
 
+    /** App */
+      readonly app:App
+
     /** Constructor */
-      constructor() {
+      constructor({app}:{app:App}) {
+        this.app = app
         const sprite = Render.app.stage.addChild(Render.Container())
         this.sprites = {
           world:sprite,

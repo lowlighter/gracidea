@@ -1,7 +1,7 @@
 //Imports
   import { Render } from "../render/render.ts"
   import { Renderable } from "./renderable.ts"
-  import { Area } from "./area.ts"
+  import { Area, AreaData } from "./area.ts"
   import { CHUNK_SIZE } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import { App } from "./../app.ts"
@@ -12,12 +12,7 @@
     chunk:{
       layers:{[key:string]:number[]}
     },
-    areas:Array<{
-      id:number
-      name:string,
-      points:number[],
-      properties:{[key:string]:unknown}
-    }>
+    areas:AreaData[]
   }
 
 /**
@@ -39,12 +34,17 @@
     /** Layers */
       readonly layers = new Map()
 
+    /** Areas */
       readonly areas = new Set()
+
+    /** World */
+      readonly world:World
 
     /** Constructor */
       constructor({id, world}:{id:string, world:World}) {
         super({world})
         this.id = id
+        this.world = world
         ;[this.x, this.y] = this.id.split(";").map(n => Number(n)*CHUNK_SIZE)
         this.width = this.height = CHUNK_SIZE
         this.sprite = this.world.sprites.chunks.addChild(Render.Container({x:this.x, y:this.y}))
@@ -61,6 +61,7 @@
         return super.destructor()
       }
 
+    /** Show sprite */
       show() {
         super.show()
         this.data?.areas?.forEach(area => Area.from({data:area, chunk:this})?.show())
@@ -96,20 +97,11 @@
                     if (tile >= 0) {
                       const y = i%CHUNK_SIZE, x = Math.floor(i/CHUNK_SIZE)
                       if ((x === 0)&&(y === 1))
-                      console.log(sublayers[z], x, y, z, y*CHUNK_SIZE+z)
                       layer.addChild(Render.Sprite({frame:tile, x, y, z:y*CHUNK_SIZE+z}))
                     }
                   }
               }
           }
-        //
-
-
-
-        }
-
-      tileEnvAt({x, y}:{x:number, y:number}) {
-        return this.data?.chunk?.layers?.["1A"]?.[x*CHUNK_SIZE+y] ?? NaN > 0 ? "GROUND" : "WATER"
       }
 
   }

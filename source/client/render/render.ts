@@ -1,14 +1,11 @@
 //Imports
-  import { TILE_SIZE, ANIMATED } from "./settings.ts"
+  import { global, TILE_SIZE, ANIMATED } from "./settings.ts"
 
 //Imports
   const imports = [
     "https://cdn.skypack.dev/pin/pixi.js@v6.0.2-2cUO8JQP1lUQiq9yVX7X/mode=imports,min/optimized/pixijs.js",
     "https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js",
   ]
-
-/** Window */
-  const global = globalThis as any
 
 /**
  * Render engine.
@@ -116,7 +113,7 @@
       }
 
     /** Tiling sprite */
-      static TilingSprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, width = 0, height = 0}:{frame?:any, x?:number, y?:number, width?:number, height?:number}) {
+      static TilingSprite({frame = Render.engine.Texture.EMPTY, x = 0, y = 0, z = NaN, width = 0, height = 0}:{frame?:any, x?:number, y?:number, z?:number, width?:number, height?:number}) {
         let sprite = Render.engine.TilingSprite.from(`${frame}`, {width:width*TILE_SIZE, height:height*TILE_SIZE})
         sprite.position.set(x*TILE_SIZE, y*TILE_SIZE)
         if (!Number.isNaN(z))

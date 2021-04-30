@@ -49,7 +49,7 @@
       readonly maxItems = 100 as number
 
     /** Constructor */
-      constructor({x = 0, y = 0, width = 400, height = 400, parent = null, maxItems = 20, maxDepth = 20}:{x?:number, y?:number, width?:number, height?:number, parent?:Quadtree<T>|null, maxItems?:number, maxDepth?:number} = {}) {
+      constructor({x = 0, y = 0, width = 400, height = 400, parent = null, maxItems = 100, maxDepth = 100}:{x?:number, y?:number, width?:number, height?:number, parent?:Quadtree<T>|null, maxItems?:number, maxDepth?:number} = {}) {
         this.x = x
         this.y = y
         this.width = width

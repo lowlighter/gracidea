@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="24" nextobjectid="235">
+<map version="1.5" tiledversion="1.5.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="259">
  <editorsettings>
   <export target="../../source/server/assets/maps/overworld.gracidea" format="gracidea"/>
  </editorsettings>
@@ -56422,74 +56422,88 @@
 </chunk>
   </data>
  </layer>
- <objectgroup id="19" name="locations">
-  <object id="74" name="3-littleroot" type="location" x="5152" y="-14928" width="384" height="352"/>
-  <object id="76" name="3-oldale" type="location" x="5152" y="-15568" width="384" height="320"/>
-  <object id="77" name="3-101" type="location" x="5152" y="-15248" width="384" height="320"/>
-  <object id="81" name="3-103" type="location" x="5152" y="-15904" width="1312" height="336"/>
-  <object id="82" name="3-petalburg-w" type="location" x="3888" y="-15728" width="480" height="512"/>
-  <object id="83" name="3-102" type="location" x="4368" y="-15584" width="784" height="368"/>
-  <object id="88" name="3-rustboro" type="location" x="3264" y="-17392" width="624" height="848"/>
-  <object id="89" name="3-fallarbor" type="location" x="4480" y="-19392" width="496" height="336"/>
-  <object id="91" name="3-lavaridge" type="location" x="5504" y="-18448" width="464" height="336"/>
-  <object id="92" name="3-mauville" type="location" x="6448" y="-17232" width="736" height="400"/>
-  <object id="93" name="3-slateport" type="location" x="6464" y="-15152" width="656" height="864"/>
-  <object id="95" name="3-104" type="location" x="3264" y="-16544" width="624" height="1360"/>
-  <object id="97" name="3-105" type="location" x="3264" y="-15184" width="624" height="1216"/>
-  <object id="98" name="3-106" type="location" x="3264" y="-13968" width="1216" height="304"/>
-  <object id="99" name="3-dewford" type="location" x="4192" y="-13664" width="432" height="384"/>
-  <object id="100" name="3-107" type="location" x="4640" y="-13648" width="864" height="352"/>
-  <object id="101" name="3-108" type="location" x="5504" y="-13648" width="960" height="352"/>
-  <object id="102" name="3-109" type="location" x="6464" y="-14288" width="656" height="1024"/>
-  <object id="103" name="3-110" type="location" x="6464" y="-16832" width="656" height="1680"/>
-  <object id="104" name="3-118" type="location" x="7184" y="-17168" width="1248" height="320"/>
-  <object id="105" name="3-114" type="location" x="3952" y="-19392" width="528" height="1280"/>
-  <object id="106" name="3-113" type="location" x="4976" y="-19392" width="1568" height="304"/>
-  <object id="108" name="3-115" type="location" x="3264" y="-18736" width="624" height="1344"/>
-  <object id="109" name="3-116" type="location" x="3888" y="-17456" width="1360.09" height="320"/>
-  <object id="110" name="3-verdanturf" type="location" x="5168" y="-17184" width="368" height="352"/>
-  <object id="111" name="3-117" type="location" x="5536" y="-17184" width="912" height="352"/>
-  <object id="113" name="3-112" type="location" x="5968" y="-19088" width="576" height="976"/>
-  <object id="114" name="3-111" type="location" x="6544" y="-19392" width="576" height="2160"/>
-  <object id="117" name="0-faraway_island" type="1-interest" x="-464" y="-720" width="1008" height="1872"/>
-  <object id="118" name="1-pallet" type="location" x="23728" y="-26528" width="351.333" height="320"/>
-  <object id="119" name="1-viridian" type="location" x="23568" y="-27808" width="656" height="592"/>
-  <object id="120" name="1-1" type="location" x="23728" y="-27216" width="352" height="688"/>
-  <object id="127" name="3-oldale-ruins" type="location" x="5648" y="-15456" width="272" height="272"/>
-  <object id="134" name="3-108-w" type="wild" x="5504" y="-13536">
+ <objectgroup id="24" name="regions">
+  <object id="254" name="faraway-island" x="-464" y="-720" width="1008" height="1872">
    <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
+    <property name="mx" type="int" value="-300"/>
+    <property name="my" type="int" value="290"/>
    </properties>
-   <polygon points="0,0 960,0 960,80 0,80"/>
   </object>
-  <object id="148" name="1-cinnabar" type="location" x="23728" y="-24720" width="384" height="400"/>
-  <object id="149" name="1-fuchsia" type="location" x="25808" y="-25872" width="816" height="624"/>
-  <object id="201" name="3-chimney" type="location" x="4656" y="-19056" width="848" height="976"/>
-  <object id="203" name="3-119" type="location" x="7648" y="-19408" width="768" height="2240"/>
-  <object id="204" name="3-fortree" type="location" x="8416" y="-19408" width="592" height="352"/>
-  <object id="205" name="3-120" type="location" x="9008" y="-19408" width="640" height="1600"/>
-  <object id="206" name="3-121" type="location" x="9648" y="-18112" width="1280" height="304"/>
-  <object id="207" name="3-safari" type="location" x="9680" y="-19616" width="2016" height="1280"/>
-  <object id="208" name="3-lilycove" x="10928" y="-18288" width="1072" height="640"/>
-  <object id="209" name="3-123" type="location" x="8432" y="-17168" width="2256" height="320"/>
-  <object id="210" name="3-122" type="location" x="9968" y="-17808" width="688" height="640"/>
-  <object id="217" name="3-132" type="location" x="7120" y="-15280" width="2544" height="704"/>
-  <object id="218" name="3-133" type="location" x="9664" y="-15280" width="1280" height="704"/>
-  <object id="219" name="3-pacifidlog" type="location" x="10944" y="-15280" width="320" height="704"/>
-  <object id="221" name="3-sky-pillar" type="location" x="11648" y="-15632" width="400" height="528"/>
-  <object id="234" name="3-petalburg" type="1-town" x="4224" y="-15456" width="16" height="16">
+  <object id="255" name="hoenn" x="2880" y="-20048" width="13872" height="7376">
    <properties>
-    <property name="mx" type="int" value="40"/>
-    <property name="my" type="int" value="100"/>
+    <property name="mx" type="int" value="-300"/>
+    <property name="my" type="int" value="140"/>
+   </properties>
+  </object>
+  <object id="256" name="kanto" x="22624" y="-28624" width="4656" height="4480">
+   <properties>
+    <property name="mx" type="int" value="0"/>
+    <property name="my" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="257" name="johto" x="18640" y="-28592" width="3136" height="2704">
+   <properties>
+    <property name="mx" type="int" value="-166"/>
+    <property name="my" type="int" value="0"/>
+   </properties>
+  </object>
+  <object id="258" name="sevii-islands" x="23744" y="-23872" width="1632" height="1376">
+   <properties>
+    <property name="mx" type="int" value="0"/>
+    <property name="my" type="int" value="130"/>
    </properties>
   </object>
  </objectgroup>
- <objectgroup id="15" name="creatures">
+ <objectgroup id="19" name="locations">
+  <object id="74" name="littleroot-town" x="5152" y="-14928" width="384" height="352"/>
+  <object id="76" name="oldale-town" x="5152" y="-15568" width="384" height="320"/>
+  <object id="77" name="hoenn-route-101" x="5152" y="-15248" width="384" height="320"/>
+  <object id="81" name="hoenn-route-103" x="5152" y="-15904" width="1312" height="336"/>
+  <object id="82" name="petalburg-city" x="3888" y="-15728" width="480" height="512"/>
+  <object id="83" name="hoenn-route-102" x="4368" y="-15584" width="784" height="368"/>
+  <object id="88" name="rustboro-city" x="3264" y="-17392" width="624" height="848"/>
+  <object id="89" name="fallarbor-town" x="4480" y="-19392" width="496" height="336"/>
+  <object id="91" name="lavaridge-town" x="5504" y="-18448" width="464" height="336"/>
+  <object id="92" name="mauville-city" x="6448" y="-17232" width="736" height="400"/>
+  <object id="93" name="slateport-city" x="6464" y="-15152" width="656" height="864"/>
+  <object id="95" name="hoenn-route-104" x="3264" y="-16544" width="624" height="1360"/>
+  <object id="97" name="hoenn-route-105" x="3264" y="-15184" width="624" height="1216"/>
+  <object id="98" name="hoenn-route-106" x="3264" y="-13968" width="1216" height="304"/>
+  <object id="99" name="dewford-town" x="4192" y="-13664" width="432" height="384"/>
+  <object id="100" name="hoenn-route-107" x="4624" y="-13648" width="880" height="352"/>
+  <object id="101" name="hoenn-route-108" x="5504" y="-13648" width="960" height="352"/>
+  <object id="102" name="hoenn-route-109" x="6464" y="-14288" width="656" height="1024"/>
+  <object id="103" name="hoenn-route-110" x="6464" y="-16832" width="656" height="1680"/>
+  <object id="104" name="hoenn-route-118" x="7184" y="-17168" width="1248" height="320"/>
+  <object id="105" name="hoenn-route-114" x="3952" y="-19392" width="528" height="1280"/>
+  <object id="106" name="hoenn-route-113" x="4976" y="-19392" width="1568" height="304"/>
+  <object id="108" name="hoenn-route-115" x="3264" y="-18736" width="624" height="1344"/>
+  <object id="109" name="hoenn-route-116" x="3888" y="-17456" width="1360.09" height="320"/>
+  <object id="110" name="verdanturf-town" x="5168" y="-17184" width="368" height="352"/>
+  <object id="111" name="hoenn-route-117" x="5536" y="-17184" width="912" height="352"/>
+  <object id="113" name="hoenn-route-112" x="5968" y="-19088" width="576" height="976"/>
+  <object id="114" name="hoenn-route-111" x="6544" y="-19392" width="576" height="2160"/>
+  <object id="118" name="pallet-town" x="23728" y="-26528" width="351.333" height="320"/>
+  <object id="119" name="viridian-city" x="23568" y="-27808" width="656" height="592"/>
+  <object id="120" name="kanto-route-1" x="23728" y="-27216" width="352" height="688"/>
+  <object id="127" name="3-oldale-ruins" type="location" x="5648" y="-15456" width="272" height="272"/>
+  <object id="148" name="cinnabar-island" x="23728" y="-24720" width="384" height="400"/>
+  <object id="149" name="fuchsia-city" x="25808" y="-25872" width="816" height="624"/>
+  <object id="201" name="mt-chimney" x="4656" y="-19056" width="848" height="976"/>
+  <object id="203" name="hoenn-route-119" x="7648" y="-19408" width="768" height="2240"/>
+  <object id="204" name="fortree-city" x="8416" y="-19408" width="592" height="352"/>
+  <object id="205" name="hoenn-route-120" x="9008" y="-19408" width="640" height="1600"/>
+  <object id="206" name="hoenn-route-121" x="9648" y="-18112" width="1280" height="304"/>
+  <object id="208" name="lilycove-city" x="10928" y="-18288" width="1072" height="640"/>
+  <object id="209" name="hoenn-route-123" x="8432" y="-17168" width="2256" height="320"/>
+  <object id="210" name="hoenn-route-122" x="9968" y="-17808" width="688" height="640"/>
+  <object id="217" name="hoenn-route-132" x="7120" y="-15280" width="2544" height="704"/>
+  <object id="218" name="hoenn-route-133" x="9664" y="-15280" width="1280" height="704"/>
+  <object id="219" name="pacifidlog-town" x="10944" y="-15280" width="320" height="704"/>
+  <object id="221" name="sky-pillar" x="11648" y="-15632" width="400" height="528"/>
+  <object id="235" name="abandoned-ship" x="5904" y="-13600" width="137" height="79"/>
+ </objectgroup>
+ <objectgroup id="15" name="creatures" visible="0">
   <object id="3" name="3-101-g" type="wild" x="5216" y="-15040">
    <properties>
     <property name="pk_poochyena" type="float" value="0.45"/>
@@ -56970,7 +56984,7 @@
    <polygon points="0,0 48,0 48,96 0,144"/>
   </object>
  </objectgroup>
- <objectgroup id="20" name="people">
+ <objectgroup id="20" name="people" visible="0">
   <object id="123" type="trainer" x="5344" y="-14752">
    <properties>
     <property name="categorie" value="guy_0"/>
@@ -57001,22 +57015,116 @@
   </object>
  </objectgroup>
  <objectgroup id="23" name="pins">
-  <object id="226" name="0-faraway_island" x="-224" y="1040" width="16" height="16">
+  <object id="226" name="faraway-island" x="-224" y="1040" width="16" height="16">
    <properties>
-    <property name="mx" type="int" value="-14"/>
-    <property name="my" type="int" value="65"/>
+    <property name="mx" type="int" value="2"/>
+    <property name="my" type="int" value="7"/>
+    <property name="region" value="faraway-island"/>
    </properties>
   </object>
-  <object id="230" name="3-littleroot" type="1-town" x="5264" y="-14784" width="16" height="16">
+  <object id="230" name="littleroot-town" x="5264" y="-14784" width="16" height="16">
    <properties>
     <property name="mx" type="int" value="58"/>
     <property name="my" type="int" value="115"/>
+    <property name="region" value="hoenn"/>
    </properties>
   </object>
-  <object id="232" name="3-oldale" type="1-town" x="5280" y="-15296" width="16" height="16">
+  <object id="232" name="oldale-town" x="5280" y="-15296" width="16" height="16">
    <properties>
     <property name="mx" type="int" value="58"/>
     <property name="my" type="int" value="100"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="237" name="petalburg-city" x="4224" y="-15456" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="40"/>
+    <property name="my" type="int" value="100"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="238" name="rustboro-city" x="3519" y="-16865" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="25"/>
+    <property name="my" type="int" value="85"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="239" name="dewford-town" x="4256" y="-13472" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="40"/>
+    <property name="my" type="int" value="130"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="240" name="slateport-city" x="6768" y="-14928" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="75"/>
+    <property name="my" type="int" value="110"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="241" name="mauville-city" x="6816" y="-17072" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="75"/>
+    <property name="my" type="int" value="85"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="242" name="verdanturf-town" x="5440" y="-17104" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="58"/>
+    <property name="my" type="int" value="85"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="243" name="fallarbor-town" x="4768" y="-19280" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="25"/>
+    <property name="my" type="int" value="20"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="244" name="fortree-city" x="8464" y="-19296" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="95"/>
+    <property name="my" type="int" value="20"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="245" name="lilycove-city" x="11312" y="-18048" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="175"/>
+    <property name="my" type="int" value="40"/>
+    <property name="region" value="hoenn"/>
+   </properties>
+  </object>
+  <object id="246" name="cinnabar-island" x="23920" y="-24432" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="10"/>
+    <property name="my" type="int" value="120"/>
+    <property name="region" value="kanto"/>
+   </properties>
+  </object>
+  <object id="247" name="pallet-town" x="23808" y="-26416" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="10"/>
+    <property name="my" type="int" value="95"/>
+    <property name="region" value="kanto"/>
+   </properties>
+  </object>
+  <object id="248" name="fuchsia-city" x="26224" y="-25392" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="80"/>
+    <property name="my" type="int" value="105"/>
+    <property name="region" value="kanto"/>
+   </properties>
+  </object>
+  <object id="251" name="lavaridge-town" x="5648" y="-18336" width="16" height="16">
+   <properties>
+    <property name="mx" type="int" value="70"/>
+    <property name="my" type="int" value="40"/>
+    <property name="region" value="hoenn"/>
    </properties>
   </object>
  </objectgroup>

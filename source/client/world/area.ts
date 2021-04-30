@@ -8,8 +8,10 @@
   import { NPC } from "./npc.ts"
 
 /** Area data */
-  type AreaData = {
+  export type AreaData = {
     id:number
+    name:string
+    type:string,
     points:number[]
     properties:{[key:string]:unknown}
   }
@@ -26,11 +28,11 @@
     /** Sprite */
       readonly sprite:ReturnType<typeof Render.Container>
 
-    /** Area data */
-      readonly data:AreaData
+    /** Data */
+      private readonly data:AreaData
 
     /** Polygon */
-      readonly polygon:ReturnType<typeof Render.Polygon>
+      private readonly polygon:ReturnType<typeof Render.Polygon>
 
     /** Constructor */
       constructor({id, data, world}:{id:string, data:AreaData, world:World}) {
@@ -41,7 +43,6 @@
         this.sprite = Render.Container()
         if (App.debugLogs)
           console.debug(`loaded area: ${this.id}`)
-        setTimeout(() => this.spawn(), 1000)
       }
 
     /** Test if point is within area */
@@ -49,14 +50,44 @@
         return this.polygon.contains(x*TILE_SIZE, y*TILE_SIZE)
       }
 
+    /** Show sprite */
       show() {
         if ((this as any)._debug)
         (this as any)._debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
         return super.show()
       }
 
+    /** Render */
+      render() {
+        //Debug
+          this.debug(App.debugAreas, () => this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x00FF00, .5], fill:[0x00FF00, .25], polygon:this.polygon})))
+
+        //TEST
+          setTimeout(() => this.spawn(), 1000)
+      }
+
+    /** Destructor */
+      destructor() {
+        if (App.debugLogs)
+          console.debug(`unloaded loaded area: ${this.id}`)
+        return super.destructor()
+      }
+
+    /** Create new area from chunk */
+      static from({data, chunk}:{data:AreaData, chunk:Chunk}) {
+        const id = `${data.id}`
+        if (!chunk.world.loaded.areas.has(id))
+          chunk.world.loaded.areas.set(id, new Area({id, data, world:chunk.world}))
+        const area = chunk.world.loaded.areas.get(id) as Area
+        chunk.areas.add(area)
+        return area
+      }
+
+
+
 
       spawn() {
+        console.log(this.data.properties)
         if (this.data.properties.max_creatures) {
           //const species = Object.key
 
@@ -97,25 +128,6 @@
       }
 
 
-    /** Render */
-      render() {
-        //Debug
-          this.debug(App.debugAreas, () => this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x00FF00, .5], fill:[0x00FF00, .25], polygon:this.polygon})))
-      }
 
-    /** Destructor */
-      destructor() {
-        if (App.debugLogs)
-          console.debug(`unloaded loaded area: ${this.id}`)
-        return super.destructor()
-      }
 
-      static from({data, chunk}:{data:AreaData, chunk:Chunk}) {
-        const id = `${data.id}`
-        if (!chunk.world.loaded.areas.has(id))
-          chunk.world.loaded.areas.set(id, new Area({id, data, world:chunk.world}))
-        const area = chunk.world.loaded.areas.get(id) as Area
-        chunk.areas.add(area)
-        return area
-      }
   }

@@ -8,7 +8,7 @@
   export abstract class Positionable {
 
     /** World */
-      private readonly world:World
+      protected readonly world:World
 
     /** X coordinate */
       x:number

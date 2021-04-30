@@ -4,10 +4,10 @@
   import type { World } from "./world.ts"
 
 /** Mini-map data */
-  type MinimapData = {regions:RegionData[]}
+  type MinimapData = {regions:{[key:string]:RegionData}}
 
 /** Mini-map region data */
-  type RegionData = {name:string, mx:number, my:number, pins:PinData[]}
+  type RegionData = {mx:number, my:number, pins:PinData[]}
 
 /** Mini-map pin data */
   type PinData = {name:string, mx:number, my:number, x:number, y:number}
@@ -20,7 +20,7 @@
     /** Sprite */
       readonly sprite:ReturnType<typeof Render.Container>
 
-    /** World map data */
+    /** Mini-map data */
       private data = null as MinimapData|null
 
     /** Constructor */
@@ -56,7 +56,7 @@
           if (!this.data)
             this.data = await fetch(`/map/${this.world.name}/pins`).then(res => res.json()) as MinimapData
         //Iterate through regions
-          for (const {name, mx, my, pins} of this.data.regions) {
+          for (const [name, {mx, my, pins}] of Object.entries(this.data.regions)) {
             const sprite = this.sprite.addChild(Render.Sprite({frame:`imgs/regions/${name}.png`}))
             sprite.position.set(mx, my)
             //Iterate through pins

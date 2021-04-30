@@ -42,7 +42,7 @@
       private debounce = false
 
     /** Render */
-      async render() {
+      async render({DX = 1, DY = 1, DM = 3}:{DX?:number, DY?:number, DM?:number} = {}) {
         //Handle throttle and debouncing
           if (this.throttle) {
             this.debounce = true
@@ -55,10 +55,7 @@
           const {x, y} = this
           const X = Math.floor(x/CHUNK_SIZE)
           const Y = Math.floor(y/CHUNK_SIZE)
-          const DX = 1
-          const DY = 1
-          const DM = 3
-        //Load visible chunks
+        //Load and render visible chunks
           const visible = [] as string[]
           for (let x = X-DX; x <= X+DX; x++)
             for (let y = Y-DY; y <= Y+DY; y++)
@@ -78,38 +75,31 @@
               }
             }
           })
-        //
+        //Load and render visible areas
           const areas = new Set()
           this.world.loaded.chunks.forEach(chunk => chunk.areas.forEach(area => areas.add(area)))
+        //Unload unrevelant areas
           this.world.loaded.areas.forEach((area, id) => {
             if (!areas.has(area)) {
               this.world.loaded.areas.delete(id)
               area.destructor()
             }
           })
-
-
-
-          /*
-          {
-            const data = await fetch(`/map/overworld/pins`).then(res => res.json())
-            console.log(data)
-          }
-*/
-
-
-        setTimeout(() => {
-          this.throttle = false
-          if (this.debounce) {
-            this.debounce = false
-            this.render()
-          }
-        }, 200)
-
+        //Update controller data
+          this.world.app?.controller?.updateDOM()
+        //Handle throttle and debouncing
+          setTimeout(() => {
+            this.throttle = false
+            if (this.debounce) {
+              this.debounce = false
+              this.render()
+            }
+          }, 200)
       }
 
+    /** Current location */
       get location() {
-        return []// [...this.world.loaded.locations.values()].filter(location => location.contains(this)).map(({name}) => name)
+        return [...this.world.loaded.areas.values()].filter(area => ((area.data.type === "locations")||(area.data.type === "regions"))&&(area.contains(this))).map(({data}) => data.name)
       }
 
     /** Move camera to given position */

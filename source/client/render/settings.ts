@@ -1,3 +1,6 @@
+/** Window */
+  export const global = globalThis as any
+
 /** Tile size in pixels */
   export const TILE_SIZE = 16
 

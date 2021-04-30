@@ -2,7 +2,6 @@
   import { Quadtree } from "./structs/quadtree.ts"
   import { Application, Router, HttpError } from "https://deno.land/x/oak/mod.ts"
   import { parse } from "https://deno.land/std@0.95.0/flags/mod.ts"
-  //import pokemon from "https://cdn.skypack.dev/pokemon"
 
   const MAPS_DIR = `${Deno.cwd()}/source/server/assets/maps`
   const CHUNK_SIZE = 32
@@ -15,11 +14,8 @@
   const maps = {} as {[key:string]:any}
   for await (const {name:file, isFile} of Deno.readDir(MAPS_DIR)) {
     if ((isFile)&&(/[.]gracidea$/.test(file))) {
-      const name = file.replace(/[.]gracidea$/, "")
-      maps[name] = {
-        ...JSON.parse(await Deno.readTextFile(`${MAPS_DIR}/${file}`)),
-        pins:JSON.parse(await Deno.readTextFile(`${MAPS_DIR}/${file}.pins`)),
-      }
+      const {name} = file.match(/^(?<name>[\s\S]+)[.]gracidea$/)?.groups ?? {}
+      maps[name] = JSON.parse(await Deno.readTextFile(`${MAPS_DIR}/${file}`))
       console.debug(`loaded ${name}`)
     }
   }
