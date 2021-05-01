@@ -1,7 +1,7 @@
 //Imports
   import { Render } from "../render/render.ts"
   import type { World } from "../world/world.ts"
-  import type { App } from "../app.ts"
+  import { App } from "../app.ts"
   import { global } from "./../render/settings.ts"
 
 /** Event */
@@ -58,9 +58,22 @@
               break
           }
         })
-        global.document.querySelector("[data-for='map']")?.addEventListener("click", () => {
-          this.world.minimap.toggle()
+        global.document.querySelector("[data-control-for='map']")?.addEventListener("click", () => this.world.minimap.toggle())
+        global.document.querySelector("[data-control-for='debug']")?.addEventListener("click", () => {
+          global.document.querySelector("nav.debug").style.display = global.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex"
         })
+        Object.keys(App.debug).forEach(key => {
+          const input = global.document.createElement("input")
+          input.setAttribute("data-control-for", key)
+          input.setAttribute("type", "checkbox")
+          input.checked = App.debug[key as keyof typeof App.debug]
+          input.addEventListener("change", () => App.debug[key as keyof typeof App.debug] = input.checked)
+          const label = global.document.createElement("label")
+          label.innerText = key
+          label.prepend(input)
+          global.document.querySelector(".debug")?.append(label)
+        })
+        console.log(App.debug)
       }
 
     /** update DOM */

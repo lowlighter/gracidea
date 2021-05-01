@@ -1,13 +1,10 @@
 //Imports
   import { Render } from "../render/render.ts"
   import { Renderable } from "./renderable.ts"
-  import { TILE_SIZE, CHUNK_SIZE } from "../render/settings.ts"
+  import { TILE_SIZE, CHUNK_SIZE, global } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import { Chunk } from "./chunk.ts"
   import { App } from "./../app.ts"
-
-/** Window */
-  const global = globalThis as any
 
 /**
  * World camera.
@@ -41,6 +38,13 @@
     /** Debounce rendering */
       private debounce = false
 
+    /** Debug sprite */
+      debug() {
+        if (!this._debug)
+          this._debug = this.world.sprites.debug.addChild(Render.Graphics({fill:[0xFF0000, .5], rect:[0, 0, 1, 1]}))
+        return super.debug(App.debug.camera)
+      }
+
     /** Render */
       render({DX = 1, DY = 1, DM = 3}:{DX?:number, DY?:number, DM?:number} = {}) {
         //Handle throttle and debouncing
@@ -50,7 +54,7 @@
           }
           this.throttle = true
         //Debug
-          this.debug(App.debugCamera, () => this.world.sprites.debug.addChild(Render.Graphics({fill:[0xFF0000, .5], rect:[0, 0, 1, 1]})))
+          this.debug()
         //Extract current tile and chunk positions
           const {x, y} = this
           const X = Math.floor(x/CHUNK_SIZE)

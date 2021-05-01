@@ -48,13 +48,13 @@
         ;[this.x, this.y] = this.id.split(";").map(n => Number(n)*CHUNK_SIZE)
         this.width = this.height = CHUNK_SIZE
         this.sprite = this.world.sprites.chunks.addChild(Render.Container({x:this.x, y:this.y}))
-        if (App.debugChunks)
+        if (App.debug.chunks)
           console.debug(`loaded chunk: ${this.id}`)
       }
 
     /** Destructor */
       destructor() {
-        if (App.debugChunks)
+        if (App.debug.chunks)
           console.debug(`unloaded loaded chunk: ${this.id}`)
         this.layers.clear()
         this.areas.clear()
@@ -67,10 +67,15 @@
         this.data?.areas?.forEach(area => Area.from({data:area, chunk:this})?.show())
       }
 
+    /** Debug sprite */
+      debug() {
+        if (!this._debug)
+          this._debug = this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x0000FF, .5], fill:[0x0000FF, .25], rect:[0, 0, this.width, this.height]}))
+        return super.debug(App.debug.chunks)
+      }
+
     /** Render */
       async render() {
-        //Debug
-          this.debug(App.debugChunks, () => this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x0000FF, .5], fill:[0x0000FF, .25], rect:[0, 0, this.width, this.height]})))
         //Load chunk data
           if (!this.data)
             this.data = await fetch(`/map/overworld/${this.id}`).then(res => res.json())

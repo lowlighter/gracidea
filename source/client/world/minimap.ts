@@ -2,6 +2,7 @@
   import { Render } from "../render/render.ts"
   import { Renderable } from "./renderable.ts"
   import type { World } from "./world.ts"
+  import { global } from "../render/settings.ts"
 
 /** Mini-map data */
   type MinimapData = {regions:{[key:string]:RegionData}}
@@ -70,6 +71,19 @@
                 pin.on("tap", () => this.moveTo({x, y}))
               }
           }
+        //Center mini-map
+          let mx = Infinity, my = Infinity, Mx = -Infinity, My = -Infinity
+          this.sprite.children.forEach((sprite:any) => {
+            mx = Math.min(mx, sprite.x)
+            my = Math.min(my, sprite.y)
+            Mx = Math.max(Mx, sprite.x+sprite.width)
+            My = Math.max(My, sprite.y+sprite.height)
+          })
+          const width = (Mx-mx)/2, height = (My-my)/2
+          this.sprite.position.set(
+            -mx+(width+global.document.body.clientWidth/2)/2,
+            -my+(height-global.document.body.clientHeight/2)/2,
+          )
       }
 
     /** Move camera to given position and hide minimap */

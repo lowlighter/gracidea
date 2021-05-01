@@ -19,7 +19,7 @@
       destroyed = false
 
     /** Debug sprite */
-      private _debug:ReturnType<typeof Render.Graphics>|null
+      protected _debug:ReturnType<typeof Render.Graphics>|null
 
     /** Render method */
       protected abstract render():void
@@ -38,6 +38,7 @@
           this.render()
         }
         this.sprite.visible = true
+        this.debug()
       }
 
     /** Toggle sprite visibilitu */
@@ -46,16 +47,10 @@
       }
 
     /** Debug sprite */
-      protected debug(enabled = false, constructor = null as Function|null) {
-        if (enabled) {
-          if (!this._debug)
-            this._debug = constructor?.()
+      protected debug(visible = false) {
+        if (this._debug) {
+          this._debug.visible = visible
           this._debug.position.set(this.x*TILE_SIZE, this.y*TILE_SIZE)
-        }
-        else if (this._debug) {
-          this._debug.parent?.removeChild(this._debug)
-          this._debug.destroy()
-          this._debug = null
         }
       }
 

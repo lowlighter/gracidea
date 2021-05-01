@@ -32,10 +32,13 @@
         })
       }
 
-      static debugLogs = true
-      static debugChunks = true
-      static debugAreas = true
-      static debugCamera = true
+    /** Debug */
+      static debug = {
+        logs:true,
+        chunks:true,
+        areas:true,
+        camera:true,
+      }
 
   }
 

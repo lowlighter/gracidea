@@ -44,7 +44,7 @@
         this.data = data
         this.polygon = Render.Polygon(this.data.points)
         this.sprite = Render.Container()
-        if (App.debugLogs)
+        if (App.debug.logs)
           console.debug(`loaded area: ${this.id}`)
       }
 
@@ -53,27 +53,24 @@
         return this.polygon.contains(x*TILE_SIZE, y*TILE_SIZE)
       }
 
-    /** Show sprite */
-      show() {
-        //deno-lint-ignore no-explicit-any
-        const _debug = (this as any)
-        if (_debug)
-          _debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
-        return super.show()
+    /** Debug sprite */
+      debug() {
+        if (!this._debug)
+          this._debug = this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x00FF00, .5], fill:[0x00FF00, .25], polygon:this.polygon}))
+        if ((this._debug)&&(App.debug.areas))
+          this._debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
+        return super.debug(App.debug.areas)
       }
 
     /** Render */
       render() {
-        //Debug
-          this.debug(App.debugAreas, () => this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x00FF00, .5], fill:[0x00FF00, .25], polygon:this.polygon})))
-
         //TEST
           setTimeout(() => this.spawn(), 1000)
       }
 
     /** Destructor */
       destructor() {
-        if (App.debugLogs)
+        if (App.debug.logs)
           console.debug(`unloaded loaded area: ${this.id}`)
         this.npcs.forEach(npc => npc.destructor())
         this.npcs.clear()
