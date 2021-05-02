@@ -4,13 +4,11 @@
 //Event listener
   addEventListener("fetch", (event:any) => event.respondWith((async () => {
     const {request} = event
-    const {pathname} = new URL(request.url)
+    let {pathname} = new URL(request.url)
+    if (pathname.endsWith("/"))
+      pathname += "index.html"
     console.log(`fetching: ${pathname}`)
     switch (true) {
-      //
-        case /^[/]favicon[.]ico$/.test(pathname):{
-          return new Response(null, {status:404})
-        }
       //Maps pins
         case /^[/]map[/]\w+[/]pins$/.test(pathname):{
           const {id} = pathname.match(/^[/]map[/](?<id>\w+)[/]pins$/)?.groups ?? {}
@@ -34,7 +32,7 @@
           })
         }
 
-      //FIX
+      //Shit stuff, to delete once #10467 is fixed
         case /^[/]textures[/]textures.webp$/.test(pathname):
         case /^[/]textures[/]creatures.webp$/.test(pathname):{
           return Response.redirect("https://gracidea.lecoq.io/maps/creatures/textures.webp", 302)
@@ -49,9 +47,14 @@
         case /^[/]textures[/]tileset3.json$/.test(pathname):{
           return Response.redirect("https://gracidea.lecoq.io/maps/overworld/tileset.textures.json", 302)
         }
+
       //Serve static assets
         default:{
-          return fetch(new URL(`../source/server/static${pathname.length > 1 ? pathname : "/index.html"}`, import.meta.url))
+          const response = await fetch(new URL(`../source/server/static${pathname}`, import.meta.url))
+          const {extension = ""} = pathname.match(/[.](?<extension>\w+)$/)?.groups ?? {}
+          const mime = ({css:"text/css", gif:"image/gif", html:"text/html", ico:"image/x-icon", jpg:"image/jpeg", jpeg:"image/jpeg", js:"application/javascript", json:"application/json", png:"image/png", webp:"image/webp"} as {[key:string]:string})[extension] ?? "text/plain"
+          response.headers.set("content-type", `${mime}; charset=utf-8`);
+          return response
         }
     }
   })()))
