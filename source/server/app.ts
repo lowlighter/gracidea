@@ -1,46 +1,24 @@
 //Imports
-  import { Quadtree } from "./structs/quadtree.ts"
   import { Application, Router, HttpError } from "https://deno.land/x/oak/mod.ts"
   import { parse } from "https://deno.land/std@0.95.0/flags/mod.ts"
-
-  const MAPS_DIR = `${Deno.cwd()}/source/server/assets/maps`
-  const CHUNK_SIZE = 32
+  import { maps, chunk } from "./serverless.ts"
 
 //Initialization
   const argv = parse(Deno.args)
   console.log(argv)
-
-//Load maps
-//deno-lint-ignore no-explicit-any
-  const maps = {} as {[key:string]:any}
-  for await (const {name:file, isFile} of Deno.readDir(MAPS_DIR)) {
-    if ((isFile)&&(/[.]gracidea$/.test(file))) {
-      const {name} = file.match(/^(?<name>[\s\S]+)[.]gracidea$/)?.groups ?? {}
-      maps[name] = JSON.parse(await Deno.readTextFile(`${MAPS_DIR}/${file}`))
-      console.debug(`loaded ${name}`)
-    }
-  }
 
 //Router
   const router = new Router()
 
 //Set maps endpoints
   for (const [id, map] of Object.entries(maps)) {
-    const {pins = [], areas = [], chunks = {}} = map
-    const quadtree = Quadtree.from(areas.map((data:any) => ({...data.bounds, data})))
     router
-      .get(`/map/${id}/pins`, async context => { context.response.body = pins })
+      .get(`/map/${id}/pins`, async context => { context.response.body = map.pins })
       .get(`/map/${id}/:section`, async (context, next) => {
-        const section = `${context.params?.section}`
-        if (!/^(?<x>-?\d+);(?<y>-?\d+)$/.test(section))
+        const data = chunk({section:`${context.params?.section}`, from:id})
+        if (!data)
           return next()
-        const [x, y] = section.split(";").map(Number)
-        const chunk = {x:x*CHUNK_SIZE, y:y*CHUNK_SIZE, width:CHUNK_SIZE, height:CHUNK_SIZE}
-        context.response.body = {
-          id:section,
-          chunk:chunks[section],
-          areas:[...quadtree.get(chunk)].filter(area => Quadtree.contains(area, chunk)).map(({data}:any) => data),
-        }
+        context.response.body = data
       })
   }
 

@@ -1,6 +1,6 @@
 tiled.registerMapFormat("gracidea", {
   name:"Gracidea Map",
-  extension:"gracidea",
+  extension:"gracidea.json",
   write(map, fileName) {
     //Setup
       const TILE_SIZE = 16
