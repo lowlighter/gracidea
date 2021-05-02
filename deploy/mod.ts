@@ -50,12 +50,12 @@
 
       //Serve static assets
         default:{
-          let response = await fetch(new URL(`../source/server/static${pathname}`, import.meta.url))
+          const response = await fetch(new URL(`../source/server/static${pathname}`, import.meta.url))
           const {extension = ""} = pathname.match(/[.](?<extension>\w+)$/)?.groups ?? {}
           const mime = ({css:"text/css", gif:"image/gif", html:"text/html", ico:"image/x-icon", jpg:"image/jpeg", jpeg:"image/jpeg", js:"application/javascript", json:"application/json", png:"image/png", webp:"image/webp"} as {[key:string]:string})[extension] ?? "text/plain"
-          response = response.clone()
-          response.headers.set("content-type", `${mime}; charset=utf-8`)
-          return response
+          const headers = new Headers(response.headers)
+          headers.set("content-type", `${mime}; charset=utf-8`)
+          return new Response(response.body, {...response, headers})
         }
     }
   })()))
