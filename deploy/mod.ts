@@ -55,6 +55,7 @@
           const mime = ({css:"text/css", gif:"image/gif", html:"text/html", ico:"image/x-icon", jpg:"image/jpeg", jpeg:"image/jpeg", js:"application/javascript", json:"application/json", png:"image/png", webp:"image/webp"} as {[key:string]:string})[extension] ?? "text/plain"
           const headers = new Headers(response.headers)
           headers.set("content-type", `${mime}; charset=utf-8`)
+          console.log(headers)
           return new Response(response.body, {...response, headers})
         }
     }
