@@ -80,7 +80,7 @@
     };
     const imports = [
         "https://cdn.skypack.dev/pixi.js",
-        "https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js",
+        "https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js", 
     ];
     class Render {
         static engine;
@@ -710,7 +710,7 @@
                         "2C"
                     ],
                     sorted: true
-                },
+                }, 
             ]){
                 if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
                     z: 0,
