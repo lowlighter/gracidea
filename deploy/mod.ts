@@ -53,9 +53,36 @@
           const response = await fetch(new URL(`../source/server/static${pathname}`, import.meta.url))
           const {extension = ""} = pathname.match(/[.](?<extension>\w+)$/)?.groups ?? {}
           const mime = ({css:"text/css", gif:"image/gif", html:"text/html", ico:"image/x-icon", jpg:"image/jpeg", jpeg:"image/jpeg", js:"application/javascript", json:"application/json", png:"image/png", webp:"image/webp"} as {[key:string]:string})[extension] ?? "text/plain"
-          console.log(response.headers)
-          response.headers.set("content-type", `${mime}; charset=utf-8`);
-          return response
+          return newResponse(response, (headers:any) => {
+            headers.set("content-type", `${mime}; charset=utf-8`)
+            return headers
+          })
         }
     }
   })()))
+
+
+
+  function newResponse(res:any, headerFn:any) {
+
+    function cloneHeaders() {
+      var headers = new Headers();
+      for (var kv of res.headers.entries()) {
+        headers.append(kv[0], kv[1]);
+      }
+      return headers;
+    }
+
+    var headers = headerFn ? headerFn(cloneHeaders()) : res.headers;
+
+    return new Promise(function (resolve) {
+      return res.blob().then(function (blob:any) {
+        resolve(new Response(blob, {
+          status: res.status,
+          statusText: res.statusText,
+          headers: headers
+        }));
+      });
+    });
+
+  }
