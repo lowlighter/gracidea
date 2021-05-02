@@ -1,6 +1,6 @@
 tiled.registerMapFormat("gracidea", {
   name:"Gracidea Map",
-  extension:"gracidea.json",
+  extension:"json",
   write(map, fileName) {
     //Setup
       const TILE_SIZE = 16
@@ -31,6 +31,8 @@ tiled.registerMapFormat("gracidea", {
                     for (let x = 0; x < CHUNK_SIZE; x++)
                       for (let y = 0; y < CHUNK_SIZE; y++)
                         chunk.push(layer.cellAt(X*CHUNK_SIZE+x, Y*CHUNK_SIZE+y).tileId)
+                    if (chunk.every(n => n < 0))
+                      chunk.splice(0, chunk.length)
                 }
               }
           }

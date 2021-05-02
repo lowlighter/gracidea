@@ -38,10 +38,6 @@
           this.engine.settings.ROUND_PIXELS = true
         //Load resources
           const loader = Render.engine.Loader.shared
-          loader.onProgress.add((...args:any[]) => console.log(args))
-          loader.onError.add((...args:any[]) => console.log(args))
-          loader.onLoad.add((...args:any[]) => console.log(args))
-          loader.onComplete.add((...args:any[]) => console.log(args))
           loader.add("/textures/tileset3.json", {crossOrigin:"anonymous"})
           loader.add("/textures/creatures.json", {crossOrigin:"anonymous"})
         //Create application
