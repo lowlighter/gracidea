@@ -25,9 +25,8 @@
         }
       //JS script
         case /^[/]js[/]gracidea.min.js$/.test(pathname):{
-          const {files} = await (Deno as any).emit("source/client/app.ts", {bundle:"iife"})
-          const script = Object.entries(files).filter(([key]) => /\.js$/.test(key)).map(([_, value]) => value).shift() as string
-          return new Response(script, {
+          const response = await fetch(new URL("app.js", import.meta.url))
+          return new Response(response.body, {
             headers:{"content-type":"text/javascript"}
           })
         }
