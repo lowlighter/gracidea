@@ -23,14 +23,6 @@
             headers:{"content-type":"application/json"}
           })
         }
-      //JS script
-        case /^[/]js[/]gracidea.min.js$/.test(pathname):{
-          const response = await fetch(new URL("app.js", import.meta.url))
-          return new Response(response.body, {
-            headers:{"content-type":"text/javascript"}
-          })
-        }
-
       //Shit stuff, to delete once #10467 is fixed
         case /^[/]textures[/]textures.webp$/.test(pathname):
         case /^[/]textures[/]creatures.webp$/.test(pathname):{
@@ -49,13 +41,14 @@
 
       //Serve static assets
         default:{
-          const response = await fetch(new URL(`../source/server/static${pathname}`, import.meta.url))
+          const url = new URL(pathname === "/js/gracidea.min.js" ? "https://raw.githubusercontent.com/lowlighter/gracidea/main/deploy/app.js" : `https://raw.githubusercontent.com/lowlighter/gracidea/main/source/server/static${pathname}`)
+          console.log(url.href)
+          const response = await fetch(url)
           const {extension = ""} = pathname.match(/[.](?<extension>\w+)$/)?.groups ?? {}
           const mime = ({css:"text/css", gif:"image/gif", html:"text/html", ico:"image/x-icon", jpg:"image/jpeg", jpeg:"image/jpeg", js:"application/javascript", json:"application/json", png:"image/png", webp:"image/webp"} as {[key:string]:string})[extension] ?? "text/plain"
           const headers = new Headers(response.headers)
           headers.set("content-type", `${mime}; charset=utf-8`)
           headers.set("content-security-policy", "")
-          console.log(headers)
           return new Response(response.body, {...response, headers})
         }
     }
