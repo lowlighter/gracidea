@@ -1,23 +1,18 @@
-#imap: imports.json
-#lock: lock.json
-allow:
-  - all
-
+name: Gracidea
+author: lowlighter
+repository: https://github.com/lowlighter/gracidea
 scripts:
   start:
     desc: Run app
-    cmd:
-      - deno run --no-check  --unstable server/app.ts --dev
-
+    cmd: deno run --unstable --allow-net --allow-read server/app.ts
   build:
+    desc: Build app
     cmd:
-      - deno bundle --no-check client/app/mod.ts client/static/js/app.js
-
-  #deno lint --unstable --ignore=node_modules,source/client/static/js/app.js
-
+      - deno bundle client/app/mod.ts client/static/js/app.js
   test:
     desc: Run tests and compute coverage
-    lock: ~
     cmd:
-      - deno test --unstable --coverage=coverage
+      #- deno lint --unstable --ignore=node_modules,client/static/js/app.js
+      - deno test --unstable --allow-read --coverage=coverage tests
       - deno coverage --unstable coverage
+      - deployctl check deploy/mod.ts

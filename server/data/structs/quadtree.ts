@@ -13,7 +13,7 @@
  * Quadtree structure.
  * This is a typescript port from https://github.com/lowlighter/quadtree.
  */
-  export class Quadtree<T extends Rectangle> {
+  export class Quadtree<T extends Rectangle = Rectangle> {
 
     /** Parent quadtree */
       private readonly parent = null as Quadtree<T>|null

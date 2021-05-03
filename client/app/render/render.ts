@@ -18,7 +18,7 @@
 
     /** Render engine */
     //deno-lint-ignore no-explicit-any
-      private static engine:any
+      static engine:any
 
     /** Render application */
     //deno-lint-ignore no-explicit-any

@@ -15,8 +15,10 @@ jobs:
       steps:
         - name: Setup deno
           uses: denoland/setup-deno@main
+        - name: Setup velociraptor
+          uses: jurassiscripts/setup-velociraptor@master
         - name: Run tests
-          run: deno test --unstable --allow-read
+          run: vr test
 
   # Run CodeQL on branch
   analyze:

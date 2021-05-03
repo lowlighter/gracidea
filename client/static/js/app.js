@@ -11870,7 +11870,7 @@ class Render {
     }
     static Container({ x =0 , y =0 , z =NaN , sorted =false  } = {
     }) {
-        const container = new Render.engine.ParticleContainer.__proto__();
+        const container = new Render.engine.Container();
         container.position.set(x * 16, y * 16);
         if (!Number.isNaN(z)) container.zIndex = z;
         if (sorted) container.sortableChildren = true;
@@ -11913,8 +11913,8 @@ class Positionable {
     y;
     width;
     height;
-    constructor({ world: world3 , x: x10 = 0 , y: y1 = 0 , width =0 , height =0  }){
-        this.world = world3;
+    constructor({ world: world2 , x: x10 = 0 , y: y1 = 0 , width =0 , height =0  }){
+        this.world = world2;
         this.x = x10;
         this.y = y1;
         this.width = width;
@@ -12041,6 +12041,438 @@ class Minimap extends Renderable {
         this.hide();
     }
 }
+class App {
+    world;
+    controller;
+    ready;
+    constructor(){
+        const that = this;
+        this.world = null;
+        this.controller = null;
+        this.ready = new Promise(async (solve)=>{
+            await Render.setup();
+            that.world = new World({
+                app: this
+            });
+            that.controller = new Controller({
+                app: this,
+                world: this.world
+            });
+            that.world.camera.moveTo({
+                x: 329,
+                y: -924
+            });
+            solve();
+        });
+    }
+    static debug = {
+        logs: true,
+        chunks: true,
+        areas: true,
+        camera: true
+    };
+}
+class Controller {
+    app;
+    world;
+    constructor({ app: app1 , world: world3  }){
+        this.app = app1;
+        this.world = world3;
+        Render.app.view.addEventListener("wheel", (event)=>{
+            event.preventDefault();
+            if (!this.world.minimap.open) {
+                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - event.deltaX), Math.round(this.world.sprites.world.position.y - event.deltaY));
+            } else {
+                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - event.deltaX), Math.round(this.world.minimap.sprite.position.y - event.deltaY));
+            }
+            this.world.camera.render();
+        });
+        global1.document.addEventListener("keydown", ({ code  })=>{
+            switch(code){
+                case "ArrowLeft":
+                    this.world.camera.x--;
+                    this.world.camera.render();
+                    break;
+                case "ArrowRight":
+                    this.world.camera.x++;
+                    this.world.camera.render();
+                    break;
+                case "ArrowUp":
+                    this.world.camera.y--;
+                    this.world.camera.render();
+                    break;
+                case "ArrowDown":
+                    this.world.camera.y++;
+                    this.world.camera.render();
+                    break;
+            }
+        });
+        global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
+        );
+        global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
+            global1.document.querySelector("nav.debug").style.display = global1.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
+        });
+        Object.keys(App.debug).forEach((key)=>{
+            const input = global1.document.createElement("input");
+            input.setAttribute("data-control-for", key);
+            input.setAttribute("type", "checkbox");
+            input.checked = App.debug[key];
+            input.addEventListener("change", ()=>App.debug[key] = input.checked
+            );
+            const label = global1.document.createElement("label");
+            label.innerText = key;
+            label.prepend(input);
+            global1.document.querySelector(".debug")?.append(label);
+        });
+        console.log(App.debug);
+    }
+    updateDOM() {
+        const location = global1.document.querySelector("#location .name");
+        if (location) location.innerHTML = this.world.camera.location[0] ?? "-  ";
+        const position = global1.document.querySelector("#location .position");
+        if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
+    }
+}
+class Area extends Renderable {
+    id;
+    sprite;
+    data;
+    polygon;
+    npcs = new Set();
+    constructor({ id: id1 , data: data1 , world: world4  }){
+        super({
+            world: world4
+        });
+        this.id = id1;
+        this.data = data1;
+        this.polygon = Render.Polygon(this.data.points);
+        this.sprite = Render.Container();
+        if (App.debug.logs) console.debug(`loaded area: ${this.id}`);
+    }
+    contains({ x , y  }) {
+        return this.polygon.contains(x * 16, y * 16);
+    }
+    debug() {
+        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
+            text: this.id,
+            textStyle: {
+                fontSize: 12,
+                fill: "white"
+            },
+            stroke: [
+                1,
+                65280,
+                0.5
+            ],
+            fill: [
+                65280,
+                0.25
+            ],
+            polygon: this.polygon
+        }));
+        if (this._debug && App.debug.areas) this._debug.tint = this.contains(this.world.camera) ? 16777215 : 16711935;
+        return super.debug(App.debug.areas);
+    }
+    render() {
+        setTimeout(()=>this.spawn()
+        , 1000);
+    }
+    destructor() {
+        if (App.debug.logs) console.debug(`unloaded loaded area: ${this.id}`);
+        this.npcs.forEach((npc)=>npc.destructor()
+        );
+        this.npcs.clear();
+        return super.destructor();
+    }
+    static from({ data , chunk  }) {
+        const id1 = `${data.id}`;
+        if (!chunk.world.loaded.areas.has(id1)) chunk.world.loaded.areas.set(id1, new Area({
+            id: id1,
+            data,
+            world: chunk.world
+        }));
+        const area = chunk.world.loaded.areas.get(id1);
+        chunk.areas.add(area);
+        return area;
+    }
+    spawn() {
+        console.log(this.data.properties);
+        new NPC({
+            world: this.world,
+            area: this
+        }).show();
+    }
+}
+class Chunk extends Renderable {
+    id;
+    sprite;
+    data = null;
+    layers = new Map();
+    areas = new Set();
+    world;
+    constructor({ id: id2 , world: world5  }){
+        super({
+            world: world5
+        });
+        this.id = id2;
+        this.world = world5;
+        [this.x, this.y] = this.id.split(";").map((n72)=>Number(n72) * CHUNK_SIZE
+        );
+        this.width = this.height = CHUNK_SIZE;
+        this.sprite = this.world.sprites.chunks.addChild(Render.Container({
+            x: this.x,
+            y: this.y
+        }));
+        if (App.debug.chunks) console.debug(`loaded chunk: ${this.id}`);
+    }
+    destructor() {
+        if (App.debug.chunks) console.debug(`unloaded loaded chunk: ${this.id}`);
+        this.layers.clear();
+        this.areas.clear();
+        return super.destructor();
+    }
+    show() {
+        super.show();
+        this.data?.areas?.forEach((area)=>Area.from({
+                data: area,
+                chunk: this
+            })?.show()
+        );
+    }
+    debug() {
+        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
+            text: this.id,
+            textStyle: {
+                fontSize: 12,
+                fill: "white"
+            },
+            stroke: [
+                1,
+                255,
+                0.5
+            ],
+            fill: [
+                255,
+                0.25
+            ],
+            rect: [
+                0,
+                0,
+                this.width,
+                this.height
+            ]
+        }));
+        return super.debug(App.debug.chunks);
+    }
+    async render() {
+        if (!this.data) this.data = await fetch(`/map/overworld/${this.id}`).then((res)=>res.json()
+        );
+        this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({
+            frame: 0,
+            width: 32,
+            height: 32
+        })));
+        for (const { name , sublayers , sorted =false  } of [
+            {
+                name: "1X",
+                sublayers: [
+                    "1A",
+                    "1B",
+                    "1C"
+                ]
+            },
+            {
+                name: "2X",
+                sublayers: [
+                    "2A",
+                    "2B",
+                    "2C"
+                ],
+                sorted: true
+            }, 
+        ]){
+            if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
+                z: 0,
+                sorted
+            })));
+            const layer = this.layers.get(name);
+            for(let z4 = 0; z4 < sublayers.length; z4++){
+                const tiles = this.data?.chunk?.layers?.[sublayers[z4]];
+                if (!tiles) continue;
+                for(let i78 = 0; i78 < tiles.length; i78++){
+                    const tile = tiles[i78];
+                    if (tile >= 0) {
+                        const y2 = i78 % 32, x11 = Math.floor(i78 / 32);
+                        layer.addChild(Render.Sprite({
+                            frame: tile,
+                            x: x11,
+                            y: y2,
+                            z: y2 * 32 + z4
+                        }));
+                    }
+                }
+            }
+        }
+    }
+}
+class Camera extends Renderable {
+    sprite;
+    constructor({ world: world6  }){
+        super({
+            world: world6
+        });
+        this.sprite = this.world.sprites.world.addChild(Render.Container());
+        Object.defineProperties(this, {
+            x: {
+                get: ()=>Math.floor((-this.world.sprites.world.position.x + global1.document.body.clientWidth / 2) / 16)
+                ,
+                set: (x11)=>this.moveTo({
+                        x: x11,
+                        y: this.y
+                    })
+            },
+            y: {
+                get: ()=>Math.floor((-this.world.sprites.world.position.y + global1.document.body.clientHeight / 2) / 16)
+                ,
+                set: (y2)=>this.moveTo({
+                        x: this.x,
+                        y: y2
+                    })
+            }
+        });
+        this.render();
+    }
+    throttle = false;
+    debounce = false;
+    debug() {
+        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
+            fill: [
+                16711680,
+                0.5
+            ],
+            rect: [
+                0,
+                0,
+                1,
+                1
+            ]
+        }));
+        return super.debug(App.debug.camera);
+    }
+    render({ DX =1 , DY =1 , DM =3  } = {
+    }) {
+        if (this.throttle) {
+            this.debounce = true;
+            return;
+        }
+        this.throttle = true;
+        this.debug();
+        const { x: x11 , y: y2  } = this;
+        const X4 = Math.floor(x11 / 32);
+        const Y3 = Math.floor(y2 / 32);
+        const visible = [];
+        for(let x12 = X4 - DX; x12 <= X4 + DX; x12++)for(let y3 = Y3 - DY; y3 <= Y3 + DY; y3++)visible.push(`${x12};${y3}`);
+        visible.forEach((id3)=>{
+            if (!this.world.loaded.chunks.has(id3)) this.world.loaded.chunks.set(id3, new Chunk({
+                id: id3,
+                world: this.world
+            }));
+            this.world.loaded.chunks.get(id3)?.show();
+        });
+        this.world.loaded.chunks.forEach((chunk, id3)=>{
+            if (!visible.includes(id3)) {
+                chunk.hide();
+                if (Math.sqrt((chunk.x - X4) ** 2 + (chunk.y - Y3) ** 2) > DM) {
+                    this.world.loaded.chunks.delete(id3);
+                    chunk.destructor();
+                }
+            }
+        });
+        const areas = new Set();
+        this.world.loaded.chunks.forEach((chunk)=>chunk.areas.forEach((area)=>areas.add(area)
+            )
+        );
+        this.world.loaded.areas.forEach((area, id3)=>{
+            if (!areas.has(area)) {
+                this.world.loaded.areas.delete(id3);
+                area.destructor();
+            }
+        });
+        this.world.app?.controller?.updateDOM();
+        setTimeout(()=>{
+            this.throttle = false;
+            if (this.debounce) {
+                this.debounce = false;
+                this.render();
+            }
+        }, 200);
+    }
+    get location() {
+        return [
+            ...this.world.loaded.areas.values()
+        ].filter((area)=>(area.data.type === "locations" || area.data.type === "regions") && area.contains(this)
+        ).map(({ data: data2  })=>data2.name
+        );
+    }
+    moveTo({ x , y  }) {
+        this.world.sprites.world.position.set(-x * 16 + global1.document.body.clientWidth / 2, -y * 16 + global1.document.body.clientHeight / 2);
+        this.render();
+    }
+}
+class World {
+    sprites;
+    loaded = {
+        chunks: new Map(),
+        areas: new Map()
+    };
+    camera;
+    minimap;
+    name = "overworld";
+    app;
+    constructor({ app: app2  }){
+        this.app = app2;
+        const sprite1 = Render.app.stage.addChild(Render.Container());
+        this.sprites = {
+            world: sprite1,
+            chunks: sprite1.addChild(Render.Container()),
+            locations: sprite1.addChild(Render.Container()),
+            debug: sprite1.addChild(Render.Container()),
+            minimap: Render.app.stage.addChild(Render.Container())
+        };
+        this.camera = new Camera({
+            world: this
+        });
+        this.minimap = new Minimap({
+            world: this
+        });
+        const textures = [
+            2374,
+            2375,
+            2376,
+            2377,
+            2378,
+            2379,
+            2380,
+            2381
+        ].map((frame)=>Render.Texture({
+                frame
+            })
+        );
+        let tick1 = 0;
+        Render.engine.Ticker.shared.add(()=>{
+            tick1 += 0.0625;
+            if (Number.isInteger(tick1)) this.loaded.chunks.forEach((chunk)=>{
+                if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = textures[tick1 % textures.length];
+            });
+            this.loaded.areas.forEach((area)=>area.npcs.forEach((npc)=>npc.update(tick1)
+                )
+            );
+        });
+    }
+    chunkAt({ x , y  }) {
+        return this.loaded.chunks.get(`${Math.floor(x / 32)};${Math.floor(y / 32)}`);
+    }
+}
 var Pattern;
 (function(Pattern1) {
     Pattern1["patrol"] = "patrol";
@@ -12060,9 +12492,9 @@ class NPC extends Renderable {
     track = [];
     _track_index = 0;
     pattern = "fixed";
-    constructor({ world: world2 , area  }){
+    constructor({ world: world7 , area  }){
         super({
-            world: world2
+            world: world7
         });
         this.area = area;
         this.sprite = Render.Container();
@@ -12077,7 +12509,7 @@ class NPC extends Renderable {
             mask: null,
             shadow: null
         };
-        console.debug(`loaded npc:`);
+        if (App.debug.logs) console.debug(`loaded npc:`);
         this.x = this.area.polygon.points[0] / TILE_SIZE;
         this.y = this.area.polygon.points[1] / TILE_SIZE;
         this.area.npcs.add(this);
@@ -12174,437 +12606,4 @@ class NPC extends Renderable {
         }
     }
 }
-class App1 {
-    world;
-    controller;
-    ready;
-    constructor(){
-        const that = this;
-        this.world = null;
-        this.controller = null;
-        this.ready = new Promise(async (solve)=>{
-            await Render.setup();
-            that.world = new World({
-                app: this
-            });
-            that.controller = new Controller({
-                app: this,
-                world: this.world
-            });
-            that.world.camera.moveTo({
-                x: 329,
-                y: -924
-            });
-            solve();
-        });
-    }
-    static debug = {
-        logs: true,
-        chunks: true,
-        areas: true,
-        camera: true
-    };
-}
-class Controller {
-    app;
-    world;
-    constructor({ app: app1 , world: world4  }){
-        this.app = app1;
-        this.world = world4;
-        Render.app.view.addEventListener("wheel", (event)=>{
-            event.preventDefault();
-            if (!this.world.minimap.open) {
-                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - event.deltaX), Math.round(this.world.sprites.world.position.y - event.deltaY));
-            } else {
-                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - event.deltaX), Math.round(this.world.minimap.sprite.position.y - event.deltaY));
-            }
-            this.world.camera.render();
-        });
-        global1.document.addEventListener("keydown", ({ code  })=>{
-            switch(code){
-                case "ArrowLeft":
-                    this.world.camera.x--;
-                    this.world.camera.render();
-                    break;
-                case "ArrowRight":
-                    this.world.camera.x++;
-                    this.world.camera.render();
-                    break;
-                case "ArrowUp":
-                    this.world.camera.y--;
-                    this.world.camera.render();
-                    break;
-                case "ArrowDown":
-                    this.world.camera.y++;
-                    this.world.camera.render();
-                    break;
-            }
-        });
-        global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
-        );
-        global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
-            global1.document.querySelector("nav.debug").style.display = global1.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
-        });
-        Object.keys(App1.debug).forEach((key)=>{
-            const input = global1.document.createElement("input");
-            input.setAttribute("data-control-for", key);
-            input.setAttribute("type", "checkbox");
-            input.checked = App1.debug[key];
-            input.addEventListener("change", ()=>App1.debug[key] = input.checked
-            );
-            const label = global1.document.createElement("label");
-            label.innerText = key;
-            label.prepend(input);
-            global1.document.querySelector(".debug")?.append(label);
-        });
-        console.log(App1.debug);
-    }
-    updateDOM() {
-        const location = global1.document.querySelector("#location .name");
-        if (location) location.innerHTML = this.world.camera.location[0] ?? "-  ";
-        const position = global1.document.querySelector("#location .position");
-        if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
-    }
-}
-class Area extends Renderable {
-    id;
-    sprite;
-    data;
-    polygon;
-    npcs = new Set();
-    constructor({ id: id1 , data: data1 , world: world5  }){
-        super({
-            world: world5
-        });
-        this.id = id1;
-        this.data = data1;
-        this.polygon = Render.Polygon(this.data.points);
-        this.sprite = Render.Container();
-        if (App1.debug.logs) console.debug(`loaded area: ${this.id}`);
-    }
-    contains({ x , y  }) {
-        return this.polygon.contains(x * 16, y * 16);
-    }
-    debug() {
-        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
-            text: this.id,
-            textStyle: {
-                fontSize: 12,
-                fill: "white"
-            },
-            stroke: [
-                1,
-                65280,
-                0.5
-            ],
-            fill: [
-                65280,
-                0.25
-            ],
-            polygon: this.polygon
-        }));
-        if (this._debug && App1.debug.areas) this._debug.tint = this.contains(this.world.camera) ? 16777215 : 16711935;
-        return super.debug(App1.debug.areas);
-    }
-    render() {
-        setTimeout(()=>this.spawn()
-        , 1000);
-    }
-    destructor() {
-        if (App1.debug.logs) console.debug(`unloaded loaded area: ${this.id}`);
-        this.npcs.forEach((npc)=>npc.destructor()
-        );
-        this.npcs.clear();
-        return super.destructor();
-    }
-    static from({ data , chunk  }) {
-        const id1 = `${data.id}`;
-        if (!chunk.world.loaded.areas.has(id1)) chunk.world.loaded.areas.set(id1, new Area({
-            id: id1,
-            data,
-            world: chunk.world
-        }));
-        const area1 = chunk.world.loaded.areas.get(id1);
-        chunk.areas.add(area1);
-        return area1;
-    }
-    spawn() {
-        console.log(this.data.properties);
-        new NPC({
-            world: this.world,
-            area: this
-        }).show();
-    }
-}
-class Chunk extends Renderable {
-    id;
-    sprite;
-    data = null;
-    layers = new Map();
-    areas = new Set();
-    world;
-    constructor({ id: id2 , world: world6  }){
-        super({
-            world: world6
-        });
-        this.id = id2;
-        this.world = world6;
-        [this.x, this.y] = this.id.split(";").map((n72)=>Number(n72) * CHUNK_SIZE
-        );
-        this.width = this.height = CHUNK_SIZE;
-        this.sprite = this.world.sprites.chunks.addChild(Render.Container({
-            x: this.x,
-            y: this.y
-        }));
-        if (App1.debug.chunks) console.debug(`loaded chunk: ${this.id}`);
-    }
-    destructor() {
-        if (App1.debug.chunks) console.debug(`unloaded loaded chunk: ${this.id}`);
-        this.layers.clear();
-        this.areas.clear();
-        return super.destructor();
-    }
-    show() {
-        super.show();
-        this.data?.areas?.forEach((area1)=>Area.from({
-                data: area1,
-                chunk: this
-            })?.show()
-        );
-    }
-    debug() {
-        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
-            text: this.id,
-            textStyle: {
-                fontSize: 12,
-                fill: "white"
-            },
-            stroke: [
-                1,
-                255,
-                0.5
-            ],
-            fill: [
-                255,
-                0.25
-            ],
-            rect: [
-                0,
-                0,
-                this.width,
-                this.height
-            ]
-        }));
-        return super.debug(App1.debug.chunks);
-    }
-    async render() {
-        if (!this.data) this.data = await fetch(`/map/overworld/${this.id}`).then((res)=>res.json()
-        );
-        this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({
-            frame: 0,
-            width: 32,
-            height: 32
-        })));
-        for (const { name , sublayers , sorted =false  } of [
-            {
-                name: "1X",
-                sublayers: [
-                    "1A",
-                    "1B",
-                    "1C"
-                ]
-            },
-            {
-                name: "2X",
-                sublayers: [
-                    "2A",
-                    "2B",
-                    "2C"
-                ],
-                sorted: true
-            }, 
-        ]){
-            if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
-                z: 0,
-                sorted
-            })));
-            const layer = this.layers.get(name);
-            for(let z4 = 0; z4 < sublayers.length; z4++){
-                const tiles = this.data?.chunk?.layers?.[sublayers[z4]];
-                if (!tiles) continue;
-                for(let i78 = 0; i78 < tiles.length; i78++){
-                    const tile = tiles[i78];
-                    if (tile >= 0) {
-                        const y2 = i78 % 32, x11 = Math.floor(i78 / 32);
-                        layer.addChild(Render.Sprite({
-                            frame: tile,
-                            x: x11,
-                            y: y2,
-                            z: y2 * 32 + z4
-                        }));
-                    }
-                }
-            }
-        }
-    }
-}
-class Camera extends Renderable {
-    sprite;
-    constructor({ world: world7  }){
-        super({
-            world: world7
-        });
-        this.sprite = this.world.sprites.world.addChild(Render.Container());
-        Object.defineProperties(this, {
-            x: {
-                get: ()=>Math.floor((-this.world.sprites.world.position.x + global1.document.body.clientWidth / 2) / 16)
-                ,
-                set: (x11)=>this.moveTo({
-                        x: x11,
-                        y: this.y
-                    })
-            },
-            y: {
-                get: ()=>Math.floor((-this.world.sprites.world.position.y + global1.document.body.clientHeight / 2) / 16)
-                ,
-                set: (y2)=>this.moveTo({
-                        x: this.x,
-                        y: y2
-                    })
-            }
-        });
-        this.render();
-    }
-    throttle = false;
-    debounce = false;
-    debug() {
-        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
-            fill: [
-                16711680,
-                0.5
-            ],
-            rect: [
-                0,
-                0,
-                1,
-                1
-            ]
-        }));
-        return super.debug(App1.debug.camera);
-    }
-    render({ DX =1 , DY =1 , DM =3  } = {
-    }) {
-        if (this.throttle) {
-            this.debounce = true;
-            return;
-        }
-        this.throttle = true;
-        this.debug();
-        const { x: x11 , y: y2  } = this;
-        const X4 = Math.floor(x11 / 32);
-        const Y3 = Math.floor(y2 / 32);
-        const visible = [];
-        for(let x12 = X4 - DX; x12 <= X4 + DX; x12++)for(let y3 = Y3 - DY; y3 <= Y3 + DY; y3++)visible.push(`${x12};${y3}`);
-        visible.forEach((id3)=>{
-            if (!this.world.loaded.chunks.has(id3)) this.world.loaded.chunks.set(id3, new Chunk({
-                id: id3,
-                world: this.world
-            }));
-            this.world.loaded.chunks.get(id3)?.show();
-        });
-        this.world.loaded.chunks.forEach((chunk, id3)=>{
-            if (!visible.includes(id3)) {
-                chunk.hide();
-                if (Math.sqrt((chunk.x - X4) ** 2 + (chunk.y - Y3) ** 2) > DM) {
-                    this.world.loaded.chunks.delete(id3);
-                    chunk.destructor();
-                }
-            }
-        });
-        const areas = new Set();
-        this.world.loaded.chunks.forEach((chunk)=>chunk.areas.forEach((area1)=>areas.add(area1)
-            )
-        );
-        this.world.loaded.areas.forEach((area1, id3)=>{
-            if (!areas.has(area1)) {
-                this.world.loaded.areas.delete(id3);
-                area1.destructor();
-            }
-        });
-        this.world.app?.controller?.updateDOM();
-        setTimeout(()=>{
-            this.throttle = false;
-            if (this.debounce) {
-                this.debounce = false;
-                this.render();
-            }
-        }, 200);
-    }
-    get location() {
-        return [
-            ...this.world.loaded.areas.values()
-        ].filter((area1)=>(area1.data.type === "locations" || area1.data.type === "regions") && area1.contains(this)
-        ).map(({ data: data2  })=>data2.name
-        );
-    }
-    moveTo({ x , y  }) {
-        this.world.sprites.world.position.set(-x * 16 + global1.document.body.clientWidth / 2, -y * 16 + global1.document.body.clientHeight / 2);
-        this.render();
-    }
-}
-class World {
-    sprites;
-    loaded = {
-        chunks: new Map(),
-        areas: new Map()
-    };
-    camera;
-    minimap;
-    name = "overworld";
-    app;
-    constructor({ app: app2  }){
-        this.app = app2;
-        const sprite = Render.app.stage.addChild(Render.Container());
-        this.sprites = {
-            world: sprite,
-            chunks: sprite.addChild(Render.Container()),
-            locations: sprite.addChild(Render.Container()),
-            debug: sprite.addChild(Render.Container()),
-            minimap: Render.app.stage.addChild(Render.Container())
-        };
-        this.camera = new Camera({
-            world: this
-        });
-        this.minimap = new Minimap({
-            world: this
-        });
-        const textures = [
-            2374,
-            2375,
-            2376,
-            2377,
-            2378,
-            2379,
-            2380,
-            2381
-        ].map((frame)=>Render.Texture({
-                frame
-            })
-        );
-        let tick = 0;
-        Render.engine.Ticker.shared.add(()=>{
-            tick += 0.0625;
-            if (Number.isInteger(tick)) this.loaded.chunks.forEach((chunk)=>{
-                if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = textures[tick % textures.length];
-            });
-            this.loaded.areas.forEach((area1)=>area1.npcs.forEach((npc)=>npc.update(tick)
-                )
-            );
-        });
-    }
-    chunkAt({ x , y  }) {
-        return this.loaded.chunks.get(`${Math.floor(x / 32)};${Math.floor(y / 32)}`);
-    }
-}
-globalThis.app = new App1();
-export { App1 as App };
+globalThis.app = new App();

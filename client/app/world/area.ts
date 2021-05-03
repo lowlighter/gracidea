@@ -29,7 +29,7 @@
       readonly sprite:ReturnType<typeof Render.Container>
 
     /** Data */
-      private readonly data:AreaData
+      readonly data:AreaData
 
     /** Polygon */
       readonly polygon:ReturnType<typeof Render.Polygon>

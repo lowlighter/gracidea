@@ -1,35 +1,29 @@
 //Imports
-  import { Quadtree } from "./structs/quadtree.ts"
+  import { Quadtree, Rectangle } from "./structs/quadtree.ts"
 
-//Initialization
+/** Chunk size */
   const CHUNK_SIZE = 32
 
-//Load maps
+/** Loose type */
 //deno-lint-ignore no-explicit-any
-  const maps = {} as {[key:string]:any}
+  type loose = {[key:string]:any}
+
+/** Area data */
+  type Area = {bounds:Rectangle, data:loose}
+
+//Load maps and build quadtrees
+  const maps = {} as loose
+  const quadtrees = {} as {[key:string]:Quadtree}
   for await (const name of ["overworld"]) {
-    let text = await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`)
-    /*const body = await fetch(new URL(`data/maps/${name}.gracidea.json`, import.meta.url)).then(res => res.body)
-    const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
-    let text = ""
-    while (true) {
-      const {done, value} = await reader.read()
-      text += new TextDecoder().decode(value)
-      if (done)
-        break
-    }*/
-    maps[name] = JSON.parse(text)
+    const {areas = []} = maps[name] = JSON.parse(await json(name))
+    quadtrees[name] = Quadtree.from(areas.map((data:Area) => ({...data.bounds, data})))
     console.debug(`loaded ${name}`)
   }
 
-  const quadtrees = {} as {[key:string]:Quadtree<any>}
-  for (const [id, map] of Object.entries(maps)) {
-    const {areas = []} = map
-    quadtrees[id] = Quadtree.from(areas.map((data:any) => ({...data.bounds, data})))
-  }
-
+/** Maps data */
   export { maps }
 
+/** Retrieve chunk data */
   export function chunk({section, from:id}:{section:string, from:string}) {
     if (!/^(?<x>-?\d+);(?<y>-?\d+)$/.test(section))
       return null
@@ -42,4 +36,22 @@
     }
   }
 
-
+/** JSON loader */
+  async function json(name:string) {
+    try {
+      return (Deno as any).readTextFile(`server/data/maps/${name}.gracidea.json`)
+    }
+    catch (error) {
+      console.log(error)
+      const body = await fetch(new URL(`server/data/maps/${name}.gracidea.json`, import.meta.url)).then(res => res.body)
+      const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
+      let content = ""
+      while (true) {
+        const {done, value} = await reader.read()
+        content += new TextDecoder().decode(value)
+        if (done)
+          break
+      }
+      return content
+    }
+  }
