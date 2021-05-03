@@ -1,3 +1,6 @@
+//Imports
+  import {maps, chunk} from "./data/serve.ts"
+
 /** Url of static content */
   const STATIC_URL = "https://raw.githubusercontent.com/lowlighter/gracidea/main"
 
@@ -25,7 +28,6 @@
         switch (true) {
           //Maps route
             case ROUTE_MAP.test(pathname):{
-              const {maps, chunk} = await import("./data/serve.ts")
               switch (true) {
                 case ROUTE_MAP_PINS.test(pathname):{
                   const {id} = pathname.match(ROUTE_MAP_PINS)?.groups ?? {}
