@@ -48,7 +48,7 @@
           //Serve static assets
             default:{
               const response = deploy
-                ? (await fetch(new URL(`${STATIC_URL}/client/static${pathname}`))).body
+                ? (await fetch(new URL(`client/static${pathname}`, import.meta.url))).body
                 : await (Deno as any).readFile(`client/static${pathname}`)
               const headers = new Headers()
               headers.set("content-type", `${mime(pathname)}; charset=utf-8`)
