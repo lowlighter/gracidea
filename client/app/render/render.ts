@@ -1,6 +1,6 @@
 //Imports
   import { global, TILE_SIZE, ANIMATED } from "./settings.ts"
-  import * as PIXI from "../../../../node_modules/pixi.js/dist/browser/pixi.min.mjs"
+  import * as PIXI from "../../../node_modules/pixi.js/dist/browser/pixi.min.mjs"
   //import StatsJS from "../../../../node_modules/stats-js/build/stats.min.js"
 
 /** Frame */

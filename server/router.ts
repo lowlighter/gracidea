@@ -33,37 +33,19 @@ export async function route(request:Request) {
 
           case ROUTE_CLIENT_APP.test(pathname)&&LOCAL:{
             console.debug(`rebuilding: ${pathname}`)
-            const {files} = await (Deno as any).emit("source/client/app/mod.ts", {bundle:"iife"})
+            const {files} = await (Deno as any).emit("client/app/mod.ts", {bundle:"iife"})
             const script = Object.entries(files).filter(([key]) => /\.js$/.test(key)).map(([_, value]) => value).shift() as string
             return new Response(script, {headers:{"content-type":"application/javascript"}})
           }
-
-
-        //Shit stuff, to delete once #10467 is fixed
-          case /^[/]textures[/]textures.webp$/.test(pathname):
-          case /^[/]textures[/]creatures.webp$/.test(pathname):{
-            return Response.redirect("https://gracidea.lecoq.io/maps/creatures/textures.webp", 302)
-          }
-          case /^[/]textures[/]tileset.textures.webp$/.test(pathname):
-          case /^[/]textures[/]tileset3.webp$/.test(pathname):{
-            return Response.redirect("https://gracidea.lecoq.io/maps/overworld/tileset.textures.webp", 302)
-          }
-          case /^[/]textures[/]creatures.json$/.test(pathname):{
-            return Response.redirect("https://gracidea.lecoq.io/maps/creatures/textures.json", 302)
-          }
-          case /^[/]textures[/]tileset3.json$/.test(pathname):{
-            return Response.redirect("https://gracidea.lecoq.io/maps/overworld/tileset.textures.json", 302)
-          }
-
         //Serve static assets
           default:{
             const response = LOCAL
-              ? new Response(await Deno.readTextFile(`source/client/static${pathname}`))
-              : await fetch(new URL(`https://raw.githubusercontent.com/lowlighter/gracidea/main/source/client/static${pathname}`))
+              ? new Response(await Deno.readTextFile(`client/static${pathname}`))
+              : await fetch(new URL(`https://raw.githubusercontent.com/lowlighter/gracidea/main/client/static${pathname}`))
             const headers = new Headers()
             headers.set("content-type", `${mime(pathname)}; charset=utf-8`)
             headers.set("content-security-policy", "")
-            return new Response(await Deno.readTextFile(`source/client/static${pathname}`), {headers})
+            return new Response(await Deno.readFile(`client/static${pathname}`), {headers})
           }
       }
     }

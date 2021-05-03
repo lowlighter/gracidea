@@ -7,11 +7,11 @@ scripts:
   start:
     desc: Run app
     cmd:
-      - deno run --no-check  --unstable source/server/app.ts --dev
+      - deno run --no-check  --unstable server/app.ts --dev
 
   build:
     cmd:
-      - deno bundle --no-check source/client/app/mod.ts source/client/static/js/app.js
+      - deno bundle --no-check client/app/mod.ts client/static/js/app.js
 
   #deno lint --unstable --ignore=node_modules,source/client/static/js/app.js
 
