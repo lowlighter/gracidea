@@ -1,11 +1,7 @@
 //Imports
   import { global, TILE_SIZE, ANIMATED } from "./settings.ts"
-
-//Imports
-  const imports = [
-    "https://cdn.skypack.dev/pixi.js",
-    "https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js",
-  ]
+  import * as PIXI from "../../../node_modules/pixi.js/dist/browser/pixi.min.mjs"
+//https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js
 
 /** Frame */
   type frame = string|number|ReturnType<typeof Render.Texture>
@@ -30,8 +26,6 @@
 
     /** Render setup */
       static async setup() {
-        //Load dependencies
-          const [PIXI, {default:StatsJS}] = await Promise.all(imports.map(dep => import(dep)))
         //Load and configure PIXI
           this.engine = PIXI
           this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST
@@ -51,13 +45,13 @@
           })
           global.document.querySelector("body").appendChild(this.app.view)
         //FPS and frame
-          for (const i of [0, 1]) {
+          /*for (const i of [0, 1]) {
             const stats = new StatsJS()
             stats.showPanel(i)
             global.document.querySelector("body").appendChild(stats.dom)
             stats.dom.style.left = `${i*80}px`
             this.app.ticker.add(() => stats.update())
-          }
+          }*/
         //Wait for resources to be loaded
           await new Promise(solve => loader.load(() => solve(null)))
       }

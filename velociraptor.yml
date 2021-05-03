@@ -1,0 +1,21 @@
+#imap: imports.json
+#lock: lock.json
+allow:
+  - all
+
+scripts:
+  start:
+    desc: Run app
+    cmd:
+      - deno run --no-check  --unstable source/server/app.ts --dev
+
+  build:
+    cmd:
+      - deno bundle --no-check source/client/app.ts source/server/static/js/app.js
+
+  test:
+    desc: Run tests and compute coverage
+    lock: ~
+    cmd:
+      - deno test --unstable --coverage=coverage
+      - deno coverage --unstable coverage

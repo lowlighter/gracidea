@@ -1,17 +1,22 @@
 //Imports
-  import { Application, Router, HttpError } from "https://deno.land/x/oak/mod.ts"
   import { parse } from "https://deno.land/std@0.95.0/flags/mod.ts"
-  import { maps, chunk } from "./serverless.ts"
+  import { route } from "./router.ts"
 
 //Initialization
   const argv = parse(Deno.args)
   console.log(argv)
 
-//Router
-  const router = new Router()
+  for await (const connection of Deno.listen({port:4000})) {
+    (async () => {
+      for await (const {request, respondWith} of Deno.serveHttp(connection))
+        respondWith(route(request))
+    })()
+  }
+
+
 
 //Set maps endpoints
-  for (const [id, map] of Object.entries(maps)) {
+  /*for (const [id, map] of Object.entries(maps)) {
     router
       .get(`/map/${id}/pins`, async context => { context.response.body = map.pins })
       .get(`/map/${id}/:section`, async (context, next) => {
@@ -32,26 +37,6 @@
           context.response.body = Object.entries(files).filter(([key]) => /\.js$/.test(key)).map(([_, value]) => value).shift() as string
         } catch { }
       })
-  }
+  }*/
 
-//App setup
-  const app = new Application()
-  app.use(async (context, next) => {
-    try {
-      await next()
-    } catch (error) {
-      if (error instanceof HttpError) {
-        context.response.status = error.status
-        context.response.body = error.message
-        return
-      }
-      context.response.status = 500
-      console.log(error)
-    }
-  })
-  app.use(router.routes())
-  app.use(router.allowedMethods())
-  app.use(async context => void await context.send({root:`${Deno.cwd()}/source/server/static`, index:"index.html"}))
-  console.log("server ready")
-  await app.listen({port:argv.port ?? 4000})
 
