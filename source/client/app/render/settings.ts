@@ -2,6 +2,10 @@
 //deno-lint-ignore no-explicit-any
   export const global = globalThis as any
 
+/** Event */
+//deno-lint-ignore no-explicit-any
+  export type event = any
+
 /** Tile size in pixels */
   export const TILE_SIZE = 16
 

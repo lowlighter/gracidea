@@ -8,8 +8,8 @@
 //deno-lint-ignore no-explicit-any
   const maps = {} as {[key:string]:any}
   for await (const name of ["overworld"]) {
-    let text = await Deno.readTextFile(`source/server/assets/maps/${name}.gracidea.json`)
-    /*const body = await fetch(new URL(`assets/maps/${name}.gracidea.json`, import.meta.url)).then(res => res.body)
+    let text = await Deno.readTextFile(`source/server/data/maps/${name}.gracidea.json`)
+    /*const body = await fetch(new URL(`data/maps/${name}.gracidea.json`, import.meta.url)).then(res => res.body)
     const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
     let text = ""
     while (true) {

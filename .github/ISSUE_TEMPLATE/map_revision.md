@@ -1,5 +1,5 @@
 ---
-name: Map revision
+name: 🗺️ Map revision
 about: Propose a map revision
 title: ''
 labels: map revision
@@ -7,14 +7,13 @@ assignees: ''
 
 ---
 
-**What should be revised ?**
-A clear and concise description of what the problem is. Ex. There is a missing/incorrect tile next to [...] at coordinates [...]
+<!--
 
-**Source your revision**
-Post links from trusted sources (like official artworks, guides or high-quality encyclopedia like poképedia or serebii) to supports your revision.
+  👋 Hi there!
+  Thanks for using gracidea and helping us to improve!
 
-**Screenshots**
-If applicable, add screenshots to help explain your problem.
+  Please:
+    - Check you're not duplicating an existing issue
+    - Provide a clear and concise description along with trusted documentation
 
-**Additional context**
-Add any other context about the problem here.
+-->

@@ -4,7 +4,7 @@
   import { TILE_SIZE } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import type { Chunk } from "./chunk.ts"
-  import { App } from "./../app.ts"
+  import { App } from "../app.ts"
   import { NPC } from "./npc.ts"
 
 /** Area data */
@@ -89,7 +89,7 @@
 
 
 
-
+    //
       spawn() {
         console.log(this.data.properties)
 

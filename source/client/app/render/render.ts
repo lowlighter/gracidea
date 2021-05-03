@@ -1,7 +1,7 @@
 //Imports
   import { global, TILE_SIZE, ANIMATED } from "./settings.ts"
-  import * as PIXI from "../../../node_modules/pixi.js/dist/browser/pixi.min.mjs"
-//https://cdn.skypack.dev/pin/stats.js@v0.17.0-O9IR9DX2BVp2a58SBe0w/mode=imports,min/optimized/statsjs.js
+  import * as PIXI from "../../../../node_modules/pixi.js/dist/browser/pixi.min.mjs"
+  //import StatsJS from "../../../../node_modules/stats-js/build/stats.min.js"
 
 /** Frame */
   type frame = string|number|ReturnType<typeof Render.Texture>
@@ -44,6 +44,7 @@
             backgroundAlpha:0,
           })
           global.document.querySelector("body").appendChild(this.app.view)
+          //console.log(StatsJS)
         //FPS and frame
           /*for (const i of [0, 1]) {
             const stats = new StatsJS()
@@ -101,7 +102,7 @@
 
     /** Container */
       static Container({x = 0, y = 0, z = NaN, sorted = false}:{x?:number, y?:number, z?:number, sorted?:boolean} = {}) {
-        const container = new Render.engine.ParticleContainer.__proto__()
+        const container = new Render.engine.Container()
         container.position.set(x*TILE_SIZE, y*TILE_SIZE)
         if (!Number.isNaN(z))
           container.zIndex = z

@@ -1,5 +1,5 @@
 ---
-name: Sprite revision
+name: 🎨 Sprite revision
 about: Propose a sprite revision
 title: ''
 labels: sprite revision
@@ -7,11 +7,13 @@ assignees: ''
 
 ---
 
-**What should be revised ?**
-A clear and concise description of what the problem is. Ex. Color of tile is incorrect [...]
+<!--
 
-**Screenshots**
-Add screenshots to help explain your problem.
+  👋 Hi there!
+  Thanks for using gracidea and helping us to improve!
 
-**Additional context**
-Add any other context about the problem here.
+  Please:
+    - Check you're not duplicating an existing issue
+    - Provide a clear and concise description along with screenshots if possible
+
+-->

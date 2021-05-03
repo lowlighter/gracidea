@@ -2,11 +2,7 @@
   import { Render } from "../render/render.ts"
   import type { World } from "../world/world.ts"
   import { App } from "../app.ts"
-  import { global } from "./../render/settings.ts"
-
-/** Event */
-//deno-lint-ignore no-explicit-any
-  type event = any
+  import { global, event } from "./../render/settings.ts"
 
 /**
  * Controller

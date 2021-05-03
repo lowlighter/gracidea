@@ -4,6 +4,7 @@
   import { CHUNK_SIZE, TILE_SIZE } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import type { Area } from "./area.ts"
+  import { App } from "./../app.ts"
 
 /** Patterns */
   const enum Pattern {
@@ -53,7 +54,8 @@
           mask:null,
           shadow:null
         }
-        console.debug(`loaded npc:`)
+        if (App.debug.logs)
+          console.debug(`loaded npc:`)
         this.x = this.area.polygon.points[0]/TILE_SIZE
         this.y = this.area.polygon.points[1]/TILE_SIZE
         this.area.npcs.add(this)

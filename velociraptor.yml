@@ -11,7 +11,9 @@ scripts:
 
   build:
     cmd:
-      - deno bundle --no-check source/client/app.ts source/server/static/js/app.js
+      - deno bundle --no-check source/client/app/mod.ts source/client/static/js/app.js
+
+  #deno lint --unstable --ignore=node_modules,source/client/static/js/app.js
 
   test:
     desc: Run tests and compute coverage
