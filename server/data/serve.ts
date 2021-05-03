@@ -43,7 +43,7 @@
     }
     catch (error) {
       console.log(error)
-      const body = await fetch(new URL(`server/data/maps/${name}.gracidea.json`, import.meta.url)).then(res => res.body)
+      const body = await fetch(new URL(`https://raw.githubusercontent.com/lowlighter/gracidea/main/server/data/maps/${name}.gracidea.json`)).then(res => res.body)
       const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
       let content = ""
       while (true) {
