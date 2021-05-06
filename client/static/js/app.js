@@ -11993,7 +11993,7 @@ class Minimap extends Renderable {
         );
         for (const [name, { mx , my , pins  }] of Object.entries(this.data.regions)){
             const sprite = this.sprite.addChild(Render.Sprite({
-                frame: `imgs/regions/${name}.png`
+                frame: `copyrighted/imgs/regions/${name}.png`
             }));
             sprite.position.set(mx, my);
             for (const { x: x11 , y: y1 , mx: mx1 , my: my1  } of pins){
@@ -12091,26 +12091,6 @@ class Controller {
             }
             this.world.camera.render();
         });
-        global1.document.addEventListener("keydown", ({ code  })=>{
-            switch(code){
-                case "ArrowLeft":
-                    this.world.camera.x--;
-                    this.world.camera.render();
-                    break;
-                case "ArrowRight":
-                    this.world.camera.x++;
-                    this.world.camera.render();
-                    break;
-                case "ArrowUp":
-                    this.world.camera.y--;
-                    this.world.camera.render();
-                    break;
-                case "ArrowDown":
-                    this.world.camera.y++;
-                    this.world.camera.render();
-                    break;
-            }
-        });
         global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
         );
         global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
@@ -12180,6 +12160,10 @@ class Area extends Renderable {
     render() {
         setTimeout(()=>this.spawn()
         , 1000);
+        setTimeout(()=>this.spawn()
+        , 1000);
+        setTimeout(()=>this.spawn()
+        , 1000);
     }
     destructor() {
         if (App.debug.logs) console.debug(`unloaded loaded area: ${this.id}`);
@@ -12200,11 +12184,22 @@ class Area extends Renderable {
         return area;
     }
     spawn() {
-        console.log(this.data.properties);
-        new NPC({
-            world: this.world,
-            area: this
-        }).show();
+        if (this.data.properties.encounters) {
+            const encounters = this.data.properties.encounters;
+            const random = Math.random();
+            let weight = 0;
+            for(const species in encounters){
+                if (random <= weight + encounters[species]) {
+                    new NPC({
+                        world: this.world,
+                        area: this,
+                        frame: `regular/${species}`
+                    }).show();
+                    break;
+                }
+                weight += encounters[species];
+            }
+        }
     }
 }
 class Chunk extends Renderable {
@@ -12495,8 +12490,8 @@ class NPC extends Renderable {
     area;
     track = [];
     _track_index = 0;
-    pattern = "fixed";
-    constructor({ world: world7 , area  }){
+    pattern = "wander";
+    constructor({ world: world7 , area , frame  }){
         super({
             world: world7
         });
@@ -12504,7 +12499,7 @@ class NPC extends Renderable {
         this.sprite = Render.Container();
         this.sprites = {
             main: this.sprite.addChild(Render.Sprite({
-                frame: "regular/mew",
+                frame,
                 anchor: [
                     0.5,
                     1
@@ -12516,6 +12511,44 @@ class NPC extends Renderable {
         if (App.debug.logs) console.debug(`loaded npc:`);
         this.x = this.area.polygon.points[0] / TILE_SIZE;
         this.y = this.area.polygon.points[1] / TILE_SIZE;
+        for (const { dx , dy  } of [
+            {
+                dx: -1,
+                dy: -1
+            },
+            {
+                dx: 0,
+                dy: -1
+            },
+            {
+                dx: +1,
+                dy: -1
+            },
+            {
+                dx: -1,
+                dy: 0
+            },
+            {
+                dx: +1,
+                dy: 0
+            },
+            {
+                dx: -1,
+                dy: +1
+            },
+            {
+                dx: 0,
+                dy: +1
+            },
+            {
+                dx: +1,
+                dy: +1
+            }
+        ]){
+            this.x += dx;
+            this.y += dy;
+            if (this.area.contains(this)) break;
+        }
         this.area.npcs.add(this);
         if (this.pattern === "loop" || this.pattern === "patrol") {
             const points = this.area.polygon.points.map((n72)=>n72 / 16
@@ -12532,14 +12565,14 @@ class NPC extends Renderable {
                     points[i78],
                     points[i78 + 1]
                 ];
-                const dx = nx - px;
-                const dy = ny - py;
+                const dx1 = nx - px;
+                const dy1 = ny - py;
                 let [x11, y2] = [
                     px,
                     py
                 ];
-                for(let j3 = 0; j3 < Math.abs(dx); j3++)this.track.push(x11 += Math.sign(dx), y2);
-                for(let j4 = 0; j4 < Math.abs(dy); j4++)this.track.push(x11, y2 += Math.sign(dy));
+                for(let j3 = 0; j3 < Math.abs(dx1); j3++)this.track.push(x11 += Math.sign(dx1), y2);
+                for(let j4 = 0; j4 < Math.abs(dy1); j4++)this.track.push(x11, y2 += Math.sign(dy1));
             }
             if (this.pattern === "patrol") {
                 const points1 = this.track.slice();
@@ -12568,7 +12601,7 @@ class NPC extends Renderable {
         this.loop();
     }
     wander() {
-        const { dx , dy  } = [
+        const { dx: dx1 , dy: dy1  } = [
             {
                 dx: 0,
                 dy: 0
@@ -12591,11 +12624,12 @@ class NPC extends Renderable {
             }
         ][Math.floor(Math.random() / 0.2)];
         if (this.area.contains({
-            x: this.x + dx,
-            y: this.y + dy
+            x: this.x + dx1,
+            y: this.y + dy1
         })) {
-            this.x += dx;
-            this.y += dy;
+            this.x += dx1;
+            this.y += dy1;
+            if (dx1) this.sprite.scale.x *= Math.sign(-dx1);
         }
     }
     lookaround() {
