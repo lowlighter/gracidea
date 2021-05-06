@@ -16,3 +16,5 @@ scripts:
       - deno test --unstable --allow-read --coverage=coverage tests
       - deno coverage --unstable coverage
       - deployctl check deploy/mod.ts
+
+#npm install -g free-tex-packer-cli
