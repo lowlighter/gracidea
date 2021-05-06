@@ -34,7 +34,7 @@ jobs:
       - name: Setup Deno
         uses: denolib/setup-deno@v2
       - name: Setup velociraptor
-          uses: jurassiscripts/setup-velociraptor@master
+        uses: jurassiscripts/setup-velociraptor@master
       - name: Build app
         run: vr build
       - name: Publish generated files
