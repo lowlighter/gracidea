@@ -11815,10 +11815,10 @@ class Render {
         this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST;
         this.engine.settings.ROUND_PIXELS = true;
         const loader = Render.engine.Loader.shared;
-        loader.add("/textures/tileset3.json", {
+        loader.add("/copyrighted/textures/tileset3.json", {
             crossOrigin: "anonymous"
         });
-        loader.add("/textures/creatures.json", {
+        loader.add("/copyrighted/textures/creatures.json", {
             crossOrigin: "anonymous"
         });
         this.app = new Render.engine.Application({
@@ -12289,7 +12289,7 @@ class Chunk extends Renderable {
                     "2C"
                 ],
                 sorted: true
-            }, 
+            },
         ]){
             if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
                 z: 0,
