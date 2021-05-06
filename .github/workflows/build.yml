@@ -18,6 +18,8 @@ jobs:
         uses: denolib/setup-deno@v2
       - name: Setup velociraptor
         uses: jurassiscripts/setup-velociraptor@master
+      - name: Setup deployctl
+        run: deno install --allow-all https://deno.land/x/deploy/deployctl.ts
       - name: Run tests
         run: vr test
 
