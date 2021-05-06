@@ -37434,25 +37434,16 @@
   <object id="28" name="hoenn-route-116-area" type="walk" x="4240" y="-17168">
    <polygon points="0,0 0,-16 16,-16 16,-48 32,-48 32,-96 48,-96 48,-112 240,-112 240,-96 256,-96 256,-48 240,-48 240,-32 112,-32 112,0"/>
   </object>
-  <object id="57" name="3-110-g" type="walk" x="6512" y="-16416">
+  <object id="57" name="hoenn-route-110-area" type="walk" x="6512" y="-16416">
    <polygon points="0,0 48,0 48,192 112,192 112,240 0,240 0,16"/>
   </object>
-  <object id="58" name="3-110-g" type="walk" x="6736" y="-16224">
+  <object id="58" name="hoenn-route-110-area" type="walk" x="6736" y="-16224">
    <polygon points="0,0 0,48 240,48 240,176 320,176 320,0"/>
   </object>
-  <object id="59" name="3-110-g" type="walk" x="6848" y="-15744">
-   <properties>
-    <property name="pk_electrike" type="float" value="0.3"/>
-    <property name="pk_gulpin" type="float" value="0.15"/>
-    <property name="pk_minun" type="float" value="0.15"/>
-    <property name="pk_oddish" type="float" value="0.1"/>
-    <property name="pk_plusle" type="float" value="0.02"/>
-    <property name="pk_poochyena" type="float" value="0.2"/>
-    <property name="pk_wingull" type="float" value="0.08"/>
-   </properties>
+  <object id="59" name="hoenn-route-110-area" type="walk" x="6848" y="-15744">
    <polygon points="0,0 0,48 224,48 224,-48 112,-48 112,0"/>
   </object>
-  <object id="61" name="3-110-g" type="walk" x="6992" y="-16048">
+  <object id="61" name="hoenn-route-110-area" type="walk" x="6992" y="-16048">
    <polygon points="0,0 48,0 48,256 0,256"/>
   </object>
   <object id="66" name="3-117-daycare" type="walk" x="6128" y="-17184">
@@ -37782,10 +37773,10 @@
   <object id="278" name="hoenn-route-114-area" type="surf" x="4304" y="-19280">
    <polygon points="0,0 32,0 32,32 0,32"/>
   </object>
-  <object id="279" x="5552" y="-15744">
+  <object id="279" name="hoenn-route-103-area" type="surf" x="5552" y="-15744">
    <polygon points="0,0 32,0 32,-16 80,-16 80,-32 176,-32 176,80 112,80 112,64 80,64 80,48 0,48"/>
   </object>
-  <object id="280" x="5728" y="-15808">
+  <object id="280" name="hoenn-route-103-area" type="surf" x="5728" y="-15808">
    <polygon points="0,0 48,0 48,32 96,32 96,48 144,48 144,64 224,64 224,128 96,128 96,112 64,112 64,128 0,128"/>
   </object>
   <object id="281" name="hoenn-route-104-area" type="surf" x="3376" y="-15680">
