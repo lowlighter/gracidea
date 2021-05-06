@@ -46,6 +46,6 @@ jobs:
           git config --global user.name "botlighter"
           git status
           git add .
-          git commit -m "Auto-build app"
+          git commit -m "Auto-build app [skip ci]"
           git push
           set -e
