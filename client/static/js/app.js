@@ -11833,6 +11833,7 @@ class Render {
         await new Promise((solve)=>loader.load(()=>solve(null)
             )
         );
+        global1.document.querySelector(".loader").style.display = "none";
     }
     static Polygon(points) {
         return new Render.engine.Polygon(...points.map((n72)=>n72 * 16
@@ -11956,6 +11957,9 @@ class Renderable extends Positionable {
             })
         );
         this.debug(false);
+        this._debug?.parent.removeChild(this._debug).destroy({
+            children: true
+        });
     }
 }
 class Minimap extends Renderable {
@@ -12289,7 +12293,7 @@ class Chunk extends Renderable {
                     "2C"
                 ],
                 sorted: true
-            },
+            }, 
         ]){
             if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
                 z: 0,

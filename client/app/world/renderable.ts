@@ -61,6 +61,7 @@
         this.sprite.visible = false
         this.sprite.removeChildren().forEach((child:ReturnType<typeof Render.Container>) => child.destroy({children:true}))
         this.debug(false)
+        this._debug?.parent.removeChild(this._debug).destroy({children:true})
       }
 
   }

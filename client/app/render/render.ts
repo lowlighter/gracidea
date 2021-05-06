@@ -55,6 +55,7 @@
           }*/
         //Wait for resources to be loaded
           await new Promise(solve => loader.load(() => solve(null)))
+          global.document.querySelector(".loader").style.display = "none"
       }
 
     /** Polygon */
