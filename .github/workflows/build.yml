@@ -45,7 +45,7 @@ jobs:
           git config --global user.email "69689554+botlighter@users.noreply.github.com"
           git config --global user.name "botlighter"
           git status
-          git add --update
+          git add .
           git commit -m "Auto-build app"
           git push
           set -e
