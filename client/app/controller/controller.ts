@@ -34,26 +34,6 @@
           }
           this.world.camera.render()
         })
-        global.document.addEventListener("keydown", ({code}:event) => {
-          switch (code) {
-            case "ArrowLeft":
-              this.world.camera.x--
-              this.world.camera.render()
-              break
-            case "ArrowRight":
-              this.world.camera.x++
-              this.world.camera.render()
-              break
-            case "ArrowUp":
-              this.world.camera.y--
-              this.world.camera.render()
-              break
-            case "ArrowDown":
-              this.world.camera.y++
-              this.world.camera.render()
-              break
-          }
-        })
         global.document.querySelector("[data-control-for='map']")?.addEventListener("click", () => this.world.minimap.toggle())
         global.document.querySelector("[data-control-for='debug']")?.addEventListener("click", () => {
           global.document.querySelector("nav.debug").style.display = global.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex"

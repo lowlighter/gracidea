@@ -4,7 +4,7 @@ const API = "build/data/data/api/v2/gender"
 /** Build dex data */
 export async function dex() {
   console.debug(`building: dex data`)
-  const exported = {} as {[pokemon:string]:{[gender:string]:number}}
+  const exported = {} as ExportedDexData
   for await (const {name:id, isFile} of Deno.readDir(API)) {
     //Load area data
     if (isFile)
@@ -19,4 +19,11 @@ export async function dex() {
     })
   }
   return exported
+}
+
+/** Exported dex data */
+export type ExportedDexData = {
+  [pokemon:string]:{
+    [gender:string]:number
+  }
 }

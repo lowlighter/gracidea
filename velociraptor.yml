@@ -10,9 +10,9 @@ scripts:
   build:
     desc: Build app
     cmd:
-      #- npm install -g free-tex-packer-cli
-      #- deno run --allow-all build/mod.ts
+      - npm install pixi.js
       - deno bundle client/app/mod.ts client/static/js/app.js
+      - deno run --allow-all build/mod.ts
 
   lint:
     desc:

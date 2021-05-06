@@ -3,7 +3,6 @@ on:
   - pull_request_target
 jobs:
 
-  # Label
   label:
     name: Label issues and pull requests
     runs-on: ubuntu-latest
@@ -12,4 +11,5 @@ jobs:
       - name: Label issues and pull requests
         uses: actions/labeler@v2
         with:
+          configuration-path: .github/config/labeler.yml
           repo-token: "${{ github.token }}"

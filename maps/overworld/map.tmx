@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="259">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="295">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -37373,114 +37373,74 @@
   <object id="221" name="sky-pillar" x="11648" y="-15632" width="400" height="528"/>
   <object id="235" name="abandoned-ship" x="5904" y="-13600" width="137" height="79"/>
  </objectgroup>
- <objectgroup id="15" name="creatures" visible="0">
-  <object id="3" name="3-101-g" type="wild" x="5216" y="-15040">
-   <properties>
-    <property name="pk_poochyena" type="float" value="0.45"/>
-    <property name="pk_wurmple" type="float" value="0.45"/>
-    <property name="pk_zigzagoon" type="float" value="0.1"/>
-   </properties>
+ <objectgroup id="15" name="creatures">
+  <object id="3" name="hoenn-route-101-area" type="walk" x="5216" y="-15040">
    <polygon points="0,0 32,0 32,16 48,16 48,32 64,32 64,64 48,64 48,80 0,80 0,48 -32,48 -32,16 0,16"/>
   </object>
-  <object id="4" name="3-101-g" type="wild" x="5360" y="-15088">
+  <object id="4" name="hoenn-route-101-area" type="walk" x="5360" y="-15088">
    <polygon points="0,0 32,0 32,-16 64,-16 64,0 80,0 80,16 96,16 96,64 80,64 80,96 48,96 48,64 16,64 16,48 0,48 0,0"/>
   </object>
-  <object id="5" name="3-101-g" type="wild" x="5376" y="-15152">
+  <object id="5" name="hoenn-route-101-area" type="walk" x="5376" y="-15152">
    <polygon points="0,0 16,0 16,16 64,16 64,0 96,0 96,-32 64,-32 64,-64 16,-64 16,-48 0,-48"/>
   </object>
-  <object id="6" name="3-101-g" type="wild" x="5248" y="-15136">
+  <object id="6" name="hoenn-route-101-area" type="walk" x="5248" y="-15136">
    <polygon points="0,0 0,-16 16,-16 16,-32 32,-32 32,-64 16,-64 16,-80 -32,-80 -32,-48 -64,-48 -64,-16 -32,-16 -32,0"/>
   </object>
-  <object id="7" name="3-999-1" type="wild" x="-80" y="-160">
-   <properties>
-    <property name="max_creatures" type="int" value="1"/>
-    <property name="pk_mew" type="float" value="1"/>
-   </properties>
-   <polygon points="0,0 192,0 192,80 176,80 176,112 160,112 160,128 112,128 112,144 64,144 64,128 32,128 32,112 0,112 0,96 -16,96 -16,16 0,16 0,0"/>
-  </object>
-  <object id="9" name="3-103-g" type="wild" x="5376" y="-15632">
-   <properties>
-    <property name="pk_poochyena" type="float" value="0.6"/>
-    <property name="pk_wingull" type="float" value="0.2"/>
-    <property name="pk_zigzagoon" type="float" value="0.2"/>
-   </properties>
+  <object id="9" name="hoenn-route-101-area" type="walk" x="5376" y="-15632">
    <polygon points="0,0 96,0 96,-32 112,-32 112,-64 96,-64 96,-80 32,-80 32,-48 -16,-48 -16,-16 0,-16"/>
   </object>
-  <object id="10" name="3-103-g" type="wild" x="5312" y="-15696">
+  <object id="10" name="hoenn-route-101-area" type="walk" x="5312" y="-15696">
    <polygon points="0,0 0,-32 16,-32 16,-96 -32,-96 -32,-112 -64,-112 -64,-128 -96,-128 -96,-32 -64,-32 -64,0"/>
   </object>
-  <object id="12" name="3-103-g" type="wild" x="5344" y="-15856">
+  <object id="12" name="hoenn-route-101-area" type="walk" x="5344" y="-15856">
    <polygon points="0,0 96,0 96,32 128,32 128,64 64,64 64,48 48,48 48,32 16,32 16,16 0,16"/>
   </object>
-  <object id="13" name="3-102-g" type="wild" x="5024" y="-15536">
-   <properties>
-    <property name="pk_lotad" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.3"/>
-    <property name="pk_ralts" type="float" value="0.04"/>
-    <property name="pk_seedot" type="float" value="0.01"/>
-    <property name="pk_wurmple" type="float" value="0.3"/>
-    <property name="pk_zigzagoon" type="float" value="0.15"/>
-   </properties>
+  <object id="13" name="hoenn-route-102-area" type="walk" x="5024" y="-15536">
    <polygon points="0,0 0,80 -32,80 -32,64 -48,64 -48,48 -64,48 -64,0"/>
   </object>
-  <object id="15" name="3-102-g" type="wild" x="4832" y="-15360">
+  <object id="15" name="hoenn-route-102-area" type="walk" x="4832" y="-15360">
    <polygon points="0,0 32,0 32,-16 64,-16 64,16 80,16 80,32 64,32 64,48 16,48 16,32 0,32 0,0"/>
   </object>
-  <object id="16" name="3-102-g" type="wild" x="4688" y="-15280">
+  <object id="16" name="hoenn-route-102-area" type="walk" x="4688" y="-15280">
    <polygon points="0,0 0,-32 16,-32 16,-48 64,-48 64,-32 112,-32 112,-16 128,-16 128,0 144,0 144,32 80,32 80,0"/>
   </object>
-  <object id="17" name="3-102-g" type="wild" x="4640" y="-15344">
+  <object id="17" name="hoenn-route-102-area" type="walk" x="4640" y="-15344">
    <polygon points="0,0 32,0 32,-16 48,-16 48,-32 64,-32 64,-48 96,-48 96,-64 128,-64 128,-80 144,-80 144,-112 64,-112 64,-96 48,-96 32,-96 32,-80 16,-80 16,-64 0,-64"/>
   </object>
-  <object id="18" name="3-102-g" type="wild" x="4480" y="-15376">
+  <object id="18" name="hoenn-route-102-area" type="walk" x="4480" y="-15376">
    <polygon points="0,0 32,0 32,32 48,32 48,64 64,64 64,96 0,96"/>
   </object>
-  <object id="19" name="3-102-g" type="wild" x="4416" y="-15504">
+  <object id="19" name="hoenn-route-102-area" type="walk" x="4416" y="-15504">
    <polygon points="0,0 96,0 96,-32 144,-32 144,16 128,16 128,48 96,48 96,64 32,64 32,48 16,48 16,32 0,32"/>
   </object>
-  <object id="22" name="3-104-g" type="wild" x="3584" y="-15600">
-   <properties>
-    <property name="pk_marill" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.4"/>
-    <property name="pk_taillow" type="float" value="0.1"/>
-    <property name="pk_wingull" type="float" value="0.1"/>
-    <property name="pk_wurmple" type="float" value="0.2"/>
-   </properties>
+  <object id="22" name="hoenn-route-104-area" type="walk" x="3584" y="-15600">
    <polygon points="0,0 0,-32 16,-32 16,-48 80,-48 80,-64 128,-64 128,-32 160,-32 160,16 112,16 112,32 80,32 80,64 32,64 32,32 16,32 16,0"/>
   </object>
-  <object id="23" name="3-104-g" type="wild" x="3376" y="-15872">
+  <object id="23" name="hoenn-route-104-area" type="walk" x="3376" y="-15872">
    <polygon points="0,0 48,0 48,64 176,64 176,80 192,80 192,96 64,96 64,80 16,80 16,48 0,48"/>
   </object>
-  <object id="24" name="3-104-g" type="wild" x="3456" y="-15872">
+  <object id="24" name="hoenn-route-104-area" type="walk" x="3456" y="-15872">
    <polygon points="0,0 0,32 80,32 80,16 64,16 64,0"/>
   </object>
-  <object id="25" name="3-104-g" type="wild" x="3296" y="-16432">
+  <object id="25" name="hoenn-route-104-area" type="walk" x="3296" y="-16432">
    <polygon points="0,0 64,0 64,-32 96,-32 96,0 128,0 128,48 96,48 96,64 64,64 64,96 32,96 32,112 16,112 16,96 0,96"/>
   </object>
-  <object id="26" name="3-116-g" type="wild" x="3968" y="-17200">
+  <object id="26" name="hoenn-route-116-area" type="walk" x="3968" y="-17200">
    <polygon points="0,0 0,-80 16,-80 16,-96 32,-96 32,-80 64,-80 64,-64 160,-64 160,-16 160,0 176,0 176,16 128,16 128,0"/>
   </object>
-  <object id="27" name="3-116-g" type="wild" x="4032" y="-17360">
-   <properties>
-    <property name="pk_abra" type="float" value="0.1"/>
-    <property name="pk_nincada" type="float" value="0.2"/>
-    <property name="pk_poochyena" type="float" value="0.28"/>
-    <property name="pk_skitty" type="float" value="0.02"/>
-    <property name="pk_taillow" type="float" value="0.2"/>
-    <property name="pk_whismur" type="float" value="0.2"/>
-   </properties>
+  <object id="27" name="hoenn-route-116-area" type="walk" x="4032" y="-17360">
    <polygon points="0,0 0,-16 16,-16 16,-32 64,-32 64,-48 80,-48 80,-32 96,-32 96,-16 128,-16 128,0 160,0 160,16 176,16 176,32 160,32 160,48 144,48 144,64 64,64 64,32 32,32 32,0"/>
   </object>
-  <object id="28" name="3-116-g" type="wild" x="4240" y="-17168">
+  <object id="28" name="hoenn-route-116-area" type="walk" x="4240" y="-17168">
    <polygon points="0,0 0,-16 16,-16 16,-48 32,-48 32,-96 48,-96 48,-112 240,-112 240,-96 256,-96 256,-48 240,-48 240,-32 112,-32 112,0"/>
   </object>
-  <object id="57" name="3-110-g" type="wild" x="6512" y="-16416">
+  <object id="57" name="3-110-g" type="walk" x="6512" y="-16416">
    <polygon points="0,0 48,0 48,192 112,192 112,240 0,240 0,16"/>
   </object>
-  <object id="58" name="3-110-g" type="wild" x="6736" y="-16224">
+  <object id="58" name="3-110-g" type="walk" x="6736" y="-16224">
    <polygon points="0,0 0,48 240,48 240,176 320,176 320,0"/>
   </object>
-  <object id="59" name="3-110-g" type="wild" x="6848" y="-15744">
+  <object id="59" name="3-110-g" type="walk" x="6848" y="-15744">
    <properties>
     <property name="pk_electrike" type="float" value="0.3"/>
     <property name="pk_gulpin" type="float" value="0.15"/>
@@ -37492,10 +37452,10 @@
    </properties>
    <polygon points="0,0 0,48 224,48 224,-48 112,-48 112,0"/>
   </object>
-  <object id="61" name="3-110-g" type="wild" x="6992" y="-16048">
+  <object id="61" name="3-110-g" type="walk" x="6992" y="-16048">
    <polygon points="0,0 48,0 48,256 0,256"/>
   </object>
-  <object id="66" name="3-117-daycare" type="wild" x="6128" y="-17184">
+  <object id="66" name="3-117-daycare" type="walk" x="6128" y="-17184">
    <properties>
     <property name="max_creatures" type="int" value="2"/>
     <property name="pk_azurill" type="float" value="0.3"/>
@@ -37505,64 +37465,22 @@
    </properties>
    <polygon points="0,0 0,64 0,80 48,80 64,96 176,96 176,48 128,48 128,0 0,0 -6,2"/>
   </object>
-  <object id="128" name="3-104-w" type="wild" x="3408" y="-15664">
-   <polygon points="0,0 64,0 64,304 272,384 272,480 0,480"/>
-  </object>
-  <object id="129" name="3-105-w" type="wild" x="3584" y="-15184">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
-   <polygon points="0,0 96,0 96,1216 0,1216"/>
-  </object>
-  <object id="130" name="3-105-w" type="wild" x="3344" y="-14848">
-   <polygon points="0,0 80,0 80,336 0,336"/>
-  </object>
-  <object id="131" name="3-106-w" type="wild" x="3568" y="-13856">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
-   <polygon points="0,0 848,0 848,64 0,64"/>
-  </object>
-  <object id="132" name="3-106-w" type="wild" x="3456" y="-13856">
-   <polygon points="0,0 240,0 240,-112 0,-112"/>
-  </object>
-  <object id="133" name="3-107-w" type="wild" x="4656" y="-13536">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_tentacool" type="float" value="0.547"/>
-    <property name="pk_wailmer" type="float" value="0.02"/>
-    <property name="pk_wingull" type="float" value="0.2975"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
-   <polygon points="0,0 848,0 848,96 0,112"/>
-  </object>
-  <object id="135" name="3-111-g" type="wild" x="6784" y="-18800">
+  <object id="135" name="3-111-g" type="walk" x="6784" y="-18800">
    <polygon points="0,0 80,0 80,144 0,144"/>
   </object>
-  <object id="136" name="3-111-g" type="wild" x="6704" y="-18640">
+  <object id="136" name="3-111-g" type="walk" x="6704" y="-18640">
    <polygon points="0,0 0,80 160,80 160,32"/>
   </object>
-  <object id="137" name="3-111-g" type="wild" x="6656" y="-18560">
+  <object id="137" name="3-111-g" type="walk" x="6656" y="-18560">
    <polygon points="0,0 96,0 96,96 0,96"/>
   </object>
-  <object id="138" name="3-111-g" type="wild" x="6944" y="-18640">
+  <object id="138" name="3-111-g" type="walk" x="6944" y="-18640">
    <polygon points="0,0 48,0 48,224 0,224"/>
   </object>
-  <object id="139" name="3-111-g" type="wild" x="6800" y="-18432">
+  <object id="139" name="3-111-g" type="walk" x="6800" y="-18432">
    <polygon points="0,0 0,144 224,144 224,64"/>
   </object>
-  <object id="140" name="3-111-g" type="wild" x="6816" y="-18272">
+  <object id="140" name="3-111-g" type="walk" x="6816" y="-18272">
    <properties>
     <property name="pk_baltoy" type="float" value="0.24"/>
     <property name="pk_cacnea" type="float" value="0.06"/>
@@ -37571,43 +37489,19 @@
    </properties>
    <polygon points="0,0 240,0 240,176 0,176"/>
   </object>
-  <object id="141" name="3-111-g" type="wild" x="6800" y="-18560">
+  <object id="141" name="3-111-g" type="walk" x="6800" y="-18560">
    <polygon points="0,0 64,0 112,32 112,80 0,80"/>
   </object>
-  <object id="142" name="3-111-g" type="wild" x="6912" y="-18816">
+  <object id="142" name="3-111-g" type="walk" x="6912" y="-18816">
    <polygon points="0,0 96,0 96,32 48,64 0,64"/>
   </object>
-  <object id="143" name="3-111-g" type="wild" x="6944" y="-17936">
+  <object id="143" name="3-111-g" type="walk" x="6944" y="-17936">
    <polygon points="0,0 0,176 48,176 48,0"/>
   </object>
-  <object id="144" name="3-113-g" type="wild" x="5696" y="-19264">
-   <properties>
-    <property name="pk_skarmory" type="float" value="0.05"/>
-    <property name="pk_slugma" type="float" value="0.25"/>
-    <property name="pk_spinda" type="float" value="0.7"/>
-   </properties>
-   <polygon points="0,0 64,0 64,-48 128,-48 128,-80 224,-80 224,-48 208,-48 208,-16 160,-16 160,16 112,16 112,64 48,64 0,32"/>
-  </object>
-  <object id="145" name="3-113-g" type="wild" x="5280" y="-19312">
-   <polygon points="0,0 0,48 48,48 48,80 112,80 112,128 -64,128 -64,80 -96,80 -96,32"/>
-  </object>
-  <object id="146" name="3-113-g" type="wild" x="5424" y="-19296">
-   <polygon points="0,0 48,-48 112,-48 128,-80 320,-80 320,-48 208,-48 208,-16 128,16 32,16"/>
-  </object>
-  <object id="147" name="3-113-g" type="wild" x="6000" y="-19264">
-   <polygon points="0,0 48,0 48,-16 160,-16 160,-64 224,-64 224,0 176,48 0,48"/>
-  </object>
-  <object id="150" name="3-102-w" type="wild" x="5040" y="-15520">
-   <properties>
-    <property name="pk_corphish" type="float" value="0.02"/>
-    <property name="pk_goldeen" type="float" value="0.0455"/>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_marill" type="float" value="0.8415"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="150" name="hoenn-route-102-area" type="surf" x="5040" y="-15520">
    <polygon points="0,0 32,0 32,32 64,32 64,64 0,64"/>
   </object>
-  <object id="151" name="3-petalburg-w" type="wild" x="4224" y="-15664">
+  <object id="151" name="3-petalburg-w" type="walk" x="4224" y="-15664">
    <properties>
     <property name="pk_corphish" type="float" value="0.02"/>
     <property name="pk_goldeen" type="float" value="0.037"/>
@@ -37617,22 +37511,13 @@
    </properties>
    <polygon points="0,0 80,0 80,80 0,80"/>
   </object>
-  <object id="152" name="3-petalburg-w" type="wild" x="3952" y="-15488">
+  <object id="152" name="3-petalburg-w" type="walk" x="3952" y="-15488">
    <polygon points="0,0 48,0 48,144 128,144 128,208 0,208"/>
   </object>
-  <object id="153" name="3-104-w" type="wild" x="3680" y="-16368">
-   <properties>
-    <property name="pk_magikarp" type="float" value="0.15"/>
-    <property name="pk_pelipper" type="float" value="0.0425"/>
-    <property name="pk_wingull" type="float" value="0.8075"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
+  <object id="153" name="hoenn-route-104-area" type="surf" x="3680" y="-16368">
    <polygon points="0,0 176,0 176,192 96,192 96,80 0,80"/>
   </object>
-  <object id="154" name="3-104-w" type="wild" x="3600" y="-16368">
-   <polygon points="0,0 48,0 48,112 144,112 144,192 -112,192 -112,96 0,48"/>
-  </object>
-  <object id="155" name="3-117-g" type="wild" x="5952" y="-16944">
+  <object id="155" name="3-117-g" type="walk" x="5952" y="-16944">
    <properties>
     <property name="pk_illumise" type="float" value="0.18"/>
     <property name="pk_marill" type="float" value="0.1"/>
@@ -37643,7 +37528,7 @@
    </properties>
    <polygon points="0,0 64,0 112,48 112,80 64,80 0,48"/>
   </object>
-  <object id="156" name="3-117-w" type="wild" x="5872" y="-17136">
+  <object id="156" name="3-117-w" type="walk" x="5872" y="-17136">
    <properties>
     <property name="pk_corphish" type="float" value="0.02"/>
     <property name="pk_goldeen" type="float" value="0.0455"/>
@@ -37654,32 +37539,16 @@
    </properties>
    <polygon points="0,0 80,0 112,32 112,96 48,48 0,48"/>
   </object>
-  <object id="157" name="3-117-g" type="wild" x="5776" y="-16960">
+  <object id="157" name="3-117-g" type="walk" x="5776" y="-16960">
    <polygon points="0,0 48,0 48,64 0,64"/>
   </object>
-  <object id="158" name="3-117-g" type="wild" x="5632" y="-17152">
+  <object id="158" name="3-117-g" type="walk" x="5632" y="-17152">
    <polygon points="0,0 64,0 64,16 112,16 112,32 0,32"/>
   </object>
-  <object id="159" name="3-117-w" type="wild" x="5840" y="-16992">
+  <object id="159" name="3-117-w" type="walk" x="5840" y="-16992">
    <polygon points="0,0 16,0 80,64 96,64 96,96 0,96"/>
   </object>
-  <object id="160" name="3-114-g" type="wild" x="4128" y="-18608">
-   <properties>
-    <property name="pk_lombre" type="float" value="0.2"/>
-    <property name="pk_lotad" type="float" value="0.3"/>
-    <property name="pk_nuzleaf" type="float" value="0.01"/>
-    <property name="pk_seviper" type="float" value="0.09"/>
-    <property name="pk_swablu" type="float" value="0.4"/>
-   </properties>
-   <polygon points="0,0 96,0 96,16 144,48 144,112 80,112 80,80 48,48 0,48"/>
-  </object>
-  <object id="161" name="3-114-g" type="wild" x="4192" y="-18736">
-   <polygon points="0,0 48,0 48,-32 80,-32 80,0 112,0 32,80 0,80"/>
-  </object>
-  <object id="162" name="3-114-g" type="wild" x="4384" y="-18864">
-   <polygon points="0,0 48,0 48,96 0,48"/>
-  </object>
-  <object id="163" name="3-119-g" type="wild" x="7888" y="-17392">
+  <object id="163" name="3-119-g" type="walk" x="7888" y="-17392">
    <properties>
     <property name="pk_kecleon" type="float" value="0.01"/>
     <property name="pk_linoone" type="float" value="0.3"/>
@@ -37690,7 +37559,7 @@
    </properties>
    <polygon points="0,0 160,0 160,80 0,80"/>
   </object>
-  <object id="164" name="3-safari-g-sw" type="wild" x="10416" y="-18480">
+  <object id="164" name="3-safari-g-sw" type="walk" x="10416" y="-18480">
    <properties>
     <property name="pk_doduo" type="float" value="0.15"/>
     <property name="pk_girafarig" type="float" value="0.15"/>
@@ -37702,22 +37571,22 @@
    </properties>
    <polygon points="0,0 32,0 32,-32 96,-32 96,-48 144,-48 144,-16 80,48 0,48"/>
   </object>
-  <object id="165" name="3-safari-g-sw" type="wild" x="10432" y="-18832">
+  <object id="165" name="3-safari-g-sw" type="walk" x="10432" y="-18832">
    <polygon points="0,0 48,0 48,32 80,32 112,64 112,112 64,112 64,128 16,128 16,32 -16,32"/>
   </object>
-  <object id="166" name="3-safari-g-sw" type="wild" x="10656" y="-18480">
+  <object id="166" name="3-safari-g-sw" type="walk" x="10656" y="-18480">
    <polygon points="0,0 48,-48 96,-48 144,0 144,64 112,80 48,80 0,48"/>
   </object>
-  <object id="167" name="3-safari-g-sw" type="wild" x="10128" y="-18480">
+  <object id="167" name="3-safari-g-sw" type="walk" x="10128" y="-18480">
    <polygon points="0,0 128,0 128,64 160,64 160,96 64,96 0,64"/>
   </object>
-  <object id="168" name="3-safari-g-sw" type="wild" x="9856" y="-18624">
+  <object id="168" name="3-safari-g-sw" type="walk" x="9856" y="-18624">
    <polygon points="0,0 0,48 48,48 48,64 80,64 80,128 32,128 -32,64 -32,16"/>
   </object>
-  <object id="169" name="3-safari-g-sw" type="wild" x="9744" y="-18736">
+  <object id="169" name="3-safari-g-sw" type="walk" x="9744" y="-18736">
    <polygon points="0,0 32,0 32,-64 80,-64 80,0 32,64 0,64"/>
   </object>
-  <object id="170" name="3-safari-w-sw" type="wild" x="9936" y="-18720">
+  <object id="170" name="3-safari-w-sw" type="walk" x="9936" y="-18720">
    <properties>
     <property name="pk_goldeen" type="float" value="0.067"/>
     <property name="pk_magikarp" type="float" value="0.079"/>
@@ -37727,7 +37596,7 @@
    </properties>
    <polygon points="0,0 144,0 144,64 32,64 0,48"/>
   </object>
-  <object id="171" name="3-safari-w-nw" type="wild" x="10112" y="-19488">
+  <object id="171" name="3-safari-w-nw" type="walk" x="10112" y="-19488">
    <properties>
     <property name="pk_goldeen" type="float" value="0.067"/>
     <property name="pk_golduck" type="float" value="0.1275"/>
@@ -37738,19 +37607,19 @@
    </properties>
    <polygon points="0,0 96,0 96,48 160,48 160,96 0,96"/>
   </object>
-  <object id="172" name="3-safari-g-nw" type="wild" x="9904" y="-19344">
+  <object id="172" name="3-safari-g-nw" type="walk" x="9904" y="-19344">
    <polygon points="0,0 64,0 160,32 176,64 176,96 80,96 80,64 0,64"/>
   </object>
-  <object id="173" name="3-safari-g-nw" type="wild" x="10160" y="-19136">
+  <object id="173" name="3-safari-g-nw" type="walk" x="10160" y="-19136">
    <polygon points="0,0 80,-48 128,-48 128,48 96,48 96,80 0,80"/>
   </object>
-  <object id="174" name="3-safari-g-nw" type="wild" x="10192" y="-19360">
+  <object id="174" name="3-safari-g-nw" type="walk" x="10192" y="-19360">
    <polygon points="0,0 128,0 128,80 64,80 -16,32"/>
   </object>
-  <object id="175" name="3-safari-g-nw" type="wild" x="9744" y="-19504">
+  <object id="175" name="3-safari-g-nw" type="walk" x="9744" y="-19504">
    <polygon points="0,0 96,0 96,48 64,96 32,112 0,112"/>
   </object>
-  <object id="176" name="3-safari-g-nw" type="wild" x="9712" y="-19168">
+  <object id="176" name="3-safari-g-nw" type="walk" x="9712" y="-19168">
    <properties>
     <property name="pk_dodrio" type="float" value="0.05"/>
     <property name="pk_doduo" type="float" value="0.15"/>
@@ -37761,10 +37630,10 @@
    </properties>
    <polygon points="0,0 80,0 112,48 112,96 96,112 64,112 64,80 0,80"/>
   </object>
-  <object id="177" name="3-safari-g-nw" type="wild" x="9840" y="-19248">
+  <object id="177" name="3-safari-g-nw" type="walk" x="9840" y="-19248">
    <polygon points="0,0 96,48 96,80 16,80 16,64 0,64"/>
   </object>
-  <object id="178" name="3-safari-g-n" type="wild" x="10416" y="-19440">
+  <object id="178" name="3-safari-g-n" type="walk" x="10416" y="-19440">
    <properties>
     <property name="pk_gloom" type="float" value="0.2"/>
     <property name="pk_heracross" type="float" value="0.05"/>
@@ -37775,19 +37644,19 @@
    </properties>
    <polygon points="0,0 32,0 32,-32 96,-80 144,-80 160,-64 160,0 144,32 96,64 48,80 0,80"/>
   </object>
-  <object id="179" name="3-safari-g-n" type="wild" x="10448" y="-19120">
+  <object id="179" name="3-safari-g-n" type="walk" x="10448" y="-19120">
    <polygon points="0,0 32,32 32,160 -32,160 -32,128 -64,128 -64,32 -32,32 -32,0"/>
   </object>
-  <object id="180" name="3-safari-g-n" type="wild" x="10496" y="-19072">
+  <object id="180" name="3-safari-g-n" type="walk" x="10496" y="-19072">
    <polygon points="0,0 32,0 32,-32 64,-32 96,0 96,80 0,80"/>
   </object>
-  <object id="181" name="3-safari-g-n" type="wild" x="10768" y="-19152">
+  <object id="181" name="3-safari-g-n" type="walk" x="10768" y="-19152">
    <polygon points="0,0 32,-32 128,-32 128,16 128,32 0,32"/>
   </object>
-  <object id="182" name="3-safari-g-sw" type="wild" x="10848" y="-18816">
+  <object id="182" name="3-safari-g-sw" type="walk" x="10848" y="-18816">
    <polygon points="0,0 64,0 64,-16 112,-16 112,48 80,48 80,80 64,80 0,32"/>
   </object>
-  <object id="183" name="3-safari-g-ne" type="wild" x="11056" y="-19296">
+  <object id="183" name="3-safari-g-ne" type="walk" x="11056" y="-19296">
    <properties>
     <property name="pk_aipom" type="float" value="0.2"/>
     <property name="pk_hoothoot" type="float" value="0.05"/>
@@ -37800,25 +37669,25 @@
    </properties>
    <polygon points="0,0 96,32 96,112 0,112"/>
   </object>
-  <object id="184" name="3-safari-g-ne" type="wild" x="11312" y="-19440">
+  <object id="184" name="3-safari-g-ne" type="walk" x="11312" y="-19440">
    <polygon points="0,0 16,-32 144,-32 144,-16 112,0"/>
   </object>
-  <object id="185" name="3-safari-g-ne" type="wild" x="11488" y="-19360">
+  <object id="185" name="3-safari-g-ne" type="walk" x="11488" y="-19360">
    <polygon points="0,0 16,-32 32,-32 32,64 16,64 16,0"/>
   </object>
-  <object id="186" name="3-safari-g-ne" type="wild" x="11440" y="-19200">
+  <object id="186" name="3-safari-g-ne" type="walk" x="11440" y="-19200">
    <polygon points="0,0 64,-64 64,-48 80,-48 80,96 64,96 64,112 16,112 16,64 0,64"/>
   </object>
-  <object id="187" name="3-safari-g-se" type="wild" x="11056" y="-18832">
+  <object id="187" name="3-safari-g-se" type="walk" x="11056" y="-18832">
    <polygon points="0,0 48,0 64,16 64,64 96,64 96,112 80,128 32,128 32,32 0,32"/>
   </object>
-  <object id="188" name="3-safari-g-se" type="wild" x="11056" y="-18640">
+  <object id="188" name="3-safari-g-se" type="walk" x="11056" y="-18640">
    <polygon points="0,0 48,32 48,96 -16,96 -16,32 0,32"/>
   </object>
-  <object id="189" name="3-safari-g-se" type="wild" x="11136" y="-18512">
+  <object id="189" name="3-safari-g-se" type="walk" x="11136" y="-18512">
    <polygon points="0,0 16,-80 32,-80 32,-112 48,-112 48,0"/>
   </object>
-  <object id="192" name="3-safari-g-se" type="wild" x="11312" y="-18352">
+  <object id="192" name="3-safari-g-se" type="walk" x="11312" y="-18352">
    <properties>
     <property name="pk_aipom" type="float" value="0.2"/>
     <property name="pk_gligar" type="float" value="0.05"/>
@@ -37831,10 +37700,10 @@
    </properties>
    <polygon points="0,0 48,-16 32,-64 -16,-128 -64,-128 -128,-80 -128,-64 -32,-64 -32,0"/>
   </object>
-  <object id="196" name="3-safari-w-sw" type="wild" x="9728" y="-18448">
+  <object id="196" name="3-safari-w-sw" type="walk" x="9728" y="-18448">
    <polygon points="0,0 96,0 96,64 0,64"/>
   </object>
-  <object id="197" name="3-safari-w-se" type="wild" x="11328" y="-18576">
+  <object id="197" name="3-safari-w-se" type="walk" x="11328" y="-18576">
    <properties>
     <property name="pk_goldeen" type="float" value="0.0558"/>
     <property name="pk_magikarp" type="float" value="0.069"/>
@@ -37847,14 +37716,122 @@
    </properties>
    <polygon points="0,0 144,0 144,48 0,48"/>
   </object>
-  <object id="215" name="3-safari-g-se" type="wild" x="11440" y="-18352">
+  <object id="215" name="3-safari-g-se" type="walk" x="11440" y="-18352">
    <polygon points="0,0 0,-48 64,-80 80,-80 80,0"/>
   </object>
-  <object id="216" name="3-safari-g-se" type="wild" x="11264" y="-18672">
+  <object id="216" name="3-safari-g-se" type="walk" x="11264" y="-18672">
    <polygon points="0,0 48,0 48,96 0,144"/>
   </object>
+  <object id="259" name="hoenn-route-104-area" type="surf" x="3600" y="-16368">
+   <polygon points="0,0 48,0 48,112 144,112 144,192 -112,192 -112,96 -96,96 -96,64 -64,64 -64,48 0,48"/>
+  </object>
+  <object id="260" name="hoenn-route-115-area" type="walk" x="3344" y="-18688">
+   <polygon points="0,0 48,0 48,16 64,16 64,64 48,64 48,80 16,80 16,64 -16,64 -16,16 0,16"/>
+  </object>
+  <object id="261" name="hoenn-route-116-area" type="surf" x="3296" y="-17872">
+   <polygon points="0,0 288,0 288,64 96,64 96,80 16,80 16,48 0,48"/>
+  </object>
+  <object id="262" name="hoenn-route-116-area" type="surf" x="3328" y="-18336">
+   <polygon points="0,0 32,0 32,96 0,96"/>
+  </object>
+  <object id="263" name="hoenn-route-116-area" type="surf" x="3344" y="-18240">
+   <polygon points="0,0 64,0 64,80 96,80 96,112 -16,112 -16,96 -32,96 -32,32 0,32"/>
+  </object>
+  <object id="264" name="hoenn-route-116-area" type="surf" x="3312" y="-18112">
+   <polygon points="0,0 16,0 16,-16 48,-16 48,48 96,48 96,96 144,96 144,128 0,128"/>
+  </object>
+  <object id="265" name="hoenn-route-116-area" type="surf" x="3328" y="-17984">
+   <polygon points="0,0 0,32 16,32 16,64 0,64 0,112 96,112 96,80 128,80 128,0 96,0 96,32 64,32 64,0"/>
+  </object>
+  <object id="266" name="hoenn-route-116-area" type="surf" x="3312" y="-17792">
+   <polygon points="0,0 32,0 32,176 48,176 48,208 64,208 64,224 144,224 144,240 96,240 96,256 48,256 48,240 16,240 16,224 0,224 0,192 -16,192 -16,128 0,128 0,96 -16,96 -16,32 0,32"/>
+  </object>
+  <object id="267" name="hoenn-route-116-area" type="surf" x="3408" y="-18128">
+   <polygon points="0,0 64,0 64,48 32,48 32,16 0,16"/>
+  </object>
+  <object id="268" name="hoenn-route-114-area" type="walk" x="4176" y="-18624">
+   <polygon points="0,0 48,0 48,32 80,32 80,48 96,48 96,128 32,128 32,96 0,96 0,64 -48,64 -48,16 0,16"/>
+  </object>
+  <object id="269" name="hoenn-route-114-area" type="walk" x="4192" y="-18656">
+   <polygon points="0,0 32,0 32,-16 64,-16 112,-64 112,-80 80,-80 80,-112 64,-112 64,-128 48,-128 48,-112 32,-112 32,-96 48,-96 48,-80 0,-80"/>
+  </object>
+  <object id="270" name="hoenn-route-114-area" type="walk" x="4384" y="-18864">
+   <polygon points="0,0 32,0 32,16 48,16 48,96 32,96 32,80 16,80 16,32 0,32"/>
+  </object>
+  <object id="271" name="hoenn-route-114-area" type="surf" x="4288" y="-19168">
+   <polygon points="0,0 48,0 48,64 0,64"/>
+  </object>
+  <object id="272" name="hoenn-route-114-area" type="surf" x="4192" y="-19184">
+   <polygon points="0,0 16,0 16,32 0,32"/>
+  </object>
+  <object id="273" name="hoenn-route-114-area" type="surf" x="4064" y="-19248">
+   <polygon points="0,0 0,-64 128,-64 128,-48 64,-48 64,-32 32,-32 32,0"/>
+  </object>
+  <object id="274" name="hoenn-route-114-area" type="surf" x="4064" y="-19200">
+   <polygon points="0,0 32,0 32,80 80,80 80,144 144,144 144,192 -16,192 -16,48 0,48"/>
+  </object>
+  <object id="275" name="hoenn-route-114-area" type="surf" x="4048" y="-18928">
+   <polygon points="0,0 0,48 96,48 96,64 160,64 160,-80 96,-80 96,0"/>
+  </object>
+  <object id="276" name="hoenn-route-114-area" type="surf" x="4272" y="-19056">
+   <polygon points="0,0 96,0 96,80 144,80 144,176 0,176"/>
+  </object>
+  <object id="277" x="6000" y="-19216">
+   <polygon points="0,0 0,-48 48,-48 48,-64 160,-64 160,-112 224,-112 224,-48 208,-48 208,-16 176,-16 176,0 96,0 96,16 32,16 32,0"/>
+  </object>
+  <object id="278" name="hoenn-route-114-area" type="surf" x="4304" y="-19280">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object id="279" x="5552" y="-15744">
+   <polygon points="0,0 32,0 32,-16 80,-16 80,-32 176,-32 176,80 112,80 112,64 80,64 80,48 0,48"/>
+  </object>
+  <object id="280" x="5728" y="-15808">
+   <polygon points="0,0 48,0 48,32 96,32 96,48 144,48 144,64 224,64 224,128 96,128 96,112 64,112 64,128 0,128"/>
+  </object>
+  <object id="281" name="hoenn-route-104-area" type="surf" x="3376" y="-15680">
+   <polygon points="0,0 64,0 64,16 96,16 96,64 112,64 112,128 16,128 16,96 0,96"/>
+  </object>
+  <object id="282" name="hoenn-route-104-area" type="surf" x="3408" y="-15296">
+   <polygon points="0,0 0,112 272,112 272,48 288,48 288,0"/>
+  </object>
+  <object id="283" name="hoenn-route-104-area" type="surf" x="3568" y="-15296">
+   <polygon points="0,0 0,-32 -32,-32 -32,-48 -64,-48 -64,-96 -160,-96 -160,-64 -176,-64 -176,-16 -160,-16 -160,0"/>
+  </object>
+  <object id="284" name="hoenn-route-104-area" type="surf" x="3392" y="-15488">
+   <polygon points="0,0 0,48 -16,48 -16,96 96,96 96,32 80,32 80,-64 0,-64 0,-32 16,-32 16,0"/>
+  </object>
+  <object id="285" name="hoenn-route-104-area" type="surf" x="3408" y="-15744">
+   <polygon points="0,0 0,16 32,16 32,32 64,32 64,0"/>
+  </object>
+  <object id="286" x="3376" y="-15184">
+   <polygon points="0,0 0,48 16,48 16,80 32,80 32,96 64,96 64,112 96,112 96,96 112,96 112,32 80,32 80,0"/>
+  </object>
+  <object id="287" x="3520" y="-15136">
+   <polygon points="0,0 -32,0 -32,-48 160,-48 160,-16 192,-16 192,16 224,16 224,48 0,48"/>
+  </object>
+  <object id="288" x="3536" y="-15088">
+   <polygon points="0,0 0,48 16,48 16,96 32,96 32,144 192,144 192,80 144,80 144,48 160,48 160,0"/>
+  </object>
+  <object id="289" name="faraway-island-area" type="only-one" x="176" y="-208">
+   <polygon points="0,0 32,0 32,16 64,16 64,192 48,192 48,208 32,208 32,240 16,240 16,256 0,256 0,272 -96,272 -96,240 -48,240 -48,192 -32,192 -32,48 -16,48 -16,32 0,32"/>
+  </object>
+  <object id="290" name="faraway-island-area" type="only-one" x="160" y="-224">
+   <polygon points="0,0 -48,0 -48,-64 -32,-64 -32,-80 16,-80 16,-64 32,-64 32,-80 64,-80 64,-16 48,-16 48,-32 32,-32 32,-16 16,-16 16,-48 0,-48"/>
+  </object>
+  <object id="291" name="faraway-island-area" type="only-one" x="32" y="-160">
+   <polygon points="0,0 48,0 48,48 64,48 64,112 48,112 48,128 -16,128 -16,48 0,48"/>
+  </object>
+  <object id="292" name="faraway-island-area" type="only-one" x="-80" y="-160">
+   <polygon points="0,0 96,0 96,80 80,80 80,128 32,128 32,112 0,112 0,96 -16,96 -16,64 32,64 32,32 16,32 16,64 -16,64 -16,16 0,16"/>
+  </object>
+  <object id="293" name="faraway-island-area" type="only-one" x="-192" y="-128">
+   <polygon points="0,0 32,0 32,16 48,16 48,64 64,64 64,80 80,80 80,96 96,96 96,176 64,176 64,112 0,112"/>
+  </object>
+  <object id="294" name="faraway-island-area" type="only-one" x="-16" y="-272">
+   <polygon points="0,0 80,0 80,48 0,48 0,32 -64,32 -64,16 -96,16 -96,64 -112,64 -112,80 -160,80 -160,32 -144,32 -144,0"/>
+  </object>
  </objectgroup>
- <objectgroup id="20" name="people" visible="0">
+ <objectgroup id="20" name="people">
   <object id="123" type="trainer" x="5344" y="-14752">
    <properties>
     <property name="categorie" value="guy_0"/>

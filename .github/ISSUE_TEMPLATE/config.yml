@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 💡 Suggest new features
+    url: https://github.com/lowlighter/gracidea/discussions/new?category=ideas
+    about: Submit ideas to help us improve
+  - name: 💬 Start a discussion
+    url: https://github.com/lowlighter/gracidea/discussions/new?category=general
+    about: Ask other questions related to this project here

@@ -1,4 +1,4 @@
-name: Build
+name: Continuous integration
 on:
   push:
     branches:
@@ -8,29 +8,40 @@ on:
       - master
 jobs:
 
-  # Run unit tests
-  test: Unit tests
-    name: Analyze code
-    runs-on: ubuntu-latest
-      steps:
-        - name: Setup deno
-          uses: denoland/setup-deno@main
-        - name: Setup velociraptor
-          uses: jurassiscripts/setup-velociraptor@master
-        - name: Run tests
-          run: vr test
-
-  # Run CodeQL on branch
-  analyze:
-    name: Analyze code
+  tests:
+    name: Run tests
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout repository
+      - name: Checkout
         uses: actions/checkout@v2
-      - name: Setup CodeQL
-        uses: github/codeql-action/init@v1
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+      - name: Setup velociraptor
+        uses: jurassiscripts/setup-velociraptor@master
+      - name: Run tests
+        run: vr test
+
+  build:
+    name: Build app
+    needs: [ tests ]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
         with:
-          languages: typescript
-          config-file: ./.github/config/codeql.yml
-      - name: Analyze code
-        uses: github/codeql-action/analyze@v1
+          token: ${{ secrets.BOT_TOKEN }}
+          fetch-depth: 0
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+      - name: Setup velociraptor
+          uses: jurassiscripts/setup-velociraptor@master
+      - name: Build app
+        run: vr build
+      - name: Publish generated files
+        run: |
+          set +e
+          git status
+          git add --update
+          git commit -m "Auto-build app"
+          git push
+          set -e

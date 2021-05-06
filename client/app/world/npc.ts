@@ -42,15 +42,15 @@
       private _track_index = 0
 
     /** Track pattern */
-      pattern = "fixed" as Pattern
+      pattern = "wander" as Pattern
 
     /** Constructor */
-      constructor({world, area}:{world:World, area:Area}) {
+      constructor({world, area, frame}:{world:World, area:Area, frame:string}) {
         super({world})
         this.area = area
         this.sprite = Render.Container()
         this.sprites = {
-          main:this.sprite.addChild(Render.Sprite({frame:"regular/mew", anchor:[0.5, 1]})),
+          main:this.sprite.addChild(Render.Sprite({frame, anchor:[0.5, 1]})),
           mask:null,
           shadow:null
         }
@@ -58,6 +58,12 @@
           console.debug(`loaded npc:`)
         this.x = this.area.polygon.points[0]/TILE_SIZE
         this.y = this.area.polygon.points[1]/TILE_SIZE
+        for (const {dx, dy} of [{dx:-1, dy:-1}, {dx:0, dy:-1}, {dx:+1, dy:-1}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:-1, dy:+1}, {dx:0, dy:+1}, {dx:+1, dy:+1}]) {
+          this.x += dx
+          this.y += dy
+          if (this.area.contains(this))
+            break
+        }
         this.area.npcs.add(this)
         if ((this.pattern === "loop")||(this.pattern === "patrol")) {
           //Compute track
@@ -117,6 +123,9 @@
         if (this.area.contains({x:this.x+dx, y:this.y+dy})) {
           this.x += dx
           this.y += dy
+
+          if (dx)
+          this.sprite.scale.x *= Math.sign(-dx)
         }
       }
 

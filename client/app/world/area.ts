@@ -66,6 +66,8 @@
       render() {
         //TEST
           setTimeout(() => this.spawn(), 1000)
+          setTimeout(() => this.spawn(), 1000)
+          setTimeout(() => this.spawn(), 1000)
       }
 
     /** Destructor */
@@ -91,30 +93,29 @@
 
     //
       spawn() {
-        console.log(this.data.properties)
 
 
-        new NPC({world:this.world, area:this}).show()
+        if (this.data.properties.encounters) {
+          const encounters = this.data.properties.encounters as {[key:string]:number}
+          const random = Math.random()
+          let weight = 0
+          for (const species in encounters) {
+            if (random <= weight + encounters[species]) {
+              new NPC({world:this.world, area:this, frame:`regular/${species}`}).show()
+              break
+            }
+            weight += encounters[species]
+          }
+        }
 
 
 
-        //max_creatures: 1, pk_mew: 1
 
          //
 
         /*
         //Add creature if possible
           if (this.creatures.size < this.spawns.max.creatures) {
-            //Generate a species
-              let species = null
-              const r = u.rand()
-              for (let p in this.species) {
-                const [a, b] = p.split("-").map(Number)
-                if ((a < r)&&(r < b)) {
-                  species = this.species[p]
-                  break
-                }
-              }
             //Generate spawn point (random point inside polygon)
               let [x, y] = [NaN, NaN]
               for (let i = 0; i < 128; i++, x = u.rand({a:this.origin.x, b:this.boundary.x, int:true}), y = u.rand({a:this.origin.y, b:this.boundary.y, int:true}))
