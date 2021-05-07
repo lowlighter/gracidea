@@ -77,6 +77,13 @@ const ANIMATED = {
         speed: 0.05
     }
 };
+const CREATURES_FLYING = [
+    "wingull",
+    "pelipper"
+];
+const CREATURES_SWIMMING = [
+    "marill"
+];
 var t11 = setTimeout;
 function e30(t1) {
     return Boolean(t1 && (void 0) !== t1.length);
@@ -11815,12 +11822,9 @@ class Render {
         this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST;
         this.engine.settings.ROUND_PIXELS = true;
         const loader = Render.engine.Loader.shared;
-        loader.add("/copyrighted/textures/tileset3.json", {
-            crossOrigin: "anonymous"
-        });
-        loader.add("/copyrighted/textures/creatures.json", {
-            crossOrigin: "anonymous"
-        });
+        loader.add("/copyrighted/textures/tileset3.json");
+        loader.add("/copyrighted/textures/npcs.json");
+        loader.add("/copyrighted/textures/creatures.json");
         this.app = new Render.engine.Application({
             width: global1.document.body.clientWidth,
             height: global1.document.body.clientHeight,
@@ -11904,6 +11908,9 @@ class Render {
         if (!Number.isNaN(z)) sprite.zIndex = z;
         return sprite;
     }
+    static get cache() {
+        return Render.engine.utils.TextureCache;
+    }
     static get filters() {
         return Render.engine.filters;
     }
@@ -11952,14 +11959,9 @@ class Renderable extends Positionable {
         this.destroyed = true;
         this.rendered = false;
         this.sprite.visible = false;
-        this.sprite.removeChildren().forEach((child)=>child.destroy({
-                children: true
-            })
-        );
+        this.sprite.removeChildren();
         this.debug(false);
-        this._debug?.parent.removeChild(this._debug).destroy({
-            children: true
-        });
+        this._debug?.parent.removeChild(this._debug);
     }
 }
 class Minimap extends Renderable {
@@ -12070,12 +12072,18 @@ class App {
         });
     }
     static debug = {
-        logs: true,
-        chunks: true,
-        areas: true,
-        camera: true
+        logs: false,
+        chunks: false,
+        areas: false,
+        camera: false
+    };
+    static config = {
+        showNpcs: true,
+        showCreatures: true,
+        shinyRate: 1 / 8
     };
 }
+var Type;
 class Controller {
     app;
     world;
@@ -12101,14 +12109,15 @@ class Controller {
             input.setAttribute("data-control-for", key);
             input.setAttribute("type", "checkbox");
             input.checked = App.debug[key];
-            input.addEventListener("change", ()=>App.debug[key] = input.checked
-            );
+            input.addEventListener("change", ()=>{
+                App.debug[key] = input.checked;
+                this.world.camera.render();
+            });
             const label = global1.document.createElement("label");
             label.innerText = key;
             label.prepend(input);
             global1.document.querySelector(".debug")?.append(label);
         });
-        console.log(App.debug);
     }
     updateDOM() {
         const location = global1.document.querySelector("#location .name");
@@ -12116,7 +12125,17 @@ class Controller {
         const position = global1.document.querySelector("#location .position");
         if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
     }
+    updateFPS(fps) {
+        global1.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`;
+    }
 }
+(function(Type1) {
+    Type1["people"] = "people";
+    Type1["creatures"] = "creatures";
+    Type1["regions"] = "regions";
+    Type1["locations"] = "locations";
+})(Type || (Type = {
+}));
 class Area extends Renderable {
     id;
     sprite;
@@ -12131,17 +12150,22 @@ class Area extends Renderable {
         this.data = data1;
         this.polygon = Render.Polygon(this.data.points);
         this.sprite = Render.Container();
-        if (App.debug.logs) console.debug(`loaded area: ${this.id}`);
+        if (App.debug.logs) console.debug(`loaded area: ${this.id} (${this.data.name})`);
     }
     contains({ x , y  }) {
         return this.polygon.contains(x * 16, y * 16);
     }
     debug() {
         if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
-            text: this.id,
+            text: `${this.data.name ?? ""}\n(${this.data.type}#${this.id})`.trim(),
             textStyle: {
-                fontSize: 12,
+                align: "center",
+                fontSize: 10,
                 fill: "white"
+            },
+            textPosition: {
+                x: this.polygon.points[0],
+                y: this.polygon.points[1]
             },
             stroke: [
                 1,
@@ -12157,13 +12181,46 @@ class Area extends Renderable {
         if (this._debug && App.debug.areas) this._debug.tint = this.contains(this.world.camera) ? 16777215 : 16711935;
         return super.debug(App.debug.areas);
     }
-    render() {
-        setTimeout(()=>this.spawn()
-        , 1000);
-        setTimeout(()=>this.spawn()
-        , 1000);
-        setTimeout(()=>this.spawn()
-        , 1000);
+    update(tick) {
+        if (this.data.name) {
+            switch(this.data.type){
+                case Type.people:
+                    {
+                        if (App.config.showNpcs && !this.npcs.size) this.npcs.add(new NPC({
+                            world: this.world,
+                            area: this,
+                            type: this.data.type,
+                            name: this.data.name
+                        }));
+                        break;
+                    }
+                case Type.creatures:
+                    {
+                        if (App.config.showCreatures && this.npcs.size < 1 + Math.floor(Number(this.data.properties.size) / 20)) {
+                            if (this.data.properties.encounters) {
+                                const encounters = this.data.properties.encounters;
+                                const random = Math.random();
+                                let weight = 0;
+                                for(const species in encounters){
+                                    if (random <= weight + encounters[species]) {
+                                        this.npcs.add(new NPC({
+                                            world: this.world,
+                                            area: this,
+                                            type: this.data.type,
+                                            name: species
+                                        }));
+                                        break;
+                                    }
+                                    weight += encounters[species];
+                                }
+                            }
+                        }
+                        break;
+                    }
+            }
+        }
+        this.npcs.forEach((npc)=>npc.update(this.world.tick)
+        );
     }
     destructor() {
         if (App.debug.logs) console.debug(`unloaded loaded area: ${this.id}`);
@@ -12171,6 +12228,8 @@ class Area extends Renderable {
         );
         this.npcs.clear();
         return super.destructor();
+    }
+    render() {
     }
     static from({ data , chunk  }) {
         const id1 = `${data.id}`;
@@ -12182,24 +12241,6 @@ class Area extends Renderable {
         const area = chunk.world.loaded.areas.get(id1);
         chunk.areas.add(area);
         return area;
-    }
-    spawn() {
-        if (this.data.properties.encounters) {
-            const encounters = this.data.properties.encounters;
-            const random = Math.random();
-            let weight = 0;
-            for(const species in encounters){
-                if (random <= weight + encounters[species]) {
-                    new NPC({
-                        world: this.world,
-                        area: this,
-                        frame: `regular/${species}`
-                    }).show();
-                    break;
-                }
-                weight += encounters[species];
-            }
-        }
     }
 }
 class Chunk extends Renderable {
@@ -12312,6 +12353,7 @@ class Chunk extends Renderable {
                 }
             }
         }
+        this.world.camera.render();
     }
 }
 class Camera extends Renderable {
@@ -12428,6 +12470,7 @@ class World {
     minimap;
     name = "overworld";
     app;
+    tick = 0;
     constructor({ app: app2  }){
         this.app = app2;
         const sprite1 = Render.app.stage.addChild(Render.Container());
@@ -12444,28 +12487,20 @@ class World {
         this.minimap = new Minimap({
             world: this
         });
-        const textures = [
-            2374,
-            2375,
-            2376,
-            2377,
-            2378,
-            2379,
-            2380,
-            2381
-        ].map((frame)=>Render.Texture({
+        const seaTextures = ANIMATED[2374].frames.map((frame)=>Render.Texture({
                 frame
             })
         );
-        let tick1 = 0;
         Render.engine.Ticker.shared.add(()=>{
-            tick1 += 0.0625;
-            if (Number.isInteger(tick1)) this.loaded.chunks.forEach((chunk)=>{
-                if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = textures[tick1 % textures.length];
-            });
-            this.loaded.areas.forEach((area)=>area.npcs.forEach((npc)=>npc.update(tick1)
-                )
-            );
+            this.tick += 0.0625;
+            if (Number.isInteger(this.tick)) {
+                this.loaded.chunks.forEach((chunk)=>{
+                    if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = seaTextures[seaTextures.length];
+                });
+                this.loaded.areas.forEach((area)=>area.update(this.tick)
+                );
+                this.app.controller.updateFPS(Render.engine.Ticker.shared.FPS);
+            }
         });
     }
     chunkAt({ x , y  }) {
@@ -12478,6 +12513,7 @@ var Pattern;
     Pattern1["loop"] = "loop";
     Pattern1["wander"] = "wander";
     Pattern1["fixed"] = "fixed";
+    Pattern1["lookaround"] = "lookaround";
 })(Pattern || (Pattern = {
 }));
 class NPC extends Renderable {
@@ -12491,15 +12527,27 @@ class NPC extends Renderable {
     track = [];
     _track_index = 0;
     pattern = "wander";
-    constructor({ world: world7 , area , frame  }){
+    name;
+    type;
+    lifetime = Infinity;
+    constructor({ world: world7 , area , type , name  }){
         super({
             world: world7
         });
         this.area = area;
+        this.name = name;
+        this.type = type;
         this.sprite = Render.Container();
+        let frame = "";
+        if (type === Type.creatures) {
+            const type1 = Math.random() < App.config.shinyRate ? "shiny" : "regular";
+            frame = `${type1}/${this.name}`;
+            this.lifetime = Math.floor(12 + Math.random() * 28);
+        }
+        if (type === Type.people) frame = `${this.name}_down_0`;
         this.sprites = {
             main: this.sprite.addChild(Render.Sprite({
-                frame,
+                frame: frame,
                 anchor: [
                     0.5,
                     1
@@ -12508,7 +12556,16 @@ class NPC extends Renderable {
             mask: null,
             shadow: null
         };
-        if (App.debug.logs) console.debug(`loaded npc:`);
+        if (App.debug.logs) console.debug(`loaded npc: ${this.name}`);
+        this.computeSpawn();
+        this.computePattern();
+    }
+    destructor() {
+        if (App.debug.logs) console.debug(`unloaded npc: ${this.name}`);
+        this.area.npcs.delete(this);
+        return super.destructor();
+    }
+    computeSpawn() {
         this.x = this.area.polygon.points[0] / TILE_SIZE;
         this.y = this.area.polygon.points[1] / TILE_SIZE;
         for (const { dx , dy  } of [
@@ -12549,7 +12606,37 @@ class NPC extends Renderable {
             this.y += dy;
             if (this.area.contains(this)) break;
         }
-        this.area.npcs.add(this);
+        let nx = this.x, ny = this.y;
+        for(let i78 = 0; i78 < 30 * Math.random(); i78++)for (const { dx: dx1 , dy: dy1  } of [
+            {
+                dx: 0,
+                dy: -1
+            },
+            {
+                dx: -1,
+                dy: 0
+            },
+            {
+                dx: +1,
+                dy: 0
+            },
+            {
+                dx: 0,
+                dy: +1
+            }
+        ]){
+            if (this.area.contains({
+                x: nx + dx1,
+                y: ny + dy1
+            })) {
+                nx += dx1;
+                ny += dy1;
+            }
+        }
+        this.x = nx;
+        this.y = ny;
+    }
+    computePattern() {
         if (this.pattern === "loop" || this.pattern === "patrol") {
             const points = this.area.polygon.points.map((n72)=>n72 / 16
             );
@@ -12565,14 +12652,14 @@ class NPC extends Renderable {
                     points[i78],
                     points[i78 + 1]
                 ];
-                const dx1 = nx - px;
-                const dy1 = ny - py;
+                const dx = nx - px;
+                const dy = ny - py;
                 let [x11, y2] = [
                     px,
                     py
                 ];
-                for(let j3 = 0; j3 < Math.abs(dx1); j3++)this.track.push(x11 += Math.sign(dx1), y2);
-                for(let j4 = 0; j4 < Math.abs(dy1); j4++)this.track.push(x11, y2 += Math.sign(dy1));
+                for(let j3 = 0; j3 < Math.abs(dx); j3++)this.track.push(x11 += Math.sign(dx), y2);
+                for(let j4 = 0; j4 < Math.abs(dy); j4++)this.track.push(x11, y2 += Math.sign(dy));
             }
             if (this.pattern === "patrol") {
                 const points1 = this.track.slice();
@@ -12584,10 +12671,53 @@ class NPC extends Renderable {
             }
         }
     }
+    render() {
+        const chunk = this.world.chunkAt(this);
+        if (chunk) {
+            if (CREATURES_FLYING.includes(this.name) && !this.sprites.shadow) {
+                this.offset.y = -TILE_SIZE;
+                const shadow = Render.Graphics({
+                    fill: [
+                        0,
+                        0.5
+                    ],
+                    ellipse: [
+                        0,
+                        0,
+                        2 / 3,
+                        2 / 4
+                    ]
+                });
+                this.sprites.shadow = this.sprite.addChildAt(shadow, 0);
+            }
+            if (CREATURES_SWIMMING.includes(this.name) && !this.sprites.mask) {
+                const mask = Render.Graphics({
+                    rect: [
+                        -2,
+                        -1.75,
+                        4,
+                        1
+                    ],
+                    fill: [
+                        0,
+                        0
+                    ]
+                });
+                this.sprite.addChild(mask);
+                this.sprites.main.mask = this.sprites.mask = mask;
+            }
+            const rx = this.x - chunk.x, ry = this.y - chunk.y;
+            this.sprite.position.set((rx + 0.5) * 16, (ry + 1) * 16);
+            this.sprite.zIndex = ry * CHUNK_SIZE;
+            this.sprites.main.position.set(this.offset.x, this.offset.y);
+            chunk?.layers.get("2X")?.addChild(this.sprite);
+        }
+    }
     update(tick) {
         if (Number.isInteger(tick)) {
             this[this.pattern]();
             this.render();
+            if ((this.lifetime--) < 0) this.destructor();
         }
     }
     fixed() {
@@ -12601,46 +12731,85 @@ class NPC extends Renderable {
         this.loop();
     }
     wander() {
-        const { dx: dx1 , dy: dy1  } = [
-            {
-                dx: 0,
-                dy: 0
-            },
-            {
-                dx: -1,
-                dy: 0
-            },
-            {
-                dx: +1,
-                dy: 0
-            },
-            {
-                dx: 0,
-                dy: -1
-            },
-            {
-                dx: 0,
-                dy: +1
-            }
-        ][Math.floor(Math.random() / 0.2)];
-        if (this.area.contains({
-            x: this.x + dx1,
-            y: this.y + dy1
-        })) {
-            this.x += dx1;
-            this.y += dy1;
-            if (dx1) this.sprite.scale.x *= Math.sign(-dx1);
-        }
+        [
+            ()=>this.goLeft()
+            ,
+            ()=>this.goRight()
+            ,
+            ()=>this.goUp()
+            ,
+            ()=>this.goDown()
+        ][Math.floor(Math.random() / 0.25)]();
     }
     lookaround() {
+        [
+            ()=>this.lookLeft()
+            ,
+            ()=>this.lookRight()
+            ,
+            ()=>this.lookUp()
+            ,
+            ()=>this.lookDown()
+        ][Math.floor(Math.random() / 0.25)]();
     }
-    render() {
-        const chunk = this.world.chunkAt(this);
-        if (chunk) {
-            const rx = this.x - chunk.x, ry = this.y - chunk.y;
-            this.sprite.position.set((rx + 0.5) * 16 + this.offset.x, (ry + 1) * 16 + this.offset.y);
-            chunk?.layers.get("2X")?.addChild(this.sprite);
-            this.sprite.zIndex = ry * CHUNK_SIZE;
+    texture(suffix, { flip =0  } = {
+    }) {
+        const frame1 = `${this.name}${suffix ? `_${suffix}` : ""}`;
+        if (frame1 in Render.cache) this.sprites.main.texture = Render.Texture({
+            frame: frame1
+        });
+        else if (flip) this.sprites.main.scale.x = Math.sign(flip);
+    }
+    lookLeft() {
+        this.texture("left_0", {
+            flip: +1
+        });
+    }
+    goLeft() {
+        if (this.area.contains({
+            x: this.x - 1,
+            y: this.y
+        })) {
+            this.x--;
+            this.lookLeft();
+        }
+    }
+    lookRight() {
+        this.texture("right_0", {
+            flip: -1
+        });
+    }
+    goRight() {
+        if (this.area.contains({
+            x: this.x + 1,
+            y: this.y
+        })) {
+            this.x++;
+            this.lookRight();
+        }
+    }
+    lookUp() {
+        this.texture("up_0");
+    }
+    goUp() {
+        if (this.area.contains({
+            x: this.x,
+            y: this.y - 1
+        })) {
+            this.y--;
+            this.lookUp();
+        }
+    }
+    lookDown() {
+        this.texture("down_0");
+    }
+    goDown() {
+        if (this.area.contains({
+            x: this.x,
+            y: this.y + 1
+        })) {
+            this.y++;
+            this.lookDown();
         }
     }
 }
