@@ -37767,7 +37767,7 @@
   <object id="276" name="hoenn-route-114-area" type="surf" x="4272" y="-19056">
    <polygon points="0,0 96,0 96,80 144,80 144,176 0,176"/>
   </object>
-  <object id="277" x="6000" y="-19216">
+  <object id="277" name="hoenn-route-113-area" type="walk" x="6000" y="-19216">
    <polygon points="0,0 0,-48 48,-48 48,-64 160,-64 160,-112 224,-112 224,-48 208,-48 208,-16 176,-16 176,0 96,0 96,16 32,16 32,0"/>
   </object>
   <object id="278" name="hoenn-route-114-area" type="surf" x="4304" y="-19280">
@@ -37794,13 +37794,13 @@
   <object id="285" name="hoenn-route-104-area" type="surf" x="3408" y="-15744">
    <polygon points="0,0 0,16 32,16 32,32 64,32 64,0"/>
   </object>
-  <object id="286" x="3376" y="-15184">
+  <object id="286" name="hoenn-route-105-area" type="surf" x="3376" y="-15184">
    <polygon points="0,0 0,48 16,48 16,80 32,80 32,96 64,96 64,112 96,112 96,96 112,96 112,32 80,32 80,0"/>
   </object>
-  <object id="287" x="3520" y="-15136">
+  <object id="287" name="hoenn-route-105-area" type="surf" x="3520" y="-15136">
    <polygon points="0,0 -32,0 -32,-48 160,-48 160,-16 192,-16 192,16 224,16 224,48 0,48"/>
   </object>
-  <object id="288" x="3536" y="-15088">
+  <object id="288" name="hoenn-route-105-area" type="surf" x="3536" y="-15088">
    <polygon points="0,0 0,48 16,48 16,96 32,96 32,144 192,144 192,80 144,80 144,48 160,48 160,0"/>
   </object>
   <object id="289" name="faraway-island-area" type="only-one" x="176" y="-208">
