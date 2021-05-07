@@ -79,7 +79,7 @@ function area(X:number[], Y:number[]) {
   let area = 0
   for (let i = 0, j = X.length-1; i < X.length; j = i, i++)
     area += (X[j]+X[i])*(Y[j]-Y[i])
-  return area/2
+  return Math.abs(area/2)
 }
 
 /** Map data */

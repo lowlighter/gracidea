@@ -65,7 +65,7 @@
 
     /** Update FPS */
       updateFPS(fps:number) {
-        global.document.querySelector(".debug [data-control-for='fps']").innerText = Math.round(fps)
+        global.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`
       }
 
   }

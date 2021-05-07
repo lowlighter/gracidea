@@ -40,4 +40,11 @@
         camera:true,
       }
 
+    /** Config */
+      static config = {
+        showNpcs:false,
+        showCreatures:true,
+        shinyRate:1/8,
+      }
+
   }

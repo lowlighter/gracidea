@@ -106,6 +106,8 @@
                   }
               }
           }
+        //Update camera
+          this.world.camera.render()
       }
 
   }

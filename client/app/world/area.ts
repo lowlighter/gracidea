@@ -62,25 +62,37 @@
         return super.debug(App.debug.areas)
       }
 
-    /** Render */
-      render() {
-        if (!this.data.name)
-          return
-
-        switch (this.data.type) {
-          case Type.people:{
-            break
-            new NPC({world:this.world, area:this, type:this.data.type, frame:this.data.name}).show()
-            break
-          }
-          case Type.creatures:{
-            console.log("creatures!!!")
-            setTimeout(() => this.spawn(), 1000)
-            setTimeout(() => this.spawn(), 1000)
-            setTimeout(() => this.spawn(), 1000)
-            break
+    /** Update area */
+      update(tick:number) {
+        if (this.data.name) {
+          switch (this.data.type) {
+            //People
+            case Type.people:{
+              if ((App.config.showNpcs)&&(!this.npcs.size))
+                this.npcs.add(new NPC({world:this.world, area:this, type:this.data.type, name:this.data.name}))
+              break
+            }
+            //Creatures
+            case Type.creatures:{
+              if ((App.config.showCreatures)&&(this.npcs.size < 1+Math.floor(Number(this.data.properties.size)/20))) {
+                if (this.data.properties.encounters) {
+                  const encounters = this.data.properties.encounters as {[key:string]:number}
+                  const random = Math.random()
+                  let weight = 0
+                  for (const species in encounters) {
+                    if (random <= weight + encounters[species]) {
+                      this.npcs.add(new NPC({world:this.world, area:this, type:this.data.type, name:species}))
+                      break
+                    }
+                    weight += encounters[species]
+                  }
+                }
+              }
+              break
+            }
           }
         }
+        this.npcs.forEach(npc => npc.update(this.world.tick))
       }
 
     /** Destructor */
@@ -90,6 +102,11 @@
         this.npcs.forEach(npc => npc.destructor())
         this.npcs.clear()
         return super.destructor()
+      }
+
+    /** Render */
+      render() {
+
       }
 
     /** Create new area from chunk */
@@ -108,18 +125,7 @@
       spawn() {
 
 
-        if (this.data.properties.encounters) {
-          const encounters = this.data.properties.encounters as {[key:string]:number}
-          const random = Math.random()
-          let weight = 0
-          for (const species in encounters) {
-            if (random <= weight + encounters[species]) {
-              new NPC({world:this.world, area:this, type:this.data.type, frame:`regular/${species}`}).show()
-              break
-            }
-            weight += encounters[species]
-          }
-        }
+
 
 
 

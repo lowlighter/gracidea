@@ -1,7 +1,7 @@
 //Imports
   import { Render } from "../render/render.ts"
   import { Renderable } from "./renderable.ts"
-  import { CHUNK_SIZE, TILE_SIZE } from "../render/settings.ts"
+  import { CHUNK_SIZE, TILE_SIZE, CREATURES_FLYING, CREATURES_SWIMMING } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import type { Area } from "./area.ts"
   import { App } from "./../app.ts"
@@ -55,35 +55,55 @@
     /** Track pattern */
       readonly pattern = "wander" as Pattern
 
+    /** Name */
+      readonly name:string
+
     /** Frame */
       readonly frame:string
 
     /** Type */
       readonly type:Type
 
+    /** Life time */
+      private lifetime = Infinity
+
     /** Constructor */
-      constructor({world, area, type, frame}:{world:World, area:Area, type:Type, frame:string}) {
+      constructor({world, area, type, name}:{world:World, area:Area, type:Type, name:string}) {
         super({world})
         this.area = area
-        this.frame = frame
+        this.name = name
         this.type = type
         this.sprite = Render.Container()
+        this.frame = ""
+        if (type === Type.creatures) {
+          const type = Math.random() < App.config.shinyRate ? "shiny" : "regular"
+          this.frame = `${type}/${this.name}`
+          this.lifetime = Math.floor(12+Math.random()*28)
+        }
         if (type === Type.people)
-          frame = `${frame}_down_0`
+          this.frame = `${this.frame}_down_0`
         this.sprites = {
-          main:this.sprite.addChild(Render.Sprite({frame, anchor:[0.5, 1]})),
+          main:this.sprite.addChild(Render.Sprite({frame:this.frame, anchor:[0.5, 1]})),
           mask:null,
           shadow:null
         }
         if (App.debug.logs)
-          console.debug(`loaded npc:`)
+          console.debug(`loaded npc: ${this.frame}`)
         this.computeSpawn()
         this.computePattern()
-        this.area.npcs.add(this)
+      }
+
+    /** Destructor */
+      destructor() {
+        if (App.debug.logs)
+          console.debug(`unloaded npc: ${this.frame}`)
+        this.area.npcs.delete(this)
+        return super.destructor()
       }
 
     /** Compute spawn point */
       private computeSpawn() {
+        //Search initial spawn point
         this.x = this.area.polygon.points[0]/TILE_SIZE
         this.y = this.area.polygon.points[1]/TILE_SIZE
         for (const {dx, dy} of [{dx:-1, dy:-1}, {dx:0, dy:-1}, {dx:+1, dy:-1}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:-1, dy:+1}, {dx:0, dy:+1}, {dx:+1, dy:+1}]) {
@@ -92,6 +112,17 @@
           if (this.area.contains(this))
             break
         }
+        //Random spawn point within polygon
+        let nx = this.x, ny = this.y
+        for (let i = 0; i < 30*Math.random(); i++)
+        for (const {dx, dy} of [{dx:0, dy:-1}, {dx:-1, dy:0}, {dx:+1, dy:0}, {dx:0, dy:+1}]) {
+          if (this.area.contains({x:nx+dx, y:ny+dy})) {
+            nx += dx
+            ny += dy
+          }
+        }
+        this.x = nx
+        this.y = ny
       }
 
     /** Compute pattern */
@@ -129,33 +160,25 @@
       render() {
         const chunk = this.world.chunkAt(this)
         if (chunk) {
+          //Flying creatures' shadow
+          if ((CREATURES_FLYING.includes(this.name))&&(!this.sprites.shadow)) {
+            this.offset.y = -TILE_SIZE
+            const shadow = Render.Graphics({fill:[0, 0.5], ellipse:[0, 0, 2/3, 2/4]})
+            this.sprites.shadow = this.sprite.addChildAt(shadow, 0)
+          }
+          //Swimming creatures' masks
+          if ((CREATURES_SWIMMING.includes(this.name)&&(!this.sprites.mask))) {
+            const mask = Render.Graphics({rect:[-2, -1.75, 4, 1], fill:[0, 0]})
+            this.sprite.addChild(mask)
+            this.sprites.main.mask = this.sprites.mask = mask
+          }
+          //Placement
           const rx = this.x-chunk.x, ry = this.y-chunk.y
-          this.sprite.position.set((rx+0.5)*TILE_SIZE+this.offset.x, (ry+1)*TILE_SIZE+this.offset.y)
-
-          chunk?.layers.get("2X")?.addChild(this.sprite)
+          this.sprite.position.set((rx+0.5)*TILE_SIZE, (ry+1)*TILE_SIZE)
           this.sprite.zIndex = ry*CHUNK_SIZE
-
-        /* switch (chunk.tileEnvAt(this)) {
-            case "WATER":{
-              if (!this.sprites.mask) {
-                const mask = Render.Graphics({rect:[-2, -0.5, 4, -0.5], fill:[0, 0.5]})
-                this.sprite.addChild(mask)
-                this.sprites.main.mask = this.sprites.mask = mask
-              }
-              break
-            }
-            default:
-              this.sprites.mask = null
-          }*/
-
+          this.sprites.main.position.set(this.offset.x, this.offset.y)
+          chunk?.layers.get("2X")?.addChild(this.sprite)
         }
-
-        if (!this.sprites.shadow) {
-          const shadow = Render.Graphics({fill:[0, 0.5], ellipse:[0, 0, 2/3, 2/4]})
-          this.sprites.shadow = this.sprite.addChildAt(shadow, 0)
-        }
-
-
       }
 
     /** Update */
@@ -163,6 +186,8 @@
         if (Number.isInteger(tick)) {
           this[this.pattern]()
           this.render()
+          if (this.lifetime-- < 0)
+            this.destructor()
         }
       }
 
@@ -192,15 +217,17 @@
       }
 
     /** Texture */
-      private texture(suffix?:string) {
+      private texture(suffix?:string, {flip = 0}:{flip?:number} = {}) {
         const frame = `${this.frame}${suffix ? `_${suffix}` : ""}`
         if (frame in Render.cache)
           this.sprites.main.texture = Render.Texture({frame})
+        if (flip)
+          this.sprites.main.scale.x = Math.sign(flip)
       }
 
     /** Look left */
       private lookLeft() {
-        this.texture("left_0")
+        this.texture("left_0", {flip:+1})
       }
 
     /** Go left */
@@ -213,7 +240,7 @@
 
     /** Look right */
       private lookRight() {
-        this.texture("right_0")
+        this.texture("right_0", {flip:-1})
       }
 
     /** Go right */
@@ -249,21 +276,5 @@
           this.lookDown()
         }
       }
-
-
-
-      /*environment(mode) {
-        switch (mode) {
-          case "air":{
-            //Apply vertical offset
-              this.offset.y = -.30
-              if (this.area.water)
-                this.offset.y *= 2
-              //Shadow
-                const mask = new PIXI.Graphics().beginFill(0x000000, 0.5).drawEllipse(0, -u.to.coord.px(this.offset.y), this.sprite.width/3, this.sprite.height/4).endFill()
-                this.sprite.addChild(mask)
-          }
-        }
-      }*/
 
   }
