@@ -12495,7 +12495,8 @@ class World {
             this.tick += 0.0625;
             if (Number.isInteger(this.tick)) {
                 this.loaded.chunks.forEach((chunk)=>{
-                    if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = seaTextures[seaTextures.length];
+                    console.log(chunk.layers.has("0X"));
+                    if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = seaTextures[this.tick % seaTextures.length];
                 });
                 this.loaded.areas.forEach((area)=>area.update(this.tick)
                 );
