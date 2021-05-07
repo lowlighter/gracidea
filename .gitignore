@@ -1,4 +1,5 @@
 node_modules
 coverage
 build/data/
-build/sprites
+build/creatures/
+build/npcs/

@@ -4,7 +4,7 @@
   import { Area } from "./area.ts"
   import { Camera } from "./camera.ts"
   import { Minimap } from "./minimap.ts"
-  import { CHUNK_SIZE } from "../render/settings.ts"
+  import { CHUNK_SIZE, ANIMATED } from "../render/settings.ts"
   import type { App } from "../app.ts"
 
 /**
@@ -39,6 +39,9 @@
     /** App */
       readonly app:App
 
+    /** Tick */
+      tick = 0
+
     /** Constructor */
       constructor({app}:{app:App}) {
         this.app = app
@@ -52,25 +55,18 @@
         }
         this.camera = new Camera({world:this})
         this.minimap = new Minimap({world:this})
-
-
-        const textures = [2374, 2375, 2376, 2377, 2378, 2379, 2380, 2381].map(frame => Render.Texture({frame}))
-
-        //      sea.texture = Render.Texture({frame:`${2374+Math.floor(i)%8}`})
-
-        let tick = 0
+        //Ticker
+        const seaTextures = ANIMATED[2374].frames.map(frame => Render.Texture({frame}))
         Render.engine.Ticker.shared.add(() => {
-          tick += 0.0625
-          if (Number.isInteger(tick))
-          this.loaded.chunks.forEach(chunk => {
-            if (chunk.layers.has("0X"))
-              chunk.layers.get("0X").texture = textures[tick%textures.length]
-          })
-
-          this.loaded.areas.forEach(area => area.npcs.forEach(npc => npc.update(tick)))
-
-
-
+          this.tick += 0.0625
+          if (Number.isInteger(this.tick)) {
+            this.loaded.chunks.forEach(chunk => {
+              if (chunk.layers.has("0X"))
+                chunk.layers.get("0X").texture = seaTextures[seaTextures.length]
+            })
+            this.loaded.areas.forEach(area => area.npcs.forEach(npc => npc.update(this.tick)))
+            this.app.controller.updateFPS(Render.engine.Ticker.shared.FPS)
+          }
         })
       }
 

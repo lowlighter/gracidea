@@ -5,13 +5,13 @@
   import type { World } from "./world.ts"
   import type { Chunk } from "./chunk.ts"
   import { App } from "../app.ts"
-  import { NPC } from "./npc.ts"
+  import { NPC, Type } from "./npc.ts"
 
 /** Area data */
   export type AreaData = {
     id:number
     name:string
-    type:string,
+    type:Type,
     points:number[]
     properties:{[key:string]:unknown}
   }
@@ -45,7 +45,7 @@
         this.polygon = Render.Polygon(this.data.points)
         this.sprite = Render.Container()
         if (App.debug.logs)
-          console.debug(`loaded area: ${this.id}`)
+          console.debug(`loaded area: ${this.id} (${this.data.name})`)
       }
 
     /** Test if point is within area */
@@ -56,7 +56,7 @@
     /** Debug sprite */
       debug() {
         if (!this._debug)
-          this._debug = this.world.sprites.debug.addChild(Render.Graphics({text:this.id, textStyle:{fontSize:12, fill:"white"}, stroke:[1, 0x00FF00, .5], fill:[0x00FF00, .25], polygon:this.polygon}))
+          this._debug = this.world.sprites.debug.addChild(Render.Graphics({text:`${this.data.name ?? ""}\n(${this.data.type}#${this.id})`.trim(), textStyle:{align:"center", fontSize:10, fill:"white"}, textPosition:{x:this.polygon.points[0], y:this.polygon.points[1]}, stroke:[1, 0x00FF00, .5], fill:[0x00FF00, .25], polygon:this.polygon}))
         if ((this._debug)&&(App.debug.areas))
           this._debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
         return super.debug(App.debug.areas)
@@ -64,10 +64,23 @@
 
     /** Render */
       render() {
-        //TEST
-          setTimeout(() => this.spawn(), 1000)
-          setTimeout(() => this.spawn(), 1000)
-          setTimeout(() => this.spawn(), 1000)
+        if (!this.data.name)
+          return
+
+        switch (this.data.type) {
+          case Type.people:{
+            break
+            new NPC({world:this.world, area:this, type:this.data.type, frame:this.data.name}).show()
+            break
+          }
+          case Type.creatures:{
+            console.log("creatures!!!")
+            setTimeout(() => this.spawn(), 1000)
+            setTimeout(() => this.spawn(), 1000)
+            setTimeout(() => this.spawn(), 1000)
+            break
+          }
+        }
       }
 
     /** Destructor */
@@ -101,7 +114,7 @@
           let weight = 0
           for (const species in encounters) {
             if (random <= weight + encounters[species]) {
-              new NPC({world:this.world, area:this, frame:`regular/${species}`}).show()
+              new NPC({world:this.world, area:this, type:this.data.type, frame:`regular/${species}`}).show()
               break
             }
             weight += encounters[species]

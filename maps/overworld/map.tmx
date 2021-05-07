@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="295">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="304">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -37823,32 +37823,40 @@
   </object>
  </objectgroup>
  <objectgroup id="20" name="people">
-  <object id="123" type="trainer" x="5344" y="-14752">
-   <properties>
-    <property name="categorie" value="guy_0"/>
-    <property name="path" value="wander"/>
-   </properties>
+  <object id="123" name="dude" type="wander" x="5344" y="-14752">
    <polygon points="0,0 80,0 80,80 0,80"/>
   </object>
-  <object id="124" type="trainer" x="5344" y="-14672">
-   <properties>
-    <property name="categorie" value="guy_1"/>
-    <property name="path" value="wander"/>
-   </properties>
+  <object id="124" name="rich_boy" type="wander" x="5344" y="-14672">
    <polygon points="0,0 80,0 80,-32 128,-32 128,32 96,32 96,64 0,64"/>
   </object>
-  <object id="125" type="trainer" x="5296" y="-14896">
-   <properties>
-    <property name="categorie" value="little_girl_0"/>
-    <property name="path" value="fixed"/>
-   </properties>
+  <object id="125" name="twin" type="fixed" x="5296" y="-14896">
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
-  <object id="126" type="trainer" x="5440" y="-15120">
-   <properties>
-    <property name="categorie" value="youngster"/>
-    <property name="path" value="lookaround"/>
-   </properties>
+  <object id="126" name="youngster" type="lookaround" x="5440" y="-15120">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="295" name="rich_boy" type="wander" x="5216" y="-15040">
+   <polygon points="0,0 32,0 32,16 48,16 48,48 -16,48 -16,16 0,16"/>
+  </object>
+  <object id="296" name="scientist" type="wander" x="5216" y="-14656">
+   <polygon points="0,0 64,0 64,48 0,48"/>
+  </object>
+  <object id="297" name="seko" type="wander" x="5296" y="-15216">
+   <polygon points="0,0 -32,0 -32,16 -16,16 -16,48 -32,48 -32,64 -48,64 -48,80 -16,80 -16,64 0,64"/>
+  </object>
+  <object id="298" name="mom" type="wander" x="5184" y="-14800">
+   <polygon points="0,0 0,64 80,64 80,16 32,16 32,0"/>
+  </object>
+  <object id="299" name="mom1" type="wander" x="5424" y="-14784">
+   <polygon points="0,0 0,32 80,32 80,-32 48,-32 48,0"/>
+  </object>
+  <object id="300" name="shopkeeper" type="fixed" x="5392" y="-15344">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="301" name="youngster" type="lookaround" x="4912" y="-15344">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="302" name="bug_catcher" type="lookaround" x="4784" y="-15328">
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
  </objectgroup>

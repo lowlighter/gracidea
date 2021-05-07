@@ -52,7 +52,7 @@ export async function encounters(dex?:ExportedDexData, methods = [] as string[])
 async function hasFemaleSprite(sprite:string) {
   //Perform checks
   try {
-    const {isFile} = await Deno.stat(`build/sprites/pokemon-gen8/regular/female/${sprite}.png`)
+    const {isFile} = await Deno.stat(`build/creatures/pokemon-gen8/regular/female/${sprite}.png`)
     return isFile
   }
   catch (error) {

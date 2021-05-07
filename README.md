@@ -1,52 +1,44 @@
-# ![](/source/client/static/copyrighted/imgs/icons/gracidea.png) Gracidea
+# ![](/client/static/copyrighted/imgs/icons/gracidea.png) Gracidea
 
 ![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
 
-![](.github/README/animated_map.gif)
+![](/.github/README/animated_map.gif)
 
-[Check it out live here ! (deno deploy version, currently in development)](https://gracidea.deno.dev/)
+[Check it out live here !](https://gracidea.deno.dev/)
 
-[Check it out live here ! (legacy version)](https://gracidea.lecoq.io/)
-
-**Gracidea** is a project which aims to gather all known *Pokémon* regions into a single 2D map, keeping fidelity to core games while taking the liberty to fill blanks trough official artworks and anime. Minors arrangements are sometimes made so everything fits.
+**Gracidea** is a cartographic project which aims to gather all known *Pokémon* regions into a single 2D map, keeping fidelity games while taking the liberty of filling blanks and making minor arrangements based on official artworks and anime.
 
 ### Features
 
-**Gracidea** is not an ordinary world map ! See below a short list of the awesome features embedded in it :
+**Gracidea** is not an ordinary world map! See below a short list of the awesome features embedded in it :
 
 * **Faithful maps** : Maps are based first on core games and then filled with region knowledge and interpretations
-* **Wild areas** : *Pokémon* can spawn in wild areas ! Maybe you'll be able to see rare encounters ?
-* **Liveful cities** : Humans are also present !
-* **World map** : A world map for quick access to cities and special locations will help you to navigate faster
-* **Integrated wiki** : Some elements are interactive (like *Pokémon*s) and will open the associated bulbapedia entry !
-* **Reactive GPS** : Current location and coordinates are displayed so you never get lost !
-* **Customisable interface** : Most of options can be passed through URL so you can easily share your favorites locations with your friends !
+* **Wild areas** : *Pokémon* can spawn in wild areas! If you're lucky you may even see rare encounters and shinies!
+* **Liveful cities** : Humans and trainers are living along with *Pokémon*s!
+* **World map** : A mini map lets you access cities and special locations quickly
 * *New features will be implemented at a later date !*
 
-### Maps
+### ![](/client/static/copyrighted/imgs/icons/map.png) Maps
 
-Since *Pokémon* franchise has remakes, third versions and sequels, it sometimes results in redesigns in maps.
-Also, as the core games switched to 3D graphics starting on generation 6 and onwards, the maps of newer regions are interpretations of what they could have been if they were in 2D.
-
-Here are the games which were chosen for representing each region :
+Since there are often map redesigns in *Pokémon* franchise, the following games were chosen to represent each region:
 * **Kanto** : *Pokémon FireRed and LeafGreen*
 * **Hoenn** : *Pokémon Emerald*
 * *Others regions will follow at a later date !*
+
+Note that some versions include 3D graphics, so these are interpretations of what they could have been if they were in 2D.
 
 #### Current progress
 
 | Kanto | Johto | Hoenn |
 | :---: | :---: | :---: |
-| ![Kanto](/source/client/static/copyrighted/imgs/regions/kanto.png) | ![Johto](/source/client/static/copyrighted/imgs/regions/johto.png) | ![Hoenn](/source/client/static/copyrighted/imgs/regions/hoenn.png) |
+| ![Kanto](/client/static/copyrighted/imgs/regions/kanto.png) | ![Johto](/client/static/copyrighted/imgs/regions/johto.png) | ![Hoenn](/client/static/copyrighted/imgs/regions/hoenn.png) |
 
 
-## ![](/source/client/static/copyrighted/imgs/icons/contribute.png) Contributing
+## ![](/client/static/copyrighted/imgs/icons/contribute.png) Contributing
 
-> ⚠️ This project is currently migrating to typescript and deno and is currently being refactored. Contributions are currently disabled but feel free to come back again when it's finished!
+The *Pokémon* world is huge, and so is the amount of work needed to map it. Wether you want to complete the mapping, provide new sprites or propose new features, please go ahead and open a pull request!
 
-The *Pokémon* world is huge, and so is the amount of work needed to map it. Wether you want to complete the mapping, provide new sprites or propose new features, you're encouraged to open a pull request !
-
-And if you're not very talented apart from knowing your type advantages, you can always reports bugs and other stuff in issues !
+If you're not very talented apart from knowing your type advantages, you can always report bugs and innacuracies in issues!
 
 Checkout the [Wiki](https://github.com/lowlighter/gracidea/wiki) to learn more about contributing !
 
@@ -58,7 +50,7 @@ Checkout the [Wiki](https://github.com/lowlighter/gracidea/wiki) to learn more a
 * The maintainers of this repo cannot be held responsible of the usage of it from other users.
 * **Star** this repo if you like it !
 
-## ![](/source/client/static/copyrighted/imgs/icons/licenses.png) License and copyright
+## ![](/client/static/copyrighted/imgs/icons/licenses.png) License and copyright
 
 This project is released under the GNU AGPL license, which means that you can reuse this project for other open-source projects, provided that you leave the original license untouched.
 
@@ -66,7 +58,7 @@ This project is released under the GNU AGPL license, which means that you can re
 
 Sprites has been ripped, sorted and edited by [@lowlighter](https://github.com/lowlighter/) using Advance Map on *Pokémon Emerald*.
 
-## ![](/source/client/static/copyrighted/imgs/icons/map.png) Note from the cartographer
+## ![](/client/static/copyrighted/imgs/icons/note.png) Note from the cartographer
 
 I always thought 2D *Pokémon* games had their own charm, and this is what gave birth to this project.
 I hope you'll be able to enjoy and (re)discover this marvellous franchise with this extensive map !

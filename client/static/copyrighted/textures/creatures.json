@@ -21125,10 +21125,10 @@
 "meta": {
 	"app": "https://www.codeandweb.com/texturepacker",
 	"version": "1.0",
-	"image": "creatures.png",
+	"image": "creatures.webp",
 	"format": "RGBA8888",
 	"size": {"w":1992,"h":1279},
 	"scale": "1",
-	"smartupdate": "$TexturePacker:SmartUpdate:ac176f0eafdbc905d9da5be486db9c7c:b6a56b5c664e1ad043a9ff214515bf33:f41c7e12db68dcb339658de4dbfb6fc0$"
+	"smartupdate": "$TexturePacker:SmartUpdate:77854fd3064a9280c478da8596942d1b:b6a56b5c664e1ad043a9ff214515bf33:020c7e16cdaeee568bde99d2ac59efe8$"
 }
 }

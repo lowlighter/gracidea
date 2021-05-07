@@ -60,6 +60,10 @@ export async function map(encounters?:ExportedEncountersData) {
           exported.areas.push({id, name, points, type, bounds, properties:{...properties, size, encounters:(encounters?.[name]?.[mode] ?? null)}})
           continue
         }
+        case "people":{
+          exported.areas.push({id, name, points, type, bounds, properties:{pattern:mode}})
+          continue
+        }
         default:{
           exported.areas.push({id, name, points, type, bounds, properties})
           continue

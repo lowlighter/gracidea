@@ -32,8 +32,9 @@
           this.engine.settings.ROUND_PIXELS = true
         //Load resources
           const loader = Render.engine.Loader.shared
-          loader.add("/copyrighted/textures/tileset3.json", {crossOrigin:"anonymous"})
-          loader.add("/copyrighted/textures/creatures.json", {crossOrigin:"anonymous"})
+          loader.add("/copyrighted/textures/tileset3.json")
+          loader.add("/copyrighted/textures/npcs.json")
+          loader.add("/copyrighted/textures/creatures.json")
         //Create application
           this.app = new Render.engine.Application({
             width:global.document.body.clientWidth,
@@ -147,6 +148,11 @@
         if (!Number.isNaN(z))
           sprite.zIndex = z
         return sprite
+      }
+
+    /** Texture cache */
+      static get cache() {
+        return Render.engine.utils.TextureCache
       }
 
     /** Filters */

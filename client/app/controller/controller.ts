@@ -49,10 +49,9 @@
           label.prepend(input)
           global.document.querySelector(".debug")?.append(label)
         })
-        console.log(App.debug)
       }
 
-    /** update DOM */
+    /** Update DOM */
       updateDOM() {
         //Location
           const location = global.document.querySelector("#location .name")
@@ -62,6 +61,11 @@
           const position = global.document.querySelector("#location .position")
             if (position)
               position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`
+      }
+
+    /** Update FPS */
+      updateFPS(fps:number) {
+        global.document.querySelector(".debug [data-control-for='fps']").innerText = Math.round(fps)
       }
 
   }
