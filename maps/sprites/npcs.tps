@@ -181,12 +181,29 @@
         </struct>
         <key>individualSpriteSettings</key>
         <map type="IndividualSpriteSettingsMap">
+            <key type="filename">../../build/npcs/bug_catcher_down_0.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_down_1.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_down_2.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_left_0.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_left_1.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_left_2.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_up_0.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_up_1.png</key>
+            <key type="filename">../../build/npcs/bug_catcher_up_2.png</key>
             <key type="filename">../../build/npcs/dude_down_0.png</key>
             <key type="filename">../../build/npcs/dude_down_1.png</key>
             <key type="filename">../../build/npcs/dude_down_2.png</key>
             <key type="filename">../../build/npcs/dude_up_0.png</key>
             <key type="filename">../../build/npcs/dude_up_1.png</key>
             <key type="filename">../../build/npcs/dude_up_2.png</key>
+            <key type="filename">../../build/npcs/mom1_down_0.png</key>
+            <key type="filename">../../build/npcs/mom1_down_1.png</key>
+            <key type="filename">../../build/npcs/mom1_down_2.png</key>
+            <key type="filename">../../build/npcs/mom1_up_0.png</key>
+            <key type="filename">../../build/npcs/mom1_up_1.png</key>
+            <key type="filename">../../build/npcs/mom1_up_2.png</key>
+            <key type="filename">../../build/npcs/mom_down_0.png</key>
+            <key type="filename">../../build/npcs/mom_up_0.png</key>
             <key type="filename">../../build/npcs/seko_down_0.png</key>
             <key type="filename">../../build/npcs/seko_down_1.png</key>
             <key type="filename">../../build/npcs/seko_up_0.png</key>
@@ -212,6 +229,28 @@
             <key type="filename">../../build/npcs/dude_right_0.png</key>
             <key type="filename">../../build/npcs/dude_right_1.png</key>
             <key type="filename">../../build/npcs/dude_right_2.png</key>
+            <key type="filename">../../build/npcs/mom1_left_0.png</key>
+            <key type="filename">../../build/npcs/mom1_left_1.png</key>
+            <key type="filename">../../build/npcs/mom1_left_2.png</key>
+            <key type="filename">../../build/npcs/mom1_right_0.png</key>
+            <key type="filename">../../build/npcs/mom1_right_1.png</key>
+            <key type="filename">../../build/npcs/mom1_right_2.png</key>
+            <key type="filename">../../build/npcs/mom_down_1.png</key>
+            <key type="filename">../../build/npcs/mom_down_2.png</key>
+            <key type="filename">../../build/npcs/mom_up_1.png</key>
+            <key type="filename">../../build/npcs/mom_up_2.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_down_0.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_down_1.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_down_2.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_up_0.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_up_1.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_up_2.png</key>
+            <key type="filename">../../build/npcs/scientist_down_0.png</key>
+            <key type="filename">../../build/npcs/scientist_down_1.png</key>
+            <key type="filename">../../build/npcs/scientist_down_2.png</key>
+            <key type="filename">../../build/npcs/scientist_up_0.png</key>
+            <key type="filename">../../build/npcs/scientist_up_1.png</key>
+            <key type="filename">../../build/npcs/scientist_up_2.png</key>
             <key type="filename">../../build/npcs/seko_down_2.png</key>
             <key type="filename">../../build/npcs/seko_left_0.png</key>
             <key type="filename">../../build/npcs/seko_left_1.png</key>
@@ -219,6 +258,12 @@
             <key type="filename">../../build/npcs/seko_right_0.png</key>
             <key type="filename">../../build/npcs/seko_right_1.png</key>
             <key type="filename">../../build/npcs/seko_right_2.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_down_0.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_down_1.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_down_2.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_up_0.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_up_1.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_up_2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
@@ -233,6 +278,44 @@
                 <key>scale9FromFile</key>
                 <false/>
             </struct>
+            <key type="filename">../../build/npcs/mom_left_0.png</key>
+            <key type="filename">../../build/npcs/mom_left_1.png</key>
+            <key type="filename">../../build/npcs/mom_left_2.png</key>
+            <key type="filename">../../build/npcs/mom_right_0.png</key>
+            <key type="filename">../../build/npcs/mom_right_1.png</key>
+            <key type="filename">../../build/npcs/mom_right_2.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_left_0.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_left_1.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_left_2.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_right_0.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_right_1.png</key>
+            <key type="filename">../../build/npcs/oups/scientist_right_2.png</key>
+            <key type="filename">../../build/npcs/scientist_left_0.png</key>
+            <key type="filename">../../build/npcs/scientist_left_1.png</key>
+            <key type="filename">../../build/npcs/scientist_left_2.png</key>
+            <key type="filename">../../build/npcs/scientist_right_0.png</key>
+            <key type="filename">../../build/npcs/scientist_right_1.png</key>
+            <key type="filename">../../build/npcs/scientist_right_2.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_left_0.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_left_1.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_left_2.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_right_0.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_right_1.png</key>
+            <key type="filename">../../build/npcs/shopkeeper_right_2.png</key>
+            <struct type="IndividualSpriteSettings">
+                <key>pivotPoint</key>
+                <point_f>0,0</point_f>
+                <key>spriteScale</key>
+                <double>1</double>
+                <key>scale9Enabled</key>
+                <false/>
+                <key>scale9Borders</key>
+                <rect>3,5,6,10</rect>
+                <key>scale9Paddings</key>
+                <rect>3,5,6,10</rect>
+                <key>scale9FromFile</key>
+                <false/>
+            </struct>
             <key type="filename">../../build/npcs/rich_boy_down_0.png</key>
             <key type="filename">../../build/npcs/rich_boy_down_1.png</key>
             <key type="filename">../../build/npcs/rich_boy_down_2.png</key>
@@ -241,6 +324,18 @@
             <key type="filename">../../build/npcs/rich_boy_up_0.png</key>
             <key type="filename">../../build/npcs/rich_boy_up_1.png</key>
             <key type="filename">../../build/npcs/rich_boy_up_2.png</key>
+            <key type="filename">../../build/npcs/youngster_down_0.png</key>
+            <key type="filename">../../build/npcs/youngster_down_1.png</key>
+            <key type="filename">../../build/npcs/youngster_down_2.png</key>
+            <key type="filename">../../build/npcs/youngster_left_0.png</key>
+            <key type="filename">../../build/npcs/youngster_left_1.png</key>
+            <key type="filename">../../build/npcs/youngster_left_2.png</key>
+            <key type="filename">../../build/npcs/youngster_right_0.png</key>
+            <key type="filename">../../build/npcs/youngster_right_1.png</key>
+            <key type="filename">../../build/npcs/youngster_right_2.png</key>
+            <key type="filename">../../build/npcs/youngster_up_0.png</key>
+            <key type="filename">../../build/npcs/youngster_up_1.png</key>
+            <key type="filename">../../build/npcs/youngster_up_2.png</key>
             <struct type="IndividualSpriteSettings">
                 <key>pivotPoint</key>
                 <point_f>0,0</point_f>
