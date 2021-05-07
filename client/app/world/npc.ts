@@ -3,7 +3,7 @@
   import { Renderable } from "./renderable.ts"
   import { CHUNK_SIZE, TILE_SIZE, CREATURES_FLYING, CREATURES_SWIMMING } from "../render/settings.ts"
   import type { World } from "./world.ts"
-  import type { Area } from "./area.ts"
+  import { Area, Type } from "./area.ts"
   import { App } from "./../app.ts"
 
 /** Patterns */
@@ -13,12 +13,6 @@
     wander = "wander",
     fixed = "fixed",
     lookaround = "lookaround",
-  }
-
-/** Types */
-  export const enum Type {
-    people = "people",
-    creatures = "creatures",
   }
 
 /** Read-write */
@@ -58,9 +52,6 @@
     /** Name */
       readonly name:string
 
-    /** Frame */
-      readonly frame:string
-
     /** Type */
       readonly type:Type
 
@@ -74,21 +65,21 @@
         this.name = name
         this.type = type
         this.sprite = Render.Container()
-        this.frame = ""
+        let frame = ""
         if (type === Type.creatures) {
           const type = Math.random() < App.config.shinyRate ? "shiny" : "regular"
-          this.frame = `${type}/${this.name}`
+          frame = `${type}/${this.name}`
           this.lifetime = Math.floor(12+Math.random()*28)
         }
         if (type === Type.people)
-          this.frame = `${this.frame}_down_0`
+          frame = `${this.name}_down_0`
         this.sprites = {
-          main:this.sprite.addChild(Render.Sprite({frame:this.frame, anchor:[0.5, 1]})),
+          main:this.sprite.addChild(Render.Sprite({frame:frame, anchor:[0.5, 1]})),
           mask:null,
           shadow:null
         }
         if (App.debug.logs)
-          console.debug(`loaded npc: ${this.frame}`)
+          console.debug(`loaded npc: ${this.name}`)
         this.computeSpawn()
         this.computePattern()
       }
@@ -96,7 +87,7 @@
     /** Destructor */
       destructor() {
         if (App.debug.logs)
-          console.debug(`unloaded npc: ${this.frame}`)
+          console.debug(`unloaded npc: ${this.name}`)
         this.area.npcs.delete(this)
         return super.destructor()
       }
@@ -218,10 +209,10 @@
 
     /** Texture */
       private texture(suffix?:string, {flip = 0}:{flip?:number} = {}) {
-        const frame = `${this.frame}${suffix ? `_${suffix}` : ""}`
+        const frame = `${this.name}${suffix ? `_${suffix}` : ""}`
         if (frame in Render.cache)
           this.sprites.main.texture = Render.Texture({frame})
-        if (flip)
+        else if (flip)
           this.sprites.main.scale.x = Math.sign(flip)
       }
 

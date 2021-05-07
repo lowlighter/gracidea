@@ -34,15 +34,15 @@
 
     /** Debug */
       static debug = {
-        logs:true,
-        chunks:true,
-        areas:true,
-        camera:true,
+        logs:false,
+        chunks:false,
+        areas:false,
+        camera:false,
       }
 
     /** Config */
       static config = {
-        showNpcs:false,
+        showNpcs:true,
         showCreatures:true,
         shinyRate:1/8,
       }

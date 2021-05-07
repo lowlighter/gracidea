@@ -5,7 +5,7 @@
   import type { World } from "./world.ts"
   import type { Chunk } from "./chunk.ts"
   import { App } from "../app.ts"
-  import { NPC, Type } from "./npc.ts"
+  import { NPC } from "./npc.ts"
 
 /** Area data */
   export type AreaData = {
@@ -14,6 +14,14 @@
     type:Type,
     points:number[]
     properties:{[key:string]:unknown}
+  }
+
+/** Types */
+  export const enum Type {
+    people = "people",
+    creatures = "creatures",
+    regions = "regions",
+    locations = "locations",
   }
 
 /**
@@ -118,39 +126,5 @@
         chunk.areas.add(area)
         return area
       }
-
-
-
-    //
-      spawn() {
-
-
-
-
-
-
-
-         //
-
-        /*
-        //Add creature if possible
-          if (this.creatures.size < this.spawns.max.creatures) {
-            //Generate spawn point (random point inside polygon)
-              let [x, y] = [NaN, NaN]
-              for (let i = 0; i < 128; i++, x = u.rand({a:this.origin.x, b:this.boundary.x, int:true}), y = u.rand({a:this.origin.y, b:this.boundary.y, int:true}))
-                if (this.inside({x, y}))
-                  break
-                else
-                  [x, y] = [NaN, NaN]
-            //Create creature
-              if ((species)&&(Number.isFinite(x))&&(Number.isFinite(y))) {
-                const creature = this.world.add.creature({species, x, y, area:this})
-                this.creatures.add(creature)
-              }
-          }*/
-      }
-
-
-
 
   }

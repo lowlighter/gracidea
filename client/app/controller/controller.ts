@@ -43,7 +43,10 @@
           input.setAttribute("data-control-for", key)
           input.setAttribute("type", "checkbox")
           input.checked = App.debug[key as keyof typeof App.debug]
-          input.addEventListener("change", () => App.debug[key as keyof typeof App.debug] = input.checked)
+          input.addEventListener("change", () => {
+            App.debug[key as keyof typeof App.debug] = input.checked
+            this.world.camera.render()
+          })
           const label = global.document.createElement("label")
           label.innerText = key
           label.prepend(input)
