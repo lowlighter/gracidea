@@ -9,7 +9,7 @@ export async function dex() {
     //Load area data
     if (isFile)
       continue
-    const { name: gender, pokemon_species_details:speciesDetails } = JSON.parse(await Deno.readTextFile(`${API}/${id}/index.json`))
+    const { name: gender, pokemon_species_details: speciesDetails } = JSON.parse(await Deno.readTextFile(`${API}/${id}/index.json`))
     console.debug(`processing: ${id} (${gender})`)
 
     //Extract gender rates
