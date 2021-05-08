@@ -1,5 +1,5 @@
 //Imports
-import { event } from "../build/constants.ts"
+import type { event } from "../build/constants.ts"
 import { route } from "../server/router.ts"
 
 //Event listener
