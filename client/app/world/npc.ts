@@ -226,12 +226,12 @@
 
     /** Wander */
       private wander() {
-        ([() => this.goLeft(), () => this.goRight(), () => this.goUp(), () => this.goDown()][Math.floor(Math.random()/0.25)])()
+        ([() => null, () => this.goLeft(), () => this.goRight(), () => this.goUp(), () => this.goDown()][Math.floor(Math.random()/0.25)])()
       }
 
     /** Lookaround */
       private lookaround() {
-        ([() => this.lookLeft(), () => this.lookRight(), () => this.lookUp(), () => this.lookDown()][Math.floor(Math.random()/0.25)])()
+        ([() => null, () => this.lookLeft(), () => this.lookRight(), () => this.lookUp(), () => this.lookDown()][Math.floor(Math.random()/0.25)])()
       }
 
     /** Texture */
