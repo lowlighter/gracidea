@@ -45,7 +45,8 @@ async function json(name: string) {
   }
   catch (error) {
     console.log(error)
-    const body = await fetch(new URL(`https://raw.githubusercontent.com/lowlighter/gracidea/main/server/data/maps/${name}.gracidea.json`)).then(res => res.body)
+    const content = await fetch(`https://raw.githubusercontent.com/lowlighter/gracidea/main/server/data/maps/${name}.gracidea.json`).then(res => res.json())
+    /*const body = await fetch(new URL(`https://raw.githubusercontent.com/lowlighter/gracidea/main/server/data/maps/${name}.gracidea.json`)).then(res => res.body)
     const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
     let content = ""
     while (true) {
@@ -53,7 +54,7 @@ async function json(name: string) {
       content += new TextDecoder().decode(value)
       if (done)
         break
-    }
+    }*/
     return content
   }
 }
