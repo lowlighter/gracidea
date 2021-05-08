@@ -7,7 +7,7 @@
   import { App } from "./../app.ts"
 
 /** Patterns */
-  const enum Pattern {
+  export const enum Pattern {
     patrol = "patrol",
     loop = "loop",
     wander = "wander",
@@ -55,7 +55,7 @@
       private _track_index = 0
 
     /** Track pattern */
-      readonly pattern = Pattern.fixed as Pattern
+      readonly pattern:Pattern
 
     /** Name */
       readonly name:string
@@ -69,12 +69,13 @@
       private direction = Direction.none
 
     /** Constructor */
-      constructor({world, area, type, name, pattern = ""}:{world:World, area:Area, type:Type, name:string, pattern?:string}) {
+      constructor({world, area, type, name, pattern = Pattern.fixed}:{world:World, area:Area, type:Type, name:string, pattern?:Pattern}) {
         super({world})
         this.area = area
         this.name = name
         this.type = type
         this.sprite = Render.Container()
+        this.pattern = pattern
         let frame = ""
         if (type === Type.creatures) {
           const type = Math.random() < App.config.shinyRate ? "shiny" : "regular"
@@ -82,10 +83,8 @@
           this.lifetime = Math.floor(12+Math.random()*28)
           this.pattern = Pattern.wander
         }
-        if (type === Type.people) {
+        if (type === Type.people)
           frame = `${this.name}_down_0`
-          this.pattern = pattern as Pattern
-        }
         this.sprites = {
           main:this.sprite.addChild(Render.Sprite({frame:frame, anchor:[0.5, 1]})),
           mask:null,

@@ -5,7 +5,7 @@
   import type { World } from "./world.ts"
   import type { Chunk } from "./chunk.ts"
   import { App } from "../app.ts"
-  import { NPC } from "./npc.ts"
+  import { NPC, Pattern } from "./npc.ts"
 
 /** Area data */
   export type AreaData = {
@@ -77,7 +77,7 @@
             //People
             case Type.people:{
               if ((App.config.showNpcs)&&(!this.npcs.size))
-                this.npcs.add(new NPC({world:this.world, area:this, type:this.data.type, name:this.data.name, pattern:this.data.properties.pattern}))
+                this.npcs.add(new NPC({world:this.world, area:this, type:this.data.type, name:this.data.name, pattern:this.data.properties.pattern as Pattern}))
               break
             }
             //Creatures
