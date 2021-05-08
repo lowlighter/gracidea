@@ -81,9 +81,6 @@ const CREATURES_FLYING = [
     "wingull",
     "pelipper"
 ];
-const CREATURES_SWIMMING = [
-    "marill"
-];
 var t11 = setTimeout;
 function e30(t1) {
     return Boolean(t1 && (void 0) !== t1.length);
@@ -12705,7 +12702,7 @@ class NPC extends Renderable {
                 });
                 this.sprites.shadow = this.sprite.addChildAt(shadow, 0);
             }
-            if (CREATURES_SWIMMING.includes(this.name) && !this.sprites.mask) {
+            if (false && !this.sprites.mask) {
                 const mask = Render.Graphics({
                     rect: [
                         -2,
