@@ -12054,20 +12054,21 @@ class App {
         const that = this;
         this.world = null;
         this.controller = null;
-        this.ready = new Promise(async (solve)=>{
-            await Render.setup();
-            that.world = new World({
-                app: this
+        this.ready = new Promise((solve)=>{
+            Render.setup().then(()=>{
+                that.world = new World({
+                    app: this
+                });
+                that.controller = new Controller({
+                    app: this,
+                    world: this.world
+                });
+                that.world.camera.moveTo({
+                    x: 329,
+                    y: -924
+                });
+                solve();
             });
-            that.controller = new Controller({
-                app: this,
-                world: this.world
-            });
-            that.world.camera.moveTo({
-                x: 329,
-                y: -924
-            });
-            solve();
         });
     }
     static debug = {
@@ -12452,7 +12453,7 @@ class Area extends Renderable {
         if (this._debug && App.debug.areas) this._debug.tint = this.contains(this.world.camera) ? 16777215 : 16711935;
         return super.debug(App.debug.areas);
     }
-    update(tick) {
+    update(_tick) {
         if (this.data.name) {
             switch(this.data.type){
                 case Type.people:
@@ -12764,7 +12765,7 @@ class NPC extends Renderable {
         this.loop();
     }
     wander() {
-        [
+        void [
             ()=>null
             ,
             ()=>this.goLeft()
@@ -12777,7 +12778,7 @@ class NPC extends Renderable {
         ][Math.floor(Math.random() / 0.25)]();
     }
     lookaround() {
-        [
+        void [
             ()=>null
             ,
             ()=>this.lookLeft()
@@ -12875,4 +12876,4 @@ class NPC extends Renderable {
         }
     }
 }
-globalThis.app = new App();
+global1.app = new App();
