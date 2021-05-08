@@ -1,7 +1,7 @@
 //Imports
   import { Render } from "../render/render.ts"
   import { Renderable } from "./renderable.ts"
-  import { CHUNK_SIZE, TILE_SIZE, CREATURES_FLYING, CREATURES_SWIMMING } from "../render/settings.ts"
+  import { CHUNK_SIZE, TILE_SIZE, CREATURES_FLYING } from "../render/settings.ts"
   import type { World } from "./world.ts"
   import { Area, Type } from "./area.ts"
   import { App } from "./../app.ts"
@@ -171,7 +171,7 @@
             this.sprites.shadow = this.sprite.addChildAt(shadow, 0)
           }
           //Swimming creatures' masks
-          if ((CREATURES_SWIMMING.includes(this.name)&&(!this.sprites.mask))) {
+          if ((false)&&(!this.sprites.mask)) {
             const mask = Render.Graphics({rect:[-2, -1.75, 4, 1], fill:[0, 0]})
             this.sprite.addChild(mask)
             this.sprites.main.mask = this.sprites.mask = mask

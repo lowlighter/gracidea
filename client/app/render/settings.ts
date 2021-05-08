@@ -38,6 +38,3 @@
 
 /** Flying creatures */
   export const CREATURES_FLYING = ["wingull", "pelipper"]
-
-/** Seeing creatures */
-  export const CREATURES_SWIMMING = ["marill"]

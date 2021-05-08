@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="304">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="359">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -37374,25 +37374,13 @@
   <object id="235" name="abandoned-ship" x="5904" y="-13600" width="137" height="79"/>
  </objectgroup>
  <objectgroup id="15" name="creatures">
-  <object id="3" name="hoenn-route-101-area" type="walk" x="5216" y="-15040">
-   <polygon points="0,0 32,0 32,16 48,16 48,32 64,32 64,64 48,64 48,80 0,80 0,48 -32,48 -32,16 0,16"/>
-  </object>
-  <object id="4" name="hoenn-route-101-area" type="walk" x="5360" y="-15088">
-   <polygon points="0,0 32,0 32,-16 64,-16 64,0 80,0 80,16 96,16 96,64 80,64 80,96 48,96 48,64 16,64 16,48 0,48 0,0"/>
-  </object>
-  <object id="5" name="hoenn-route-101-area" type="walk" x="5376" y="-15152">
-   <polygon points="0,0 16,0 16,16 64,16 64,0 96,0 96,-32 64,-32 64,-64 16,-64 16,-48 0,-48"/>
-  </object>
-  <object id="6" name="hoenn-route-101-area" type="walk" x="5248" y="-15136">
-   <polygon points="0,0 0,-16 16,-16 16,-32 32,-32 32,-64 16,-64 16,-80 -32,-80 -32,-48 -64,-48 -64,-16 -32,-16 -32,0"/>
-  </object>
-  <object id="9" name="hoenn-route-101-area" type="walk" x="5376" y="-15632">
+  <object id="9" name="hoenn-route-103-area" type="walk" x="5376" y="-15632">
    <polygon points="0,0 96,0 96,-32 112,-32 112,-64 96,-64 96,-80 32,-80 32,-48 -16,-48 -16,-16 0,-16"/>
   </object>
-  <object id="10" name="hoenn-route-101-area" type="walk" x="5312" y="-15696">
+  <object id="10" name="hoenn-route-103-area" type="walk" x="5312" y="-15696">
    <polygon points="0,0 0,-32 16,-32 16,-96 -32,-96 -32,-112 -64,-112 -64,-128 -96,-128 -96,-32 -64,-32 -64,0"/>
   </object>
-  <object id="12" name="hoenn-route-101-area" type="walk" x="5344" y="-15856">
+  <object id="12" name="hoenn-route-103-area" type="walk" x="5344" y="-15856">
    <polygon points="0,0 96,0 96,32 128,32 128,64 64,64 64,48 48,48 48,32 16,32 16,16 0,16"/>
   </object>
   <object id="13" name="hoenn-route-102-area" type="walk" x="5024" y="-15536">
@@ -37401,38 +37389,11 @@
   <object id="15" name="hoenn-route-102-area" type="walk" x="4832" y="-15360">
    <polygon points="0,0 32,0 32,-16 64,-16 64,16 80,16 80,32 64,32 64,48 16,48 16,32 0,32 0,0"/>
   </object>
-  <object id="16" name="hoenn-route-102-area" type="walk" x="4688" y="-15280">
-   <polygon points="0,0 0,-32 16,-32 16,-48 64,-48 64,-32 112,-32 112,-16 128,-16 128,0 144,0 144,32 80,32 80,0"/>
-  </object>
-  <object id="17" name="hoenn-route-102-area" type="walk" x="4640" y="-15344">
-   <polygon points="0,0 32,0 32,-16 48,-16 48,-32 64,-32 64,-48 96,-48 96,-64 128,-64 128,-80 144,-80 144,-112 64,-112 64,-96 48,-96 32,-96 32,-80 16,-80 16,-64 0,-64"/>
-  </object>
   <object id="18" name="hoenn-route-102-area" type="walk" x="4480" y="-15376">
    <polygon points="0,0 32,0 32,32 48,32 48,64 64,64 64,96 0,96"/>
   </object>
-  <object id="19" name="hoenn-route-102-area" type="walk" x="4416" y="-15504">
-   <polygon points="0,0 96,0 96,-32 144,-32 144,16 128,16 128,48 96,48 96,64 32,64 32,48 16,48 16,32 0,32"/>
-  </object>
-  <object id="22" name="hoenn-route-104-area" type="walk" x="3584" y="-15600">
-   <polygon points="0,0 0,-32 16,-32 16,-48 80,-48 80,-64 128,-64 128,-32 160,-32 160,16 112,16 112,32 80,32 80,64 32,64 32,32 16,32 16,0"/>
-  </object>
-  <object id="23" name="hoenn-route-104-area" type="walk" x="3376" y="-15872">
-   <polygon points="0,0 48,0 48,64 176,64 176,80 192,80 192,96 64,96 64,80 16,80 16,48 0,48"/>
-  </object>
   <object id="24" name="hoenn-route-104-area" type="walk" x="3456" y="-15872">
    <polygon points="0,0 0,32 80,32 80,16 64,16 64,0"/>
-  </object>
-  <object id="25" name="hoenn-route-104-area" type="walk" x="3296" y="-16432">
-   <polygon points="0,0 64,0 64,-32 96,-32 96,0 128,0 128,48 96,48 96,64 64,64 64,96 32,96 32,112 16,112 16,96 0,96"/>
-  </object>
-  <object id="26" name="hoenn-route-116-area" type="walk" x="3968" y="-17200">
-   <polygon points="0,0 0,-80 16,-80 16,-96 32,-96 32,-80 64,-80 64,-64 160,-64 160,-16 160,0 176,0 176,16 128,16 128,0"/>
-  </object>
-  <object id="27" name="hoenn-route-116-area" type="walk" x="4032" y="-17360">
-   <polygon points="0,0 0,-16 16,-16 16,-32 64,-32 64,-48 80,-48 80,-32 96,-32 96,-16 128,-16 128,0 160,0 160,16 176,16 176,32 160,32 160,48 144,48 144,64 64,64 64,32 32,32 32,0"/>
-  </object>
-  <object id="28" name="hoenn-route-116-area" type="walk" x="4240" y="-17168">
-   <polygon points="0,0 0,-16 16,-16 16,-48 32,-48 32,-96 48,-96 48,-112 240,-112 240,-96 256,-96 256,-48 240,-48 240,-32 112,-32 112,0"/>
   </object>
   <object id="57" name="hoenn-route-110-area" type="walk" x="6512" y="-16416">
    <polygon points="0,0 48,0 48,192 112,192 112,240 0,240 0,16"/>
@@ -37491,22 +37452,6 @@
   </object>
   <object id="150" name="hoenn-route-102-area" type="surf" x="5040" y="-15520">
    <polygon points="0,0 32,0 32,32 64,32 64,64 0,64"/>
-  </object>
-  <object id="151" name="3-petalburg-w" type="walk" x="4224" y="-15664">
-   <properties>
-    <property name="pk_corphish" type="float" value="0.02"/>
-    <property name="pk_goldeen" type="float" value="0.037"/>
-    <property name="pk_magikarp" type="float" value="0.093"/>
-    <property name="pk_marill" type="float" value="0.85"/>
-    <property name="water" type="bool" value="true"/>
-   </properties>
-   <polygon points="0,0 80,0 80,80 0,80"/>
-  </object>
-  <object id="152" name="3-petalburg-w" type="walk" x="3952" y="-15488">
-   <polygon points="0,0 48,0 48,144 128,144 128,208 0,208"/>
-  </object>
-  <object id="153" name="hoenn-route-104-area" type="surf" x="3680" y="-16368">
-   <polygon points="0,0 176,0 176,192 96,192 96,80 0,80"/>
   </object>
   <object id="155" name="3-117-g" type="walk" x="5952" y="-16944">
    <properties>
@@ -37713,41 +37658,29 @@
   <object id="216" name="3-safari-g-se" type="walk" x="11264" y="-18672">
    <polygon points="0,0 48,0 48,96 0,144"/>
   </object>
-  <object id="259" name="hoenn-route-104-area" type="surf" x="3600" y="-16368">
-   <polygon points="0,0 48,0 48,112 144,112 144,192 -112,192 -112,96 -96,96 -96,64 -64,64 -64,48 0,48"/>
-  </object>
   <object id="260" name="hoenn-route-115-area" type="walk" x="3344" y="-18688">
    <polygon points="0,0 48,0 48,16 64,16 64,64 48,64 48,80 16,80 16,64 -16,64 -16,16 0,16"/>
   </object>
-  <object id="261" name="hoenn-route-116-area" type="surf" x="3296" y="-17872">
+  <object id="261" name="hoenn-route-115-area" type="surf" x="3296" y="-17872">
    <polygon points="0,0 288,0 288,64 96,64 96,80 16,80 16,48 0,48"/>
   </object>
-  <object id="262" name="hoenn-route-116-area" type="surf" x="3328" y="-18336">
+  <object id="262" name="hoenn-route-115-area" type="surf" x="3328" y="-18336">
    <polygon points="0,0 32,0 32,96 0,96"/>
   </object>
-  <object id="263" name="hoenn-route-116-area" type="surf" x="3344" y="-18240">
+  <object id="263" name="hoenn-route-115-area" type="surf" x="3344" y="-18240">
    <polygon points="0,0 64,0 64,80 96,80 96,112 -16,112 -16,96 -32,96 -32,32 0,32"/>
   </object>
-  <object id="264" name="hoenn-route-116-area" type="surf" x="3312" y="-18112">
+  <object id="264" name="hoenn-route-115-area" type="surf" x="3312" y="-18112">
    <polygon points="0,0 16,0 16,-16 48,-16 48,48 96,48 96,96 144,96 144,128 0,128"/>
   </object>
-  <object id="265" name="hoenn-route-116-area" type="surf" x="3328" y="-17984">
+  <object id="265" name="hoenn-route-115-area" type="surf" x="3328" y="-17984">
    <polygon points="0,0 0,32 16,32 16,64 0,64 0,112 96,112 96,80 128,80 128,0 96,0 96,32 64,32 64,0"/>
   </object>
-  <object id="266" name="hoenn-route-116-area" type="surf" x="3312" y="-17792">
+  <object id="266" name="hoenn-route-115-area" type="surf" x="3312" y="-17792">
    <polygon points="0,0 32,0 32,176 48,176 48,208 64,208 64,224 144,224 144,240 96,240 96,256 48,256 48,240 16,240 16,224 0,224 0,192 -16,192 -16,128 0,128 0,96 -16,96 -16,32 0,32"/>
   </object>
-  <object id="267" name="hoenn-route-116-area" type="surf" x="3408" y="-18128">
+  <object id="267" name="hoenn-route-115-area" type="surf" x="3408" y="-18128">
    <polygon points="0,0 64,0 64,48 32,48 32,16 0,16"/>
-  </object>
-  <object id="268" name="hoenn-route-114-area" type="walk" x="4176" y="-18624">
-   <polygon points="0,0 48,0 48,32 80,32 80,48 96,48 96,128 32,128 32,96 0,96 0,64 -48,64 -48,16 0,16"/>
-  </object>
-  <object id="269" name="hoenn-route-114-area" type="walk" x="4192" y="-18656">
-   <polygon points="0,0 32,0 32,-16 64,-16 112,-64 112,-80 80,-80 80,-112 64,-112 64,-128 48,-128 48,-112 32,-112 32,-96 48,-96 48,-80 0,-80"/>
-  </object>
-  <object id="270" name="hoenn-route-114-area" type="walk" x="4384" y="-18864">
-   <polygon points="0,0 32,0 32,16 48,16 48,96 32,96 32,80 16,80 16,32 0,32"/>
   </object>
   <object id="271" name="hoenn-route-114-area" type="surf" x="4288" y="-19168">
    <polygon points="0,0 48,0 48,64 0,64"/>
@@ -37758,26 +37691,11 @@
   <object id="273" name="hoenn-route-114-area" type="surf" x="4064" y="-19248">
    <polygon points="0,0 0,-64 128,-64 128,-48 64,-48 64,-32 32,-32 32,0"/>
   </object>
-  <object id="274" name="hoenn-route-114-area" type="surf" x="4064" y="-19200">
-   <polygon points="0,0 32,0 32,80 80,80 80,144 144,144 144,192 -16,192 -16,48 0,48"/>
-  </object>
-  <object id="275" name="hoenn-route-114-area" type="surf" x="4048" y="-18928">
-   <polygon points="0,0 0,48 96,48 96,64 160,64 160,-80 96,-80 96,0"/>
-  </object>
-  <object id="276" name="hoenn-route-114-area" type="surf" x="4272" y="-19056">
-   <polygon points="0,0 96,0 96,80 144,80 144,176 0,176"/>
-  </object>
   <object id="277" name="hoenn-route-113-area" type="walk" x="6000" y="-19216">
    <polygon points="0,0 0,-48 48,-48 48,-64 160,-64 160,-112 224,-112 224,-48 208,-48 208,-16 176,-16 176,0 96,0 96,16 32,16 32,0"/>
   </object>
   <object id="278" name="hoenn-route-114-area" type="surf" x="4304" y="-19280">
    <polygon points="0,0 32,0 32,32 0,32"/>
-  </object>
-  <object id="279" name="hoenn-route-103-area" type="surf" x="5552" y="-15744">
-   <polygon points="0,0 32,0 32,-16 80,-16 80,-32 176,-32 176,80 112,80 112,64 80,64 80,48 0,48"/>
-  </object>
-  <object id="280" name="hoenn-route-103-area" type="surf" x="5728" y="-15808">
-   <polygon points="0,0 48,0 48,32 96,32 96,48 144,48 144,64 224,64 224,128 96,128 96,112 64,112 64,128 0,128"/>
   </object>
   <object id="281" name="hoenn-route-104-area" type="surf" x="3376" y="-15680">
    <polygon points="0,0 64,0 64,16 96,16 96,64 112,64 112,128 16,128 16,96 0,96"/>
@@ -37821,6 +37739,138 @@
   <object id="294" name="faraway-island-area" type="only-one" x="-16" y="-272">
    <polygon points="0,0 80,0 80,48 0,48 0,32 -64,32 -64,16 -96,16 -96,64 -112,64 -112,80 -160,80 -160,32 -144,32 -144,0"/>
   </object>
+  <object id="304" name="hoenn-route-116-area" type="walk" x="4240" y="-17168">
+   <polygon points="0,0 0,-16 16,-16 16,-48 32,-48 32,-112 112,-112 112,0"/>
+  </object>
+  <object id="305" name="hoenn-route-116-area" type="walk" x="4352" y="-17280">
+   <polygon points="0,0 80,0 80,16 144,16 144,80 0,80"/>
+  </object>
+  <object id="306" x="4384" y="-18864">
+   <polygon points="0,0 48,0 48,96 16,96 16,48 0,48"/>
+  </object>
+  <object id="307" x="4128" y="-18608">
+   <polygon points="0,0 48,0 48,-16 96,-16 96,48 0,48"/>
+  </object>
+  <object id="308" x="4176" y="-18560">
+   <polygon points="0,0 48,0 48,-32 96,-32 96,80 64,80 64,64 32,64 32,32 0,32"/>
+  </object>
+  <object id="309" x="4192" y="-18656">
+   <polygon points="0,0 32,0 32,-16 80,-16 80,-48 112,-48 112,-80 0,-80"/>
+  </object>
+  <object id="310" x="4224" y="-18784">
+   <polygon points="0,0 0,32 16,32 16,48 48,48 48,16 32,16 32,0"/>
+  </object>
+  <object id="322" name="hoenn-route-101-area" type="walk" x="5184" y="-15184">
+   <polygon points="0,0 32,0 32,-32 80,-32 80,-16 96,-16 96,16 80,16 80,32 64,32 64,48 32,48 32,32 0,32"/>
+  </object>
+  <object id="323" name="hoenn-route-101-area" type="walk" x="5440" y="-15216">
+   <polygon points="0,0 0,32 32,32 32,64 0,64 0,80 -48,80 -48,64 -64,64 -64,16 -48,16 -48,0"/>
+  </object>
+  <object id="324" name="hoenn-route-101-area" type="walk" x="5184" y="-15024">
+   <polygon points="0,0 32,0 32,16 96,16 96,48 80,48 80,64 32,64 32,32 0,32"/>
+  </object>
+  <object id="325" name="hoenn-route-101-area" type="walk" x="5408" y="-15024">
+   <polygon points="0,0 0,32 32,32 32,0 48,0 48,-48 32,-48 32,-64 16,-64 16,-80 -16,-80 -16,-64 -48,-64 -48,-16 -32,-16 -32,0"/>
+  </object>
+  <object id="326" name="hoenn-route-103-area" type="surf" x="5552" y="-15760">
+   <polygon points="0,0 80,0 80,-32 112,-32 112,80 80,80 80,64 0,64"/>
+  </object>
+  <object id="327" name="hoenn-route-103-area" type="surf" x="5664" y="-15776">
+   <polygon points="0,0 64,0 64,-32 112,-32 112,96 64,96 64,112 0,112"/>
+  </object>
+  <object id="328" name="hoenn-route-103-area" type="surf" x="5776" y="-15776">
+   <polygon points="0,0 48,0 48,16 96,16 96,96 48,96 48,80 0,80"/>
+  </object>
+  <object id="329" name="hoenn-route-103-area" type="surf" x="5872" y="-15744">
+   <polygon points="0,0 80,0 80,64 0,64"/>
+  </object>
+  <object id="330" name="hoenn-route-103-area" type="surf" x="5616" y="-15520">
+   <polygon points="0,0 0,-80 32,-80 32,-112 112,-112 112,0"/>
+  </object>
+  <object id="331" name="hoenn-route-103-area" type="surf" x="5728" y="-15648">
+   <polygon points="0,0 80,0 80,128 0,128"/>
+  </object>
+  <object id="332" name="hoenn-route-103-area" type="surf" x="5808" y="-15632">
+   <polygon points="0,0 32,0 32,-16 64,-16 64,112 32,112 32,128 0,128"/>
+  </object>
+  <object id="333" name="hoenn-route-103-area" type="surf" x="5648" y="-15520">
+   <polygon points="0,0 0,32 16,32 16,48 32,48 32,80 96,80 96,0"/>
+  </object>
+  <object id="334" name="hoenn-route-103-area" type="surf" x="5744" y="-15520">
+   <polygon points="0,0 0,80 48,80 48,64 80,64 80,16 64,16 64,0"/>
+  </object>
+  <object id="335" name="hoenn-route-102-area" type="walk" x="4416" y="-15504">
+   <polygon points="0,0 96,0 96,64 32,64 32,48 16,48 16,32 0,32"/>
+  </object>
+  <object id="336" name="hoenn-route-102-area" type="walk" x="4512" y="-15536">
+   <polygon points="0,0 48,0 48,48 32,48 32,80 0,80"/>
+  </object>
+  <object id="337" name="hoenn-route-102-area" type="walk" x="4704" y="-15440">
+   <polygon points="0,0 0,64 -16,64 -16,80 -32,80 -32,96 -64,96 -64,32 -48,32 -48,16 -32,16 -32,0"/>
+  </object>
+  <object id="338" name="hoenn-route-102-area" type="walk" x="4704" y="-15456">
+   <polygon points="0,0 80,0 80,32 64,32 64,48 32,48 32,64 0,64"/>
+  </object>
+  <object id="339" name="hoenn-route-102-area" type="walk" x="4768" y="-15312">
+   <polygon points="0,0 -16,0 -16,-16 -64,-16 -64,0 -80,0 -80,32 0,32"/>
+  </object>
+  <object id="340" name="hoenn-route-102-area" type="walk" x="4768" y="-15248">
+   <polygon points="0,0 0,-64 32,-64 32,-48 48,-48 48,-32 64,-32 64,0"/>
+  </object>
+  <object id="341" x="4304" y="-15680">
+   <polygon points="0,0 -32,0 -32,16 -80,16 -80,96 0,96"/>
+  </object>
+  <object id="342" x="3952" y="-15344">
+   <polygon points="0,0 128,0 128,64 0,64"/>
+  </object>
+  <object id="343" x="3952" y="-15344">
+   <polygon points="0,0 0,-144 48,-144 48,0"/>
+  </object>
+  <object id="344" name="hoenn-route-104-area" type="walk" x="3664" y="-15648">
+   <polygon points="0,0 0,112 -48,112 -48,80 -64,80 -64,48 -80,48 -80,16 -64,16 -64,0"/>
+  </object>
+  <object id="345" name="hoenn-route-104-area" type="walk" x="3664" y="-15568">
+   <polygon points="0,0 0,-96 48,-96 48,-64 80,-64 80,-16 32,-16 32,0"/>
+  </object>
+  <object id="346" name="hoenn-route-104-area" type="walk" x="3424" y="-15808">
+   <polygon points="0,0 128,0 128,16 144,16 144,32 16,32 16,16 0,16"/>
+  </object>
+  <object id="347" name="hoenn-route-104-area" type="walk" x="3376" y="-15872">
+   <polygon points="0,0 48,0 48,80 16,80 16,48 0,48"/>
+  </object>
+  <object id="348" name="hoenn-route-104-area" type="walk" x="3360" y="-16368">
+   <polygon points="0,0 0,-96 32,-96 32,-64 64,-64 64,-16 32,-16 32,0"/>
+  </object>
+  <object id="349" name="hoenn-route-104-area" type="walk" x="3360" y="-16432">
+   <polygon points="0,0 -64,0 -64,96 0,96"/>
+  </object>
+  <object id="350" name="hoenn-route-104-area" type="surf" x="3600" y="-16368">
+   <polygon points="0,0 48,0 48,112 -96,112 -96,64 -64,64 -64,48 0,48"/>
+  </object>
+  <object id="351" name="hoenn-route-104-area" type="surf" x="3488" y="-16256">
+   <polygon points="0,0 128,0 128,80 0,80"/>
+  </object>
+  <object id="352" name="hoenn-route-104-area" type="surf" x="3616" y="-16256">
+   <polygon points="0,0 128,0 128,80 0,80"/>
+  </object>
+  <object id="353" name="hoenn-route-104-area" type="surf" x="3680" y="-16368">
+   <polygon points="0,0 144,0 144,80 0,80"/>
+  </object>
+  <object id="354" name="hoenn-route-104-area" type="surf" x="3824" y="-16288">
+   <polygon points="0,0 0,-80 32,-80 32,112 -48,112 -48,0"/>
+  </object>
+  <object id="355" name="hoenn-route-116-area" type="walk" x="4064" y="-17264">
+   <polygon points="0,0 0,64 -96,64 -96,-16 -32,-16 -32,0"/>
+  </object>
+  <object id="356" name="hoenn-route-116-area" type="walk" x="4064" y="-17264">
+   <polygon points="0,0 64,0 64,48 80,48 80,80 32,80 32,64 0,64"/>
+  </object>
+  <object id="357" name="hoenn-route-116-area" type="walk" x="4096" y="-17328">
+   <polygon points="0,0 0,32 80,32 80,16 96,16 96,0 112,0 112,-32 32,-32 32,0"/>
+  </object>
+  <object id="358" name="hoenn-route-116-area" type="walk" x="4096" y="-17328">
+   <polygon points="0,0 -32,0 -32,-32 -48,-32 -48,-64 0,-64 0,-80 32,-80 32,-64 64,-64 64,-32 32,-32 32,0"/>
+  </object>
  </objectgroup>
  <objectgroup id="20" name="people">
   <object id="123" name="dude" type="wander" x="5344" y="-14752">
@@ -37834,9 +37884,6 @@
   </object>
   <object id="126" name="youngster" type="lookaround" x="5440" y="-15120">
    <polygon points="0,0 16,0 16,16 0,16"/>
-  </object>
-  <object id="295" name="rich_boy" type="wander" x="5216" y="-15040">
-   <polygon points="0,0 32,0 32,16 48,16 48,48 -16,48 -16,16 0,16"/>
   </object>
   <object id="296" name="scientist" type="wander" x="5216" y="-14656">
    <polygon points="0,0 64,0 64,48 0,48"/>
@@ -37858,6 +37905,9 @@
   </object>
   <object id="302" name="bug_catcher" type="lookaround" x="4784" y="-15328">
    <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="316" name="rich_boy" type="wander" x="5216" y="-15040">
+   <polygon points="0,0 48,0 48,32 0,32"/>
   </object>
  </objectgroup>
  <objectgroup id="23" name="pins">
