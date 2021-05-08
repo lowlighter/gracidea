@@ -37817,13 +37817,13 @@
   <object id="340" name="hoenn-route-102-area" type="walk" x="4768" y="-15248">
    <polygon points="0,0 0,-64 32,-64 32,-48 48,-48 48,-32 64,-32 64,0"/>
   </object>
-  <object id="341" x="4304" y="-15680">
+  <object id="341" name="petalburg-city-area" type="surf" x="4304" y="-15680">
    <polygon points="0,0 -32,0 -32,16 -80,16 -80,96 0,96"/>
   </object>
-  <object id="342" x="3952" y="-15344">
+  <object id="342" name="petalburg-city-area" type="surf" x="3952" y="-15344">
    <polygon points="0,0 128,0 128,64 0,64"/>
   </object>
-  <object id="343" x="3952" y="-15344">
+  <object id="343" name="petalburg-city-area" type="surf" x="3952" y="-15344">
    <polygon points="0,0 0,-144 48,-144 48,0"/>
   </object>
   <object id="344" name="hoenn-route-104-area" type="walk" x="3664" y="-15648">
