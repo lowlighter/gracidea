@@ -13,7 +13,7 @@ scripts:
 
   lint:
     desc: Lint code
-    cmd: deno lint --unstable --ignore=node_modules,client/static/js/app.js
+    cmd: deno lint --unstable --ignore=node_modules,client/static/js,maps
 
   test:
     desc: Run tests

@@ -80,7 +80,7 @@ export class Area extends Renderable {
   }
 
   /** Update area */
-  update(tick: number) {
+  update(_tick: number) {
     if (this.data.name) {
       switch (this.data.type) {
         //People

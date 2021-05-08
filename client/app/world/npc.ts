@@ -226,12 +226,12 @@ export class NPC extends Renderable {
 
   /** Wander */
   private wander() {
-    ;([() => null, () => this.goLeft(), () => this.goRight(), () => this.goUp(), () => this.goDown()][Math.floor(Math.random() / 0.25)])()
+    void ([() => null, () => this.goLeft(), () => this.goRight(), () => this.goUp(), () => this.goDown()][Math.floor(Math.random() / 0.25)])()
   }
 
   /** Lookaround */
   private lookaround() {
-    ;([() => null, () => this.lookLeft(), () => this.lookRight(), () => this.lookUp(), () => this.lookDown()][Math.floor(Math.random() / 0.25)])()
+    void ([() => null, () => this.lookLeft(), () => this.lookRight(), () => this.lookUp(), () => this.lookDown()][Math.floor(Math.random() / 0.25)])()
   }
 
   /** Texture */

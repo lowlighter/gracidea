@@ -23,6 +23,10 @@ export type rw = any
 //deno-lint-ignore no-explicit-any
 export type asyncdef = any
 
+/** Loose type */
+//deno-lint-ignore no-explicit-any
+export type loose = { [key: string]: any }
+
 /** Animated tiles */
 export const ANIMATED = {
   2266: {

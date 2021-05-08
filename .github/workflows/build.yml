@@ -1,4 +1,4 @@
-name: Continuous integration
+name: 🌺
 on:
   push:
     branches:

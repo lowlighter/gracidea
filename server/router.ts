@@ -1,8 +1,6 @@
 //Imports
+import { rw } from "../build/constants.ts"
 import { chunk, maps } from "./data/serve.ts"
-
-/** Url of static content */
-const STATIC_URL = "https://raw.githubusercontent.com/lowlighter/gracidea/main"
 
 /** Map routes  */
 const ROUTE_MAP = /^[/]map[/]\w+[/].*$/
@@ -43,7 +41,7 @@ export async function route(request: Request, { deploy = false }: { deploy?: boo
       //Client app rebuild
       case (!deploy) && (ROUTE_CLIENT_APP.test(pathname)): {
         console.debug(`rebuilding: ${pathname}`)
-        const { files } = await (Deno as any).emit("client/app/mod.ts", { bundle: "iife" })
+        const { files } = await (Deno as rw).emit("client/app/mod.ts", { bundle: "iife" })
         const script = Object.entries(files).filter(([key]) => /\.js$/.test(key)).map(([_, value]) => value).shift() as string
         return new Response(script, { headers: { "content-type": "application/javascript" } })
       }
@@ -51,7 +49,7 @@ export async function route(request: Request, { deploy = false }: { deploy?: boo
       default: {
         const response = deploy
           ? (await fetch(new URL(`../client/static${pathname}`, import.meta.url))).body
-          : await (Deno as any).readFile(`client/static${pathname}`)
+          : await (Deno as rw).readFile(`client/static${pathname}`)
         const headers = new Headers()
         headers.set("content-type", `${mime(pathname)}; charset=utf-8`)
         headers.set("content-security-policy", "")

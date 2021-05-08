@@ -1,10 +1,6 @@
 //Imports
-import { CHUNK_SIZE } from "../../build/constants.ts"
+import { CHUNK_SIZE, rw, loose } from "../../build/constants.ts"
 import { Quadtree, Rectangle } from "./structs/quadtree.ts"
-
-/** Loose type */
-//deno-lint-ignore no-explicit-any
-type loose = { [key: string]: any }
 
 /** Area data */
 type Area = { bounds: Rectangle; data: loose }
@@ -30,14 +26,14 @@ export function chunk({ section, from: id }: { section: string; from: string }) 
   return {
     id: section,
     chunk: maps[id].chunks[section],
-    areas: [...quadtrees[id].get(chunk)].filter(area => Quadtree.contains(area, chunk)).map(({ data }: any) => data),
+    areas: [...quadtrees[id].get(chunk)].filter(area => Quadtree.contains(area, chunk)).map(({ data }: loose) => data),
   }
 }
 
 /** JSON loader */
 async function json(name: string) {
   try {
-    return (Deno as any).readTextFile(`server/data/maps/${name}.gracidea.json`)
+    return (Deno as rw).readTextFile(`server/data/maps/${name}.gracidea.json`)
   }
   catch (error) {
     console.log(error)

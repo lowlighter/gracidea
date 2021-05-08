@@ -1,4 +1,4 @@
-name: Label issues and pull requests
+name: 🏷️
 on:
   - pull_request_target
 jobs:

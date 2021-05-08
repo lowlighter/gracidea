@@ -12,12 +12,12 @@ export async function encounters(dex?: ExportedDexData, methods = [] as string[]
     //Load area data
     if (isFile)
       continue
-    const { name: area, pokemon_encounters } = JSON.parse(await Deno.readTextFile(`${API}/${id}/index.json`))
+    const { name: area, pokemon_encounters:creaturesEncounters } = JSON.parse(await Deno.readTextFile(`${API}/${id}/index.json`))
     console.debug(`processing: ${id} (${area})`)
 
     //Extract encounter rates
     const encounters = {} as encounters
-    pokemon_encounters
+    creaturesEncounters
       //Extract names and merge details by encounter method
       .map(({ pokemon: { name = "" }, version_details = [] }) => ({
         name,

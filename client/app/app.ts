@@ -20,12 +20,13 @@ export class App {
     const that = this as asyncdef
     this.world = null as asyncdef
     this.controller = null as asyncdef
-    this.ready = new Promise(async solve => {
-      await Render.setup()
-      that.world = new World({ app: this })
-      that.controller = new Controller({ app: this, world: this.world })
-      that.world.camera.moveTo({ x: 329, y: -924 })
-      solve()
+    this.ready = new Promise(solve => {
+      Render.setup().then(() => {
+        that.world = new World({ app: this })
+        that.controller = new Controller({ app: this, world: this.world })
+        that.world.camera.moveTo({ x: 329, y: -924 })
+        solve()
+      })
     })
   }
 
