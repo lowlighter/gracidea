@@ -5,7 +5,7 @@
   import { Camera } from "./camera.ts"
   import { Minimap } from "./minimap.ts"
   import { CHUNK_SIZE, ANIMATED } from "../render/settings.ts"
-  import type { App } from "../app.ts"
+  import { App } from "../app.ts"
 
 /**
  * World.
@@ -58,15 +58,15 @@
         //Ticker
         const seaTextures = ANIMATED[2374].frames.map(frame => Render.Texture({frame}))
         Render.engine.Ticker.shared.add(() => {
-          this.tick += 0.0625
+          this.tick += App.config.delta
           if (Number.isInteger(this.tick)) {
             this.loaded.chunks.forEach(chunk => {
               if (chunk.layers.has("0X"))
                 chunk.layers.get("0X").texture = seaTextures[this.tick%seaTextures.length]
             })
-            this.loaded.areas.forEach(area => area.update(this.tick))
             this.app.controller.updateFPS(Render.engine.Ticker.shared.FPS)
           }
+          this.loaded.areas.forEach(area => area.update(this.tick))
         })
       }
 

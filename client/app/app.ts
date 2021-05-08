@@ -45,6 +45,7 @@
         showNpcs:true,
         showCreatures:true,
         shinyRate:1/8,
+        delta:0.0625,
       }
 
   }

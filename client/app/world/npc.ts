@@ -15,6 +15,14 @@
     lookaround = "lookaround",
   }
 
+  const enum Direction {
+    none = 0,
+    up = 1,
+    right = 2,
+    down = 3,
+    left = 4,
+  }
+
 /** Read-write */
 //deno-lint-ignore no-explicit-any
   type rw = any
@@ -58,6 +66,8 @@
     /** Life time */
       private lifetime = Infinity
 
+      private direction = Direction.none
+
     /** Constructor */
       constructor({world, area, type, name, pattern = ""}:{world:World, area:Area, type:Type, name:string, pattern?:string}) {
         super({world})
@@ -85,6 +95,7 @@
           console.debug(`loaded npc: ${this.name}`)
         this.computeSpawn()
         this.computePattern()
+        this.sprite.alpha = 0
       }
 
     /** Destructor */
@@ -169,7 +180,7 @@
           //Placement
           const rx = this.x-chunk.x, ry = this.y-chunk.y
           this.sprite.position.set((rx+0.5)*TILE_SIZE, (ry+1)*TILE_SIZE)
-          this.sprite.zIndex = ry*CHUNK_SIZE
+          this.sprite.zIndex = Math.ceil(ry)*CHUNK_SIZE
           this.sprites.main.position.set(this.offset.x, this.offset.y)
           chunk?.layers.get("2X")?.addChild(this.sprite)
         }
@@ -177,12 +188,25 @@
 
     /** Update */
       update(tick:number) {
-        if (Number.isInteger(tick)) {
-          this[this.pattern]()
-          this.render()
-          if (this.lifetime-- < 0)
-            this.destructor()
+        this.lifetime -= App.config.delta
+        if (this.lifetime <= 1) {
+          this.sprite.alpha *= 0.8
         }
+        else if (this.sprite.alpha < 1) {
+          this.sprite.alpha = Math.min(1, this.sprite.alpha*1.25)
+          if (!this.sprite.alpha)
+            this.sprite.alpha = 0.03
+        }
+         if (Number.isInteger(tick)) {
+          if (this.lifetime <= 0) {
+            this.destructor()
+            return
+          }
+          this.direction = Direction.none
+          this[this.pattern]()
+        }
+        this.goDirection()
+        this.render()
       }
 
     /** Fixed */
@@ -224,10 +248,32 @@
         this.texture("left_0", {flip:+1})
       }
 
+      private goDirection() {
+        const delta = App.config.delta
+        switch (this.direction) {
+          case Direction.up:{
+            this.y -= delta
+            return
+          }
+          case Direction.down:{
+            this.y += delta
+            return
+          }
+          case Direction.left:{
+            this.x -= delta
+            return
+          }
+          case Direction.right:{
+            this.x += delta
+            return
+          }
+        }
+      }
+
     /** Go left */
       private goLeft() {
         if (this.area.contains({x:this.x-1, y:this.y})) {
-          this.x--
+          this.direction = Direction.left
           this.lookLeft()
         }
       }
@@ -240,7 +286,7 @@
     /** Go right */
       private goRight() {
         if (this.area.contains({x:this.x+1, y:this.y})) {
-          this.x++
+          this.direction = Direction.right
           this.lookRight()
         }
       }
@@ -253,7 +299,7 @@
     /** Go up */
       private goUp() {
         if (this.area.contains({x:this.x, y:this.y-1})) {
-          this.y--
+          this.direction = Direction.up
           this.lookUp()
         }
       }
@@ -266,7 +312,7 @@
     /** Go down */
       private goDown() {
         if (this.area.contains({x:this.x, y:this.y+1})) {
-          this.y++
+          this.direction = Direction.down
           this.lookDown()
         }
       }
