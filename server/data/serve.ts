@@ -1,8 +1,6 @@
 //Imports
+import { CHUNK_SIZE } from "../../build/settings.ts"
 import { Quadtree, Rectangle } from "./structs/quadtree.ts"
-
-/** Chunk size */
-const CHUNK_SIZE = 32
 
 /** Loose type */
 //deno-lint-ignore no-explicit-any

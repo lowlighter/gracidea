@@ -1,8 +1,8 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { event, global } from "./../render/settings.ts"
-import type { World } from "../world/world.ts"
-import { App } from "../app.ts"
+import { event, global } from "../../build/constants.ts"
+import type { World } from "./world/world.ts"
+import { App } from "./app.ts"
+import { Render } from "./render.ts"
 
 /**
  * Controller

@@ -1,3 +1,12 @@
+/** Tile size in pixels */
+export const TILE_SIZE = 16
+
+/** Tile padding in pixels */
+export const TILE_PADDING = 2
+
+/** Chunk size in tiles */
+export const CHUNK_SIZE = 32
+
 /** Window */
 //deno-lint-ignore no-explicit-any
 export const global = globalThis as any
@@ -6,11 +15,13 @@ export const global = globalThis as any
 //deno-lint-ignore no-explicit-any
 export type event = any
 
-/** Tile size in pixels */
-export const TILE_SIZE = 16
+/** Read-write */
+//deno-lint-ignore no-explicit-any
+export type rw = any
 
-/** Chunk size in tiles */
-export const CHUNK_SIZE = 32
+/** Async definition */
+//deno-lint-ignore no-explicit-any
+export type asyncdef = any
 
 /** Animated tiles */
 export const ANIMATED = {

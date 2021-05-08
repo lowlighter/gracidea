@@ -1,7 +1,7 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { CHUNK_SIZE } from "../render/settings.ts"
+import { CHUNK_SIZE } from "../../../build/constants.ts"
 import { App } from "./../app.ts"
+import { Render } from "../render.ts"
 import { Area, AreaData } from "./area.ts"
 import { Renderable } from "./renderable.ts"
 import type { World } from "./world.ts"

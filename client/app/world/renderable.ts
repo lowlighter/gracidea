@@ -1,6 +1,6 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { TILE_SIZE } from "../render/settings.ts"
+import { TILE_SIZE } from "../../../build/constants.ts"
+import { Render } from "../render.ts"
 import { Positionable } from "./positionable.ts"
 
 /**

@@ -1,7 +1,7 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { ANIMATED, CHUNK_SIZE } from "../render/settings.ts"
+import { ANIMATED, CHUNK_SIZE } from "../../../build/constants.ts"
 import { App } from "../app.ts"
+import { Render } from "../render.ts"
 import { Area } from "./area.ts"
 import { Camera } from "./camera.ts"
 import { Chunk } from "./chunk.ts"

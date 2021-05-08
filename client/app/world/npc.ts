@@ -1,7 +1,7 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { CHUNK_SIZE, CREATURES_FLYING, TILE_SIZE } from "../render/settings.ts"
+import { CHUNK_SIZE, CREATURES_FLYING, rw, TILE_SIZE } from "../../../build/constants.ts"
 import { App } from "./../app.ts"
+import { Render } from "../render.ts"
 import { Area, Type } from "./area.ts"
 import { Renderable } from "./renderable.ts"
 import type { World } from "./world.ts"
@@ -15,6 +15,7 @@ export const enum Pattern {
   lookaround = "lookaround",
 }
 
+/** Directions */
 const enum Direction {
   none = 0,
   up = 1,
@@ -22,10 +23,6 @@ const enum Direction {
   down = 3,
   left = 4,
 }
-
-/** Read-write */
-//deno-lint-ignore no-explicit-any
-type rw = any
 
 /**
  * NPC

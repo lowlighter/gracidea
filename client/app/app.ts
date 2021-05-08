@@ -1,7 +1,8 @@
 //Imports
-import { Controller } from "./controller/controller.ts"
-import { Render } from "./render/render.ts"
+import type { asyncdef } from "../../build/constants.ts"
 import { World } from "./world/world.ts"
+import { Controller } from "./controller.ts"
+import { Render } from "./render.ts"
 
 /** App */
 export class App {
@@ -16,12 +17,9 @@ export class App {
 
   /** Constructor */
   constructor() {
-    //deno-lint-ignore no-explicit-any
-    const that = this as any
-    //deno-lint-ignore no-explicit-any
-    this.world = null as any
-    //deno-lint-ignore no-explicit-any
-    this.controller = null as any
+    const that = this as asyncdef
+    this.world = null as asyncdef
+    this.controller = null as asyncdef
     this.ready = new Promise(async solve => {
       await Render.setup()
       that.world = new World({ app: this })

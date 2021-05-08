@@ -11728,9 +11728,9 @@ const mod = function() {
         utils: Ue
     };
 }();
-const global = globalThis;
 const TILE_SIZE = 16;
 const CHUNK_SIZE = 32;
+const global = globalThis;
 const ANIMATED = {
     2266: {
         frames: [

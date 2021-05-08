@@ -1,7 +1,7 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { TILE_SIZE } from "../render/settings.ts"
+import { TILE_SIZE } from "../../../build/constants.ts"
 import { App } from "../app.ts"
+import { Render } from "../render.ts"
 import type { Chunk } from "./chunk.ts"
 import { NPC, Pattern } from "./npc.ts"
 import { Renderable } from "./renderable.ts"

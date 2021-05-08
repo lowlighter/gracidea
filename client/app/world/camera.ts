@@ -1,7 +1,7 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { CHUNK_SIZE, global, TILE_SIZE } from "../render/settings.ts"
+import { CHUNK_SIZE, global, TILE_SIZE } from "../../../build/constants.ts"
 import { App } from "./../app.ts"
+import { Render } from "../render.ts"
 import { Chunk } from "./chunk.ts"
 import { Renderable } from "./renderable.ts"
 import type { World } from "./world.ts"

@@ -1,14 +1,12 @@
 //Imports
-import * as PIXI from "../../../node_modules/pixi.js/dist/browser/pixi.min.mjs"
-import { ANIMATED, global, TILE_SIZE } from "./settings.ts"
-//import StatsJS from "../../../../node_modules/stats-js/build/stats.min.js"
+import { ANIMATED, global, TILE_SIZE } from "../../build/constants.ts"
+import * as PIXI from "../../node_modules/pixi.js/dist/browser/pixi.min.mjs"
 
 /** Frame */
 type frame = string | number | ReturnType<typeof Render.Texture>
 
 /** Font style */
-//deno-lint-ignore no-explicit-any
-type fontstyle = any
+type fontstyle = { [key: string]: unknown }
 
 /**
  * Render engine.
@@ -44,15 +42,6 @@ export class Render {
       backgroundAlpha: 0,
     })
     global.document.querySelector("body").appendChild(this.app.view)
-    //console.log(StatsJS)
-    //FPS and frame
-    /*for (const i of [0, 1]) {
-            const stats = new StatsJS()
-            stats.showPanel(i)
-            global.document.querySelector("body").appendChild(stats.dom)
-            stats.dom.style.left = `${i*80}px`
-            this.app.ticker.add(() => stats.update())
-          }*/
     //Wait for resources to be loaded
     await new Promise(solve => loader.load(() => solve(null)))
     global.document.querySelector(".loader").style.display = "none"
@@ -126,8 +115,7 @@ export class Render {
   }
 
   /** Texture */
-  //deno-lint-ignore no-explicit-any
-  static Texture({ frame = Render.engine.Texture.EMPTY }: { frame: any }) {
+  static Texture({ frame = Render.engine.Texture.EMPTY }: { frame: unknown }) {
     return Render.engine.Texture.from(`${frame}`)
   }
 

@@ -1,6 +1,6 @@
 //Imports
-import { Render } from "../render/render.ts"
-import { global } from "../render/settings.ts"
+import { global } from "../../../build/constants.ts"
+import { Render } from "../render.ts"
 import { Renderable } from "./renderable.ts"
 import type { World } from "./world.ts"
 
@@ -72,7 +72,7 @@ export class Minimap extends Renderable {
     }
     //Center mini-map
     let mx = Infinity, my = Infinity, Mx = -Infinity, My = -Infinity
-    this.sprite.children.forEach((sprite: any) => {
+    this.sprite.children.forEach((sprite: { [key: string]: number }) => {
       mx = Math.min(mx, sprite.x)
       my = Math.min(my, sprite.y)
       Mx = Math.max(Mx, sprite.x + sprite.width)
