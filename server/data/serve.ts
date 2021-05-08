@@ -1,5 +1,5 @@
 //Imports
-import { CHUNK_SIZE } from "../../build/settings.ts"
+import { CHUNK_SIZE } from "../../build/constants.ts"
 import { Quadtree, Rectangle } from "./structs/quadtree.ts"
 
 /** Loose type */
