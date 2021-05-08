@@ -5,3 +5,20 @@ repository:
   - README.md
   - CONTRIBUTING.md
   - LICENSE
+  - velociraptor.yml
+build:
+  - build/**
+client-app:
+  - client/app/**
+client-assets:
+  - client/static/**
+deploy:
+  - deploy
+maps:
+  - maps/**
+sprites:
+  - maps/sprites/**
+server-app:
+  - server/**
+tests:
+  - tests/**

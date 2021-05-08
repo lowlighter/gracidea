@@ -6,7 +6,6 @@ jobs:
   label:
     name: Label issues and pull requests
     runs-on: ubuntu-latest
-
     steps:
       - name: Label issues and pull requests
         uses: actions/labeler@v2

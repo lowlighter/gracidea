@@ -8,7 +8,33 @@ on:
       - main
 jobs:
 
-  tests:
+  fmt:
+    name: Format code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup dprint
+        run: |
+          curl -fsSL https://dprint.dev/install.sh | sh
+          echo "$HOME/.dprint/bin" >> $GITHUB_PATH
+      - name: Check code formatting
+        run: dprint check --config .github/config/dprint.json
+
+  lint:
+    name: Lint code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+      - name: Setup velociraptor
+        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+      - name: Lint code
+        run: vr lint
+
+  test:
     name: Run tests
     runs-on: ubuntu-latest
     steps:
@@ -17,27 +43,50 @@ jobs:
       - name: Setup Deno
         uses: denolib/setup-deno@v2
       - name: Setup velociraptor
-        uses: jurassiscripts/setup-velociraptor@master
+        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
       - name: Run tests
-        run: vr ci-test
+        run: vr test
 
-  build:
-    name: Build app
-    needs:
-      - tests
+  test-deploy:
+    name: Run tests (deploy)
     runs-on: ubuntu-latest
+    needs:
+      - test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.BOT_TOKEN }}
-          fetch-depth: 0
       - name: Setup Deno
         uses: denolib/setup-deno@v2
-      - name: Setup velociraptor
-        uses: jurassiscripts/setup-velociraptor@master
-      - name: Build app
-        run: vr ci-build
+      - name: Setup deployctl
+        run: deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
+      - name: Run tests
+        run: deployctl check deploy/mod.ts
+
+  ci:
+    name: Continuous integration
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs:
+      - fmt
+      - lint
+      - test
+      - test-deploy
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+      - name: Setup velociraptor and dprint
+        run: |
+          deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+          curl -fsSL https://dprint.dev/install.sh | sh
+          echo "$HOME/.dprint/bin" >> $GITHUB_PATH
+      - name: Format code
+        run: vr fmt
+      - name: Bundle client app
+        run: vr bundle
+      - name: Build data and sprites
+        run: vr build
       - name: Publish generated files
         run: |
           set +e
