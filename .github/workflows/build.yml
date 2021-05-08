@@ -8,19 +8,6 @@ on:
       - main
 jobs:
 
-  fmt:
-    name: Format code
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup dprint
-        run: |
-          curl -fsSL https://dprint.dev/install.sh | sh
-          echo "$HOME/.dprint/bin" >> $GITHUB_PATH
-      - name: Check code formatting
-        run: dprint check --config .github/config/dprint.json
-
   lint:
     name: Lint code
     runs-on: ubuntu-latest

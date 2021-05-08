@@ -3,7 +3,7 @@ author: lowlighter
 repository: https://github.com/lowlighter/gracidea
 scripts:
 
-  start:
+  run:
     desc: Run app locally
     cmd: deno run --unstable --allow-net --allow-read server/app.ts
 
