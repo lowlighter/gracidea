@@ -37745,19 +37745,19 @@
   <object id="305" name="hoenn-route-116-area" type="walk" x="4352" y="-17280">
    <polygon points="0,0 80,0 80,16 144,16 144,80 0,80"/>
   </object>
-  <object id="306" x="4384" y="-18864">
+  <object id="306" name="hoenn-route-114-area" type="walk" x="4384" y="-18864">
    <polygon points="0,0 48,0 48,96 16,96 16,48 0,48"/>
   </object>
-  <object id="307" x="4128" y="-18608">
+  <object id="307" name="hoenn-route-114-area" type="walk" x="4128" y="-18608">
    <polygon points="0,0 48,0 48,-16 96,-16 96,48 0,48"/>
   </object>
-  <object id="308" x="4176" y="-18560">
+  <object id="308" name="hoenn-route-114-area" type="walk" x="4176" y="-18560">
    <polygon points="0,0 48,0 48,-32 96,-32 96,80 64,80 64,64 32,64 32,32 0,32"/>
   </object>
-  <object id="309" x="4192" y="-18656">
+  <object id="309" name="hoenn-route-114-area" type="walk" x="4192" y="-18656">
    <polygon points="0,0 32,0 32,-16 80,-16 80,-48 112,-48 112,-80 0,-80"/>
   </object>
-  <object id="310" x="4224" y="-18784">
+  <object id="310" name="hoenn-route-114-area" type="walk" x="4224" y="-18784">
    <polygon points="0,0 0,32 16,32 16,48 48,48 48,16 32,16 32,0"/>
   </object>
   <object id="322" name="hoenn-route-101-area" type="walk" x="5184" y="-15184">
