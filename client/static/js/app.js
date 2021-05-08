@@ -1,86 +1,3 @@
-const global1 = globalThis;
-const TILE_SIZE = 16;
-const CHUNK_SIZE = 32;
-const ANIMATED = {
-    2266: {
-        frames: [
-            2266,
-            2267,
-            2268,
-            2269
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.025
-    },
-    2374: {
-        frames: [
-            2374,
-            2375,
-            2376,
-            2377,
-            2378,
-            2379,
-            2380,
-            2381
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.075
-    },
-    658: {
-        frames: [
-            658,
-            659,
-            660,
-            659
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.05
-    },
-    661: {
-        frames: [
-            661,
-            662,
-            663,
-            664,
-            663,
-            664,
-            663,
-            664,
-            663,
-            664,
-            662,
-            661,
-            661,
-            661
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.05
-    },
-    774: {
-        frames: [
-            774,
-            775,
-            776,
-            777,
-            776,
-            777,
-            776,
-            777,
-            776,
-            777,
-            775,
-            774,
-            774,
-            774
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.05
-    }
-};
-const CREATURES_FLYING = [
-    "wingull",
-    "pelipper"
-];
 var t11 = setTimeout;
 function e30(t1) {
     return Boolean(t1 && (void 0) !== t1.length);
@@ -11811,6 +11728,89 @@ const mod = function() {
         utils: Ue
     };
 }();
+const global = globalThis;
+const TILE_SIZE = 16;
+const CHUNK_SIZE = 32;
+const ANIMATED = {
+    2266: {
+        frames: [
+            2266,
+            2267,
+            2268,
+            2269
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.025
+    },
+    2374: {
+        frames: [
+            2374,
+            2375,
+            2376,
+            2377,
+            2378,
+            2379,
+            2380,
+            2381
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.075
+    },
+    658: {
+        frames: [
+            658,
+            659,
+            660,
+            659
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.05
+    },
+    661: {
+        frames: [
+            661,
+            662,
+            663,
+            664,
+            663,
+            664,
+            663,
+            664,
+            663,
+            664,
+            662,
+            661,
+            661,
+            661
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.05
+    },
+    774: {
+        frames: [
+            774,
+            775,
+            776,
+            777,
+            776,
+            777,
+            776,
+            777,
+            776,
+            777,
+            775,
+            774,
+            774,
+            774
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.05
+    }
+};
+const CREATURES_FLYING = [
+    "wingull",
+    "pelipper"
+];
 class Render {
     static engine;
     static app;
@@ -11823,18 +11823,18 @@ class Render {
         loader.add("/copyrighted/textures/npcs.json");
         loader.add("/copyrighted/textures/creatures.json");
         this.app = new Render.engine.Application({
-            width: global1.document.body.clientWidth,
-            height: global1.document.body.clientHeight,
-            resizeTo: global1.window,
+            width: global.document.body.clientWidth,
+            height: global.document.body.clientHeight,
+            resizeTo: global.window,
             autoDensity: true,
-            resolution: global1.devicePixelRatio,
+            resolution: global.devicePixelRatio,
             backgroundAlpha: 0
         });
-        global1.document.querySelector("body").appendChild(this.app.view);
+        global.document.querySelector("body").appendChild(this.app.view);
         await new Promise((solve)=>loader.load(()=>solve(null)
             )
         );
-        global1.document.querySelector(".loader").style.display = "none";
+        global.document.querySelector(".loader").style.display = "none";
     }
     static Polygon(points) {
         return new Render.engine.Polygon(...points.map((n72)=>n72 * 16
@@ -11898,7 +11898,9 @@ class Render {
             sprite = new Render.engine.AnimatedSprite.fromFrames(ANIMATED[frame].frames);
             sprite.animationSpeed = ANIMATED[frame].speed;
             sprite.play();
-        } else sprite = new Render.engine.Sprite.from(`${frame}`);
+        } else {
+            sprite = new Render.engine.Sprite.from(`${frame}`);
+        }
         sprite.position.set(x * 16, y * 16);
         if (anchor) sprite.anchor.set(...anchor);
         if (scale) sprite.scale.set(...scale);
@@ -12034,7 +12036,7 @@ class Minimap extends Renderable {
             My = Math.max(My, sprite.y + sprite.height);
         });
         const width1 = (Mx - mx1) / 2, height1 = (My - my1) / 2;
-        this.sprite.position.set(-mx1 + (width1 + global1.document.body.clientWidth / 2) / 2, -my1 + (height1 - global1.document.body.clientHeight / 2) / 2);
+        this.sprite.position.set(-mx1 + (width1 + global.document.body.clientWidth / 2) / 2, -my1 + (height1 - global.document.body.clientHeight / 2) / 2);
     }
     moveTo({ x , y  }) {
         this.world.camera.moveTo({
@@ -12081,7 +12083,6 @@ class App {
         delta: 0.0625
     };
 }
-var Type;
 class Controller {
     app;
     world;
@@ -12097,13 +12098,13 @@ class Controller {
             }
             this.world.camera.render();
         });
-        global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
+        global.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
         );
-        global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
-            global1.document.querySelector("nav.debug").style.display = global1.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
+        global.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
+            global.document.querySelector("nav.debug").style.display = global.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
         });
         Object.keys(App.debug).forEach((key)=>{
-            const input = global1.document.createElement("input");
+            const input = global.document.createElement("input");
             input.setAttribute("data-control-for", key);
             input.setAttribute("type", "checkbox");
             input.checked = App.debug[key];
@@ -12111,22 +12112,292 @@ class Controller {
                 App.debug[key] = input.checked;
                 this.world.camera.render();
             });
-            const label = global1.document.createElement("label");
+            const label = global.document.createElement("label");
             label.innerText = key;
             label.prepend(input);
-            global1.document.querySelector(".debug")?.append(label);
+            global.document.querySelector(".debug")?.append(label);
         });
     }
     updateDOM() {
-        const location = global1.document.querySelector("#location .name");
+        const location = global.document.querySelector("#location .name");
         if (location) location.innerHTML = this.world.camera.location[0] ?? "-  ";
-        const position = global1.document.querySelector("#location .position");
+        const position = global.document.querySelector("#location .position");
         if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
     }
     updateFPS(fps) {
-        global1.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`;
+        global.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`;
     }
 }
+class World {
+    sprites;
+    loaded = {
+        chunks: new Map(),
+        areas: new Map()
+    };
+    camera;
+    minimap;
+    name = "overworld";
+    app;
+    tick = 0;
+    constructor({ app: app2  }){
+        this.app = app2;
+        const sprite1 = Render.app.stage.addChild(Render.Container());
+        this.sprites = {
+            world: sprite1,
+            chunks: sprite1.addChild(Render.Container()),
+            locations: sprite1.addChild(Render.Container()),
+            debug: sprite1.addChild(Render.Container()),
+            minimap: Render.app.stage.addChild(Render.Container())
+        };
+        this.camera = new Camera({
+            world: this
+        });
+        this.minimap = new Minimap({
+            world: this
+        });
+        const seaTextures = ANIMATED[2374].frames.map((frame)=>Render.Texture({
+                frame
+            })
+        );
+        Render.engine.Ticker.shared.add(()=>{
+            this.tick += App.config.delta;
+            if (Number.isInteger(this.tick)) {
+                this.loaded.chunks.forEach((chunk)=>{
+                    if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = seaTextures[this.tick % seaTextures.length];
+                });
+                this.app.controller.updateFPS(Render.engine.Ticker.shared.FPS);
+            }
+            this.loaded.areas.forEach((area)=>area.update(this.tick)
+            );
+        });
+    }
+    chunkAt({ x , y  }) {
+        return this.loaded.chunks.get(`${Math.floor(x / 32)};${Math.floor(y / 32)}`);
+    }
+}
+class Camera extends Renderable {
+    sprite;
+    constructor({ world: world4  }){
+        super({
+            world: world4
+        });
+        this.sprite = this.world.sprites.world.addChild(Render.Container());
+        Object.defineProperties(this, {
+            x: {
+                get: ()=>Math.floor((-this.world.sprites.world.position.x + global.document.body.clientWidth / 2) / 16)
+                ,
+                set: (x11)=>this.moveTo({
+                        x: x11,
+                        y: this.y
+                    })
+            },
+            y: {
+                get: ()=>Math.floor((-this.world.sprites.world.position.y + global.document.body.clientHeight / 2) / 16)
+                ,
+                set: (y2)=>this.moveTo({
+                        x: this.x,
+                        y: y2
+                    })
+            }
+        });
+        this.render();
+    }
+    throttle = false;
+    debounce = false;
+    debug() {
+        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
+            fill: [
+                16711680,
+                0.5
+            ],
+            rect: [
+                0,
+                0,
+                1,
+                1
+            ]
+        }));
+        return super.debug(App.debug.camera);
+    }
+    render({ DX =1 , DY =1 , DM =3  } = {
+    }) {
+        if (this.throttle) {
+            this.debounce = true;
+            return;
+        }
+        this.throttle = true;
+        this.debug();
+        const { x: x11 , y: y2  } = this;
+        const X4 = Math.floor(x11 / 32);
+        const Y3 = Math.floor(y2 / 32);
+        const visible = [];
+        for(let x12 = X4 - DX; x12 <= X4 + DX; x12++){
+            for(let y3 = Y3 - DY; y3 <= Y3 + DY; y3++)visible.push(`${x12};${y3}`);
+        }
+        visible.forEach((id)=>{
+            if (!this.world.loaded.chunks.has(id)) this.world.loaded.chunks.set(id, new Chunk({
+                id,
+                world: this.world
+            }));
+            this.world.loaded.chunks.get(id)?.show();
+        });
+        this.world.loaded.chunks.forEach((chunk, id)=>{
+            if (!visible.includes(id)) {
+                chunk.hide();
+                if (Math.sqrt((chunk.x - X4) ** 2 + (chunk.y - Y3) ** 2) > DM) {
+                    this.world.loaded.chunks.delete(id);
+                    chunk.destructor();
+                }
+            }
+        });
+        const areas = new Set();
+        this.world.loaded.chunks.forEach((chunk)=>chunk.areas.forEach((area)=>areas.add(area)
+            )
+        );
+        this.world.loaded.areas.forEach((area, id)=>{
+            if (!areas.has(area)) {
+                this.world.loaded.areas.delete(id);
+                area.destructor();
+            }
+        });
+        this.world.app?.controller?.updateDOM();
+        setTimeout(()=>{
+            this.throttle = false;
+            if (this.debounce) {
+                this.debounce = false;
+                this.render();
+            }
+        }, 200);
+    }
+    get location() {
+        return [
+            ...this.world.loaded.areas.values()
+        ].filter((area)=>(area.data.type === "locations" || area.data.type === "regions") && area.contains(this)
+        ).map(({ data  })=>data.name
+        );
+    }
+    moveTo({ x , y  }) {
+        this.world.sprites.world.position.set(-x * 16 + global.document.body.clientWidth / 2, -y * 16 + global.document.body.clientHeight / 2);
+        this.render();
+    }
+}
+class Chunk extends Renderable {
+    id;
+    sprite;
+    data = null;
+    layers = new Map();
+    areas = new Set();
+    world;
+    constructor({ id: id1 , world: world5  }){
+        super({
+            world: world5
+        });
+        this.id = id1;
+        this.world = world5;
+        [this.x, this.y] = this.id.split(";").map((n72)=>Number(n72) * CHUNK_SIZE
+        );
+        this.width = this.height = CHUNK_SIZE;
+        this.sprite = this.world.sprites.chunks.addChild(Render.Container({
+            x: this.x,
+            y: this.y
+        }));
+        if (App.debug.chunks) console.debug(`loaded chunk: ${this.id}`);
+    }
+    destructor() {
+        if (App.debug.chunks) console.debug(`unloaded loaded chunk: ${this.id}`);
+        this.layers.clear();
+        this.areas.clear();
+        return super.destructor();
+    }
+    show() {
+        super.show();
+        this.data?.areas?.forEach((area)=>Area.from({
+                data: area,
+                chunk: this
+            })?.show()
+        );
+    }
+    debug() {
+        if (!this._debug) {
+            this._debug = this.world.sprites.debug.addChild(Render.Graphics({
+                text: this.id,
+                textStyle: {
+                    fontSize: 12,
+                    fill: "white"
+                },
+                stroke: [
+                    1,
+                    255,
+                    0.5
+                ],
+                fill: [
+                    255,
+                    0.25
+                ],
+                rect: [
+                    0,
+                    0,
+                    this.width,
+                    this.height
+                ]
+            }));
+        }
+        return super.debug(App.debug.chunks);
+    }
+    async render() {
+        if (!this.data) this.data = await fetch(`/map/overworld/${this.id}`).then((res)=>res.json()
+        );
+        this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({
+            frame: 0,
+            width: 32,
+            height: 32
+        })));
+        for (const { name , sublayers , sorted =false  } of [
+            {
+                name: "1X",
+                sublayers: [
+                    "1A",
+                    "1B",
+                    "1C"
+                ]
+            },
+            {
+                name: "2X",
+                sublayers: [
+                    "2A",
+                    "2B",
+                    "2C"
+                ],
+                sorted: true
+            }, 
+        ]){
+            if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
+                z: 0,
+                sorted
+            })));
+            const layer = this.layers.get(name);
+            for(let z4 = 0; z4 < sublayers.length; z4++){
+                const tiles = this.data?.chunk?.layers?.[sublayers[z4]];
+                if (!tiles) continue;
+                for(let i78 = 0; i78 < tiles.length; i78++){
+                    const tile = tiles[i78];
+                    if (tile >= 0) {
+                        const y2 = i78 % 32, x11 = Math.floor(i78 / 32);
+                        layer.addChild(Render.Sprite({
+                            frame: tile,
+                            x: x11,
+                            y: y2,
+                            z: y2 * 32 + z4
+                        }));
+                    }
+                }
+            }
+        }
+        this.world.camera.render();
+    }
+}
+var Type;
+var Pattern;
 (function(Type1) {
     Type1["people"] = "people";
     Type1["creatures"] = "creatures";
@@ -12140,11 +12411,11 @@ class Area extends Renderable {
     data;
     polygon;
     npcs = new Set();
-    constructor({ id: id1 , data: data1 , world: world4  }){
+    constructor({ id: id2 , data: data1 , world: world6  }){
         super({
-            world: world4
+            world: world6
         });
-        this.id = id1;
+        this.id = id2;
         this.data = data1;
         this.polygon = Render.Polygon(this.data.points);
         this.sprite = Render.Container();
@@ -12154,28 +12425,30 @@ class Area extends Renderable {
         return this.polygon.contains(x * 16, y * 16);
     }
     debug() {
-        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
-            text: `${this.data.name ?? ""}\n(${this.data.type}#${this.id})`.trim(),
-            textStyle: {
-                align: "center",
-                fontSize: 10,
-                fill: "white"
-            },
-            textPosition: {
-                x: this.polygon.points[0],
-                y: this.polygon.points[1]
-            },
-            stroke: [
-                1,
-                65280,
-                0.5
-            ],
-            fill: [
-                65280,
-                0.25
-            ],
-            polygon: this.polygon
-        }));
+        if (!this._debug) {
+            this._debug = this.world.sprites.debug.addChild(Render.Graphics({
+                text: `${this.data.name ?? ""}\n(${this.data.type}#${this.id})`.trim(),
+                textStyle: {
+                    align: "center",
+                    fontSize: 10,
+                    fill: "white"
+                },
+                textPosition: {
+                    x: this.polygon.points[0],
+                    y: this.polygon.points[1]
+                },
+                stroke: [
+                    1,
+                    65280,
+                    0.5
+                ],
+                fill: [
+                    65280,
+                    0.25
+                ],
+                polygon: this.polygon
+            }));
+        }
         if (this._debug && App.debug.areas) this._debug.tint = this.contains(this.world.camera) ? 16777215 : 16711935;
         return super.debug(App.debug.areas);
     }
@@ -12231,282 +12504,17 @@ class Area extends Renderable {
     render() {
     }
     static from({ data , chunk  }) {
-        const id1 = `${data.id}`;
-        if (!chunk.world.loaded.areas.has(id1)) chunk.world.loaded.areas.set(id1, new Area({
-            id: id1,
+        const id3 = `${data.id}`;
+        if (!chunk.world.loaded.areas.has(id3)) chunk.world.loaded.areas.set(id3, new Area({
+            id: id3,
             data,
             world: chunk.world
         }));
-        const area = chunk.world.loaded.areas.get(id1);
+        const area = chunk.world.loaded.areas.get(id3);
         chunk.areas.add(area);
         return area;
     }
 }
-class Chunk extends Renderable {
-    id;
-    sprite;
-    data = null;
-    layers = new Map();
-    areas = new Set();
-    world;
-    constructor({ id: id2 , world: world5  }){
-        super({
-            world: world5
-        });
-        this.id = id2;
-        this.world = world5;
-        [this.x, this.y] = this.id.split(";").map((n72)=>Number(n72) * CHUNK_SIZE
-        );
-        this.width = this.height = CHUNK_SIZE;
-        this.sprite = this.world.sprites.chunks.addChild(Render.Container({
-            x: this.x,
-            y: this.y
-        }));
-        if (App.debug.chunks) console.debug(`loaded chunk: ${this.id}`);
-    }
-    destructor() {
-        if (App.debug.chunks) console.debug(`unloaded loaded chunk: ${this.id}`);
-        this.layers.clear();
-        this.areas.clear();
-        return super.destructor();
-    }
-    show() {
-        super.show();
-        this.data?.areas?.forEach((area)=>Area.from({
-                data: area,
-                chunk: this
-            })?.show()
-        );
-    }
-    debug() {
-        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
-            text: this.id,
-            textStyle: {
-                fontSize: 12,
-                fill: "white"
-            },
-            stroke: [
-                1,
-                255,
-                0.5
-            ],
-            fill: [
-                255,
-                0.25
-            ],
-            rect: [
-                0,
-                0,
-                this.width,
-                this.height
-            ]
-        }));
-        return super.debug(App.debug.chunks);
-    }
-    async render() {
-        if (!this.data) this.data = await fetch(`/map/overworld/${this.id}`).then((res)=>res.json()
-        );
-        this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({
-            frame: 0,
-            width: 32,
-            height: 32
-        })));
-        for (const { name , sublayers , sorted =false  } of [
-            {
-                name: "1X",
-                sublayers: [
-                    "1A",
-                    "1B",
-                    "1C"
-                ]
-            },
-            {
-                name: "2X",
-                sublayers: [
-                    "2A",
-                    "2B",
-                    "2C"
-                ],
-                sorted: true
-            }, 
-        ]){
-            if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
-                z: 0,
-                sorted
-            })));
-            const layer = this.layers.get(name);
-            for(let z4 = 0; z4 < sublayers.length; z4++){
-                const tiles = this.data?.chunk?.layers?.[sublayers[z4]];
-                if (!tiles) continue;
-                for(let i78 = 0; i78 < tiles.length; i78++){
-                    const tile = tiles[i78];
-                    if (tile >= 0) {
-                        const y2 = i78 % 32, x11 = Math.floor(i78 / 32);
-                        layer.addChild(Render.Sprite({
-                            frame: tile,
-                            x: x11,
-                            y: y2,
-                            z: y2 * 32 + z4
-                        }));
-                    }
-                }
-            }
-        }
-        this.world.camera.render();
-    }
-}
-class Camera extends Renderable {
-    sprite;
-    constructor({ world: world6  }){
-        super({
-            world: world6
-        });
-        this.sprite = this.world.sprites.world.addChild(Render.Container());
-        Object.defineProperties(this, {
-            x: {
-                get: ()=>Math.floor((-this.world.sprites.world.position.x + global1.document.body.clientWidth / 2) / 16)
-                ,
-                set: (x11)=>this.moveTo({
-                        x: x11,
-                        y: this.y
-                    })
-            },
-            y: {
-                get: ()=>Math.floor((-this.world.sprites.world.position.y + global1.document.body.clientHeight / 2) / 16)
-                ,
-                set: (y2)=>this.moveTo({
-                        x: this.x,
-                        y: y2
-                    })
-            }
-        });
-        this.render();
-    }
-    throttle = false;
-    debounce = false;
-    debug() {
-        if (!this._debug) this._debug = this.world.sprites.debug.addChild(Render.Graphics({
-            fill: [
-                16711680,
-                0.5
-            ],
-            rect: [
-                0,
-                0,
-                1,
-                1
-            ]
-        }));
-        return super.debug(App.debug.camera);
-    }
-    render({ DX =1 , DY =1 , DM =3  } = {
-    }) {
-        if (this.throttle) {
-            this.debounce = true;
-            return;
-        }
-        this.throttle = true;
-        this.debug();
-        const { x: x11 , y: y2  } = this;
-        const X4 = Math.floor(x11 / 32);
-        const Y3 = Math.floor(y2 / 32);
-        const visible = [];
-        for(let x12 = X4 - DX; x12 <= X4 + DX; x12++)for(let y3 = Y3 - DY; y3 <= Y3 + DY; y3++)visible.push(`${x12};${y3}`);
-        visible.forEach((id3)=>{
-            if (!this.world.loaded.chunks.has(id3)) this.world.loaded.chunks.set(id3, new Chunk({
-                id: id3,
-                world: this.world
-            }));
-            this.world.loaded.chunks.get(id3)?.show();
-        });
-        this.world.loaded.chunks.forEach((chunk, id3)=>{
-            if (!visible.includes(id3)) {
-                chunk.hide();
-                if (Math.sqrt((chunk.x - X4) ** 2 + (chunk.y - Y3) ** 2) > DM) {
-                    this.world.loaded.chunks.delete(id3);
-                    chunk.destructor();
-                }
-            }
-        });
-        const areas = new Set();
-        this.world.loaded.chunks.forEach((chunk)=>chunk.areas.forEach((area)=>areas.add(area)
-            )
-        );
-        this.world.loaded.areas.forEach((area, id3)=>{
-            if (!areas.has(area)) {
-                this.world.loaded.areas.delete(id3);
-                area.destructor();
-            }
-        });
-        this.world.app?.controller?.updateDOM();
-        setTimeout(()=>{
-            this.throttle = false;
-            if (this.debounce) {
-                this.debounce = false;
-                this.render();
-            }
-        }, 200);
-    }
-    get location() {
-        return [
-            ...this.world.loaded.areas.values()
-        ].filter((area)=>(area.data.type === "locations" || area.data.type === "regions") && area.contains(this)
-        ).map(({ data: data2  })=>data2.name
-        );
-    }
-    moveTo({ x , y  }) {
-        this.world.sprites.world.position.set(-x * 16 + global1.document.body.clientWidth / 2, -y * 16 + global1.document.body.clientHeight / 2);
-        this.render();
-    }
-}
-class World {
-    sprites;
-    loaded = {
-        chunks: new Map(),
-        areas: new Map()
-    };
-    camera;
-    minimap;
-    name = "overworld";
-    app;
-    tick = 0;
-    constructor({ app: app2  }){
-        this.app = app2;
-        const sprite1 = Render.app.stage.addChild(Render.Container());
-        this.sprites = {
-            world: sprite1,
-            chunks: sprite1.addChild(Render.Container()),
-            locations: sprite1.addChild(Render.Container()),
-            debug: sprite1.addChild(Render.Container()),
-            minimap: Render.app.stage.addChild(Render.Container())
-        };
-        this.camera = new Camera({
-            world: this
-        });
-        this.minimap = new Minimap({
-            world: this
-        });
-        const seaTextures = ANIMATED[2374].frames.map((frame)=>Render.Texture({
-                frame
-            })
-        );
-        Render.engine.Ticker.shared.add(()=>{
-            this.tick += App.config.delta;
-            if (Number.isInteger(this.tick)) {
-                this.loaded.chunks.forEach((chunk)=>{
-                    if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = seaTextures[this.tick % seaTextures.length];
-                });
-                this.app.controller.updateFPS(Render.engine.Ticker.shared.FPS);
-            }
-            this.loaded.areas.forEach((area)=>area.update(this.tick)
-            );
-        });
-    }
-    chunkAt({ x , y  }) {
-        return this.loaded.chunks.get(`${Math.floor(x / 32)};${Math.floor(y / 32)}`);
-    }
-}
-var Pattern;
 (function(Pattern1) {
     Pattern1["patrol"] = "patrol";
     Pattern1["loop"] = "loop";
@@ -12619,30 +12627,32 @@ class NPC extends Renderable {
             if (this.area.contains(this)) break;
         }
         let nx = this.x, ny = this.y;
-        for(let i78 = 0; i78 < 30 * Math.random(); i78++)for (const { dx: dx1 , dy: dy1  } of [
-            {
-                dx: 0,
-                dy: -1
-            },
-            {
-                dx: -1,
-                dy: 0
-            },
-            {
-                dx: +1,
-                dy: 0
-            },
-            {
-                dx: 0,
-                dy: +1
-            }
-        ]){
-            if (this.area.contains({
-                x: nx + dx1,
-                y: ny + dy1
-            })) {
-                nx += dx1;
-                ny += dy1;
+        for(let i78 = 0; i78 < 30 * Math.random(); i78++){
+            for (const { dx: dx1 , dy: dy1  } of [
+                {
+                    dx: 0,
+                    dy: -1
+                },
+                {
+                    dx: -1,
+                    dy: 0
+                },
+                {
+                    dx: +1,
+                    dy: 0
+                },
+                {
+                    dx: 0,
+                    dy: +1
+                }
+            ]){
+                if (this.area.contains({
+                    x: nx + dx1,
+                    y: ny + dy1
+                })) {
+                    nx += dx1;
+                    ny += dy1;
+                }
             }
         }
         this.x = nx;
@@ -12727,9 +12737,8 @@ class NPC extends Renderable {
     }
     update(tick) {
         this.lifetime -= App.config.delta;
-        if (this.lifetime <= 1) {
-            this.sprite.alpha *= 0.8;
-        } else if (this.sprite.alpha < 1) {
+        if (this.lifetime <= 1) this.sprite.alpha *= 0.8;
+        else if (this.sprite.alpha < 1) {
             this.sprite.alpha = Math.min(1, this.sprite.alpha * 1.25);
             if (!this.sprite.alpha) this.sprite.alpha = 0.03;
         }
