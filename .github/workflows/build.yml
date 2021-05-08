@@ -18,14 +18,13 @@ jobs:
         uses: denolib/setup-deno@v2
       - name: Setup velociraptor
         uses: jurassiscripts/setup-velociraptor@master
-      - name: Setup deployctl
-        run: deno install --allow-all https://deno.land/x/deploy/deployctl.ts
       - name: Run tests
-        run: vr test
+        run: vr ci-test
 
   build:
     name: Build app
-    needs: [ tests ]
+    needs:
+      - tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -38,14 +37,13 @@ jobs:
       - name: Setup velociraptor
         uses: jurassiscripts/setup-velociraptor@master
       - name: Build app
-        run: vr build
+        run: vr ci-build
       - name: Publish generated files
         run: |
           set +e
           git config --global user.email "69689554+botlighter@users.noreply.github.com"
           git config --global user.name "botlighter"
-          git status
-          git add .
+          git add --all
           git commit -m "Auto-build app [skip ci]"
           git push
           set -e

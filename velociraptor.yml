@@ -4,25 +4,44 @@ repository: https://github.com/lowlighter/gracidea
 scripts:
 
   start:
-    desc: Run app
+    desc: Run app locally
     cmd: deno run --unstable --allow-net --allow-read server/app.ts
 
-  build:
-    desc: Build app
-    cmd:
-      - npm install pixi.js terser
-      - deno run --allow-all --unstable build/mod.ts
-      - deno bundle client/app/mod.ts client/static/js/app.js
-      - npx terser client/static/js/app.js --mangle --source-map --output client/static/js/app.min.js
-      # dprint fmt --config .github/config/dprint.json
+  fmt:
+    desc: Format code
+    cmd: dprint fmt --config .github/config/dprint.json
 
   lint:
-    desc:
+    desc: Lint code
     cmd: deno lint --unstable --ignore=node_modules,client/static/js/app.js
 
   test:
     desc: Run tests
+    cmd: deno test --unstable --allow-read tests
+
+  build:
+    desc: Build data and sprites
     cmd:
-      - deno test --unstable --allow-read tests
+      - deno run --allow-all --unstable build/mod.ts --all
+
+  bundle:
+    desc: Bundle client app
+    cmd:
+      - echo {} > package.json
+      - npm install pixi.js terser
+      - deno bundle client/app/mod.ts client/static/js/app.js
+      - npx terser client/static/js/app.js --mangle --source-map --output client/static/js/app.min.js
+
+  ci-test:
+    desc: (CI) Run tests
+    cmd:
+      - vr test
+      - deno install --allow-all https://deno.land/x/deploy/deployctl.ts
       - deployctl check deploy/mod.ts
-      # dprint check --config .github/config/dprint.json
+      - dprint check --config .github/config/dprint.json
+
+  ci-build:
+    desc:
+    cmd: (CI) Build app
+      - vr bundle
+      - vr build

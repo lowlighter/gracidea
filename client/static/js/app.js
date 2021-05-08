@@ -1,3 +1,86 @@
+const TILE_SIZE = 16;
+const CHUNK_SIZE = 32;
+const global1 = globalThis;
+const ANIMATED = {
+    2266: {
+        frames: [
+            2266,
+            2267,
+            2268,
+            2269
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.025
+    },
+    2374: {
+        frames: [
+            2374,
+            2375,
+            2376,
+            2377,
+            2378,
+            2379,
+            2380,
+            2381
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.075
+    },
+    658: {
+        frames: [
+            658,
+            659,
+            660,
+            659
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.05
+    },
+    661: {
+        frames: [
+            661,
+            662,
+            663,
+            664,
+            663,
+            664,
+            663,
+            664,
+            663,
+            664,
+            662,
+            661,
+            661,
+            661
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.05
+    },
+    774: {
+        frames: [
+            774,
+            775,
+            776,
+            777,
+            776,
+            777,
+            776,
+            777,
+            776,
+            777,
+            775,
+            774,
+            774,
+            774
+        ].map((frame)=>`${frame}`
+        ),
+        speed: 0.05
+    }
+};
+const CREATURES_FLYING = [
+    "wingull",
+    "pelipper"
+];
 var t11 = setTimeout;
 function e30(t1) {
     return Boolean(t1 && (void 0) !== t1.length);
@@ -11728,89 +11811,6 @@ const mod = function() {
         utils: Ue
     };
 }();
-const TILE_SIZE = 16;
-const CHUNK_SIZE = 32;
-const global = globalThis;
-const ANIMATED = {
-    2266: {
-        frames: [
-            2266,
-            2267,
-            2268,
-            2269
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.025
-    },
-    2374: {
-        frames: [
-            2374,
-            2375,
-            2376,
-            2377,
-            2378,
-            2379,
-            2380,
-            2381
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.075
-    },
-    658: {
-        frames: [
-            658,
-            659,
-            660,
-            659
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.05
-    },
-    661: {
-        frames: [
-            661,
-            662,
-            663,
-            664,
-            663,
-            664,
-            663,
-            664,
-            663,
-            664,
-            662,
-            661,
-            661,
-            661
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.05
-    },
-    774: {
-        frames: [
-            774,
-            775,
-            776,
-            777,
-            776,
-            777,
-            776,
-            777,
-            776,
-            777,
-            775,
-            774,
-            774,
-            774
-        ].map((frame)=>`${frame}`
-        ),
-        speed: 0.05
-    }
-};
-const CREATURES_FLYING = [
-    "wingull",
-    "pelipper"
-];
 class Render {
     static engine;
     static app;
@@ -11823,18 +11823,18 @@ class Render {
         loader.add("/copyrighted/textures/npcs.json");
         loader.add("/copyrighted/textures/creatures.json");
         this.app = new Render.engine.Application({
-            width: global.document.body.clientWidth,
-            height: global.document.body.clientHeight,
-            resizeTo: global.window,
+            width: global1.document.body.clientWidth,
+            height: global1.document.body.clientHeight,
+            resizeTo: global1.window,
             autoDensity: true,
-            resolution: global.devicePixelRatio,
+            resolution: global1.devicePixelRatio,
             backgroundAlpha: 0
         });
-        global.document.querySelector("body").appendChild(this.app.view);
+        global1.document.querySelector("body").appendChild(this.app.view);
         await new Promise((solve)=>loader.load(()=>solve(null)
             )
         );
-        global.document.querySelector(".loader").style.display = "none";
+        global1.document.querySelector(".loader").style.display = "none";
     }
     static Polygon(points) {
         return new Render.engine.Polygon(...points.map((n72)=>n72 * 16
@@ -12036,7 +12036,7 @@ class Minimap extends Renderable {
             My = Math.max(My, sprite.y + sprite.height);
         });
         const width1 = (Mx - mx1) / 2, height1 = (My - my1) / 2;
-        this.sprite.position.set(-mx1 + (width1 + global.document.body.clientWidth / 2) / 2, -my1 + (height1 - global.document.body.clientHeight / 2) / 2);
+        this.sprite.position.set(-mx1 + (width1 + global1.document.body.clientWidth / 2) / 2, -my1 + (height1 - global1.document.body.clientHeight / 2) / 2);
     }
     moveTo({ x , y  }) {
         this.world.camera.moveTo({
@@ -12083,51 +12083,6 @@ class App {
         delta: 0.0625
     };
 }
-class Controller {
-    app;
-    world;
-    constructor({ app: app1 , world: world3  }){
-        this.app = app1;
-        this.world = world3;
-        Render.app.view.addEventListener("wheel", (event)=>{
-            event.preventDefault();
-            if (!this.world.minimap.open) {
-                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - event.deltaX), Math.round(this.world.sprites.world.position.y - event.deltaY));
-            } else {
-                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - event.deltaX), Math.round(this.world.minimap.sprite.position.y - event.deltaY));
-            }
-            this.world.camera.render();
-        });
-        global.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
-        );
-        global.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
-            global.document.querySelector("nav.debug").style.display = global.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
-        });
-        Object.keys(App.debug).forEach((key)=>{
-            const input = global.document.createElement("input");
-            input.setAttribute("data-control-for", key);
-            input.setAttribute("type", "checkbox");
-            input.checked = App.debug[key];
-            input.addEventListener("change", ()=>{
-                App.debug[key] = input.checked;
-                this.world.camera.render();
-            });
-            const label = global.document.createElement("label");
-            label.innerText = key;
-            label.prepend(input);
-            global.document.querySelector(".debug")?.append(label);
-        });
-    }
-    updateDOM() {
-        const location = global.document.querySelector("#location .name");
-        if (location) location.innerHTML = this.world.camera.location[0] ?? "-  ";
-        const position = global.document.querySelector("#location .position");
-        if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
-    }
-    updateFPS(fps) {
-        global.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`;
-    }
-}
 class World {
     sprites;
     loaded = {
@@ -12139,8 +12094,8 @@ class World {
     name = "overworld";
     app;
     tick = 0;
-    constructor({ app: app2  }){
-        this.app = app2;
+    constructor({ app: app1  }){
+        this.app = app1;
         const sprite1 = Render.app.stage.addChild(Render.Container());
         this.sprites = {
             world: sprite1,
@@ -12177,14 +12132,14 @@ class World {
 }
 class Camera extends Renderable {
     sprite;
-    constructor({ world: world4  }){
+    constructor({ world: world3  }){
         super({
-            world: world4
+            world: world3
         });
         this.sprite = this.world.sprites.world.addChild(Render.Container());
         Object.defineProperties(this, {
             x: {
-                get: ()=>Math.floor((-this.world.sprites.world.position.x + global.document.body.clientWidth / 2) / 16)
+                get: ()=>Math.floor((-this.world.sprites.world.position.x + global1.document.body.clientWidth / 2) / 16)
                 ,
                 set: (x11)=>this.moveTo({
                         x: x11,
@@ -12192,7 +12147,7 @@ class Camera extends Renderable {
                     })
             },
             y: {
-                get: ()=>Math.floor((-this.world.sprites.world.position.y + global.document.body.clientHeight / 2) / 16)
+                get: ()=>Math.floor((-this.world.sprites.world.position.y + global1.document.body.clientHeight / 2) / 16)
                 ,
                 set: (y2)=>this.moveTo({
                         x: this.x,
@@ -12277,7 +12232,7 @@ class Camera extends Renderable {
         );
     }
     moveTo({ x , y  }) {
-        this.world.sprites.world.position.set(-x * 16 + global.document.body.clientWidth / 2, -y * 16 + global.document.body.clientHeight / 2);
+        this.world.sprites.world.position.set(-x * 16 + global1.document.body.clientWidth / 2, -y * 16 + global1.document.body.clientHeight / 2);
         this.render();
     }
 }
@@ -12288,12 +12243,12 @@ class Chunk extends Renderable {
     layers = new Map();
     areas = new Set();
     world;
-    constructor({ id: id1 , world: world5  }){
+    constructor({ id: id1 , world: world4  }){
         super({
-            world: world5
+            world: world4
         });
         this.id = id1;
-        this.world = world5;
+        this.world = world4;
         [this.x, this.y] = this.id.split(";").map((n72)=>Number(n72) * CHUNK_SIZE
         );
         this.width = this.height = CHUNK_SIZE;
@@ -12398,6 +12353,51 @@ class Chunk extends Renderable {
 }
 var Type;
 var Pattern;
+class Controller {
+    app;
+    world;
+    constructor({ app: app2 , world: world5  }){
+        this.app = app2;
+        this.world = world5;
+        Render.app.view.addEventListener("wheel", (event)=>{
+            event.preventDefault();
+            if (!this.world.minimap.open) {
+                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - event.deltaX), Math.round(this.world.sprites.world.position.y - event.deltaY));
+            } else {
+                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - event.deltaX), Math.round(this.world.minimap.sprite.position.y - event.deltaY));
+            }
+            this.world.camera.render();
+        });
+        global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
+        );
+        global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
+            global1.document.querySelector("nav.debug").style.display = global1.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
+        });
+        Object.keys(App.debug).forEach((key)=>{
+            const input = global1.document.createElement("input");
+            input.setAttribute("data-control-for", key);
+            input.setAttribute("type", "checkbox");
+            input.checked = App.debug[key];
+            input.addEventListener("change", ()=>{
+                App.debug[key] = input.checked;
+                this.world.camera.render();
+            });
+            const label = global1.document.createElement("label");
+            label.innerText = key;
+            label.prepend(input);
+            global1.document.querySelector(".debug")?.append(label);
+        });
+    }
+    updateDOM() {
+        const location = global1.document.querySelector("#location .name");
+        if (location) location.innerHTML = this.world.camera.location[0] ?? "-  ";
+        const position = global1.document.querySelector("#location .position");
+        if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
+    }
+    updateFPS(fps) {
+        global1.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`;
+    }
+}
 (function(Type1) {
     Type1["people"] = "people";
     Type1["creatures"] = "creatures";

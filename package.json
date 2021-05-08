@@ -1,7 +1,0 @@
-{
-  "dependencies": {
-    "pixi.js": "^6.0.2",
-    "stats-js": "^1.0.1",
-    "terser": "^5.7.0"
-  }
-}

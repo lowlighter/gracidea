@@ -6,3 +6,4 @@
 *.tps linguist-generated
 *.tsx linguist-generated
 *.tmx linguist-generated
+*.json linguist-generated
