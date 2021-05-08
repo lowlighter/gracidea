@@ -47,7 +47,7 @@
       private _track_index = 0
 
     /** Track pattern */
-      readonly pattern = "wander" as Pattern
+      readonly pattern = Pattern.fixed as Pattern
 
     /** Name */
       readonly name:string
@@ -59,7 +59,7 @@
       private lifetime = Infinity
 
     /** Constructor */
-      constructor({world, area, type, name}:{world:World, area:Area, type:Type, name:string}) {
+      constructor({world, area, type, name, pattern = ""}:{world:World, area:Area, type:Type, name:string, pattern?:string}) {
         super({world})
         this.area = area
         this.name = name
@@ -70,9 +70,12 @@
           const type = Math.random() < App.config.shinyRate ? "shiny" : "regular"
           frame = `${type}/${this.name}`
           this.lifetime = Math.floor(12+Math.random()*28)
+          this.pattern = Pattern.wander
         }
-        if (type === Type.people)
+        if (type === Type.people) {
           frame = `${this.name}_down_0`
+          this.pattern = pattern as Pattern
+        }
         this.sprites = {
           main:this.sprite.addChild(Render.Sprite({frame:frame, anchor:[0.5, 1]})),
           mask:null,

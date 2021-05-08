@@ -77,7 +77,7 @@
             //People
             case Type.people:{
               if ((App.config.showNpcs)&&(!this.npcs.size))
-                this.npcs.add(new NPC({world:this.world, area:this, type:this.data.type, name:this.data.name}))
+                this.npcs.add(new NPC({world:this.world, area:this, type:this.data.type, name:this.data.name, pattern:this.data.properties.pattern}))
               break
             }
             //Creatures
