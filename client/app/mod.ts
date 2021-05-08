@@ -1,3 +1,7 @@
+/**
+ * Copyright Simon Lecoq (@lowlighter)
+ * @license https://github.com/lowlighter/gracidea/blob/main/README.md
+ */
 //Imports
 import { App } from "./app.ts"
 

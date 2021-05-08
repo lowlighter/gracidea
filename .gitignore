@@ -1,5 +1,3 @@
 node_modules
 coverage
-build/data
-build/creatures
-build/npcs
+build/*/
