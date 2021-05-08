@@ -12080,7 +12080,8 @@ class App {
     static config = {
         showNpcs: true,
         showCreatures: true,
-        shinyRate: 1 / 8
+        shinyRate: 1 / 8,
+        delta: 0.0625
     };
 }
 var Type;
@@ -12190,7 +12191,8 @@ class Area extends Renderable {
                             world: this.world,
                             area: this,
                             type: this.data.type,
-                            name: this.data.name
+                            name: this.data.name,
+                            pattern: this.data.properties.pattern
                         }));
                         break;
                     }
@@ -12492,15 +12494,15 @@ class World {
             })
         );
         Render.engine.Ticker.shared.add(()=>{
-            this.tick += 0.0625;
+            this.tick += App.config.delta;
             if (Number.isInteger(this.tick)) {
                 this.loaded.chunks.forEach((chunk)=>{
                     if (chunk.layers.has("0X")) chunk.layers.get("0X").texture = seaTextures[this.tick % seaTextures.length];
                 });
-                this.loaded.areas.forEach((area)=>area.update(this.tick)
-                );
                 this.app.controller.updateFPS(Render.engine.Ticker.shared.FPS);
             }
+            this.loaded.areas.forEach((area)=>area.update(this.tick)
+            );
         });
     }
     chunkAt({ x , y  }) {
@@ -12516,6 +12518,15 @@ var Pattern;
     Pattern1["lookaround"] = "lookaround";
 })(Pattern || (Pattern = {
 }));
+var Direction;
+(function(Direction1) {
+    Direction1[Direction1["none"] = 0] = "none";
+    Direction1[Direction1["up"] = 1] = "up";
+    Direction1[Direction1["right"] = 2] = "right";
+    Direction1[Direction1["down"] = 3] = "down";
+    Direction1[Direction1["left"] = 4] = "left";
+})(Direction || (Direction = {
+}));
 class NPC extends Renderable {
     sprite;
     sprites;
@@ -12526,11 +12537,12 @@ class NPC extends Renderable {
     area;
     track = [];
     _track_index = 0;
-    pattern = "wander";
+    pattern;
     name;
     type;
     lifetime = Infinity;
-    constructor({ world: world7 , area , type , name  }){
+    direction = Direction.none;
+    constructor({ world: world7 , area , type , name , pattern =Pattern.fixed  }){
         super({
             world: world7
         });
@@ -12538,11 +12550,13 @@ class NPC extends Renderable {
         this.name = name;
         this.type = type;
         this.sprite = Render.Container();
+        this.pattern = pattern;
         let frame = "";
         if (type === Type.creatures) {
             const type1 = Math.random() < App.config.shinyRate ? "shiny" : "regular";
             frame = `${type1}/${this.name}`;
             this.lifetime = Math.floor(12 + Math.random() * 28);
+            this.pattern = Pattern.wander;
         }
         if (type === Type.people) frame = `${this.name}_down_0`;
         this.sprites = {
@@ -12559,6 +12573,7 @@ class NPC extends Renderable {
         if (App.debug.logs) console.debug(`loaded npc: ${this.name}`);
         this.computeSpawn();
         this.computePattern();
+        this.sprite.alpha = 0;
     }
     destructor() {
         if (App.debug.logs) console.debug(`unloaded npc: ${this.name}`);
@@ -12708,17 +12723,29 @@ class NPC extends Renderable {
             }
             const rx = this.x - chunk.x, ry = this.y - chunk.y;
             this.sprite.position.set((rx + 0.5) * 16, (ry + 1) * 16);
-            this.sprite.zIndex = ry * CHUNK_SIZE;
+            this.sprite.zIndex = Math.ceil(ry) * CHUNK_SIZE;
             this.sprites.main.position.set(this.offset.x, this.offset.y);
             chunk?.layers.get("2X")?.addChild(this.sprite);
         }
     }
     update(tick) {
-        if (Number.isInteger(tick)) {
-            this[this.pattern]();
-            this.render();
-            if ((this.lifetime--) < 0) this.destructor();
+        this.lifetime -= App.config.delta;
+        if (this.lifetime <= 1) {
+            this.sprite.alpha *= 0.8;
+        } else if (this.sprite.alpha < 1) {
+            this.sprite.alpha = Math.min(1, this.sprite.alpha * 1.25);
+            if (!this.sprite.alpha) this.sprite.alpha = 0.03;
         }
+        if (Number.isInteger(tick)) {
+            if (this.lifetime <= 0) {
+                this.destructor();
+                return;
+            }
+            this.direction = Direction.none;
+            this[this.pattern]();
+        }
+        this.goDirection();
+        this.render();
     }
     fixed() {
     }
@@ -12732,6 +12759,8 @@ class NPC extends Renderable {
     }
     wander() {
         [
+            ()=>null
+            ,
             ()=>this.goLeft()
             ,
             ()=>this.goRight()
@@ -12743,6 +12772,8 @@ class NPC extends Renderable {
     }
     lookaround() {
         [
+            ()=>null
+            ,
             ()=>this.lookLeft()
             ,
             ()=>this.lookRight()
@@ -12765,12 +12796,37 @@ class NPC extends Renderable {
             flip: +1
         });
     }
+    goDirection() {
+        const delta = App.config.delta;
+        switch(this.direction){
+            case Direction.up:
+                {
+                    this.y -= delta;
+                    return;
+                }
+            case Direction.down:
+                {
+                    this.y += delta;
+                    return;
+                }
+            case Direction.left:
+                {
+                    this.x -= delta;
+                    return;
+                }
+            case Direction.right:
+                {
+                    this.x += delta;
+                    return;
+                }
+        }
+    }
     goLeft() {
         if (this.area.contains({
             x: this.x - 1,
             y: this.y
         })) {
-            this.x--;
+            this.direction = Direction.left;
             this.lookLeft();
         }
     }
@@ -12784,7 +12840,7 @@ class NPC extends Renderable {
             x: this.x + 1,
             y: this.y
         })) {
-            this.x++;
+            this.direction = Direction.right;
             this.lookRight();
         }
     }
@@ -12796,7 +12852,7 @@ class NPC extends Renderable {
             x: this.x,
             y: this.y - 1
         })) {
-            this.y--;
+            this.direction = Direction.up;
             this.lookUp();
         }
     }
@@ -12808,7 +12864,7 @@ class NPC extends Renderable {
             x: this.x,
             y: this.y + 1
         })) {
-            this.y++;
+            this.direction = Direction.down;
             this.lookDown();
         }
     }
