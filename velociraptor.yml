@@ -14,6 +14,7 @@ scripts:
       - deno run --allow-all build/mod.ts
       - deno bundle client/app/mod.ts client/static/js/app.js
       - npx terser client/static/js/app.js --mangle --ecma 2015 --source-map --output client/static/js/app.min.js
+      # dprint fmt --config .github/config/dprint.json
 
   lint:
     desc:
