@@ -16,10 +16,13 @@ const data = xmlparse(await Deno.readTextFile("maps/overworld/map.tmx")) as test
     ),
   ]
   for (const group of data.map.objectgroup) {
+    const ids = new Set()
     const layer = group["@name"]
     for (const object of group.object) {
-      const { "@id": _id, "@name": name = _id, "@x": x, "@y": y, "@width": width, "@height": height, polygon = {} } = object
+      const { "@id": id, "@name": name = id, "@x": x, "@y": y, "@width": width, "@height": height, polygon = {} } = object
       const properties = Object.fromEntries(object?.properties?.property.map(({ "@name": name, "@value": value }: test) => [name, value]) ?? [])
+      Deno.test(`${layer} ${name} integrity: has unique id`, () => assert(!ids.has(id)))
+      ids.add(id)
       Deno.test(`${layer} ${name} integrity: has name`, () => assert((typeof name === "string") && (name.length > 0)))
       Deno.test(`${layer} ${name} integrity: has valid position`, () => assert((typeof x === "number") && (typeof y === "number")))
       Deno.test(`${layer} ${name} integrity: has valid polygon`, () =>
@@ -76,3 +79,7 @@ const data = xmlparse(await Deno.readTextFile("maps/overworld/map.tmx")) as test
     }
   }
 }
+
+//TODO:
+//Nb max chunks edited
+//Locations

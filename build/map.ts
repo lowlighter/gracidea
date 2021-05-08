@@ -127,7 +127,7 @@ type MapData = {
 }
 
 /** Exported data */
-type ExportedMapData = {
+export type ExportedMapData = {
   pins: {
     regions: {
       [region: string]: {

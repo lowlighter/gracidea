@@ -51,5 +51,13 @@ export const ANIMATED = {
   },
 }
 
+/** Diff contants */
+export const enum DIFF {
+  UNCHANGED = 0,
+  CREATED = 0.25,
+  EDITED = 0.5,
+  DELETED = 0.75,
+}
+
 /** Flying creatures */
 export const CREATURES_FLYING = ["wingull", "pelipper"]

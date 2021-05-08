@@ -36,6 +36,7 @@ export class App {
     chunks: false,
     areas: false,
     camera: false,
+    diff: true,
   }
 
   /** Config */

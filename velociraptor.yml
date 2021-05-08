@@ -3,7 +3,7 @@ author: lowlighter
 repository: https://github.com/lowlighter/gracidea
 scripts:
 
-  run:
+  start:
     desc: Run app locally
     cmd: deno run --unstable --allow-net --allow-read server/app.ts
 
@@ -21,8 +21,11 @@ scripts:
 
   build:
     desc: Build data and sprites
-    cmd:
-      - deno run --allow-all --unstable build/mod.ts --all
+    cmd: deno run --allow-all --unstable build/mod.ts --all
+
+  build-data:
+    desc: Build data
+    cmd: deno run --allow-all --unstable build/mod.ts --data
 
   bundle:
     desc: Bundle client app

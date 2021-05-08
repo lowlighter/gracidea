@@ -1,5 +1,5 @@
 //Imports
-import { CHUNK_SIZE } from "../../../build/constants.ts"
+import { CHUNK_SIZE, DIFF } from "../../../build/constants.ts"
 import { App } from "./../app.ts"
 import { Render } from "../render.ts"
 import { Area, AreaData } from "./area.ts"
@@ -83,6 +83,8 @@ export class Chunk extends Renderable {
       this.data = await fetch(`/map/overworld/${this.id}`).then(res => res.json())
     //Sea
     this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({ frame: 0, width: CHUNK_SIZE, height: CHUNK_SIZE })))
+    if (App.debug.diff)
+      this.diff(DIFF.UNCHANGED, { sprite: this.layers.get("0X") })
     //Render layers
     for (
       const { name, sublayers, sorted = false } of [
@@ -105,7 +107,9 @@ export class Chunk extends Renderable {
           const tile = tiles[i]
           if (tile >= 0) {
             const y = i % CHUNK_SIZE, x = Math.floor(i / CHUNK_SIZE)
-            layer.addChild(Render.Sprite({ frame: tile, x, y, z: y * CHUNK_SIZE + z }))
+            const sprite = layer.addChild(Render.Sprite({ frame: ~~tile, x, y, z: y * CHUNK_SIZE + z }))
+            if (App.debug.diff)
+              this.diff(tile % 1, { sprite })
           }
         }
       }

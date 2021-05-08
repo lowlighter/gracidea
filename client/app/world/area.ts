@@ -68,14 +68,18 @@ export class Area extends Renderable {
           text: `${this.data.name ?? ""}\n(${this.data.type}#${this.id})`.trim(),
           textStyle: { align: "center", fontSize: 10, fill: "white" },
           textPosition: { x: this.polygon.points[0], y: this.polygon.points[1] },
-          stroke: [1, 0x00FF00, .5],
-          fill: [0x00FF00, .25],
+          stroke: [1, 0xFFFFFF, .5],
+          fill: [0xFFFFFF, .25],
           polygon: this.polygon,
         }),
       )
+      if (App.debug.diff)
+        this.diff(NaN, { sprite: this._debug, from: this.data.properties })
+      else
+        this._debug.tint = 0x00FF00
     }
     if ((this._debug) && (App.debug.areas))
-      this._debug.tint = this.contains(this.world.camera) ? 0xFFFFFF : 0xFF00FF
+      this._debug.alpha = this.contains(this.world.camera) ? 1 : 0.25
     return super.debug(App.debug.areas)
   }
 
