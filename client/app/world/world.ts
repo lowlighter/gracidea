@@ -33,7 +33,7 @@ export class World {
   readonly minimap: Minimap
 
   /** World name */
-  readonly name = "overworld"
+  readonly name: string
 
   /** App */
   readonly app: App
@@ -42,8 +42,9 @@ export class World {
   tick = 0
 
   /** Constructor */
-  constructor({ app }: { app: App }) {
+  constructor({ app, name }: { app: App; name?: string | null }) {
     this.app = app
+    this.name = name ?? "overworld"
     const sprite = Render.app.stage.addChild(Render.Container())
     this.sprites = {
       world: sprite,

@@ -27,6 +27,10 @@ scripts:
     desc: Build data
     cmd: deno run --allow-all --unstable build/mod.ts --data
 
+  build-diff:
+    desc: Build diff
+    cmd: deno run --allow-all --unstable build/mod.ts --diff
+
   bundle:
     desc: Bundle client app
     cmd:

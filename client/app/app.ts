@@ -20,9 +20,11 @@ export class App {
     const that = this as asyncdef
     this.world = null as asyncdef
     this.controller = null as asyncdef
+    const params = new URLSearchParams(window.location.search)
+    App.debug.diff = /_diff$/.test(params.get("map"))
     this.ready = new Promise(solve => {
       Render.setup().then(() => {
-        that.world = new World({ app: this })
+        that.world = new World({ app: this, name: params.get("map") })
         that.controller = new Controller({ app: this, world: this.world })
         that.world.camera.moveTo({ x: 329, y: -924 })
         solve()
@@ -36,7 +38,7 @@ export class App {
     chunks: false,
     areas: false,
     camera: false,
-    diff: true,
+    diff: false,
   }
 
   /** Config */

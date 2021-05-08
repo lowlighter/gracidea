@@ -80,7 +80,7 @@ export class Chunk extends Renderable {
   async render() {
     //Load chunk data
     if (!this.data)
-      this.data = await fetch(`/map/overworld/${this.id}`).then(res => res.json())
+      this.data = await fetch(`/map/${this.world.name}/${this.id}`).then(res => res.json())
     //Sea
     this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({ frame: 0, width: CHUNK_SIZE, height: CHUNK_SIZE })))
     if (App.debug.diff)

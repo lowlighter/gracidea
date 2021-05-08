@@ -8,25 +8,33 @@ type Area = { bounds: Rectangle; data: loose }
 //Load maps and build quadtrees
 const maps = {} as loose
 const quadtrees = {} as { [key: string]: Quadtree }
-for await (const name of ["overworld"]) {
-  const { areas = [] } = maps[name] = JSON.parse(await json(name))
-  quadtrees[name] = Quadtree.from(areas.map((data: Area) => ({ ...data.bounds, data })))
-  console.debug(`loaded ${name}`)
+
+/** Map loader */
+async function load(map: string) {
+  if (map in maps)
+    return
+  const { areas = [] } = maps[map] = JSON.parse(await json(map))
+  quadtrees[map] = Quadtree.from(areas.map((data: Area) => ({ ...data.bounds, data })))
+  console.debug(`loaded: ${map}`)
 }
 
-/** Maps data */
-export { maps }
+/** Get pins */
+export async function pins({ map }: { map: string }) {
+  await load(map)
+  return maps[map].pins
+}
 
-/** Retrieve chunk data */
-export function chunk({ section, from: id }: { section: string; from: string }) {
+/** Get chunk data */
+export async function chunk({ section, map }: { section: string; map: string }) {
   if (!/^(?<x>-?\d+);(?<y>-?\d+)$/.test(section))
     return null
+  await load(map)
   const [x, y] = section.split(";").map(Number)
   const chunk = { x: x * CHUNK_SIZE, y: y * CHUNK_SIZE, width: CHUNK_SIZE, height: CHUNK_SIZE }
   return {
     id: section,
-    chunk: maps[id].chunks[section],
-    areas: [...quadtrees[id].get(chunk)].filter(area => Quadtree.contains(area, chunk)).map(({ data }: loose) => data),
+    chunk: maps[map].chunks[section],
+    areas: [...quadtrees[map].get(chunk)].filter(area => Quadtree.contains(area, chunk)).map(({ data }: loose) => data),
   }
 }
 

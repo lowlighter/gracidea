@@ -1,6 +1,6 @@
 //Imports
 import { rw } from "../build/constants.ts"
-import { chunk, maps } from "./data/serve.ts"
+import { chunk, pins } from "./data/serve.ts"
 
 /** Map routes  */
 const ROUTE_MAP = /^[/]map[/]\w+[/].*$/
@@ -29,11 +29,11 @@ export async function route(request: Request, { deploy = false }: { deploy?: boo
         switch (true) {
           case ROUTE_MAP_PINS.test(pathname): {
             const { id } = pathname.match(ROUTE_MAP_PINS)?.groups ?? {}
-            return new Response(JSON.stringify(maps[id].pins), { headers: { "content-type": "application/json" } })
+            return new Response(JSON.stringify(await pins({ map: id })), { headers: { "content-type": "application/json" } })
           }
           case ROUTE_MAP_SECTION.test(pathname): {
             const { id, section } = pathname.match(ROUTE_MAP_SECTION)?.groups ?? {}
-            return new Response(JSON.stringify(chunk({ section, from: id })), { headers: { "content-type": "application/json" } })
+            return new Response(JSON.stringify(await chunk({ section, map: id })), { headers: { "content-type": "application/json" } })
           }
         }
         throw new Error("Invalid map route")

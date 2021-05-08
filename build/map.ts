@@ -3,10 +3,10 @@ import { parse } from "https://deno.land/x/xml@v1.0.0/mod.ts"
 import { ExportedEncountersData } from "./encounters.ts"
 
 /** Build map data */
-export async function map(encounters?: ExportedEncountersData) {
+export async function map(name: string, encounters?: ExportedEncountersData) {
   //Load data
   const exported = { pins: { regions: {} }, areas: [], chunks: {} } as ExportedMapData
-  const { map: { editorsettings: settings, layer: layers, objectgroup: groups } } = parse(await Deno.readTextFile("maps/overworld/map.tmx")) as MapData
+  const { map: { editorsettings: settings, layer: layers, objectgroup: groups } } = parse(await Deno.readTextFile(`maps/${name}/map.tmx`)) as MapData
   const TILE_SIZE = 16
   const CHUNK_SIZE = settings.chunksize["@width"]
 
