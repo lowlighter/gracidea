@@ -10,9 +10,10 @@ scripts:
   build:
     desc: Build app
     cmd:
-      - npm install pixi.js
-      - deno bundle client/app/mod.ts client/static/js/app.js
+      - npm install pixi.js terser
       - deno run --allow-all build/mod.ts
+      - deno bundle client/app/mod.ts client/static/js/app.js
+      - npx terser client/static/js/app.js --mangle --ecma 2015 --source-map --output client/static/js/app.min.js
 
   lint:
     desc:

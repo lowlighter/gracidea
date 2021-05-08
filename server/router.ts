@@ -14,7 +14,7 @@
   const ROUTE_MAP_SECTION = /^[/]map[/](?<id>\w+)[/](?<section>-?\d+;-?\d+)$/
 
 /** Client app route */
-  const ROUTE_CLIENT_APP = /^[/]js[/]app[.]js$/
+  const ROUTE_CLIENT_APP = /^[/]js[/]app[.]min[.]js$/
 
 /** Route */
   export async function route(request:Request, {deploy = false}:{deploy?:boolean} = {}) {
