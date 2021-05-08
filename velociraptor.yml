@@ -20,7 +20,8 @@ scripts:
     cmd: deno lint --unstable --ignore=node_modules,client/static/js/app.js
 
   test:
-    desc: Run tests and compute coverage
+    desc: Run tests
     cmd:
       - deno test --unstable --allow-read tests
       - deployctl check deploy/mod.ts
+      # dprint check --config .github/config/dprint.json

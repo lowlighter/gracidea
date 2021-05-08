@@ -1,8 +1,8 @@
 /** Clone a repository */
-export async function clone({repository, target}:{repository:string, target:string}) {
+export async function clone({ repository, target }: { repository: string; target: string }) {
   //Perform checks
   try {
-    const {isDirectory} = await Deno.stat(target)
+    const { isDirectory } = await Deno.stat(target)
     if (!isDirectory)
       throw new Error("Error: Target directory already in use")
     console.debug(`already cloned: ${repository}`)
@@ -13,7 +13,7 @@ export async function clone({repository, target}:{repository:string, target:stri
       throw error
   }
   //Clone repository
-  const {success} = await Deno.run({cmd:["git", "clone", repository, target, "--depth", "1"]}).status()
+  const { success } = await Deno.run({ cmd: ["git", "clone", repository, target, "--depth", "1"] }).status()
   if (!success)
     throw new Error("Error: An error occured during cloning")
   console.debug(`cloned: ${repository}`)
