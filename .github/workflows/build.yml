@@ -68,7 +68,7 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
       - lint
-      - built
+      - build
       - test
       - test-deploy
     steps:
