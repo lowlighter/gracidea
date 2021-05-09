@@ -57,7 +57,7 @@ export abstract class Renderable extends Positionable {
   protected patch(patch: number, { sprite, from }: { sprite?: ReturnType<typeof Render.Container>; from?: loose } = {}) {
     if (from)
       patch = from.patchCreated ? PATCH.CREATED : from.patchEdited ? PATCH.EDITED : from.patchDeleted ? PATCH.DELETED : PATCH.UNCHANGED
-    let tint = 0xFFFFFF
+    let tint = 0x222222
     switch (patch) {
       case PATCH.CREATED: {
         tint = 0x00FF00
@@ -70,9 +70,6 @@ export abstract class Renderable extends Positionable {
       case PATCH.EDITED: {
         tint = 0xFFFF00
         break
-      }
-      default: {
-        tint = 0x222222
       }
     }
     if (sprite)

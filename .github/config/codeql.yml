@@ -4,3 +4,4 @@ queries:
 paths-ignore:
   - node_modules
   - client/static/js/**
+  - maps/**
