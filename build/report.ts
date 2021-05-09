@@ -16,11 +16,11 @@ export async function report(changes: loose[], { sha }: { sha: string }) {
         changed = true
         content += `@@ ${type} @@\n`
         if (change[type].created.length)
-          content += `+ ${change[type].created.length} created (${change[type].created.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
+          content += `+ ${change[type].created.length} created\n  ${change[type].created.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")}\n`
         if (change[type].edited.length)
-          content += `! ${change[type].edited.length} edited (${change[type].edited.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
+          content += `! ${change[type].edited.length} edited\n  ${change[type].edited.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")}\n`
         if (change[type].deleted.length)
-          content += `- ${change[type].deleted.length} deleted (${change[type].deleted.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
+          content += `- ${change[type].deleted.length} deleted\n  ${change[type].deleted.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")}\n`
         content += "\n"
       }
     }
