@@ -11965,7 +11965,7 @@ class Renderable extends Positionable {
     patch(patch, { sprite , from  } = {
     }) {
         if (from) patch = from.patchCreated ? PATCH.CREATED : from.patchEdited ? PATCH.EDITED : from.patchDeleted ? PATCH.DELETED : PATCH.UNCHANGED;
-        let tint = 16777215;
+        let tint = 2236962;
         switch(patch){
             case PATCH.CREATED:
                 {
@@ -11981,10 +11981,6 @@ class Renderable extends Positionable {
                 {
                     tint = 16776960;
                     break;
-                }
-            default:
-                {
-                    tint = 2236962;
                 }
         }
         if (sprite) sprite.tint = tint;
