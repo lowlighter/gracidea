@@ -14,10 +14,9 @@ export async function patch(name: string, { main: __main, head: __head, sha }: {
   const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
     res.json()
   ) as ExportedMapData
-  const head =
-    (_head
-      ? await fetch(`https://raw.githubusercontent.com/${_head.user}/gracidea/${_head.branch}/server/data/maps/${name}.gracidea.json`).then(res => res.json())
-      : JSON.parse(await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`))) as ExportedMapData
+  const head = (_head
+    ? await fetch(`https://raw.githubusercontent.com/${_head.user}/gracidea/${_head.branch}/server/data/maps/${name}.gracidea.json`).then(res => res.json())
+    : JSON.parse(await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`))) as ExportedMapData
   const areas = {
     main: new Map(main.areas.map(area => [`${area.type}#${area.id}`, area])),
     head: new Map(head.areas.map(area => [`${area.type}#${area.id}`, area])),
