@@ -68,7 +68,7 @@ jobs:
                 sha:"${{ github.sha }}",
                 issue_number:${{ github.event.number }},
                 report:`${fs.readFileSync("diff/${{ github.sha }}.report")}`,
-                diff:`${fs.readFileSync("diff/overworld_${{ github.sha }}_diff.json")}`,
+                diff:`${fs.readFileSync("diff/overworld_${{ github.sha }}_diff.gracidea.json")}`,
               }
             })
 
