@@ -72,7 +72,7 @@ jobs:
       - name: Bundle client app
         run: vr bundle
       - name: Build data and sprites
-        run: vr build
+        run: vr build --all
       - name: Publish generated files
         run: |
           set +e

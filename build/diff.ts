@@ -10,7 +10,7 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
   //Load data
   const _main = __main.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
   const _head = __head.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
-  console.debug(`processing: ${name} (${_head.user}:${_head.branch} => ${_main.user}:${_main.branch})`)
+  console.debug(`processing diff: ${name} (${_head.user}:${_head.branch} => ${_main.user}:${_main.branch})`)
   const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
     res.json()
   ) as ExportedMapData
@@ -26,6 +26,7 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
     head: new Map(Object.entries(head.pins.regions).flatMap(([region, { pins }]) => pins.map(pin => [pin.id, { ...pin, region }]))),
   }
   const changes = {
+    map: name,
     regions: { created: [], deleted: [], edited: [] },
     areas: { created: [], deleted: [], edited: [] },
     pins: { created: [], deleted: [], edited: [] },
@@ -124,7 +125,7 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
         changes.tiles.unchanged++
       }
       if (changed)
-        changes.chunks[id in main.chunks ? "edited" : "created"].push(id)
+        changes.chunks[id in main.chunks ? "edited" : "created"].push({id})
       delete main.chunks[id]?.layers[name]
     }
   }
