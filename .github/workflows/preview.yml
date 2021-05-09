@@ -15,7 +15,6 @@ jobs:
         run: |
           git status
           git checkout ci-attachments
-
           # github.event.client_payload.
           # git commit -m "Auto-build diff ${{ github.event.client_payload.sha }}"
           # git push
