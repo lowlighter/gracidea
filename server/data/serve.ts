@@ -44,7 +44,7 @@ async function json(name: string) {
     return (Deno as rw).readTextFile(`server/data/maps/${name}.gracidea.json`)
   }
   catch (error) {
-    console.log(error)
+    console.warn(error)
     const body = await fetch(new URL(`https://raw.githubusercontent.com/lowlighter/gracidea/main/server/data/maps/${name}.gracidea.json`)).then(res => res.body)
     const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
     let content = ""

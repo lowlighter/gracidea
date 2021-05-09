@@ -39,7 +39,6 @@ export async function report(changes:loose[], {sha}:{sha:string}) {
       content += "# no changes\n"
     content += "```\n\n"
   }
-  console.log(content)
   console.debug(`saving: diff/${sha}.report`)
   await Deno.writeTextFile(`diff/${sha}.report`, content)
 }

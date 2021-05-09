@@ -58,7 +58,7 @@ export async function route(request: Request, { deploy = false }: { deploy?: boo
     }
   }
   catch (error) {
-    console.log(error)
+    console.warn(error)
     return new Response(null, { status: 404 })
   }
 }

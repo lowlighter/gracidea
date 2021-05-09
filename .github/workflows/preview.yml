@@ -3,12 +3,14 @@ on:
   - pull_request_target
 jobs:
 
-  diff:
-    name: Build diff
+  preview:
+    name: Build preview data
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+          with:
+            fetch-depth: 1
       - name: Setup Deno
         uses: denolib/setup-deno@v2
       - name: Setup velociraptor
@@ -16,20 +18,17 @@ jobs:
       - env:
           GITHUB_CONTEXT: ${{ toJSON(github) }}
         run: echo "$GITHUB_CONTEXT"
-      - name: Build diff
+      - name: Build data diff
         run: |
           vr build --data
           vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
       - name: Publish generated files
         run: |
-          set +e
-          git config --global user.email "69689554+botlighter@users.noreply.github.com"
-          git config --global user.name "botlighter"
+          git status
           git checkout -b ci-attachments
           git add diff
-          git commit -m "Auto-build diff [skip ci]"
+          git commit -m "Auto-build diff ${{ github.sha }}"
           git push
-          set -e
       - name: Publish report
         uses: actions/github-script@v3
         with:

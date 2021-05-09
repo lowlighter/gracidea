@@ -18,7 +18,6 @@ if (import.meta.main) {
   }
   if ((args.sprites) || (args.all))
     await tiles({ file: "maps/overworld/tileset3.png" })
-    console.log(args)
   if ((args.head) && (args.sha)) {
     const {head, sha} = args
     await report([await diff("overworld", { main: "lowlighter:main", head, sha })], {sha})
