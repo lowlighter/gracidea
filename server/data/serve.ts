@@ -11,17 +11,20 @@ const maps = {} as loose
 const quadtrees = {} as { [key: string]: Quadtree }
 
 /** Map loader */
-async function load(map: string, {patch}:{patch?:string|null}) {
+async function load(map: string, { patch }: { patch?: string | null }) {
   //Load map
   if (!pending.has(map)) {
-    pending.set(map, new Promise<void>(solve =>
-      json(map).then(content => {
-        const { areas = [] } = maps[map] = JSON.parse(content)
-        quadtrees[map] = Quadtree.from(areas.map((data: Area) => ({ ...data.bounds, data })))
-        console.debug(`loaded: ${map}`)
-        solve()
-      })
-    ))
+    pending.set(
+      map,
+      new Promise<void>(solve =>
+        json(map).then(content => {
+          const { areas = [] } = maps[map] = JSON.parse(content)
+          quadtrees[map] = Quadtree.from(areas.map((data: Area) => ({ ...data.bounds, data })))
+          console.debug(`loaded: ${map}`)
+          solve()
+        })
+      ),
+    )
   }
   await pending.get(map)
   const data = maps[map]
@@ -31,33 +34,33 @@ async function load(map: string, {patch}:{patch?:string|null}) {
     console.debug(`patching: ${map} with ${patch}`)
     patched = JSON.parse(await json(patch, MapData.patch))?.[map] ?? null
   }
-  return {quadtree:quadtrees[map], map:data, patched}
+  return { quadtree: quadtrees[map], map: data, patched }
 }
 
 /** Get pins */
-export async function pins({ map, patch }: { map: string, patch?:string|null }) {
+export async function pins({ map, patch }: { map: string; patch?: string | null }) {
   //Load data
-  const {map:data, patched} = await load(map, {patch})
-  let {pins} = data
+  const { map: data, patched } = await load(map, { patch })
+  let { pins } = data
   //Apply patch if needed
   if (patched) {
     pins = JSON.parse(JSON.stringify(pins))
-    for (const [region, {pins:pinned, ...properties}] of Object.entries(pins.regions as {[key:string]:loose})) {
+    for (const [region, { pins: pinned, ...properties }] of Object.entries(pins.regions as { [key: string]: loose })) {
       Object.assign(pins.regions[region], properties)
       pins.regions[region].pins.push(...pinned)
     }
   }
-  return {pins}
+  return { pins }
 }
 
 /** Get chunk data */
-export async function chunk({ section, map, patch }: { section: string; map: string, patch?:string|null }) {
+export async function chunk({ section, map, patch }: { section: string; map: string; patch?: string | null }) {
   //Load data
   if (!/^(?<x>-?\d+);(?<y>-?\d+)$/.test(section))
     return null
   const [x, y] = section.split(";").map(Number)
   const rectangle = { x: x * CHUNK_SIZE, y: y * CHUNK_SIZE, width: CHUNK_SIZE, height: CHUNK_SIZE }
-  const {quadtree, map:data, patched} = await load(map, {patch})
+  const { quadtree, map: data, patched } = await load(map, { patch })
   let areas = [...quadtree.get(rectangle)].filter(area => Quadtree.contains(area, rectangle)).map(({ data }: loose) => data)
   let chunk = data.chunks[section]
   //Apply patch if needed
@@ -67,7 +70,7 @@ export async function chunk({ section, map, patch }: { section: string; map: str
       chunk.layers[layer] = tiles
     areas = [...areas, ...patched.areas]
   }
-  return {id: section, chunk, areas}
+  return { id: section, chunk, areas }
 }
 
 /** Map data types */

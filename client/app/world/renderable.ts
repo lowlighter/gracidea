@@ -1,5 +1,5 @@
 //Imports
-import { PATCH, loose, TILE_SIZE } from "../../../build/constants.ts"
+import { loose, PATCH, TILE_SIZE } from "../../../build/constants.ts"
 import { Render } from "../render.ts"
 import { Positionable } from "./positionable.ts"
 

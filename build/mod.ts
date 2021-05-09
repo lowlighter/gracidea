@@ -2,9 +2,9 @@
 import { parse } from "https://deno.land/std@0.95.0/flags/mod.ts"
 import { clone } from "./clone.ts"
 import { dex } from "./dex.ts"
-import { patch } from "./patch.ts"
 import { encounters } from "./encounters.ts"
 import { map } from "./map.ts"
+import { patch } from "./patch.ts"
 import { report } from "./report.ts"
 import { tiles } from "./tiles.ts"
 const args = parse(Deno.args.map(arg => arg.replace(/^"/g, "").replace(/"$/, "")), { string: ["head", "sha"] })

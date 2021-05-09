@@ -2,7 +2,7 @@
 import { stringify } from "https://deno.land/std@0.95.0/encoding/yaml.ts"
 import { ensureDir } from "https://deno.land/std@0.95.0/fs/mod.ts"
 //import { assertObjectMatch } from "https://deno.land/std@0.95.0/testing/asserts.ts"
-import { PATCH, loose, rw } from "./constants.ts"
+import { loose, PATCH, rw } from "./constants.ts"
 import type { ExportedMapData } from "./map.ts"
 
 /** Patch computer */
@@ -11,10 +11,13 @@ export async function patch(name: string, { main: __main, head: __head, sha }: {
   const _main = __main.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
   const _head = __head?.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? null
   console.debug(`processing patch: ${name} (${_head?.user ?? "local"}:${_head?.branch ?? "head"} => ${_main.user}:${_main.branch})`)
-  const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res =>res.json()) as ExportedMapData
-  const head = (_head ? await fetch(`https://raw.githubusercontent.com/${_head.user}/gracidea/${_head.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
+  const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
     res.json()
-  ) : JSON.parse(await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`))) as ExportedMapData
+  ) as ExportedMapData
+  const head =
+    (_head
+      ? await fetch(`https://raw.githubusercontent.com/${_head.user}/gracidea/${_head.branch}/server/data/maps/${name}.gracidea.json`).then(res => res.json())
+      : JSON.parse(await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`))) as ExportedMapData
   const areas = {
     main: new Map(main.areas.map(area => [`${area.type}#${area.id}`, area])),
     head: new Map(head.areas.map(area => [`${area.type}#${area.id}`, area])),
@@ -66,11 +69,11 @@ export async function patch(name: string, { main: __main, head: __head, sha }: {
     head.pins.regions[pin.region].pins.push(pin)
   }
   //Clean untouched regions
-  for (const [id, { pins}] of Object.entries(head.pins.regions))
-    if ((!pins.length)&&(!editedRegions.has(id)))
+  for (const [id, { pins }] of Object.entries(head.pins.regions)) {
+    if ((!pins.length) && (!editedRegions.has(id)))
       delete head.pins.regions[id]
+  }
   changes.regions.edited = [...editedRegions]
-
 
   //Edited areas
   console.debug("checking: areas")
@@ -146,9 +149,10 @@ export async function patch(name: string, { main: __main, head: __head, sha }: {
     }
   }
   //Clean empty chunks
-  for (const [id, { layers }] of Object.entries(head.chunks))
+  for (const [id, { layers }] of Object.entries(head.chunks)) {
     if (!Object.keys(layers).length)
       delete head.chunks[id]
+  }
 
   //Save
   const target = `patches/${sha}.json`

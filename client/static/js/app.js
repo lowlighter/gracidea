@@ -77,13 +77,13 @@ const ANIMATED = {
         speed: 0.05
     }
 };
-var DIFF;
-(function(DIFF1) {
-    DIFF1[DIFF1["UNCHANGED"] = 0] = "UNCHANGED";
-    DIFF1[DIFF1["CREATED"] = 0.25] = "CREATED";
-    DIFF1[DIFF1["EDITED"] = 0.5] = "EDITED";
-    DIFF1[DIFF1["DELETED"] = 0.75] = "DELETED";
-})(DIFF || (DIFF = {
+var PATCH;
+(function(PATCH1) {
+    PATCH1[PATCH1["UNCHANGED"] = 0] = "UNCHANGED";
+    PATCH1[PATCH1["CREATED"] = 0.25] = "CREATED";
+    PATCH1[PATCH1["EDITED"] = 0.5] = "EDITED";
+    PATCH1[PATCH1["DELETED"] = 0.75] = "DELETED";
+})(PATCH || (PATCH = {
 }));
 const CREATURES_FLYING = [
     "wingull",
@@ -11962,24 +11962,24 @@ class Renderable extends Positionable {
             this._debug.position.set(this.x * 16, this.y * 16);
         }
     }
-    diff(diff, { sprite , from  } = {
+    patch(patch, { sprite , from  } = {
     }) {
-        if (from) diff = from.diffCreated ? DIFF.CREATED : from.diffEdited ? DIFF.EDITED : from.diffDeleted ? DIFF.DELETED : DIFF.UNCHANGED;
+        if (from) patch = from.patchCreated ? PATCH.CREATED : from.patchEdited ? PATCH.EDITED : from.patchDeleted ? PATCH.DELETED : PATCH.UNCHANGED;
         let tint = 16777215;
-        switch(diff){
-            case DIFF.CREATED:
+        switch(patch){
+            case PATCH.CREATED:
                 {
                     tint = 65280;
                     break;
                 }
-            case DIFF.DELETED:
+            case PATCH.DELETED:
                 {
                     tint = 16711680;
                     break;
                 }
-            case DIFF.EDITED:
+            case PATCH.EDITED:
                 {
-                    tint = 16306224;
+                    tint = 16776960;
                     break;
                 }
             default:
@@ -12091,7 +12091,7 @@ class App {
         this.world = null;
         this.controller = null;
         const params = new URLSearchParams(window.location.search);
-        App.debug.diff = /_diff$/.test(params.get("map") ?? "");
+        App.debug.patch = params.get("patch");
         this.ready = new Promise((solve)=>{
             Render.setup().then(()=>{
                 that.world = new World({
@@ -12115,7 +12115,7 @@ class App {
         chunks: false,
         areas: false,
         camera: false,
-        diff: false
+        patch: null
     };
     static config = {
         showNpcs: true,
@@ -12342,14 +12342,14 @@ class Chunk extends Renderable {
         return super.debug(App.debug.chunks);
     }
     async render() {
-        if (!this.data) this.data = await fetch(`/map/${this.world.name}/${this.id}`).then((res)=>res.json()
+        if (!this.data) this.data = await fetch(`/map/${this.world.name}/${this.id}${App.debug.patch ? `?patch=${App.debug.patch}` : ""}`).then((res)=>res.json()
         );
         this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({
             frame: 0,
             width: 32,
             height: 32
         })));
-        if (App.debug.diff) this.diff(DIFF.UNCHANGED, {
+        if (App.debug.patch) this.patch(PATCH.UNCHANGED, {
             sprite: this.layers.get("0X")
         });
         for (const { name: name1 , sublayers , sorted =false  } of [
@@ -12389,7 +12389,7 @@ class Chunk extends Renderable {
                             y: y2,
                             z: y2 * 32 + z4
                         }));
-                        if (App.debug.diff) this.diff(tile % 1, {
+                        if (App.debug.patch) this.patch(tile % 1, {
                             sprite: sprite2
                         });
                     }
@@ -12426,7 +12426,7 @@ class Controller {
             input.setAttribute("data-control-for", key);
             input.setAttribute("type", "checkbox");
             if ([
-                "diff"
+                "patch"
             ].includes(key)) input.setAttribute("disabled", true);
             input.checked = App.debug[key];
             input.addEventListener("change", ()=>{
@@ -12499,7 +12499,7 @@ class Area extends Renderable {
                 ],
                 polygon: this.polygon
             }));
-            if (App.debug.diff) this.diff(NaN, {
+            if (App.debug.patch) this.patch(NaN, {
                 sprite: this._debug,
                 from: this.data.properties
             });
@@ -12789,7 +12789,7 @@ class NPC extends Renderable {
             this.sprite.zIndex = Math.ceil(ry) * CHUNK_SIZE;
             this.sprites.main.position.set(this.offset.x, this.offset.y);
             chunk?.layers.get("2X")?.addChild(this.sprite);
-            if (App.debug.diff) this.diff(NaN, {
+            if (App.debug.patch) this.patch(NaN, {
                 sprite: this.sprites.main,
                 from: this.area.data.properties
             });

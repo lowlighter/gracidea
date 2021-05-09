@@ -38,7 +38,7 @@ export class App {
     chunks: false,
     areas: false,
     camera: false,
-    patch: null as string|null,
+    patch: null as string | null,
   }
 
   /** Config */
