@@ -31,5 +31,5 @@ jobs:
             await github.issues.createComment({
               ...context.repo,
               issue_number:${{ github.event.client_payload.issue_number }},
-              body:github.event.client_payload.report,
+              body:'${{ github.event.client_payload.report }}',
             });
