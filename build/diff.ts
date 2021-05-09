@@ -125,7 +125,7 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
         changes.tiles.unchanged++
       }
       if (changed)
-        changes.chunks[id in main.chunks ? "edited" : "created"].push({id})
+        changes.chunks[id in main.chunks ? "edited" : "created"].push({ id })
       delete main.chunks[id]?.layers[name]
     }
   }

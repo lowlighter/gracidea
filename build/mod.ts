@@ -3,9 +3,9 @@ import { parse } from "https://deno.land/std@0.95.0/flags/mod.ts"
 import { clone } from "./clone.ts"
 import { dex } from "./dex.ts"
 import { diff } from "./diff.ts"
-import { report } from "./report.ts"
 import { encounters } from "./encounters.ts"
 import { map } from "./map.ts"
+import { report } from "./report.ts"
 import { tiles } from "./tiles.ts"
 const args = parse(Deno.args.map(arg => arg.replace(/^"/g, "").replace(/"$/, "")), { string: ["diff", "sha"] })
 
@@ -18,9 +18,9 @@ if (import.meta.main) {
   }
   if ((args.sprites) || (args.all))
     await tiles({ file: "maps/overworld/tileset3.png" })
-    console.log(args)
+  console.log(args)
   if ((args.head) && (args.sha)) {
-    const {head, sha} = args
-    await report([await diff("overworld", { main: "lowlighter:main", head, sha })], {sha})
+    const { head, sha } = args
+    await report([await diff("overworld", { main: "lowlighter:main", head, sha })], { sha })
   }
 }
