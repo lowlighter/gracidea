@@ -54,8 +54,8 @@ jobs:
         if: github.event_name == 'pull_request'
         run: |
           vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
-          tar cfz diff/overworld_123_diff.gracidea.json.tgz diff/overworld_${{ github.sha }}_diff.gracidea.json
-          base64 diff/overworld_123_diff.gracidea.json.tgz > diff/overworld_123_diff.gracidea.json.tgz.b64
+          tar cfz diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz diff/overworld_${{ github.sha }}_diff.gracidea.json
+          base64 diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz > diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz.b64
       - name: Run tests
         run: deployctl check deploy/mod.ts
       - name: Publish preview data
