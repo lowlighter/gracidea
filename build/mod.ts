@@ -6,7 +6,7 @@ import { diff } from "./diff.ts"
 import { encounters } from "./encounters.ts"
 import { map } from "./map.ts"
 import { tiles } from "./tiles.ts"
-const args = parse(Deno.args)
+const args = parse(Deno.args, {string:["diff", "sha"]})
 
 //Main
 if (import.meta.main) {
@@ -17,6 +17,6 @@ if (import.meta.main) {
   }
   if ((args.sprites) || (args.all))
     tiles({ file: "maps/overworld/tileset3.png" })
-  if ((args.diff) || (args.all))
-    diff("overworld")
+  if ((args.diff)&&(args.sha))
+    diff("overworld", {main:"lowlighter:main", head:args.diff, sha:args.sha})
 }

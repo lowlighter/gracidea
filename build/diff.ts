@@ -1,16 +1,18 @@
 //Imports
 import { stringify } from "https://deno.land/std@0.95.0/encoding/yaml.ts"
-//import { assertObjectMatch } from "https://deno.land/std@0.95.0/testing/asserts.ts"
+import { assertObjectMatch } from "https://deno.land/std@0.95.0/testing/asserts.ts"
 import { DIFF, loose, rw } from "./constants.ts"
 import type { ExportedMapData } from "./map.ts"
+import { ensureDir } from "https://deno.land/std@0.95.0/fs/mod.ts"
 
 /** Diff computer */
-export async function diff(name: string) {
+export async function diff(name: string, {main:__main, head:__head, sha}:{main:string, head:string, sha:string}) {
   //Load data
-  console.debug(`processing: ${name}`)
-  const main = await fetch(`https://raw.githubusercontent.com/lowlighter/gracidea/main/server/data/maps/${name}.gracidea.json`).then(res => res.json()) as ExportedMapData
-  const head = JSON.parse(await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`)) as ExportedMapData
-
+  const _main = __main.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
+  const _head = __head.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
+  console.debug(`processing: ${name} (${_head.user}:${_head.branch} => ${_main.user}:${_main.branch})`)
+  const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res => res.json()) as ExportedMapData
+  const head = await fetch(`https://raw.githubusercontent.com/${_head.user}/gracidea/${_head.branch}/server/data/maps/${name}.gracidea.json`).then(res => res.json()) as ExportedMapData
   const areas = {
     main: new Map(main.areas.map(area => [`${area.type}#${area.id}`, area])),
     head: new Map(head.areas.map(area => [`${area.type}#${area.id}`, area])),
@@ -19,7 +21,6 @@ export async function diff(name: string) {
     main: new Map(Object.entries(main.pins.regions).flatMap(([region, { pins }]) => pins.map(pin => [pin.id, { ...pin, region }]))),
     head: new Map(Object.entries(head.pins.regions).flatMap(([region, { pins }]) => pins.map(pin => [pin.id, { ...pin, region }]))),
   }
-
   const changes = {
     regions: { created: [], deleted: [], edited: [] },
     areas: { created: [], deleted: [], edited: [] },
@@ -27,6 +28,7 @@ export async function diff(name: string) {
     tiles: { created: 0, deleted: 0, edited: 0, unchanged: 0 },
     chunks: { created: [], deleted: [], edited: [] },
   } as loose
+  await ensureDir("diff")
 
   //Created and deleted regions
   console.debug("checking: regions")
@@ -43,7 +45,7 @@ export async function diff(name: string) {
       continue
     }
     try {
-      //assertObjectMatch(pins.main.get(id) as loose, pins.head.get(id) as loose)
+      assertObjectMatch(pins.main.get(id) as loose, pins.head.get(id) as loose)
     }
     catch {
       void ((pins as rw).diffEdited = true)
@@ -70,7 +72,7 @@ export async function diff(name: string) {
       continue
     }
     try {
-      //  assertObjectMatch(areas.main.get(id) as loose, areas.head.get(id) as loose)
+      assertObjectMatch(areas.main.get(id) as loose, areas.head.get(id) as loose)
     }
     catch {
       area.properties.diffEdited = true
@@ -133,8 +135,8 @@ export async function diff(name: string) {
   }
 
   //Save
-  console.debug(`saving: ${name}_diff.gracidea.json`)
-  await Deno.writeTextFile(`server/data/maps/${name}_diff.gracidea.json`, JSON.stringify(head))
+  console.debug(`saving: diff/${name}_${sha}_diff.gracidea.json`)
+  await Deno.writeTextFile(`diff/${name}_${sha}_diff.gracidea.json`, JSON.stringify(head))
   console.debug(stringify(changes))
   return changes
 }

@@ -1,0 +1,27 @@
+name: #️⃣
+on:
+  - pull_request_target
+jobs:
+
+  diff:
+    name: Build diff
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+      - name: Setup velociraptor
+        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+      - name: Build diff
+        run: vr build-diff ${{ github.head_ref }} --sha ${{ github.sha }}
+      - name: Publish generated files
+        run: |
+          set +e
+          git config --global user.email "69689554+botlighter@users.noreply.github.com"
+          git config --global user.name "botlighter"
+          git checkout --branch ci-attachments
+          git add diff
+          git commit -m "Auto-build diff [skip ci]"
+          git push
+          set -e

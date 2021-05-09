@@ -1,6 +1,6 @@
 node_modules
 coverage
+diff
 build/*/
 package.json
 package-lock.json
-server/data/maps/*_diff.gracidea.json
