@@ -1,5 +1,5 @@
 //Imports
-import { CHUNK_SIZE, CREATURES_FLYING, DIFF, rw, TILE_SIZE } from "../../../build/constants.ts"
+import { CHUNK_SIZE, CREATURES_FLYING, rw, TILE_SIZE } from "../../../build/constants.ts"
 import { App } from "./../app.ts"
 import { Render } from "../render.ts"
 import { Area, Type } from "./area.ts"

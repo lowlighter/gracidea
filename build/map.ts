@@ -39,7 +39,7 @@ export async function map(name: string, encounters?: ExportedEncountersData) {
     for (const object of objects) {
       //Extract dimensional data
       const { "@id": id, "@name": name, "@type": mode, "@x": x, "@y": y, "@width": width, "@height": height, polygon, properties: _properties } = object
-      const properties = Object.fromEntries(_properties?.property.map(({ "@name": name, "@value": value }) => [name, value]) ?? [])
+      const properties = Object.fromEntries([_properties?.property ?? []].flat().map(({ "@name": name, "@value": value }) => [name, value]))
       console.debug(`processing: ${id} (${name})`)
       const points = (polygon?.["@points"].match(/-?\d+/g) ?? [0, 0, width, 0, width, height, 0, height]).map(Number).map((n, i) => (n + (i % 2 ? y : x)) / TILE_SIZE)
       const X = points.filter((_, i) => !(i % 2)), Y = points.filter((_, i) => i % 2)
@@ -54,7 +54,7 @@ export async function map(name: string, encounters?: ExportedEncountersData) {
           continue
         }
         case "pins": {
-          exported.pins.regions[properties?.region as string].pins.push({ id, name, x: points[0], y: points[1], mx: properties?.mx as number, my: properties?.my as number })
+          exported.pins.regions[properties?.region as string]?.pins.push({ id, name, x: points[0], y: points[1], mx: properties?.mx as number, my: properties?.my as number })
           continue
         }
         case "creatures": {
