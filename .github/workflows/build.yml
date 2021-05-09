@@ -44,8 +44,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Deno
         uses: denolib/setup-deno@v2
-      - name: Setup deployctl
-        run: deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
+      - name: Setup velociraptor and deployctl
+        run: |
+          deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+          deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
       - name: Build data
         run: |
           vr build --data
