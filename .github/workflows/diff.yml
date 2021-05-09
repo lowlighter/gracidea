@@ -13,6 +13,9 @@ jobs:
         uses: denolib/setup-deno@v2
       - name: Setup velociraptor
         run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+      - env:
+          GITHUB_CONTEXT: ${{ toJSON(github) }}
+        run: echo "$GITHUB_CONTEXT"
       - name: Build diff
         run: |
           vr build-data
