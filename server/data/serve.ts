@@ -42,7 +42,7 @@ export async function pins({ map, patch }: { map: string, patch?:string|null }) 
   //Apply patch if needed
   if (patched) {
     pins = JSON.parse(JSON.stringify(pins))
-    for (const [region, {pins:pinned, ...properties}] of Object.entries(pins.regions)) {
+    for (const [region, {pins:pinned, ...properties}] of Object.entries(pins.regions as {[key:string]:loose})) {
       Object.assign(pins.regions[region], properties)
       pins.regions[region].pins.push(...pinned)
     }
