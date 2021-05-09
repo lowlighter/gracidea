@@ -50,7 +50,7 @@ export async function pins({ map, patch }: { map: string; patch?: string | null 
       pins.regions[region].pins.push(...pinned)
     }
   }
-  return { pins }
+  return pins
 }
 
 /** Get chunk data */
