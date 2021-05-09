@@ -8,7 +8,7 @@ export async function report(changes: loose[], { sha }: { sha: string }) {
   console.debug(`processing report: ${sha}`)
   let content = ""
   for (const change of changes) {
-    content += `**[🗺️ ${change.map}](https://gracidea.deno.dev?patch=${sha})**\n`
+    content += `**[🗺️ Preview \`${change.map}\` changes online](https://gracidea.deno.dev?patch=${sha})**\n`
     content += "```diff\n"
     let changed = false
     for (const type of ["regions", "pins", "areas", "chunks"]) {
@@ -16,11 +16,11 @@ export async function report(changes: loose[], { sha }: { sha: string }) {
         changed = true
         content += `@@ ${type} @@\n`
         if (change[type].created.length)
-          content += `+ ${change[type].created.length} (${change[type].created.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
+          content += `+ ${change[type].created.length} created (${change[type].created.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
         if (change[type].edited.length)
-          content += `! ${change[type].edited.length} (${change[type].edited.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
+          content += `! ${change[type].edited.length} edited (${change[type].edited.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
         if (change[type].deleted.length)
-          content += `- ${change[type].deleted.length} (${change[type].deleted.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
+          content += `- ${change[type].deleted.length} deleted (${change[type].deleted.map(({ id = "", name = "" }) => `${name}#${id}`).join(", ")})\n`
         content += "\n"
       }
     }
@@ -28,16 +28,16 @@ export async function report(changes: loose[], { sha }: { sha: string }) {
       changed = true
       content += `@@ tiles @@\n`
       if (change.tiles.created)
-        content += `+ ${change.tiles.created}\n`
+        content += `+ ${change.tiles.created} created\n`
       if (change.tiles.edited)
-        content += `! ${change.tiles.edited}\n`
+        content += `! ${change.tiles.edited} edited\n`
       if (change.tiles.deleted)
-        content += `- ${change.tiles.deleted}\n`
+        content += `- ${change.tiles.deleted} deleted\n`
       content += "\n"
     }
     if (!changed)
       content += "# no changes\n"
-    content = content.trimEnd() + "```\n"
+    content = content.trimEnd() + "\n```\n"
   }
   console.debug(`saving: patches/${sha}.report`)
   await Deno.writeTextFile(`patches/${sha}.report`, content)
