@@ -2,9 +2,9 @@
 import { stringify } from "https://deno.land/std@0.95.0/encoding/yaml.ts"
 import { ensureDir } from "https://deno.land/std@0.95.0/fs/mod.ts"
 //import { assertObjectMatch } from "https://deno.land/std@0.95.0/testing/asserts.ts"
+import { clone } from "./clone.ts"
 import { loose, PATCH, rw } from "./constants.ts"
-import { map, ExportedMapData } from "./map.ts"
-import {clone} from "./clone.ts"
+import { ExportedMapData, map } from "./map.ts"
 
 /** Patch computer */
 export async function patch(name: string, { main: __main, head: __head, sha }: { main: string; head?: string; sha: string }) {
@@ -16,8 +16,8 @@ export async function patch(name: string, { main: __main, head: __head, sha }: {
     res.json()
   ) as ExportedMapData
   if (_head) {
-    await clone({repository:`${_head.user}/gracidea`, target:"build/head", branch:_head.branch, clean:true})
-    await map("overworld", {from:"build/head/"})
+    await clone({ repository: `${_head.user}/gracidea`, target: "build/head", branch: _head.branch, clean: true })
+    await map("overworld", { from: "build/head/" })
   }
   const head = JSON.parse(await Deno.readTextFile(`${_head ? "build/head/" : ""}server/data/maps/${name}.gracidea.json`)) as ExportedMapData
 

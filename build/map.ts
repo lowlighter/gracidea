@@ -4,7 +4,7 @@ import { dex } from "./dex.ts"
 import { encounters as _encounters } from "./encounters.ts"
 
 /** Build map data */
-export async function map(name: string, {from = ""}:{from?:string} = {}) {
+export async function map(name: string, { from = "" }: { from?: string } = {}) {
   //Load data
   console.debug(`building: ${name} map data`)
   const encounters = await _encounters(await dex())
