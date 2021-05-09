@@ -1,10 +1,13 @@
 //Imports
 import { parse } from "https://deno.land/x/xml@v1.0.0/mod.ts"
-import { ExportedEncountersData } from "./encounters.ts"
+import { dex } from "./dex.ts"
+import { encounters as _encounters } from "./encounters.ts"
 
 /** Build map data */
-export async function map(name: string, encounters?: ExportedEncountersData) {
+export async function map(name: string) {
   //Load data
+  console.debug(`building: ${name} map data`)
+  const encounters = await _encounters(await dex())
   const exported = { pins: { regions: {} }, areas: [], chunks: {} } as ExportedMapData
   const { map: { editorsettings: settings, layer: layers, objectgroup: groups } } = parse(await Deno.readTextFile(`maps/${name}/map.tmx`)) as MapData
   const TILE_SIZE = 16
@@ -72,7 +75,11 @@ export async function map(name: string, encounters?: ExportedEncountersData) {
       }
     }
   }
-  return exported
+
+  //Saving
+  const target = `server/data/maps/${name}.gracidea.json`
+  console.debug(`saving: ${target}`)
+  await Deno.writeTextFile(target, JSON.stringify(exported))
 }
 
 /** Compute polygon area */
