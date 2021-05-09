@@ -62,6 +62,20 @@ jobs:
       - name: Run tests
         run: deployctl check deploy/mod.ts
 
+  analyze:
+    name: Analyze code
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+      - name: Setup CodeQL
+        uses: github/codeql-action/init@v1
+        with:
+          languages: typescript
+          config-file: ./.github/config/codeql.yml
+      - name: Analyze code
+        uses: github/codeql-action/analyze@v1
+
   ci:
     name: Continuous integration
     runs-on: ubuntu-latest
@@ -71,6 +85,7 @@ jobs:
       - build
       - test
       - test-deploy
+      - analyze
     steps:
       - name: Checkout
         uses: actions/checkout@v2
