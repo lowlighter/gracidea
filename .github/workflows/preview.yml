@@ -12,8 +12,6 @@ jobs:
         with:
           fetch-depth: 0
           ref: patches
-      - name: Checkout
-        uses: actions/checkout@v2
       - name: Setup Deno
         uses: denolib/setup-deno@v2
       - name: Setup velociraptor
