@@ -15,9 +15,10 @@ jobs:
         run: |
           git status
           git checkout ci-attachments
-          # github.event.client_payload.
-          # git commit -m "Auto-build patch ${{ github.event.client_payload.sha }}"
-          # git push
+          echo '${{ github.event.client_payload.patch }}' > patches/${{ github.event.client_payload.sha }}.json
+          git add --all
+          git commit -m "Auto-build patch ${{ github.event.client_payload.sha }}"
+          git push
       - name: Publish report
         uses: actions/github-script@v3
         with:
