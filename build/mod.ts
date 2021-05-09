@@ -1,16 +1,16 @@
 //Imports
 import { parse } from "https://deno.land/std@0.95.0/flags/mod.ts"
 import { clone } from "./clone.ts"
+import { loose } from "./constants.ts"
 import { map } from "./map.ts"
 import { patch } from "./patch.ts"
 import { report } from "./report.ts"
 import { tiles } from "./tiles.ts"
-import { loose } from "./constants.ts"
 const args = parse(Deno.args.map(arg => arg.replace(/^"/g, "").replace(/"$/, "")), { string: ["head", "sha"] })
 
 //Main
 if (import.meta.main) {
-  if ((args.data)||(args.all)) {
+  if ((args.data) || (args.all)) {
     await clone({ repository: "PokeAPI/api-data", target: "build/data" })
     await clone({ repository: "msikma/pokesprite", target: "build/creatures" })
   }
