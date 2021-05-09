@@ -1,3 +1,6 @@
 name: CodeQL config
 queries:
   - uses: security-and-quality
+paths-ignore:
+  - node_modules
+  - client/static/js/**
