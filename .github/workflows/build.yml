@@ -49,12 +49,14 @@ jobs:
           deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
           deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
       - name: Build data
-        run: |
-          vr build --data
-          vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
+        run: vr build --data
+      - name: Build preview data
+        if: github.event_name == 'pull_request'
+        run: vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
       - name: Run tests
         run: deployctl check deploy/mod.ts
       - name: Publish preview data
+        if: github.event_name == 'pull_request'
         uses: actions/github-script@v3
         with:
           script: |
