@@ -6,17 +6,15 @@ import { PATCH, loose, rw } from "./constants.ts"
 import type { ExportedMapData } from "./map.ts"
 
 /** Patch computer */
-export async function patch(name: string, { main: __main, head: __head, sha }: { main: string; head: string; sha: string }) {
+export async function patch(name: string, { main: __main, head: __head, sha }: { main: string; head?: string; sha: string }) {
   //Load data
   const _main = __main.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
-  const _head = __head.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
-  console.debug(`processing patch: ${name} (${_head.user}:${_head.branch} => ${_main.user}:${_main.branch})`)
-  const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
+  const _head = __head?.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? null
+  console.debug(`processing patch: ${name} (${_head?.user ?? "local"}:${_head?.branch ?? "head"} => ${_main.user}:${_main.branch})`)
+  const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res =>res.json()) as ExportedMapData
+  const head = (_head ? await fetch(`https://raw.githubusercontent.com/${_head.user}/gracidea/${_head.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
     res.json()
-  ) as ExportedMapData
-  const head = await fetch(`https://raw.githubusercontent.com/${_head.user}/gracidea/${_head.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
-    res.json()
-  ) as ExportedMapData
+  ) : JSON.parse(await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`))) as ExportedMapData
   const areas = {
     main: new Map(main.areas.map(area => [`${area.type}#${area.id}`, area])),
     head: new Map(head.areas.map(area => [`${area.type}#${area.id}`, area])),

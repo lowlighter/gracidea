@@ -18,7 +18,7 @@ if (import.meta.main) {
   }
   if ((args.sprites) || (args.all))
     await tiles({ file: "maps/overworld/tileset3.png" })
-  if ((args.head) && (args.sha)) {
+  if ((args.patch) && (args.sha)) {
     const { head, sha } = args
     await report([await patch("overworld", { main: "lowlighter:main", head, sha })], { sha })
   }

@@ -68,7 +68,7 @@ export abstract class Renderable extends Positionable {
         break
       }
       case PATCH.EDITED: {
-        tint = 0xF8D030
+        tint = 0xFFFF00
         break
       }
       default: {

@@ -12,6 +12,7 @@ const quadtrees = {} as { [key: string]: Quadtree }
 
 /** Map loader */
 async function load(map: string, {patch}:{patch?:string|null}) {
+  //Load map
   if (!pending.has(map)) {
     pending.set(map, new Promise<void>(solve =>
       json(map).then(content => {
@@ -24,33 +25,49 @@ async function load(map: string, {patch}:{patch?:string|null}) {
   }
   await pending.get(map)
   const data = maps[map]
+  //Apply patch if needed
   let patched = null
   if (patch) {
     console.debug(`patching: ${map} with ${patch}`)
     patched = JSON.parse(await json(patch, MapData.patch))?.[map] ?? null
-    console.log(patched)
   }
   return {quadtree:quadtrees[map], map:data, patched}
 }
 
 /** Get pins */
 export async function pins({ map, patch }: { map: string, patch?:string|null }) {
-  return (await load(map, {patch})).map.pins
+  //Load data
+  const {map:data, patched} = await load(map, {patch})
+  let {pins} = data
+  //Apply patch if needed
+  if (patched) {
+    pins = JSON.parse(JSON.stringify(pins))
+    for (const [region, {pins:pinned, ...properties}] of Object.entries(pins.regions)) {
+      Object.assign(pins.regions[region], properties)
+      pins.regions[region].pins.push(...pinned)
+    }
+  }
+  return {pins}
 }
 
 /** Get chunk data */
 export async function chunk({ section, map, patch }: { section: string; map: string, patch?:string|null }) {
+  //Load data
   if (!/^(?<x>-?\d+);(?<y>-?\d+)$/.test(section))
     return null
   const [x, y] = section.split(";").map(Number)
-  const chunk = { x: x * CHUNK_SIZE, y: y * CHUNK_SIZE, width: CHUNK_SIZE, height: CHUNK_SIZE }
+  const rectangle = { x: x * CHUNK_SIZE, y: y * CHUNK_SIZE, width: CHUNK_SIZE, height: CHUNK_SIZE }
   const {quadtree, map:data, patched} = await load(map, {patch})
-  const areas = [...quadtree.get(chunk)].filter(area => Quadtree.contains(area, chunk)).map(({ data }: loose) => data)
-  return {
-    id: section,
-    chunk: patched?.chunks[section] ?? data.chunks[section],
-    areas: patched?.areas.length ? [...areas, ...patched.areas] : areas
+  let areas = [...quadtree.get(rectangle)].filter(area => Quadtree.contains(area, rectangle)).map(({ data }: loose) => data)
+  let chunk = data.chunks[section]
+  //Apply patch if needed
+  if (patched) {
+    chunk = JSON.parse(JSON.stringify(chunk))
+    for (const [layer, tiles] of Object.entries(patched?.chunks[section]?.layers ?? {}))
+      chunk.layers[layer] = tiles
+    areas = [...areas, ...patched.areas]
   }
+  return {id: section, chunk, areas}
 }
 
 /** Map data types */
