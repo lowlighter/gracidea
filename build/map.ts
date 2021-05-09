@@ -4,12 +4,12 @@ import { dex } from "./dex.ts"
 import { encounters as _encounters } from "./encounters.ts"
 
 /** Build map data */
-export async function map(name: string) {
+export async function map(name: string, {from = ""}:{from?:string} = {}) {
   //Load data
   console.debug(`building: ${name} map data`)
   const encounters = await _encounters(await dex())
   const exported = { pins: { regions: {} }, areas: [], chunks: {} } as ExportedMapData
-  const { map: { editorsettings: settings, layer: layers, objectgroup: groups } } = parse(await Deno.readTextFile(`maps/${name}/map.tmx`)) as MapData
+  const { map: { editorsettings: settings, layer: layers, objectgroup: groups } } = parse(await Deno.readTextFile(`${from}maps/${name}/map.tmx`)) as MapData
   const TILE_SIZE = 16
   const CHUNK_SIZE = settings.chunksize["@width"]
 
@@ -77,7 +77,7 @@ export async function map(name: string) {
   }
 
   //Saving
-  const target = `server/data/maps/${name}.gracidea.json`
+  const target = `${from}server/data/maps/${name}.gracidea.json`
   console.debug(`saving: ${target}`)
   await Deno.writeTextFile(target, JSON.stringify(exported))
 }

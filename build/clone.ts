@@ -22,7 +22,7 @@ export async function clone({ repository, target, branch, clean = false }: { rep
 
   //Clone repository
   if (!cloned) {
-    const { success } = await Deno.run({ cmd: ["git", "clone", `https://github.com/${repository}.git`, target, "--depth", "1"] }).status()
+    const { success } = await Deno.run({ cmd: ["git", "clone", `https://github.com/${repository}.git`, target, "--depth", "1", ...(branch ? ["--no-single-branch"] : [])] }).status()
     if (!success)
       throw new Error("Error: An error occured during cloning")
     console.debug(`cloned: ${repository}`)
