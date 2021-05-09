@@ -34,6 +34,22 @@ jobs:
       - name: Run tests
         run: vr test
 
+  build:
+    if: false
+    name: Build app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+      - name: Setup velociraptor
+        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+      - name: Bundle client app
+        run: vr bundle
+      - name: Build data and sprites
+        run: vr build --all
+
   test-deploy:
     name: Run tests (deploy)
     runs-on: ubuntu-latest
@@ -79,6 +95,7 @@ jobs:
     needs:
       - lint
       - test
+      - build
       - test-deploy
     steps:
       - name: Checkout

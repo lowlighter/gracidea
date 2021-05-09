@@ -1,8 +1,6 @@
 name: 🗺️
 on:
   repository_dispatch:
-    types:
-      - preview
 jobs:
 
   preview:
