@@ -111,7 +111,7 @@ export async function patch(name: string, { main: __main, head: __head, sha }: {
       const layer = layers[name]
       let changed = false
       for (let i = 0; i < layer.length; i++) {
-        const p = main.chunks[id]?.layers[name][i] ?? -1
+        const p = main.chunks[id]?.layers[name]?.[i] ?? -1
         const c = layer[i]
         //Created
         if ((p < 0) && (c >= 0)) {
