@@ -12,8 +12,8 @@ export async function diff(name: string) {
   const head = JSON.parse(await Deno.readTextFile(`server/data/maps/${name}.gracidea.json`)) as ExportedMapData
 
   const areas = {
-    main: new Map(main.areas.map(area => [area.id, area])),
-    head: new Map(head.areas.map(area => [area.id, area])),
+    main: new Map(main.areas.map(area => [`${area.type}#${area.id}`, area])),
+    head: new Map(head.areas.map(area => [`${area.type}#${area.id}`, area])),
   }
   const pins = {
     main: new Map(Object.entries(main.pins.regions).flatMap(([region, { pins }]) => pins.map(pin => [pin.id, { ...pin, region }]))),

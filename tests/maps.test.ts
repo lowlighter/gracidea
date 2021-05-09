@@ -21,8 +21,8 @@ const data = xmlparse(await Deno.readTextFile("maps/overworld/map.tmx")) as test
     for (const object of group.object) {
       const { "@id": id, "@name": name = id, "@x": x, "@y": y, "@width": width, "@height": height, polygon = {} } = object
       const properties = Object.fromEntries([object.properties?.property ?? []].flat().map(({ "@name": name, "@value": value }) => [name, value]))
-      Deno.test(`${layer} ${name} integrity: has unique id`, () => assert(!ids.has(id)))
-      ids.add(id)
+      Deno.test(`${layer} ${name} integrity: has unique id`, () => assert(!ids.has(ids.add(`${layer}#${id}`))))
+      ids.add(`${layer}#${id}`)
       Deno.test(`${layer} ${name} integrity: has name`, () => assert((typeof name === "string") && (name.length > 0)))
       Deno.test(`${layer} ${name} integrity: has valid position`, () => assert((typeof x === "number") && (typeof y === "number")))
       Deno.test(`${layer} ${name} integrity: has valid polygon`, () =>
