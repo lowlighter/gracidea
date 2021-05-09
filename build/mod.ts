@@ -22,7 +22,7 @@ if (import.meta.main) {
     if ((args.sprites) || (args.all))
       await tiles({ file: `maps/${name}/tileset3.png` })
     if ((args.patch) && (args.sha))
-      await patch(name, { main: "lowlighter:main", head, sha })
+      patches.push(await patch(name, { main: "lowlighter:main", head, sha }))
   }
   if ((args.patch) && (args.sha))
     await report(patches, { sha })

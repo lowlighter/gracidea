@@ -35,8 +35,6 @@ jobs:
         with:
           script: |
             const fs = require("fs")
-            await github.issues.createComment({
-              ...context.repo,
-              issue_number:${{ github.event.number }},
-              body:`${fs.readFileSync("patches/${{ github.sha }}.report")}`,
-            })
+            const body = `${fs.readFileSync("patches/${{ github.sha }}.report")}`
+            if (body)
+              await github.issues.createComment({...context.repo, issue_number:${{ github.event.number }}, body})
