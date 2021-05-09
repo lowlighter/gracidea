@@ -16,6 +16,7 @@ jobs:
           ref: patches
       - name: Publish generated files
         run: |
+          set +e
           mkdir -p patches
           echo '${{ github.event.client_payload.patch }}' > patches/${{ github.event.client_payload.sha }}.json
           git config user.name github-actions[bot]
@@ -23,6 +24,7 @@ jobs:
           git add --all
           git commit -m "Auto-build patch ${{ github.event.client_payload.sha }}"
           git push
+          set -e
       - name: Publish report
         uses: actions/github-script@v3
         with:
