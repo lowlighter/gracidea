@@ -17,7 +17,8 @@ const ROUTE_CLIENT_APP = /^[/]js[/]app[.]min[.]js$/
 /** Route */
 export async function route(request: Request, { deploy = false }: { deploy?: boolean } = {}) {
   //Auto-complete pathname
-  let { pathname } = new URL(request.url)
+  let { pathname, search } = new URL(request.url)
+  const params = new URLSearchParams(search)
   if (pathname.endsWith("/"))
     pathname += "index.html"
   console.debug(`fetching: ${pathname}`)
@@ -26,14 +27,15 @@ export async function route(request: Request, { deploy = false }: { deploy?: boo
     switch (true) {
       //Maps route
       case ROUTE_MAP.test(pathname): {
+        const patch = params.get("patch")
         switch (true) {
           case ROUTE_MAP_PINS.test(pathname): {
             const { id } = pathname.match(ROUTE_MAP_PINS)?.groups ?? {}
-            return new Response(JSON.stringify(await pins({ map: id })), { headers: { "content-type": "application/json" } })
+            return new Response(JSON.stringify(await pins({ map: id, patch })), { headers: { "content-type": "application/json" } })
           }
           case ROUTE_MAP_SECTION.test(pathname): {
             const { id, section } = pathname.match(ROUTE_MAP_SECTION)?.groups ?? {}
-            return new Response(JSON.stringify(await chunk({ section, map: id })), { headers: { "content-type": "application/json" } })
+            return new Response(JSON.stringify(await chunk({ section, map: id, patch })), { headers: { "content-type": "application/json" } })
           }
         }
         throw new Error("Invalid map route")

@@ -4,11 +4,11 @@ import { loose } from "./constants.ts"
 
 /** Reporting function */
 export async function report(changes: loose[], { sha }: { sha: string }) {
-  await ensureDir("diff")
-  console.debug(`processing report: ${sha})`)
+  await ensureDir("patches")
+  console.debug(`processing report: ${sha}`)
   let content = ""
   for (const change of changes) {
-    content += `**[🗺️ ${change.map}](https://gracidea.deno.dev?map=${change.map}_${sha}_diff)**\n`
+    content += `**[🗺️ ${change.map}](https://gracidea.deno.dev?patch=${sha})**\n`
     content += "```diff\n"
     let changed = false
     for (const type of ["regions", "pins", "areas", "chunks"]) {
@@ -39,6 +39,6 @@ export async function report(changes: loose[], { sha }: { sha: string }) {
       content += "# no changes\n"
     content += "```\n\n"
   }
-  console.debug(`saving: diff/${sha}.report`)
-  await Deno.writeTextFile(`diff/${sha}.report`, content)
+  console.debug(`saving: patches/${sha}.report`)
+  await Deno.writeTextFile(`patches/${sha}.report`, content)
 }

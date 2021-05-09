@@ -67,8 +67,8 @@ jobs:
               client_payload:{
                 sha:"${{ github.sha }}",
                 issue_number:${{ github.event.number }},
-                report:`${fs.readFileSync("diff/${{ github.sha }}.report")}`,
-                //diff:`${fs.readFileSync("diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz.b64")}`,
+                report:`${fs.readFileSync("patches/${{ github.sha }}.report")}`,
+                patch:`${fs.readFileSync("patches/${{ github.sha }}.json")}`,
               }
             })
 

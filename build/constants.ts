@@ -51,8 +51,8 @@ export const ANIMATED = {
   },
 }
 
-/** Diff contants */
-export const enum DIFF {
+/** Patch contants */
+export const enum PATCH {
   UNCHANGED = 0,
   CREATED = 0.25,
   EDITED = 0.5,

@@ -1,5 +1,5 @@
 //Imports
-import { CHUNK_SIZE, DIFF } from "../../../build/constants.ts"
+import { CHUNK_SIZE, PATCH } from "../../../build/constants.ts"
 import { App } from "./../app.ts"
 import { Render } from "../render.ts"
 import { Area, AreaData } from "./area.ts"
@@ -80,11 +80,11 @@ export class Chunk extends Renderable {
   async render() {
     //Load chunk data
     if (!this.data)
-      this.data = await fetch(`/map/${this.world.name}/${this.id}`).then(res => res.json())
+      this.data = await fetch(`/map/${this.world.name}/${this.id}${App.debug.patch ? `?patch=${App.debug.patch}` : ""}`).then(res => res.json())
     //Sea
     this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({ frame: 0, width: CHUNK_SIZE, height: CHUNK_SIZE })))
-    if (App.debug.diff)
-      this.diff(DIFF.UNCHANGED, { sprite: this.layers.get("0X") })
+    if (App.debug.patch)
+      this.patch(PATCH.UNCHANGED, { sprite: this.layers.get("0X") })
     //Render layers
     for (
       const { name, sublayers, sorted = false } of [
@@ -108,8 +108,8 @@ export class Chunk extends Renderable {
           if (tile >= 0) {
             const y = i % CHUNK_SIZE, x = Math.floor(i / CHUNK_SIZE)
             const sprite = layer.addChild(Render.Sprite({ frame: ~~tile, x, y, z: y * CHUNK_SIZE + z }))
-            if (App.debug.diff)
-              this.diff(tile % 1, { sprite })
+            if (App.debug.patch)
+              this.patch(tile % 1, { sprite })
           }
         }
       }

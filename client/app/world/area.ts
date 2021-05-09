@@ -73,8 +73,8 @@ export class Area extends Renderable {
           polygon: this.polygon,
         }),
       )
-      if (App.debug.diff)
-        this.diff(NaN, { sprite: this._debug, from: this.data.properties })
+      if (App.debug.patch)
+        this.patch(NaN, { sprite: this._debug, from: this.data.properties })
       else
         this._debug.tint = 0x00FF00
     }

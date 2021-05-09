@@ -184,8 +184,8 @@ export class NPC extends Renderable {
       this.sprite.zIndex = Math.ceil(ry) * CHUNK_SIZE
       this.sprites.main.position.set(this.offset.x, this.offset.y)
       chunk?.layers.get("2X")?.addChild(this.sprite)
-      if (App.debug.diff)
-        this.diff(NaN, { sprite: this.sprites.main, from: this.area.data.properties })
+      if (App.debug.patch)
+        this.patch(NaN, { sprite: this.sprites.main, from: this.area.data.properties })
     }
   }
 

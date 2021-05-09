@@ -1,6 +1,6 @@
 node_modules
 coverage
-diff
+patches
 build/*/
 package.json
 package-lock.json

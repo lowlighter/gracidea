@@ -1,16 +1,16 @@
 //Imports
 import { stringify } from "https://deno.land/std@0.95.0/encoding/yaml.ts"
 import { ensureDir } from "https://deno.land/std@0.95.0/fs/mod.ts"
-import { assertObjectMatch } from "https://deno.land/std@0.95.0/testing/asserts.ts"
-import { DIFF, loose, rw } from "./constants.ts"
+//import { assertObjectMatch } from "https://deno.land/std@0.95.0/testing/asserts.ts"
+import { PATCH, loose, rw } from "./constants.ts"
 import type { ExportedMapData } from "./map.ts"
 
-/** Diff computer */
-export async function diff(name: string, { main: __main, head: __head, sha }: { main: string; head: string; sha: string }) {
+/** Patch computer */
+export async function patch(name: string, { main: __main, head: __head, sha }: { main: string; head: string; sha: string }) {
   //Load data
   const _main = __main.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
   const _head = __head.match(/(?<user>[\w-]+):(?<branch>[\w-]+)/)?.groups ?? {}
-  console.debug(`processing diff: ${name} (${_head.user}:${_head.branch} => ${_main.user}:${_main.branch})`)
+  console.debug(`processing patch: ${name} (${_head.user}:${_head.branch} => ${_main.user}:${_main.branch})`)
   const main = await fetch(`https://raw.githubusercontent.com/${_main.user}/gracidea/${_main.branch}/server/data/maps/${name}.gracidea.json`).then(res =>
     res.json()
   ) as ExportedMapData
@@ -33,7 +33,7 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
     tiles: { created: 0, deleted: 0, edited: 0, unchanged: 0 },
     chunks: { created: [], deleted: [], edited: [] },
   } as loose
-  await ensureDir("diff")
+  await ensureDir("patches")
 
   //Created and deleted regions
   console.debug("checking: regions")
@@ -45,15 +45,16 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
   const editedRegions = new Set()
   for (const [id, pin] of pins.head) {
     if (!pins.main.has(id)) {
-      void ((pins as rw).diffCreated = true)
+      void ((pins as rw).patchCreated = true)
       changes.pins.created.push({ id, name: pin.name })
       continue
     }
     try {
-      assertObjectMatch(pins.main.get(id) as loose, pins.head.get(id) as loose)
+      //assertObjectMatch(pins.main.get(id) as loose, pins.head.get(id) as loose)
+      head.pins.regions[pin.region].pins.splice(head.pins.regions[pin.region].pins.indexOf(pin), 1)
     }
     catch {
-      void ((pins as rw).diffEdited = true)
+      void ((pins as rw).patchEdited = true)
       editedRegions.add(pin.region)
       changes.pins.edited.push({ id, name: pin.name })
     }
@@ -61,33 +62,39 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
   }
   //Deleted pins (present in main but not in head)
   for (const [id, pin] of pins.main) {
-    void ((pins as rw).diffDeleted = true)
+    void ((pins as rw).patchDeleted = true)
     editedRegions.add(pin.region)
     changes.pins.deleted.push({ id, name: pin.name })
     head.pins.regions[pin.region].pins.push(pin)
   }
+  //Clean untouched regions
+  for (const [id, { pins}] of Object.entries(head.pins.regions))
+    if ((!pins.length)&&(!editedRegions.has(id)))
+      delete head.pins.regions[id]
   changes.regions.edited = [...editedRegions]
+
 
   //Edited areas
   console.debug("checking: areas")
   for (const [id, area] of areas.head) {
     if (!areas.main.has(id)) {
       changes.areas.created.push({ id, name: area.name })
-      area.properties.diffCreated = true
+      area.properties.patchCreated = true
       continue
     }
     try {
-      assertObjectMatch(areas.main.get(id) as loose, areas.head.get(id) as loose)
+      //assertObjectMatch(areas.main.get(id) as loose, areas.head.get(id) as loose)
+      head.areas.splice(head.areas.indexOf(area), 1)
     }
     catch {
-      area.properties.diffEdited = true
+      area.properties.patchEdited = true
       changes.areas.edited.push({ id, name: area.name })
     }
     areas.main.delete(id)
   }
   //Deleted areas (present in main but not in head)
   for (const [id, area] of areas.main) {
-    area.properties.diffDeleted = true
+    area.properties.patchDeleted = true
     changes.areas.deleted.push({ id, name: area.name })
     head.areas.push(area)
   }
@@ -105,27 +112,29 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
         if ((p < 0) && (c >= 0)) {
           changed = true
           changes.tiles.created++
-          layer[i] += DIFF.CREATED
+          layer[i] += PATCH.CREATED
           continue
         }
         //Deleted
         if ((c < 0) && (p >= 0)) {
           changed = true
           changes.tiles.deleted++
-          layer[i] = p + DIFF.DELETED
+          layer[i] = p + PATCH.DELETED
           continue
         }
         //Edited
         if (p !== c) {
           changed = true
           changes.tiles.edited++
-          layer[i] += DIFF.EDITED
+          layer[i] += PATCH.EDITED
           continue
         }
         changes.tiles.unchanged++
       }
       if (changed)
         changes.chunks[id in main.chunks ? "edited" : "created"].push({ id })
+      else
+        delete head.chunks[id]?.layers[name]
       delete main.chunks[id]?.layers[name]
     }
   }
@@ -133,15 +142,32 @@ export async function diff(name: string, { main: __main, head: __head, sha }: { 
   for (const [id, { layers }] of Object.entries(main.chunks)) {
     head.chunks[id] ??= { layers: {} }
     for (const name in layers) {
-      head.chunks[id].layers[name] = layers[name].map(tile => tile + DIFF.DELETED)
+      head.chunks[id].layers[name] = layers[name].map(tile => tile + PATCH.DELETED)
       changes.tiles.deleted += layers[name].length
       changes.chunks.deleted.push(id)
     }
   }
+  //Clean empty chunks
+  for (const [id, { layers }] of Object.entries(head.chunks))
+    if (!Object.keys(layers).length)
+      delete head.chunks[id]
 
   //Save
-  console.debug(`saving: diff/${name}_${sha}_diff.gracidea.json`)
-  await Deno.writeTextFile(`diff/${name}_${sha}_diff.gracidea.json`, JSON.stringify(head))
+  const target = `patches/${sha}.json`
+  console.debug(`saving: ${target}`)
+  try {
+    const { isFile } = await Deno.stat(target)
+    if (!isFile)
+      throw new Error("Error: Target directory already in use")
+  }
+  catch (error) {
+    if (!(error instanceof Deno.errors.NotFound))
+      throw error
+    await Deno.writeTextFile(target, "{}")
+  }
+  const patch = JSON.parse(await Deno.readTextFile(target))
+  patch[name] = head
+  await Deno.writeTextFile(target, JSON.stringify(patch))
   console.debug(stringify(changes))
   return changes
 }

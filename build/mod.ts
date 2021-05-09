@@ -2,12 +2,12 @@
 import { parse } from "https://deno.land/std@0.95.0/flags/mod.ts"
 import { clone } from "./clone.ts"
 import { dex } from "./dex.ts"
-import { diff } from "./diff.ts"
+import { patch } from "./patch.ts"
 import { encounters } from "./encounters.ts"
 import { map } from "./map.ts"
 import { report } from "./report.ts"
 import { tiles } from "./tiles.ts"
-const args = parse(Deno.args.map(arg => arg.replace(/^"/g, "").replace(/"$/, "")), { string: ["diff", "sha"] })
+const args = parse(Deno.args.map(arg => arg.replace(/^"/g, "").replace(/"$/, "")), { string: ["head", "sha"] })
 
 //Main
 if (import.meta.main) {
@@ -20,6 +20,6 @@ if (import.meta.main) {
     await tiles({ file: "maps/overworld/tileset3.png" })
   if ((args.head) && (args.sha)) {
     const { head, sha } = args
-    await report([await diff("overworld", { main: "lowlighter:main", head, sha })], { sha })
+    await report([await patch("overworld", { main: "lowlighter:main", head, sha })], { sha })
   }
 }

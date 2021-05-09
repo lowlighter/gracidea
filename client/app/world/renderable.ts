@@ -1,5 +1,5 @@
 //Imports
-import { DIFF, loose, TILE_SIZE } from "../../../build/constants.ts"
+import { PATCH, loose, TILE_SIZE } from "../../../build/constants.ts"
 import { Render } from "../render.ts"
 import { Positionable } from "./positionable.ts"
 
@@ -53,21 +53,21 @@ export abstract class Renderable extends Positionable {
     }
   }
 
-  /** Debug diff sprite */
-  protected diff(diff: number, { sprite, from }: { sprite?: ReturnType<typeof Render.Container>; from?: loose } = {}) {
+  /** Debug patch sprite */
+  protected patch(patch: number, { sprite, from }: { sprite?: ReturnType<typeof Render.Container>; from?: loose } = {}) {
     if (from)
-      diff = from.diffCreated ? DIFF.CREATED : from.diffEdited ? DIFF.EDITED : from.diffDeleted ? DIFF.DELETED : DIFF.UNCHANGED
+      patch = from.patchCreated ? PATCH.CREATED : from.patchEdited ? PATCH.EDITED : from.patchDeleted ? PATCH.DELETED : PATCH.UNCHANGED
     let tint = 0xFFFFFF
-    switch (diff) {
-      case DIFF.CREATED: {
+    switch (patch) {
+      case PATCH.CREATED: {
         tint = 0x00FF00
         break
       }
-      case DIFF.DELETED: {
+      case PATCH.DELETED: {
         tint = 0xFF0000
         break
       }
-      case DIFF.EDITED: {
+      case PATCH.EDITED: {
         tint = 0xF8D030
         break
       }

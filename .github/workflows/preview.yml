@@ -16,7 +16,7 @@ jobs:
           git status
           git checkout ci-attachments
           # github.event.client_payload.
-          # git commit -m "Auto-build diff ${{ github.event.client_payload.sha }}"
+          # git commit -m "Auto-build patch ${{ github.event.client_payload.sha }}"
           # git push
       - name: Publish report
         uses: actions/github-script@v3

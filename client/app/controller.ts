@@ -42,7 +42,7 @@ export class Controller {
       const input = global.document.createElement("input")
       input.setAttribute("data-control-for", key)
       input.setAttribute("type", "checkbox")
-      if (["diff"].includes(key))
+      if (["patch"].includes(key))
         input.setAttribute("disabled", true)
       input.checked = App.debug[key as keyof typeof App.debug]
       input.addEventListener("change", () => {
