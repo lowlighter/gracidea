@@ -37,8 +37,8 @@ jobs:
   test-deploy:
     name: Run tests (deploy)
     runs-on: ubuntu-latest
-    needs:
-      - test
+  #  needs:
+  #    - test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -46,8 +46,27 @@ jobs:
         uses: denolib/setup-deno@v2
       - name: Setup deployctl
         run: deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
+      - name: Build data
+        run: |
+          vr build --data
+          vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
       - name: Run tests
         run: deployctl check deploy/mod.ts
+      - name: Publish preview data
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const fs = require("fs")
+            await github.repos.createDispatchEvent({
+              ...context.repo,
+              event_type:"preview",
+              client_payload:{
+                sha:"${{ github.sha }}",
+                issue_number:${{ github.event.number }},
+                report:`${fs.readFileSync("diff/${{ github.sha }}.report")}`,
+                diff:`${fs.readFileSync("diff/overworld_${{ github.sha }}_diff.json")}`,
+              }
+            })
 
   ci:
     name: Continuous integration
