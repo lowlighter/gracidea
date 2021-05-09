@@ -9,7 +9,6 @@ on:
 jobs:
 
   lint:
-    if: false
     name: Lint code
     runs-on: ubuntu-latest
     steps:
@@ -22,8 +21,20 @@ jobs:
       - name: Lint code
         run: vr lint
 
+  build:
+    name: Build client app
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Setup Deno
+        uses: denolib/setup-deno@v2
+      - name: Setup velociraptor
+        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+      - name: Bundle client app
+        run: vr bundle
+
   test:
-    if: false
     name: Run tests
     runs-on: ubuntu-latest
     steps:
@@ -36,27 +47,9 @@ jobs:
       - name: Run tests
         run: vr test
 
-  build:
-    if: false
-    name: Build app
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-      - name: Setup Deno
-        uses: denolib/setup-deno@v2
-      - name: Setup velociraptor
-        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
-      - name: Bundle client app
-        run: vr bundle
-      - name: Build data and sprites
-        run: vr build --all
-
   test-deploy:
     name: Run tests (deploy)
     runs-on: ubuntu-latest
-  #  needs:
-  #    - test
     steps:
       - name: Checkout
         uses: actions/checkout@v2
@@ -66,30 +59,8 @@ jobs:
         run: |
           deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
           deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
-      - name: Build data
-        run: vr build --data
-      - name: Build preview data
-        if: github.event_name == 'pull_request'
-        run: vr build --patch --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
       - name: Run tests
         run: deployctl check deploy/mod.ts
-      - name: Publish preview data
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v3
-        with:
-          debug: true
-          script: |
-            const fs = require("fs")
-            await github.repos.createDispatchEvent({
-              ...context.repo,
-              event_type:"preview",
-              client_payload:{
-                sha:"${{ github.sha }}",
-                issue_number:${{ github.event.number }},
-                report:`${fs.readFileSync("patches/${{ github.sha }}.report")}`,
-                patch:`${fs.readFileSync("patches/${{ github.sha }}.json")}`,
-              }
-            })
 
   ci:
     name: Continuous integration
@@ -97,8 +68,8 @@ jobs:
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
       - lint
+      - built
       - test
-      - build
       - test-deploy
     steps:
       - name: Checkout

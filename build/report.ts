@@ -9,7 +9,7 @@ export async function report(changes: loose[], { sha }: { sha: string }) {
   let content = ""
   for (const change of changes) {
     content += `**[🗺️ ${change.map}](https://gracidea.deno.dev?patch=${sha})**\n`
-    content += "'''diff\n"
+    content += "```diff\n"
     let changed = false
     for (const type of ["regions", "pins", "areas", "chunks"]) {
       if (change[type].created.length + change[type].edited.length + change[type].deleted.length > 0) {
@@ -37,7 +37,7 @@ export async function report(changes: loose[], { sha }: { sha: string }) {
     }
     if (!changed)
       content += "# no changes\n"
-    content = content.trimEnd() + "'''\n"
+    content = content.trimEnd() + "```\n"
   }
   console.debug(`saving: patches/${sha}.report`)
   await Deno.writeTextFile(`patches/${sha}.report`, content)
