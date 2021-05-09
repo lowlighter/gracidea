@@ -46,7 +46,7 @@ export class Controller {
         input.setAttribute("disabled", true)
       input.checked = App.debug[key as keyof typeof App.debug]
       input.addEventListener("change", () => {
-        App.debug[key as keyof typeof App.debug] = input.checked
+        App.debug[key as keyof typeof App.debug] = input.checked as never
         this.world.camera.render()
       })
       const label = global.document.createElement("label")
