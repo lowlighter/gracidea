@@ -52,10 +52,7 @@ jobs:
         run: vr build --data
       - name: Build preview data
         if: github.event_name == 'pull_request'
-        run: |
-          vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
-          tar cfz diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz diff/overworld_${{ github.sha }}_diff.gracidea.json
-          base64 diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz > diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz.b64
+        run: vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
       - name: Run tests
         run: deployctl check deploy/mod.ts
       - name: Publish preview data
@@ -71,7 +68,7 @@ jobs:
                 sha:"${{ github.sha }}",
                 issue_number:${{ github.event.number }},
                 report:`${fs.readFileSync("diff/${{ github.sha }}.report")}`,
-                diff:`${fs.readFileSync("diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz.b64")}`,
+                //diff:`${fs.readFileSync("diff/overworld_${{ github.sha }}_diff.gracidea.json.tgz.b64")}`,
               }
             })
 
