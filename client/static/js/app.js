@@ -77,6 +77,14 @@ const ANIMATED = {
         speed: 0.05
     }
 };
+var DIFF;
+(function(DIFF1) {
+    DIFF1[DIFF1["UNCHANGED"] = 0] = "UNCHANGED";
+    DIFF1[DIFF1["CREATED"] = 0.25] = "CREATED";
+    DIFF1[DIFF1["EDITED"] = 0.5] = "EDITED";
+    DIFF1[DIFF1["DELETED"] = 0.75] = "DELETED";
+})(DIFF || (DIFF = {
+}));
 const CREATURES_FLYING = [
     "wingull",
     "pelipper"
@@ -11954,6 +11962,34 @@ class Renderable extends Positionable {
             this._debug.position.set(this.x * 16, this.y * 16);
         }
     }
+    diff(diff, { sprite , from  } = {
+    }) {
+        if (from) diff = from.diffCreated ? DIFF.CREATED : from.diffEdited ? DIFF.EDITED : from.diffDeleted ? DIFF.DELETED : DIFF.UNCHANGED;
+        let tint = 16777215;
+        switch(diff){
+            case DIFF.CREATED:
+                {
+                    tint = 65280;
+                    break;
+                }
+            case DIFF.DELETED:
+                {
+                    tint = 16711680;
+                    break;
+                }
+            case DIFF.EDITED:
+                {
+                    tint = 16306224;
+                    break;
+                }
+            default:
+                {
+                    tint = 2236962;
+                }
+        }
+        if (sprite) sprite.tint = tint;
+        return tint;
+    }
     destructor() {
         this.destroyed = true;
         this.rendered = false;
@@ -12054,10 +12090,13 @@ class App {
         const that = this;
         this.world = null;
         this.controller = null;
+        const params = new URLSearchParams(window.location.search);
+        App.debug.diff = /_diff$/.test(params.get("map") ?? "");
         this.ready = new Promise((solve)=>{
             Render.setup().then(()=>{
                 that.world = new World({
-                    app: this
+                    app: this,
+                    name: params.get("map")
                 });
                 that.controller = new Controller({
                     app: this,
@@ -12075,7 +12114,8 @@ class App {
         logs: false,
         chunks: false,
         areas: false,
-        camera: false
+        camera: false,
+        diff: false
     };
     static config = {
         showNpcs: true,
@@ -12092,11 +12132,12 @@ class World {
     };
     camera;
     minimap;
-    name = "overworld";
+    name;
     app;
     tick = 0;
-    constructor({ app: app1  }){
+    constructor({ app: app1 , name: name1  }){
         this.app = app1;
+        this.name = name1 ?? "overworld";
         const sprite1 = Render.app.stage.addChild(Render.Container());
         this.sprites = {
             world: sprite1,
@@ -12301,14 +12342,17 @@ class Chunk extends Renderable {
         return super.debug(App.debug.chunks);
     }
     async render() {
-        if (!this.data) this.data = await fetch(`/map/overworld/${this.id}`).then((res)=>res.json()
+        if (!this.data) this.data = await fetch(`/map/${this.world.name}/${this.id}`).then((res)=>res.json()
         );
         this.layers.set("0X", this.sprite.addChild(Render.TilingSprite({
             frame: 0,
             width: 32,
             height: 32
         })));
-        for (const { name , sublayers , sorted =false  } of [
+        if (App.debug.diff) this.diff(DIFF.UNCHANGED, {
+            sprite: this.layers.get("0X")
+        });
+        for (const { name: name1 , sublayers , sorted =false  } of [
             {
                 name: "1X",
                 sublayers: [
@@ -12327,11 +12371,11 @@ class Chunk extends Renderable {
                 sorted: true
             }, 
         ]){
-            if (!this.layers.has(name)) this.layers.set(name, this.sprite.addChild(Render.Container({
+            if (!this.layers.has(name1)) this.layers.set(name1, this.sprite.addChild(Render.Container({
                 z: 0,
                 sorted
             })));
-            const layer = this.layers.get(name);
+            const layer = this.layers.get(name1);
             for(let z4 = 0; z4 < sublayers.length; z4++){
                 const tiles = this.data?.chunk?.layers?.[sublayers[z4]];
                 if (!tiles) continue;
@@ -12339,12 +12383,15 @@ class Chunk extends Renderable {
                     const tile = tiles[i78];
                     if (tile >= 0) {
                         const y2 = i78 % 32, x11 = Math.floor(i78 / 32);
-                        layer.addChild(Render.Sprite({
-                            frame: tile,
+                        const sprite2 = layer.addChild(Render.Sprite({
+                            frame: ~~tile,
                             x: x11,
                             y: y2,
                             z: y2 * 32 + z4
                         }));
+                        if (App.debug.diff) this.diff(tile % 1, {
+                            sprite: sprite2
+                        });
                     }
                 }
             }
@@ -12378,6 +12425,9 @@ class Controller {
             const input = global1.document.createElement("input");
             input.setAttribute("data-control-for", key);
             input.setAttribute("type", "checkbox");
+            if ([
+                "diff"
+            ].includes(key)) input.setAttribute("disabled", true);
             input.checked = App.debug[key];
             input.addEventListener("change", ()=>{
                 App.debug[key] = input.checked;
@@ -12440,17 +12490,22 @@ class Area extends Renderable {
                 },
                 stroke: [
                     1,
-                    65280,
+                    16777215,
                     0.5
                 ],
                 fill: [
-                    65280,
+                    16777215,
                     0.25
                 ],
                 polygon: this.polygon
             }));
+            if (App.debug.diff) this.diff(NaN, {
+                sprite: this._debug,
+                from: this.data.properties
+            });
+            else this._debug.tint = 65280;
         }
-        if (this._debug && App.debug.areas) this._debug.tint = this.contains(this.world.camera) ? 16777215 : 16711935;
+        if (this._debug && App.debug.areas) this._debug.alpha = this.contains(this.world.camera) ? 1 : 0.25;
         return super.debug(App.debug.areas);
     }
     update(_tick) {
@@ -12548,12 +12603,12 @@ class NPC extends Renderable {
     type;
     lifetime = Infinity;
     direction = Direction.none;
-    constructor({ world: world7 , area , type , name , pattern =Pattern.fixed  }){
+    constructor({ world: world7 , area , type , name: name2 , pattern =Pattern.fixed  }){
         super({
             world: world7
         });
         this.area = area;
-        this.name = name;
+        this.name = name2;
         this.type = type;
         this.sprite = Render.Container();
         this.pattern = pattern;
@@ -12734,6 +12789,10 @@ class NPC extends Renderable {
             this.sprite.zIndex = Math.ceil(ry) * CHUNK_SIZE;
             this.sprites.main.position.set(this.offset.x, this.offset.y);
             chunk?.layers.get("2X")?.addChild(this.sprite);
+            if (App.debug.diff) this.diff(NaN, {
+                sprite: this.sprites.main,
+                from: this.area.data.properties
+            });
         }
     }
     update(tick) {

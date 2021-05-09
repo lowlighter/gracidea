@@ -21,7 +21,7 @@ export class App {
     this.world = null as asyncdef
     this.controller = null as asyncdef
     const params = new URLSearchParams(window.location.search)
-    App.debug.diff = /_diff$/.test(params.get("map"))
+    App.debug.diff = /_diff$/.test(params.get("map") ?? "")
     this.ready = new Promise(solve => {
       Render.setup().then(() => {
         that.world = new World({ app: this, name: params.get("map") })
