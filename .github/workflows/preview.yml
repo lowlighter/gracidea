@@ -14,7 +14,7 @@ jobs:
       - name: Setup velociraptor
         run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
       - name: Build patches
-        run: vr build --patch --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
+        run: vr build --data --patch --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
       - name: Checkout patches
         uses: actions/checkout@v2
         with:
