@@ -21,6 +21,7 @@ jobs:
           vr build --head ${{ github.actor }}:${{ github.head_ref }} --sha ${{ github.sha }}
       - name: Publish generated files
         run: |
+          git fetch origin/ci-attachments
           git switch ci-attachments
           git status
           git add diff
