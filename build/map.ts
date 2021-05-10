@@ -65,7 +65,7 @@ export async function map(name: string, { from = "" }: { from?: string } = {}) {
           continue
         }
         case "people": {
-          const directions = Object.entries(properties).filter(([key, value]) => (["left", "right", "up", "down"].includes(key))&&(value)).map(([key]) => key)
+          const directions = Object.entries(properties).filter(([key, value]) => (["left", "right", "up", "down"].includes(key)) && (value)).map(([key]) => key)
           exported.areas.push({ id, name, points, type, bounds, properties: { pattern: mode, directions } })
           continue
         }
