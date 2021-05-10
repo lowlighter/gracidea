@@ -34,7 +34,9 @@ export class Render {
     loader.add("/copyrighted/textures/tileset3.json")
     loader.add("/copyrighted/textures/npcs.json")
     loader.add("/copyrighted/textures/creatures.json")
-    loader.onProgress.add(({progress = 0}, {name = ""}) => domloader.innerHTML = `<span>loaded textures ${name.split("/").pop()} (${Math.floor(progress)}%)</span>${domloader.innerHTML}`)
+    loader.onProgress.add(({ progress = 0 }, { name = "" }) =>
+      domloader.innerHTML = `<span>loaded textures ${name.split("/").pop()} (${Math.floor(progress)}%)</span>${domloader.innerHTML}`
+    )
     //Create application
     this.app = new Render.engine.Application({
       width: global.document.body.clientWidth,
