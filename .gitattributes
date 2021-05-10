@@ -7,5 +7,5 @@
 *.tsx linguist-generated
 *.tmx linguist-generated
 *.json linguist-generated
-static/*.js linguist-generated
-static/*.js.map linguist-generated
+*.js linguist-generated
+*.js.map linguist-generated
