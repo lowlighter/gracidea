@@ -62,7 +62,11 @@ export class NPC extends Renderable {
   /** Life time */
   private lifetime = Infinity
 
+  /** Current direction */
   private direction = Direction.none
+
+  /** Allowed directions */
+  private directions = [] as string[]
 
   /** Constructor */
   constructor({ world, area, type, name, pattern = Pattern.fixed }: { world: World; area: Area; type: Type; name: string; pattern?: Pattern }) {
@@ -73,6 +77,7 @@ export class NPC extends Renderable {
     this.sprite = Render.Container()
     this.pattern = pattern
     let frame = ""
+    this.directions = this.area.data.properties.directions as string[]
     if (type === Type.creatures) {
       const type = Math.random() < App.config.shinyRate ? "shiny" : "regular"
       frame = `${type}/${this.name}`
@@ -80,7 +85,7 @@ export class NPC extends Renderable {
       this.pattern = Pattern.wander
     }
     if (type === Type.people)
-      frame = `${this.name}_down_0`
+      frame = `${this.name}_${this.directions.length ? this.directions[0] : "down"}_0`
     this.sprites = {
       main: this.sprite.addChild(Render.Sprite({ frame: frame, anchor: [0.5, 1] })),
       mask: null,
@@ -148,6 +153,13 @@ export class NPC extends Renderable {
         for (let j = 0; j < Math.abs(dy); j++)
           this.track.push(x, y += Math.sign(dy))
       }
+      //Filter out invalid cells
+      for (let i = 0; i < this.track.length; i+=2) {
+        const [x, y] = [this.track[i], this.track[i+1]]
+        if (!this.area.contains({x, y}))
+          this.track[i] = this.track[i+1] = NaN
+      }
+      (this.track as rw) = this.track.filter(Number.isFinite)
       //Push reversed track on patrol
       if (this.pattern === "patrol") {
         const points = this.track.slice()
@@ -159,6 +171,7 @@ export class NPC extends Renderable {
         this.track.pop()
         this.track.pop()
       }
+      console.log(this.track)
     }
   }
 
@@ -169,12 +182,12 @@ export class NPC extends Renderable {
       //Flying creatures' shadow
       if ((CREATURES_FLYING.includes(this.name)) && (!this.sprites.shadow)) {
         this.offset.y = -TILE_SIZE
-        const shadow = Render.Graphics({ fill: [0, 0.5], ellipse: [0, 0, 2 / 3, 2 / 4] })
+        const shadow = Render.Graphics({ fill: [0, 0.5], ellipse: [0, -0.5, 2 / 3, 2 / 4]})
         this.sprites.shadow = this.sprite.addChildAt(shadow, 0)
       }
       //Swimming creatures' masks
-      if ((false) && (!this.sprites.mask)) {
-        const mask = Render.Graphics({ rect: [-2, -1.75, 4, 1], fill: [0, 0] })
+      if ((["magikarp", "sharpedo", "wailmer", "tentacool"].includes(this.name)) && (!this.sprites.mask)) {
+        const mask = Render.Graphics({ rect: [-2, -2.75, 4, 2], fill: [0, 0] })
         this.sprite.addChild(mask)
         this.sprites.main.mask = this.sprites.mask = mask
       }
@@ -217,8 +230,16 @@ export class NPC extends Renderable {
   /** Loop (follow track and loop over) */
   private loop() {
     this._track_index = (this._track_index + 2) % this.track.length
-    this.x = this.track[this._track_index]
-    this.y = this.track[this._track_index + 1]
+    const dx = this.track[this._track_index]-this.x
+    const dy = this.track[this._track_index + 1]-this.y
+    if (dx > 0)
+      this.goRight()
+    else if (dx < 0)
+      this.goLeft()
+    else if (dy < 0)
+      this.goUp()
+    else if (dy > 0)
+      this.goDown()
   }
 
   /** Patrol (follow track and reverse) */
@@ -228,12 +249,12 @@ export class NPC extends Renderable {
 
   /** Wander */
   private wander() {
-    void ([() => null, () => this.goLeft(), () => this.goRight(), () => this.goUp(), () => this.goDown()][Math.floor(Math.random() / 0.25)])()
+    void ([() => null, () => this.goLeft(), () => this.goRight(), () => this.goUp(), () => this.goDown()][Math.floor(Math.random() / 0.2)])()
   }
 
   /** Lookaround */
   private lookaround() {
-    void ([() => null, () => this.lookLeft(), () => this.lookRight(), () => this.lookUp(), () => this.lookDown()][Math.floor(Math.random() / 0.25)])()
+    void ([() => null, () => this.lookLeft(), () => this.lookRight(), () => this.lookUp(), () => this.lookDown()][Math.floor(Math.random() / 0.2)])()
   }
 
   /** Texture */
@@ -250,23 +271,32 @@ export class NPC extends Renderable {
     this.texture("left_0", { flip: +1 })
   }
 
+  /** Go in given direction */
   private goDirection() {
     const delta = App.config.delta
+    if (this.direction === Direction.none)
+      return
+    const dx = Math.round(Math.abs(this.x-Math.floor(this.x))/(1/6))%3
+    const dy = Math.round(Math.abs(this.y-Math.floor(this.y))/(1/6))%3
     switch (this.direction) {
       case Direction.up: {
         this.y -= delta
+        this.texture(`up_${dy}`)
         return
       }
       case Direction.down: {
         this.y += delta
+        this.texture(`down_${dy}`)
         return
       }
       case Direction.left: {
         this.x -= delta
+        this.texture(`left_${dx}`)
         return
       }
       case Direction.right: {
         this.x += delta
+        this.texture(`right_${dx}`)
         return
       }
     }

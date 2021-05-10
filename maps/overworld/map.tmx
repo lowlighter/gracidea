@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="412">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="443">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -37766,28 +37766,25 @@
   <object id="326" name="hoenn-route-103-area" type="surf" x="5552" y="-15760">
    <polygon points="0,0 80,0 80,-32 112,-32 112,80 80,80 80,64 0,64"/>
   </object>
-  <object id="327" name="hoenn-route-103-area" type="surf" x="5664" y="-15776">
-   <polygon points="0,0 64,0 64,-32 112,-32 112,96 64,96 64,112 0,112"/>
-  </object>
   <object id="328" name="hoenn-route-103-area" type="surf" x="5776" y="-15776">
    <polygon points="0,0 48,0 48,16 96,16 96,96 48,96 48,80 0,80"/>
   </object>
   <object id="329" name="hoenn-route-103-area" type="surf" x="5872" y="-15744">
    <polygon points="0,0 80,0 80,64 0,64"/>
   </object>
-  <object id="330" name="hoenn-route-103-area" type="surf" x="5616" y="-15520">
+  <object id="330" name="hoenn-route-103-area" type="old-rod" x="5616" y="-15520">
    <polygon points="0,0 0,-80 32,-80 32,-112 112,-112 112,0"/>
   </object>
-  <object id="331" name="hoenn-route-103-area" type="surf" x="5728" y="-15648">
+  <object id="331" name="hoenn-route-103-area" type="good-rod" x="5728" y="-15648">
    <polygon points="0,0 80,0 80,128 0,128"/>
   </object>
   <object id="332" name="hoenn-route-103-area" type="surf" x="5808" y="-15632">
    <polygon points="0,0 32,0 32,-16 64,-16 64,112 32,112 32,128 0,128"/>
   </object>
-  <object id="333" name="hoenn-route-103-area" type="surf" x="5648" y="-15520">
+  <object id="333" name="hoenn-route-103-area" type="good-rod" x="5648" y="-15520">
    <polygon points="0,0 0,32 16,32 16,48 32,48 32,80 96,80 96,0"/>
   </object>
-  <object id="334" name="hoenn-route-103-area" type="surf" x="5744" y="-15520">
+  <object id="334" name="hoenn-route-103-area" type="super-rod" x="5744" y="-15520">
    <polygon points="0,0 0,80 48,80 48,64 80,64 80,16 64,16 64,0"/>
   </object>
   <object id="335" name="hoenn-route-102-area" type="walk" x="4416" y="-15504">
@@ -38009,6 +38006,15 @@
   <object id="411" name="hoenn-route-118-area" type="walk" x="8160" y="-17408">
    <polygon points="0,0 32,0 32,48 48,48 48,64 112,64 112,96 0,96"/>
   </object>
+  <object id="431" name="hoenn-route-103-area" type="surf" x="5664" y="-15776">
+   <polygon points="0,0 64,0 64,-32 96,-32 96,96 64,96 64,112 0,112"/>
+  </object>
+  <object id="432" name="hoenn-route-103-area" type="good-rod" x="5712" y="-15904">
+   <polygon points="0,0 -96,0 -96,32 -64,32 -64,80 -48,80 -48,96 0,96"/>
+  </object>
+  <object id="433" name="hoenn-route-103-area" type="super-rod" x="5712" y="-15904">
+   <polygon points="0,0 64,0 64,64 0,64"/>
+  </object>
  </objectgroup>
  <objectgroup id="20" name="people">
   <object id="123" name="dude" type="wander" x="5344" y="-14752">
@@ -38046,6 +38052,45 @@
   </object>
   <object id="316" name="rich_boy" type="wander" x="5216" y="-15040">
    <polygon points="0,0 48,0 48,32 0,32"/>
+  </object>
+  <object id="412" name="fisher" type="lookaround" x="5984" y="-15744">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="417" name="generic_m1" type="wander" x="5472" y="-15728">
+   <polygon points="0,0 64,0 64,48 16,48 16,32 0,32"/>
+  </object>
+  <object id="423" name="black_belt" type="fixed" x="6256" y="-15808">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="424" name="guitarist" type="fixed" x="6256" y="-15744">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="425" name="twin" type="fixed" x="6208" y="-15696">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="426" name="twin" type="fixed" x="6224" y="-15696">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="427" name="ace_trainer" type="wander" x="5968" y="-15712">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object id="436" name="may" type="fixed" x="5344" y="-15840">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="438" name="swimmer_m" type="patrol" x="5760" y="-15680">
+   <polygon points="0,0 0,-64 16,-64 16,0"/>
+  </object>
+  <object id="440" name="pokefan" type="fixed" x="6080" y="-15680">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="442" name="swimmer_f" type="patrol" x="5776" y="-15808">
+   <polygon points="0,0 0,64 -16,64 -16,0"/>
   </object>
  </objectgroup>
  <objectgroup id="23" name="pins">
