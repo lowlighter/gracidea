@@ -1,14 +1,16 @@
 # ![](/client/static/copyrighted/imgs/icons/gracidea.png) Gracidea
 
-![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
+![](/.github/README/animated_map.gif)
 
-![](/.github/README/animated_map.gif?x=1)
+![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
+![Deploy](https://img.shields.io/badge/%20-Gracidea-black.svg?logo=deno)
+
 
 [Check it out live here !](https://gracidea.deno.dev/)
 
 **Gracidea** is a cartographic project which aims to gather all known *Pokémon* regions into a single 2D map, keeping fidelity to games while taking the liberty of filling blanks and making minor arrangements based on official artworks, anime and manga.
 
-### Features
+### ![](/client/static/copyrighted/imgs/icons/pokedoll.png) Features
 
 **Gracidea** is not an ordinary world map! See below a short list of the awesome features embedded in it :
 
@@ -48,7 +50,7 @@ This project is released under the GNU AGPL license, which means that you can re
 
 *Pokémon* sprites are the intellectual property of The Pokémon Company and its affiliates ([Legal informations](https://www.pokemon.com/us/legal/))
 
-Sprites has been ripped, sorted and edited by [@lowlighter](https://github.com/lowlighter/) using Advance Map on *Pokémon Emerald*.
+Sprites has been ripped, sorted and edited by [@lowlighter](https://github.com/lowlighter/) using Advance Map on *Pokémon Emerald* or taken from [Spriters resource](https://www.spriters-resource.com/game_boy_advance/pokemonemerald/) (see respective images for credits).
 The maintainers of this repository cannot be held responsible of the usage of it from other users.
 
 ## ![](/client/static/copyrighted/imgs/icons/note.png) Note from the cartographer
