@@ -2,7 +2,7 @@
 
 ![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
 
-![](/.github/README/animated_map.gif)
+![](/.github/README/animated_map.gif?x=1)
 
 [Check it out live here !](https://gracidea.deno.dev/)
 
