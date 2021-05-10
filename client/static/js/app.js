@@ -12165,7 +12165,7 @@ class World {
         });
     }
     chunkAt({ x , y  }) {
-        return this.loaded.chunks.get(`${Math.floor(x / 32)};${Math.floor(y / 32)}`);
+        return this.loaded.chunks.get(`${Math.floor(Math.ceil(x + 1) / 32)};${Math.floor(Math.floor(y - 1) / 32)}`);
     }
 }
 class Camera extends Renderable {
@@ -12599,6 +12599,7 @@ class NPC extends Renderable {
     type;
     lifetime = Infinity;
     direction = Direction.none;
+    directions = [];
     constructor({ world: world7 , area , type , name: name2 , pattern =Pattern.fixed  }){
         super({
             world: world7
@@ -12609,13 +12610,14 @@ class NPC extends Renderable {
         this.sprite = Render.Container();
         this.pattern = pattern;
         let frame = "";
+        this.directions = this.area.data.properties.directions;
         if (type === Type.creatures) {
             const type1 = Math.random() < App.config.shinyRate ? "shiny" : "regular";
             frame = `${type1}/${this.name}`;
             this.lifetime = Math.floor(12 + Math.random() * 28);
             this.pattern = Pattern.wander;
         }
-        if (type === Type.people) frame = `${this.name}_down_0`;
+        if (type === Type.people) frame = `${this.name}_${this.directions.length ? this.directions[0] : "down"}_0`;
         this.sprites = {
             main: this.sprite.addChild(Render.Sprite({
                 frame: frame,
@@ -12735,14 +12737,26 @@ class NPC extends Renderable {
                 for(let j3 = 0; j3 < Math.abs(dx); j3++)this.track.push(x11 += Math.sign(dx), y2);
                 for(let j4 = 0; j4 < Math.abs(dy); j4++)this.track.push(x11, y2 += Math.sign(dy));
             }
+            for(let i79 = 0; i79 < this.track.length; i79 += 2){
+                const [x11, y2] = [
+                    this.track[i79],
+                    this.track[i79 + 1]
+                ];
+                if (!this.area.contains({
+                    x: x11,
+                    y: y2
+                })) this.track[i79] = this.track[i79 + 1] = NaN;
+            }
+            this.track = this.track.filter(Number.isFinite);
             if (this.pattern === "patrol") {
                 const points1 = this.track.slice();
-                for(let i79 = points1.length - 4; i79 > 0; i79 -= 2)this.track.push(points1[i79], points1[i79 + 1]);
+                for(let i80 = points1.length - 4; i80 > 0; i80 -= 2)this.track.push(points1[i80], points1[i80 + 1]);
             }
             if (this.pattern === "loop" && this.track[0] === this.track[this.track.length - 2] && this.track[1] === this.track[this.track.length - 1]) {
                 this.track.pop();
                 this.track.pop();
             }
+            console.log(this.track);
         }
     }
     render() {
@@ -12757,20 +12771,25 @@ class NPC extends Renderable {
                     ],
                     ellipse: [
                         0,
-                        0,
+                        -0.5,
                         2 / 3,
                         2 / 4
                     ]
                 });
                 this.sprites.shadow = this.sprite.addChildAt(shadow, 0);
             }
-            if (false && !this.sprites.mask) {
+            if ([
+                "magikarp",
+                "sharpedo",
+                "wailmer",
+                "tentacool"
+            ].includes(this.name) && !this.sprites.mask) {
                 const mask = Render.Graphics({
                     rect: [
                         -2,
-                        -1.75,
+                        -2.75,
                         4,
-                        1
+                        2
                     ],
                     fill: [
                         0,
@@ -12813,8 +12832,12 @@ class NPC extends Renderable {
     }
     loop() {
         this._track_index = (this._track_index + 2) % this.track.length;
-        this.x = this.track[this._track_index];
-        this.y = this.track[this._track_index + 1];
+        const dx = this.track[this._track_index] - this.x;
+        const dy = this.track[this._track_index + 1] - this.y;
+        if (dx > 0) this.goRight();
+        else if (dx < 0) this.goLeft();
+        else if (dy < 0) this.goUp();
+        else if (dy > 0) this.goDown();
     }
     patrol() {
         this.loop();
@@ -12830,7 +12853,7 @@ class NPC extends Renderable {
             ()=>this.goUp()
             ,
             ()=>this.goDown()
-        ][Math.floor(Math.random() / 0.25)]();
+        ][Math.floor(Math.random() / 0.2)]();
     }
     lookaround() {
         void [
@@ -12843,7 +12866,7 @@ class NPC extends Renderable {
             ()=>this.lookUp()
             ,
             ()=>this.lookDown()
-        ][Math.floor(Math.random() / 0.25)]();
+        ][Math.floor(Math.random() / 0.2)]();
     }
     texture(suffix, { flip =0  } = {
     }) {
@@ -12860,25 +12883,32 @@ class NPC extends Renderable {
     }
     goDirection() {
         const delta = App.config.delta;
+        if (this.direction === Direction.none) return;
+        const dx = Math.round(Math.abs(this.x - Math.floor(this.x)) / (1 / 6)) % 3;
+        const dy = Math.round(Math.abs(this.y - Math.floor(this.y)) / (1 / 6)) % 3;
         switch(this.direction){
             case Direction.up:
                 {
                     this.y -= delta;
+                    this.texture(`up_${dy}`);
                     return;
                 }
             case Direction.down:
                 {
                     this.y += delta;
+                    this.texture(`down_${dy}`);
                     return;
                 }
             case Direction.left:
                 {
                     this.x -= delta;
+                    this.texture(`left_${dx}`);
                     return;
                 }
             case Direction.right:
                 {
                     this.x += delta;
+                    this.texture(`right_${dx}`);
                     return;
                 }
         }

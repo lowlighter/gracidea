@@ -154,12 +154,12 @@ export class NPC extends Renderable {
           this.track.push(x, y += Math.sign(dy))
       }
       //Filter out invalid cells
-      for (let i = 0; i < this.track.length; i+=2) {
-        const [x, y] = [this.track[i], this.track[i+1]]
-        if (!this.area.contains({x, y}))
-          this.track[i] = this.track[i+1] = NaN
+      for (let i = 0; i < this.track.length; i += 2) {
+        const [x, y] = [this.track[i], this.track[i + 1]]
+        if (!this.area.contains({ x, y }))
+          this.track[i] = this.track[i + 1] = NaN
       }
-      (this.track as rw) = this.track.filter(Number.isFinite)
+      ;(this.track as rw) = this.track.filter(Number.isFinite)
       //Push reversed track on patrol
       if (this.pattern === "patrol") {
         const points = this.track.slice()
@@ -182,7 +182,7 @@ export class NPC extends Renderable {
       //Flying creatures' shadow
       if ((CREATURES_FLYING.includes(this.name)) && (!this.sprites.shadow)) {
         this.offset.y = -TILE_SIZE
-        const shadow = Render.Graphics({ fill: [0, 0.5], ellipse: [0, -0.5, 2 / 3, 2 / 4]})
+        const shadow = Render.Graphics({ fill: [0, 0.5], ellipse: [0, -0.5, 2 / 3, 2 / 4] })
         this.sprites.shadow = this.sprite.addChildAt(shadow, 0)
       }
       //Swimming creatures' masks
@@ -230,8 +230,8 @@ export class NPC extends Renderable {
   /** Loop (follow track and loop over) */
   private loop() {
     this._track_index = (this._track_index + 2) % this.track.length
-    const dx = this.track[this._track_index]-this.x
-    const dy = this.track[this._track_index + 1]-this.y
+    const dx = this.track[this._track_index] - this.x
+    const dy = this.track[this._track_index + 1] - this.y
     if (dx > 0)
       this.goRight()
     else if (dx < 0)
@@ -276,8 +276,8 @@ export class NPC extends Renderable {
     const delta = App.config.delta
     if (this.direction === Direction.none)
       return
-    const dx = Math.round(Math.abs(this.x-Math.floor(this.x))/(1/6))%3
-    const dy = Math.round(Math.abs(this.y-Math.floor(this.y))/(1/6))%3
+    const dx = Math.round(Math.abs(this.x - Math.floor(this.x)) / (1 / 6)) % 3
+    const dy = Math.round(Math.abs(this.y - Math.floor(this.y)) / (1 / 6)) % 3
     switch (this.direction) {
       case Direction.up: {
         this.y -= delta
