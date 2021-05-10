@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="443">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="449">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -38014,6 +38014,24 @@
   </object>
   <object id="433" name="hoenn-route-103-area" type="super-rod" x="5712" y="-15904">
    <polygon points="0,0 64,0 64,64 0,64"/>
+  </object>
+  <object id="443" name="kanto-route-1-area" type="walk" x="23872" y="-27088">
+   <polygon points="0,0 192,0 192,80 0,80"/>
+  </object>
+  <object id="444" name="kanto-route-1-area" type="walk" x="24064" y="-26976">
+   <polygon points="0,0 0,80 -96,80 -96,0"/>
+  </object>
+  <object id="445" name="kanto-route-1-area" type="walk" x="23904" y="-26800">
+   <polygon points="0,0 96,0 96,80 0,80"/>
+  </object>
+  <object id="446" name="kanto-route-1-area" type="walk" x="23744" y="-26640">
+   <polygon points="0,0 32,0 32,-32 144,-32 144,0 112,0 112,32 0,32"/>
+  </object>
+  <object id="447" name="kanto-route-1-area" type="walk" x="23904" y="-26624">
+   <polygon points="0,0 32,0 32,80 0,80"/>
+  </object>
+  <object id="448" name="kanto-route-1-area" type="walk" x="24064" y="-26640">
+   <polygon points="0,0 -32,0 -32,32 -112,32 -112,0 -80,0 -80,-32 0,-32"/>
   </object>
  </objectgroup>
  <objectgroup id="20" name="people">

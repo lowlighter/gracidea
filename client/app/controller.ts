@@ -18,6 +18,13 @@ export class Controller {
   constructor({ app, world }: { app: App; world: World }) {
     this.app = app
     this.world = world
+    this.scrollers()
+    this.controls()
+  }
+
+  /** Scrollers */
+  private scrollers() {
+    let click = {x:0, y:0, active:false}
     let touch = { x: 0, y: 0 }
     Render.app.view.addEventListener("touchstart", (event: event) => touch = { x: event.touches[0].pageX, y: event.touches[0].pageY })
     Render.app.view.addEventListener("touchmove", (event: event) => {
@@ -37,6 +44,26 @@ export class Controller {
       }
       this.world.camera.render()
     })
+    Render.app.view.addEventListener("mousedown", (event: event) => click = {x:event.pageX, y:event.pageY, active:true})
+    document.addEventListener("mousemove", (event: event) => {
+      if (click.active) {
+        const delta = {x:click.x-event.pageX,y:click.y-event.pageY}
+        click = {x:event.pageX, y:event.pageY, active:true}
+        if (!this.world.minimap.open) {
+          this.world.sprites.world.position.set(
+            Math.round(this.world.sprites.world.position.x - delta.x),
+            Math.round(this.world.sprites.world.position.y - delta.y),
+          )
+        }
+        else {
+          this.world.minimap.sprite.position.set(
+            Math.round(this.world.minimap.sprite.position.x - delta.x),
+            Math.round(this.world.minimap.sprite.position.y - delta.y),
+          )
+        }
+      }
+    })
+    Render.app.view.addEventListener("mouseup", (event: event) => click.active = false)
     Render.app.view.addEventListener("wheel", (event: event) => {
       event.preventDefault()
       if (!this.world.minimap.open) {
@@ -53,6 +80,10 @@ export class Controller {
       }
       this.world.camera.render()
     })
+  }
+
+  /** Controls */
+  private controls() {
     global.document.querySelector("[data-control-for='map']")?.addEventListener("click", () => this.world.minimap.toggle())
     global.document.querySelector("[data-control-for='debug']")?.addEventListener("click", () => {
       global.document.querySelector("nav.debug").style.display = global.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex"
