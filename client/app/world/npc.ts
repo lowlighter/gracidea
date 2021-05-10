@@ -1,5 +1,5 @@
 //Imports
-import { CHUNK_SIZE, CREATURES_FLYING, rw, TILE_SIZE } from "../../../build/constants.ts"
+import { CHUNK_SIZE, CREATURES_FLYING, TILE_SIZE } from "../../../build/constants.ts"
 import { App } from "./../app.ts"
 import { Render } from "../render.ts"
 import { Area, Type } from "./area.ts"
@@ -45,7 +45,7 @@ export class NPC extends Renderable {
   readonly area: Area
 
   /** Track */
-  private readonly track = [] as number[]
+  private track = [] as number[]
 
   /** Track index */
   private _track_index = 0
@@ -142,7 +142,7 @@ export class NPC extends Renderable {
       //Compute track
       const points = this.area.polygon.points.map((n: number) => n / TILE_SIZE) as number[]
       points.push(points[0], points[1])
-      ;(this as rw).track = [points[0], points[1]]
+      this.track = [points[0], points[1]]
       for (let i = 2; i < points.length; i += 2) {
         const [px, py, nx, ny] = [points[i - 2], points[i - 1], points[i], points[i + 1]]
         const dx = nx - px
@@ -159,7 +159,7 @@ export class NPC extends Renderable {
         if (!this.area.contains({ x, y }))
           this.track[i] = this.track[i + 1] = NaN
       }
-      ;(this.track as rw) = this.track.filter(Number.isFinite)
+      this.track = this.track.filter(Number.isFinite)
       //Push reversed track on patrol
       if (this.pattern === "patrol") {
         const points = this.track.slice()
@@ -171,7 +171,6 @@ export class NPC extends Renderable {
         this.track.pop()
         this.track.pop()
       }
-      console.log(this.track)
     }
   }
 
