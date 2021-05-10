@@ -18,6 +18,25 @@ export class Controller {
   constructor({ app, world }: { app: App; world: World }) {
     this.app = app
     this.world = world
+    let touch = {x:0, y:0}
+    Render.app.view.addEventListener("touchstart", (event:event) => touch = {x:event.touches[0].pageX, y:event.touches[0].pageY})
+    Render.app.view.addEventListener("touchmove", (event:event) => {
+      const delta = {x:touch.x - event.touches[0].pageX, y:touch.y - event.touches[0].pageY}
+      touch = {x:event.touches[0].pageX, y:event.touches[0].pageY}
+      if (!this.world.minimap.open) {
+        this.world.sprites.world.position.set(
+          Math.round(this.world.sprites.world.position.x - delta.x),
+          Math.round(this.world.sprites.world.position.y - delta.y),
+        )
+      }
+      else {
+        this.world.minimap.sprite.position.set(
+          Math.round(this.world.minimap.sprite.position.x - delta.x),
+          Math.round(this.world.minimap.sprite.position.y - delta.y),
+        )
+      }
+      this.world.camera.render()
+    })
     Render.app.view.addEventListener("wheel", (event: event) => {
       event.preventDefault()
       if (!this.world.minimap.open) {

@@ -37,7 +37,8 @@
     window.onload = function () {
       const compat = !window.isGoodBrowser
       document.querySelector(".loader .loaded").innerHTML += `<span>loading gracidea (this may take a few seconds)</span>`
-      document.querySelector(".loader .loaded").innerHTML += `<span style="color: orange">using compat mode because of non-standard browser</span>`
+      if (compat)
+        document.querySelector(".loader .loaded").innerHTML += `<span style="color: orange">using compat mode because of non-standard browser</span>`
       const script = document.createElement("script")
       script.setAttribute("type", "module")
       script.setAttribute("src", `/js/app.${compat ? "compat" : "min"}.js`)
