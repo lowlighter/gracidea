@@ -70,8 +70,8 @@ export class World {
     })
   }
 
-  /** Return chunk for a given position */
+  /** Return chunk for a given position (note that chunks are rounded to avoid display issues) */
   chunkAt({ x, y }: { x: number; y: number }) {
-    return this.loaded.chunks.get(`${Math.floor(x / CHUNK_SIZE)};${Math.floor(y / CHUNK_SIZE)}`)
+    return this.loaded.chunks.get(`${Math.floor(Math.ceil(x+1) / CHUNK_SIZE)};${Math.floor(Math.floor(y-1) / CHUNK_SIZE)}`)
   }
 }
