@@ -30,12 +30,8 @@
   </nav>
 
   <script>
-    {class A{x=1}}
-    window.isGoodBrowser = true
-  </script>
-  <script>
     window.onload = function () {
-      const compat = !window.isGoodBrowser
+      const compat = (navigator.userAgent.includes("Safari"))&&(!navigator.userAgent.includes("Chrome"))
       document.querySelector(".loader .loaded").innerHTML += `<span>loading gracidea (this may take a few seconds)</span>`
       if (compat)
         document.querySelector(".loader .loaded").innerHTML += `<span style="color: orange">using compat mode because of non-standard browser</span>`
