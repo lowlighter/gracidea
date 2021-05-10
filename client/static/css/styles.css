@@ -21,17 +21,34 @@
     align-items: center;
     justify-content: center;
     color: white;
-    font-size: 1.5rem;
-    background-color: #000000A0;
+    font-size: 1.25rem;
+    background-color: #182850;
+    z-index: 8888;
   }
-  .loader small {
-    font-size: 1rem;
-    opacity: .7;
+  .loader .loaded {
+    display: flex;
+    flex-direction: column;
+    opacity: 0.8;
+    font-size: 0.8rem;
+    height: 4rem;
+    overflow: hidden;
+  }
+  .loader .loaded :nth-child(1) {
+    opacity: 1;
+  }
+  .loader .loaded :nth-child(2) {
+    opacity: 0.7;
+  }
+  .loader .loaded :nth-child(3) {
+    opacity: 0.4;
+  }
+  .loader .loaded :nth-child(4) {
+    opacity: 0.1;
   }
   .loading {
     overflow: hidden;
     display: inline-block;
-    vertical-align: bottom;
+    vertical-align: top;
   }
   .loading::after {
     overflow: hidden;
@@ -39,7 +56,6 @@
     content: "...";
     animation: loading-dots-keyframes 1.2s steps(4, jump-none) infinite;
   }
-
   @keyframes loading-dots-keyframes {
     0% { transform: translateX(-100%); }
   }

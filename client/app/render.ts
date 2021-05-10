@@ -28,10 +28,13 @@ export class Render {
     this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST
     this.engine.settings.ROUND_PIXELS = true
     //Load resources
+    const domloader = global.document.querySelector(".loader .loaded")
+    domloader.innerHTML = `<span>loaded gracidea</span>${domloader.innerHTML}`
     const loader = Render.engine.Loader.shared
     loader.add("/copyrighted/textures/tileset3.json")
     loader.add("/copyrighted/textures/npcs.json")
     loader.add("/copyrighted/textures/creatures.json")
+    loader.onProgress.add(({progress = 0}, {name = ""}) => domloader.innerHTML = `<span>loaded textures ${name.split("/").pop()} (${Math.floor(progress)}%)</span>${domloader.innerHTML}`)
     //Create application
     this.app = new Render.engine.Application({
       width: global.document.body.clientWidth,
@@ -44,7 +47,7 @@ export class Render {
     global.document.querySelector("body").appendChild(this.app.view)
     //Wait for resources to be loaded
     await new Promise(solve => loader.load(() => solve(null)))
-    global.document.querySelector(".loader").style.display = "none"
+    global.document.querySelector(".loader").remove()
   }
 
   /** Polygon */

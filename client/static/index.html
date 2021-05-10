@@ -10,9 +10,8 @@
 <body>
 
   <div class="loader">
-    <div>Loading<span class="loading"></span></div>
-    <small>This may take some time</small>
-    <small>(note that Safari is not supported yet)</small>
+    <div>loading<span class="loading"></span></div>
+    <div class="loaded"></div>
   </div>
 
   <div id="location">
@@ -30,8 +29,20 @@
     <button data-control-for="fps"></button>
   </nav>
 
-  <script>window.onerror = (message, url, linenumber) => console.error(`${message} on line ${linenumber} for ${url}`)</script>
-  <script type="module" src="/js/app.min.js"></script>
+  <script>
+    {class A{x=1}}
+    window.isGoodBrowser = true
+  </script>
+  <script>
+    window.onload = function () {
+      console.log(isGoodBrowser)
+      document.querySelector(".loader .loaded").innerHTML += `<span>loading gracidea (this may take a few seconds)</span>`
+      const script = document.createElement("script")
+      script.setAttribute("type", "module")
+      script.setAttribute("src", "/js/app.min.js")
+      document.querySelector("body").append(script)
+    }
+  </script>
 
 </body>
 </html>

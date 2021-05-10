@@ -77,7 +77,7 @@ export class NPC extends Renderable {
     this.sprite = Render.Container()
     this.pattern = pattern
     let frame = ""
-    this.directions = this.area.data.properties.directions as string[]
+    this.directions = (this.area.data.properties.directions ?? []) as string[]
     if (type === Type.creatures) {
       const type = Math.random() < App.config.shinyRate ? "shiny" : "regular"
       frame = `${type}/${this.name}`

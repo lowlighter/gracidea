@@ -27,6 +27,7 @@ scripts:
     desc: Bundle client app
     cmd:
       - echo {} > package.json
-      - npm install pixi.js terser
+      - npm install pixi.js terser @babel/core @babel/cli @babel/preset-env core-js@3
       - deno bundle client/app/mod.ts client/static/js/app.js
       - npx terser client/static/js/app.js --mangle --source-map --output client/static/js/app.min.js
+      - npx babel --config-file ./.github/config/babel.config.json --out-file client/static/js/app.compat.js --minified client/static/js/app.js
