@@ -8,7 +8,7 @@ type test = any
 const data = xmlparse(await Deno.readTextFile("maps/overworld/map.tmx")) as test
 {
   const regions = [] as string[]
-  const methods = ["walk", "surf", "only-one"]
+  const methods = ["walk", "surf", "only-one", "old-rod", "good-rod", "super-rod"]
   const patterns = ["patrol", "loop", "wander", "fixed", "lookaround"]
   const npcs = [
     ...new Set(
