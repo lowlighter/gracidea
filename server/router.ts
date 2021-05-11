@@ -43,7 +43,7 @@ export async function route(request: Request, { deploy = false }: { deploy?: boo
       //Client app rebuild
       case (!deploy) && (ROUTE_CLIENT_APP.test(pathname)): {
         console.debug(`rebuilding: ${pathname}`)
-        const { files } = await (Deno as rw).emit("client/app/mod.ts", { bundle: "iife" })
+        const { files } = await (Deno as rw).emit("client/app/mod.ts", { bundle: "module" })
         const script = Object.entries(files).filter(([key]) => /\.js$/.test(key)).map(([_, value]) => value).shift() as string
         return new Response(script, { headers: { "content-type": "application/javascript" } })
       }
