@@ -11340,7 +11340,7 @@ class Render {
         this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST;
         this.engine.settings.ROUND_PIXELS = true;
         const domloader = global1.document.querySelector(".loader .loaded");
-        domloader.innerHTML = `<span>loaded gracidea</span>${domloader.innerHTML}`;
+        domloader.innerHTML = `<span>loading textures</span><span>loaded gracidea</span>${domloader.innerHTML}`;
         const loader = Render.engine.Loader.shared;
         loader.add("/copyrighted/textures/tileset3.json");
         loader.add("/copyrighted/textures/npcs.json");
