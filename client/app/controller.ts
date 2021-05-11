@@ -45,7 +45,7 @@ export class Controller {
       this.world.camera.render()
     })
     Render.app.view.addEventListener("mousedown", (event: event) => click = {x:event.pageX, y:event.pageY, active:true})
-    document.addEventListener("mousemove", (event: event) => {
+    global.document.addEventListener("mousemove", (event: event) => {
       if (click.active) {
         const delta = {x:click.x-event.pageX,y:click.y-event.pageY}
         click = {x:event.pageX, y:event.pageY, active:true}
