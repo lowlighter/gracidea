@@ -1191,7 +1191,7 @@ var Ee = {
     resolve: kt
 };
 tt.RETINA_PREFIX = /@([0-9\.]+)x/, tt.FAIL_IF_MAJOR_PERFORMANCE_CAVEAT = !1;
-var xe, be = !1, Ae = "6.0.3";
+var xe, be = !1, Ae = "6.0.4";
 function Se(t1) {
     var e2;
     if (!be) {
@@ -11141,7 +11141,7 @@ var du = function(t7) {
     }), e46;
 }(da);
 no.registerPlugin("accessibility", Ur), no.registerPlugin("extract", Ro), no.registerPlugin("interaction", Kr), no.registerPlugin("particle", Ms), no.registerPlugin("prepare", Ua), no.registerPlugin("batch", yo), no.registerPlugin("tilingSprite", Ka), Zo.registerPlugin(gh), Zo.registerPlugin(hs), Zo.registerPlugin(vs), Zo.registerPlugin(xs), Zo.registerPlugin(Xa), Ao.registerPlugin(Xr), Ao.registerPlugin($o);
-var Eu = "6.0.3", xu = {
+var Eu = "6.0.4", xu = {
     AlphaFilter: xh,
     BlurFilter: Wh,
     BlurFilterPass: zh,
@@ -11920,6 +11920,15 @@ class Controller {
     constructor({ app: app2 , world: world5  }){
         this.app = app2;
         this.world = world5;
+        this.scrollers();
+        this.controls();
+    }
+    scrollers() {
+        let click = {
+            x: 0,
+            y: 0,
+            active: false
+        };
         let touch = {
             x: 0,
             y: 0
@@ -11945,6 +11954,32 @@ class Controller {
             }
             this.world.camera.render();
         });
+        Render.app.view.addEventListener("mousedown", (event)=>click = {
+                x: event.pageX,
+                y: event.pageY,
+                active: true
+            }
+        );
+        global1.document.addEventListener("mousemove", (event)=>{
+            if (click.active) {
+                const delta = {
+                    x: click.x - event.pageX,
+                    y: click.y - event.pageY
+                };
+                click = {
+                    x: event.pageX,
+                    y: event.pageY,
+                    active: true
+                };
+                if (!this.world.minimap.open) {
+                    this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - delta.x), Math.round(this.world.sprites.world.position.y - delta.y));
+                } else {
+                    this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - delta.x), Math.round(this.world.minimap.sprite.position.y - delta.y));
+                }
+            }
+        });
+        Render.app.view.addEventListener("mouseup", ()=>click.active = false
+        );
         Render.app.view.addEventListener("wheel", (event)=>{
             event.preventDefault();
             if (!this.world.minimap.open) {
@@ -11954,6 +11989,8 @@ class Controller {
             }
             this.world.camera.render();
         });
+    }
+    controls() {
         global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
         );
         global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{

@@ -24,7 +24,7 @@ export class Controller {
 
   /** Scrollers */
   private scrollers() {
-    let click = {x:0, y:0, active:false}
+    let click = { x: 0, y: 0, active: false }
     let touch = { x: 0, y: 0 }
     Render.app.view.addEventListener("touchstart", (event: event) => touch = { x: event.touches[0].pageX, y: event.touches[0].pageY })
     Render.app.view.addEventListener("touchmove", (event: event) => {
@@ -44,11 +44,11 @@ export class Controller {
       }
       this.world.camera.render()
     })
-    Render.app.view.addEventListener("mousedown", (event: event) => click = {x:event.pageX, y:event.pageY, active:true})
+    Render.app.view.addEventListener("mousedown", (event: event) => click = { x: event.pageX, y: event.pageY, active: true })
     global.document.addEventListener("mousemove", (event: event) => {
       if (click.active) {
-        const delta = {x:click.x-event.pageX,y:click.y-event.pageY}
-        click = {x:event.pageX, y:event.pageY, active:true}
+        const delta = { x: click.x - event.pageX, y: click.y - event.pageY }
+        click = { x: event.pageX, y: event.pageY, active: true }
         if (!this.world.minimap.open) {
           this.world.sprites.world.position.set(
             Math.round(this.world.sprites.world.position.x - delta.x),
