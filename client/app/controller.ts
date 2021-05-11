@@ -63,7 +63,7 @@ export class Controller {
         }
       }
     })
-    Render.app.view.addEventListener("mouseup", (event: event) => click.active = false)
+    Render.app.view.addEventListener("mouseup", () => click.active = false)
     Render.app.view.addEventListener("wheel", (event: event) => {
       event.preventDefault()
       if (!this.world.minimap.open) {
