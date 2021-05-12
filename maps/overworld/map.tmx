@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="449">
+<map version="1.5" tiledversion="1.6.0" orientation="orthogonal" renderorder="right-down" width="100" height="100" tilewidth="16" tileheight="16" infinite="1" nextlayerid="25" nextobjectid="537">
  <editorsettings>
   <chunksize width="32" height="32"/>
  </editorsettings>
@@ -21712,7 +21712,7 @@
 </chunk>
    <chunk x="256" y="-1088" width="32" height="32">
 95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
-95,95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1040,1041,1041,1041,1044,0,0,0,
+0,95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1040,1041,1041,1041,1044,0,0,0,
 95,95,95,95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1153,1155,1154,1155,1157,0,0,0,
 95,95,95,95,95,95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1266,1268,1267,1268,1270,0,0,0,
 95,95,95,95,95,0,95,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -37407,6 +37407,9 @@
   <object id="221" name="sky-pillar" x="11648" y="-15632" width="400" height="528"/>
   <object id="235" name="abandoned-ship" x="5904" y="-13600" width="137" height="79"/>
   <object id="359" name="mt-pyre-outside" x="10064" y="-17712" width="464" height="432"/>
+  <object id="464" name="hoenn-route-102-area" type="walk" x="4672" y="-15344">
+   <polygon points="0,0 -32,0 -32,-64 -16,-64 -16,-80 0,-80 0,-96 32,-96 32,-48 0,-48 0,-32 16,-32 16,-16 0,-16"/>
+  </object>
  </objectgroup>
  <objectgroup id="15" name="creatures">
   <object id="9" name="hoenn-route-103-area" type="walk" x="5376" y="-15632">
@@ -37417,9 +37420,6 @@
   </object>
   <object id="12" name="hoenn-route-103-area" type="walk" x="5344" y="-15856">
    <polygon points="0,0 96,0 96,32 128,32 128,64 64,64 64,48 48,48 48,32 16,32 16,16 0,16"/>
-  </object>
-  <object id="13" name="hoenn-route-102-area" type="walk" x="5024" y="-15536">
-   <polygon points="0,0 0,80 -32,80 -32,64 -48,64 -48,48 -64,48 -64,0"/>
   </object>
   <object id="15" name="hoenn-route-102-area" type="walk" x="4832" y="-15360">
    <polygon points="0,0 32,0 32,-16 64,-16 64,16 80,16 80,32 64,32 64,48 16,48 16,32 0,32 0,0"/>
@@ -37793,9 +37793,6 @@
   <object id="336" name="hoenn-route-102-area" type="walk" x="4512" y="-15536">
    <polygon points="0,0 48,0 48,48 32,48 32,80 0,80"/>
   </object>
-  <object id="337" name="hoenn-route-102-area" type="walk" x="4704" y="-15440">
-   <polygon points="0,0 0,64 -16,64 -16,80 -32,80 -32,96 -64,96 -64,32 -48,32 -48,16 -32,16 -32,0"/>
-  </object>
   <object id="338" name="hoenn-route-102-area" type="walk" x="4704" y="-15456">
    <polygon points="0,0 80,0 80,32 64,32 64,48 32,48 32,64 0,64"/>
   </object>
@@ -38033,16 +38030,16 @@
   <object id="448" name="kanto-route-1-area" type="walk" x="24064" y="-26640">
    <polygon points="0,0 -32,0 -32,32 -112,32 -112,0 -80,0 -80,-32 0,-32"/>
   </object>
+  <object id="461" name="hoenn-route-102-area" type="walk" x="4960" y="-15536">
+   <polygon points="0,0 64,0 64,80 32,80 32,32 0,32"/>
+  </object>
  </objectgroup>
  <objectgroup id="20" name="people">
-  <object id="123" name="dude" type="wander" x="5344" y="-14752">
+  <object id="123" name="generic_m2" type="wander" x="5344" y="-14752">
    <polygon points="0,0 80,0 80,80 0,80"/>
   </object>
   <object id="124" name="rich_boy" type="wander" x="5344" y="-14672">
    <polygon points="0,0 80,0 80,-32 128,-32 128,32 96,32 96,64 0,64"/>
-  </object>
-  <object id="125" name="twin" type="fixed" x="5296" y="-14896">
-   <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
   <object id="126" name="youngster" type="lookaround" x="5440" y="-15120">
    <polygon points="0,0 16,0 16,16 0,16"/>
@@ -38053,19 +38050,16 @@
   <object id="297" name="seko" type="wander" x="5296" y="-15216">
    <polygon points="0,0 -32,0 -32,16 -16,16 -16,48 -32,48 -32,64 -48,64 -48,80 -16,80 -16,64 0,64"/>
   </object>
-  <object id="298" name="mom" type="wander" x="5184" y="-14800">
-   <polygon points="0,0 0,64 80,64 80,16 32,16 32,0"/>
-  </object>
-  <object id="299" name="mom1" type="wander" x="5424" y="-14784">
-   <polygon points="0,0 0,32 80,32 80,-32 48,-32 48,0"/>
-  </object>
-  <object id="300" name="shopkeeper" type="fixed" x="5392" y="-15344">
+  <object id="300" name="shopkeeper_m" type="fixed" x="5392" y="-15344">
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
-  <object id="301" name="youngster" type="lookaround" x="4912" y="-15344">
+  <object id="301" name="youngster" type="fixed" x="4912" y="-15344">
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
-  <object id="302" name="bug_catcher" type="lookaround" x="4784" y="-15328">
+  <object id="302" name="bug_catcher" type="fixed" x="4784" y="-15328">
+   <properties>
+    <property name="up" type="bool" value="true"/>
+   </properties>
    <polygon points="0,0 16,0 16,16 0,16"/>
   </object>
   <object id="316" name="rich_boy" type="wander" x="5216" y="-15040">
@@ -38110,6 +38104,317 @@
   <object id="442" name="swimmer_f" type="patrol" x="5776" y="-15808">
    <polygon points="0,0 0,64 -16,64 -16,0"/>
   </object>
+  <object id="450" name="schoolkid_f" type="wander" x="5408" y="-15408">
+   <polygon points="0,0 32,0 32,-16 64,-16 64,48 -16,48 -16,16 0,16"/>
+  </object>
+  <object id="451" name="aroma" type="fixed" x="6320" y="-15712">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="452" name="youngster" type="fixed" x="4688" y="-15504">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="453" name="schoolkid_f" type="lookaround" x="4512" y="-15456">
+   <properties>
+    <property name="down" type="bool" value="true"/>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="454" name="twin" type="wander" x="5424" y="-14752">
+   <polygon points="0,0 80,0 80,80 48,80 48,48 16,48 16,32 0,32"/>
+  </object>
+  <object id="455" name="mom" type="wander" x="5216" y="-14784">
+   <polygon points="0,0 96,0 96,48 0,48"/>
+  </object>
+  <object id="456" name="generic_f3" type="wander" x="5392" y="-14816">
+   <polygon points="0,0 -32,0 -32,-64 32,-64 32,-32 0,-32"/>
+  </object>
+  <object id="458" name="pokemaniac" type="fixed" x="5312" y="-15424">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="459" name="aroma" type="wander" x="5216" y="-15456">
+   <polygon points="0,0 32,0 32,16 64,16 64,48 0,48"/>
+  </object>
+  <object id="460" name="generic_m1" type="wander" x="5232" y="-15376">
+   <polygon points="0,0 0,48 32,48 32,32 64,32 64,0"/>
+  </object>
+  <object id="462" name="generic_m1" type="wander" x="4944" y="-15504">
+   <polygon points="0,0 48,0 48,32 0,32"/>
+  </object>
+  <object id="463" name="generic_c2" type="lookaround" x="4672" y="-15392">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="465" name="gentleman" type="wander" x="4208" y="-15584">
+   <polygon points="0,0 64,0 64,48 0,48"/>
+  </object>
+  <object id="466" name="generic_f3" type="wander" x="4160" y="-15456">
+   <polygon points="0,0 48,0 48,48 0,48"/>
+  </object>
+  <object id="467" name="schoolkid_m" type="wander" x="4240" y="-15328">
+   <polygon points="0,0 32,0 32,-16 64,-16 64,32 0,32"/>
+  </object>
+  <object id="468" name="generic_m1" type="fixed" x="4032" y="-15376">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="469" name="norman" type="wander" x="4112" y="-15584">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object id="470" name="rich_boy" type="wander" x="3984" y="-15552">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="471" name="generic_m1" type="wander" x="3680" y="-15536">
+   <polygon points="0,0 64,0 64,48 16,48 16,64 -16,64 -16,32 0,32"/>
+  </object>
+  <object id="472" name="schoolkid_f" type="fixed" x="3712" y="-15344">
+   <properties>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="473" name="youngster" type="loop" x="3552" y="-15344">
+   <polygon points="0,0 96,0 96,-112 0,-112"/>
+  </object>
+  <object id="474" name="bug_catcher" type="fixed" x="3504" y="-15552">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,-16 0,-16"/>
+  </object>
+  <object id="475" name="fisher" type="fixed" x="3504" y="-15584">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="476" name="aroma" type="wander" x="3744" y="-15728">
+   <polygon points="0,0 0,48 32,48 32,16 48,16 48,-16 0,-16"/>
+  </object>
+  <object id="477" name="generic_f1" type="wander" x="3664" y="-15776">
+   <polygon points="0,0 -32,0 -32,64 16,64 16,32 0,32"/>
+  </object>
+  <object id="478" name="aroma" type="lookaround" x="3440" y="-15808">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 0,-16 16,-16 16,0"/>
+  </object>
+  <object id="480" name="rich_boy" type="lookaround" x="3344" y="-16112">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="481" name="rich_boy_2" type="lookaround" x="3600" y="-16128">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="482" name="schoolkid_f" type="fixed" x="3760" y="-16144">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="483" name="twin" type="fixed" x="3696" y="-16288">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="484" name="twin" type="fixed" x="3712" y="-16288">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="485" name="fisher" type="fixed" x="3728" y="-16400">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="486" name="expert_f" type="fixed" x="3856" y="-16400">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="487" name="rich_boy" type="lookaround" x="3456" y="-16768">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="488" name="twin" type="wander" x="3584" y="-16736">
+   <polygon points="0,0 16,0 16,-16 48,-16 48,16 0,16"/>
+  </object>
+  <object id="489" name="generic_c2" type="fixed" x="3648" y="-16672">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="490" name="generic_c3" type="fixed" x="3664" y="-16672">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="491" name="generic_m1" type="lookaround" x="3760" y="-16912">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="492" name="generic_m2" type="lookaround" x="3568" y="-17280">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="493" name="generic_m4" type="wander" x="3408" y="-17200">
+   <polygon points="0,0 64,0 64,32 0,32"/>
+  </object>
+  <object id="494" name="ace_trainer" type="lookaround" x="3680" y="-17120">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="495" name="roxanne" type="lookaround" x="3680" y="-17168">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="496" name="ranger_m" type="wander" x="3776" y="-17168">
+   <polygon points="0,0 64,0 64,48 32,48 32,32 0,32"/>
+  </object>
+  <object id="497" name="generic_m5" type="fixed" x="3568" y="-17056">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="498" name="generic_m4" type="wander" x="3488" y="-16912">
+   <polygon points="0,0 0,-48 48,-48 48,-16 32,-16 32,0"/>
+  </object>
+  <object id="499" name="pokefan" type="wander" x="3376" y="-16848">
+   <polygon points="0,0 48,0 48,32 0,32"/>
+  </object>
+  <object id="500" name="generic_c1" type="fixed" x="3664" y="-16896">
+   <properties>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="501" name="generic_f5" type="wander" x="3616" y="-16976">
+   <polygon points="0,0 16,0 16,64 0,64"/>
+  </object>
+  <object id="502" name="generic_f4" type="wander" x="3760" y="-17024">
+   <polygon points="0,0 32,0 32,16 48,16 48,48 0,48"/>
+  </object>
+  <object id="503" name="elder_f" type="wander" x="3360" y="-16656">
+   <polygon points="0,0 48,0 48,16 0,16"/>
+  </object>
+  <object id="504" name="youngster" type="lookaround" x="4096" y="-17376">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="505" name="bug_catcher" type="lookaround" x="4112" y="-17216">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="506" name="schoolkid_f" type="lookaround" x="4256" y="-17232">
+   <properties>
+    <property name="down" type="bool" value="true"/>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="507" name="lass" type="fixed" x="4320" y="-17392">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="508" name="rich_boy" type="fixed" x="4432" y="-17408">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="509" name="aroma" type="fixed" x="4432" y="-17360">
+   <properties>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="510" name="schoolkid_m" type="fixed" x="4352" y="-17360">
+   <properties>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="511" name="youngster" type="lookaround" x="4480" y="-17280">
+   <properties>
+    <property name="down" type="bool" value="true"/>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="512" name="hiker" type="lookaround" x="4480" y="-17216">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="513" name="hiker" type="fixed" x="4576" y="-17280">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="514" name="pokemaniac" type="lookaround" x="5088" y="-17280">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="515" name="twin" type="fixed" x="5328" y="-17136">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="516" name="ranger_m" type="wander" x="5296" y="-17072">
+   <polygon points="0,0 32,0 32,48 -16,48 -16,16 0,16"/>
+  </object>
+  <object id="517" name="generic_m1" type="wander" x="5328" y="-16976">
+   <polygon points="0,0 -48,0 -48,-32 0,-32"/>
+  </object>
+  <object id="518" name="generic_m3" type="wander" x="5232" y="-16880">
+   <polygon points="0,0 0,-32 32,-32 32,-48 64,-48 64,0"/>
+  </object>
+  <object id="519" name="wally" type="wander" x="5424" y="-17040">
+   <polygon points="0,0 64,0 64,48 0,48"/>
+  </object>
+  <object id="525" name="aroma" type="lookaround" x="5632" y="-17008">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="526" name="generic_f2" type="fixed" x="5712" y="-16960">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="527" name="pokemaniac" type="fixed" x="5776" y="-16976">
+   <properties>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="528" name="schoolkid_f" type="fixed" x="5840" y="-17104">
+   <properties>
+    <property name="left" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="529" name="lass" type="fixed" x="5744" y="-17104">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="530" name="swimmer_f" type="lookaround" x="3568" y="-15104">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="531" name="swimmer_m" type="patrol" x="3584" y="-14672">
+   <polygon points="0,0 128,0 128,16 0,16"/>
+  </object>
+  <object id="532" name="swimmer_f" type="patrol" x="3392" y="-14640">
+   <polygon points="0,0 0,128 16,128 16,0"/>
+  </object>
+  <object id="533" name="guitarist" type="fixed" x="3328" y="-14384">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="534" name="hiker" type="fixed" x="3328" y="-14320">
+   <properties>
+    <property name="up" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="535" name="hiker" type="patrol" x="3536" y="-14480">
+   <polygon points="0,0 16,0 16,128 0,128"/>
+  </object>
+  <object id="536" name="swimmer_m" type="fixed" x="3568" y="-14288">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
  </objectgroup>
  <objectgroup id="23" name="pins">
   <object id="226" name="faraway-island" x="-224" y="1040" width="16" height="16">
@@ -38119,14 +38424,14 @@
     <property name="region" value="faraway-island"/>
    </properties>
   </object>
-  <object id="230" name="littleroot-town" x="5264" y="-14784" width="16" height="16">
+  <object id="230" name="littleroot-town" x="5264" y="-14800" width="16" height="16">
    <properties>
     <property name="mx" type="int" value="58"/>
     <property name="my" type="int" value="115"/>
     <property name="region" value="hoenn"/>
    </properties>
   </object>
-  <object id="232" name="oldale-town" x="5280" y="-15296" width="16" height="16">
+  <object id="232" name="oldale-town" x="5280" y="-15312" width="16" height="16">
    <properties>
     <property name="mx" type="int" value="58"/>
     <property name="my" type="int" value="100"/>
@@ -38140,7 +38445,7 @@
     <property name="region" value="hoenn"/>
    </properties>
   </object>
-  <object id="238" name="rustboro-city" x="3519" y="-16865" width="16" height="16">
+  <object id="238" name="rustboro-city" x="3520" y="-16880" width="16" height="16">
    <properties>
     <property name="mx" type="int" value="25"/>
     <property name="my" type="int" value="85"/>
@@ -38168,7 +38473,7 @@
     <property name="region" value="hoenn"/>
    </properties>
   </object>
-  <object id="242" name="verdanturf-town" x="5440" y="-17104" width="16" height="16">
+  <object id="242" name="verdanturf-town" x="5440" y="-17120" width="16" height="16">
    <properties>
     <property name="mx" type="int" value="58"/>
     <property name="my" type="int" value="85"/>

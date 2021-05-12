@@ -11685,11 +11685,121 @@ class World {
         return this.loaded.chunks.get(`${Math.floor(Math.ceil(x + 1) / 32)};${Math.floor(Math.floor(y - 1) / 32)}`);
     }
 }
+class Controller {
+    app;
+    world;
+    constructor({ app: app2 , world: world3  }){
+        this.app = app2;
+        this.world = world3;
+        this.scrollers();
+        this.controls();
+    }
+    scrollers() {
+        let click = {
+            x: 0,
+            y: 0,
+            active: false
+        };
+        let touch = {
+            x: 0,
+            y: 0
+        };
+        Render.app.view.addEventListener("touchstart", (event)=>touch = {
+                x: event.touches[0].pageX,
+                y: event.touches[0].pageY
+            }
+        );
+        Render.app.view.addEventListener("touchmove", (event)=>{
+            const delta = {
+                x: touch.x - event.touches[0].pageX,
+                y: touch.y - event.touches[0].pageY
+            };
+            touch = {
+                x: event.touches[0].pageX,
+                y: event.touches[0].pageY
+            };
+            if (!this.world.minimap.open) {
+                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - delta.x), Math.round(this.world.sprites.world.position.y - delta.y));
+            } else {
+                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - delta.x), Math.round(this.world.minimap.sprite.position.y - delta.y));
+            }
+            this.world.camera.render();
+        });
+        Render.app.view.addEventListener("mousedown", (event)=>click = {
+                x: event.pageX,
+                y: event.pageY,
+                active: true
+            }
+        );
+        global1.document.addEventListener("mousemove", (event)=>{
+            if (click.active) {
+                const delta = {
+                    x: click.x - event.pageX,
+                    y: click.y - event.pageY
+                };
+                click = {
+                    x: event.pageX,
+                    y: event.pageY,
+                    active: true
+                };
+                if (!this.world.minimap.open) {
+                    this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - delta.x), Math.round(this.world.sprites.world.position.y - delta.y));
+                } else {
+                    this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - delta.x), Math.round(this.world.minimap.sprite.position.y - delta.y));
+                }
+            }
+        });
+        Render.app.view.addEventListener("mouseup", ()=>click.active = false
+        );
+        Render.app.view.addEventListener("wheel", (event)=>{
+            event.preventDefault();
+            if (!this.world.minimap.open) {
+                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - event.deltaX), Math.round(this.world.sprites.world.position.y - event.deltaY));
+            } else {
+                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - event.deltaX), Math.round(this.world.minimap.sprite.position.y - event.deltaY));
+            }
+            this.world.camera.render();
+        });
+    }
+    controls() {
+        global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
+        );
+        global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
+            global1.document.querySelector("nav.debug").style.display = global1.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
+        });
+        Object.keys(App.debug).forEach((key)=>{
+            const input = global1.document.createElement("input");
+            input.setAttribute("data-control-for", key);
+            input.setAttribute("type", "checkbox");
+            if ([
+                "patch"
+            ].includes(key)) input.setAttribute("disabled", true);
+            input.checked = App.debug[key];
+            input.addEventListener("change", ()=>{
+                App.debug[key] = input.checked;
+                this.world.camera.render();
+            });
+            const label = global1.document.createElement("label");
+            label.innerText = key;
+            label.prepend(input);
+            global1.document.querySelector(".debug")?.append(label);
+        });
+    }
+    updateDOM() {
+        const location = global1.document.querySelector("#location .name");
+        if (location) location.innerHTML = this.world.camera.location[0] ?? "-  ";
+        const position = global1.document.querySelector("#location .position");
+        if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
+    }
+    updateFPS(fps) {
+        global1.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`;
+    }
+}
 class Camera extends Renderable {
     sprite;
-    constructor({ world: world3  }){
+    constructor({ world: world4  }){
         super({
-            world: world3
+            world: world4
         });
         this.sprite = this.world.sprites.world.addChild(Render.Container());
         Object.defineProperties(this, {
@@ -11798,12 +11908,12 @@ class Chunk extends Renderable {
     layers = new Map();
     areas = new Set();
     world;
-    constructor({ id: id1 , world: world4  }){
+    constructor({ id: id1 , world: world5  }){
         super({
-            world: world4
+            world: world5
         });
         this.id = id1;
-        this.world = world4;
+        this.world = world5;
         [this.x, this.y] = this.id.split(";").map((n72)=>Number(n72) * CHUNK_SIZE
         );
         this.width = this.height = CHUNK_SIZE;
@@ -11914,116 +12024,6 @@ class Chunk extends Renderable {
 }
 var Type;
 var Pattern;
-class Controller {
-    app;
-    world;
-    constructor({ app: app2 , world: world5  }){
-        this.app = app2;
-        this.world = world5;
-        this.scrollers();
-        this.controls();
-    }
-    scrollers() {
-        let click = {
-            x: 0,
-            y: 0,
-            active: false
-        };
-        let touch = {
-            x: 0,
-            y: 0
-        };
-        Render.app.view.addEventListener("touchstart", (event)=>touch = {
-                x: event.touches[0].pageX,
-                y: event.touches[0].pageY
-            }
-        );
-        Render.app.view.addEventListener("touchmove", (event)=>{
-            const delta = {
-                x: touch.x - event.touches[0].pageX,
-                y: touch.y - event.touches[0].pageY
-            };
-            touch = {
-                x: event.touches[0].pageX,
-                y: event.touches[0].pageY
-            };
-            if (!this.world.minimap.open) {
-                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - delta.x), Math.round(this.world.sprites.world.position.y - delta.y));
-            } else {
-                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - delta.x), Math.round(this.world.minimap.sprite.position.y - delta.y));
-            }
-            this.world.camera.render();
-        });
-        Render.app.view.addEventListener("mousedown", (event)=>click = {
-                x: event.pageX,
-                y: event.pageY,
-                active: true
-            }
-        );
-        global1.document.addEventListener("mousemove", (event)=>{
-            if (click.active) {
-                const delta = {
-                    x: click.x - event.pageX,
-                    y: click.y - event.pageY
-                };
-                click = {
-                    x: event.pageX,
-                    y: event.pageY,
-                    active: true
-                };
-                if (!this.world.minimap.open) {
-                    this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - delta.x), Math.round(this.world.sprites.world.position.y - delta.y));
-                } else {
-                    this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - delta.x), Math.round(this.world.minimap.sprite.position.y - delta.y));
-                }
-            }
-        });
-        Render.app.view.addEventListener("mouseup", ()=>click.active = false
-        );
-        Render.app.view.addEventListener("wheel", (event)=>{
-            event.preventDefault();
-            if (!this.world.minimap.open) {
-                this.world.sprites.world.position.set(Math.round(this.world.sprites.world.position.x - event.deltaX), Math.round(this.world.sprites.world.position.y - event.deltaY));
-            } else {
-                this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - event.deltaX), Math.round(this.world.minimap.sprite.position.y - event.deltaY));
-            }
-            this.world.camera.render();
-        });
-    }
-    controls() {
-        global1.document.querySelector("[data-control-for='map']")?.addEventListener("click", ()=>this.world.minimap.toggle()
-        );
-        global1.document.querySelector("[data-control-for='debug']")?.addEventListener("click", ()=>{
-            global1.document.querySelector("nav.debug").style.display = global1.document.querySelector("nav.debug").style.display === "flex" ? "none" : "flex";
-        });
-        Object.keys(App.debug).forEach((key)=>{
-            const input = global1.document.createElement("input");
-            input.setAttribute("data-control-for", key);
-            input.setAttribute("type", "checkbox");
-            if ([
-                "patch"
-            ].includes(key)) input.setAttribute("disabled", true);
-            input.checked = App.debug[key];
-            input.addEventListener("change", ()=>{
-                App.debug[key] = input.checked;
-                this.world.camera.render();
-            });
-            const label = global1.document.createElement("label");
-            label.innerText = key;
-            label.prepend(input);
-            global1.document.querySelector(".debug")?.append(label);
-        });
-    }
-    updateDOM() {
-        const location = global1.document.querySelector("#location .name");
-        if (location) location.innerHTML = this.world.camera.location[0] ?? "-  ";
-        const position = global1.document.querySelector("#location .position");
-        if (position) position.innerHTML = `${this.world.camera.x};${this.world.camera.y}`;
-    }
-    updateFPS(fps) {
-        global1.document.querySelector(".debug [data-control-for='fps']").innerText = `${Math.round(fps)} FPS`;
-    }
-}
 (function(Type1) {
     Type1["people"] = "people";
     Type1["creatures"] = "creatures";
