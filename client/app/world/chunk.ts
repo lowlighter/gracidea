@@ -46,7 +46,7 @@ export class Chunk extends Renderable {
     this.world = world
     ;[this.x, this.y] = this.id.split(";").map(n => Number(n) * CHUNK_SIZE)
     this.width = this.height = CHUNK_SIZE
-    this.sprite = this.world.sprites.chunks.addChild(Render.Container({ x: this.x, y: this.y }))
+    this.sprite = this.world.sprites.chunks.addChild(Render.Container({ x: this.x, y: this.y, z:this.x-this.y }))
     if (App.debug.chunks)
       console.debug(`loaded chunk: ${this.id}`)
   }

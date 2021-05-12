@@ -42,14 +42,14 @@ export class Quadtree<T extends Rectangle = Rectangle> {
   readonly depth: number
 
   /** Max depth */
-  readonly maxDepth = 25 as number
+  readonly maxDepth: number
 
   /** Max items */
-  readonly maxItems = 150 as number
+  readonly maxItems: number
 
   /** Constructor */
   constructor(
-    { x = 0, y = 0, width = 400, height = 400, parent = null, maxItems = 150, maxDepth = 25 }: {
+    { x = 0, y = 0, width = 0, height = 0, parent = null, maxItems = 300, maxDepth = 5 }: {
       x?: number
       y?: number
       width?: number
