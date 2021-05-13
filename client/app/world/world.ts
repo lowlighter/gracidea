@@ -48,7 +48,7 @@ export class World {
     const sprite = Render.app.stage.addChild(Render.Container())
     this.sprites = {
       world: sprite,
-      chunks: sprite.addChild(Render.Container({sorted:true})),
+      chunks: sprite.addChild(Render.Container({ sorted: true })),
       locations: sprite.addChild(Render.Container()),
       debug: sprite.addChild(Render.Container()),
       minimap: Render.app.stage.addChild(Render.Container()),

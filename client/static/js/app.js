@@ -11654,7 +11654,9 @@ class World {
         const sprite1 = Render.app.stage.addChild(Render.Container());
         this.sprites = {
             world: sprite1,
-            chunks: sprite1.addChild(Render.Container()),
+            chunks: sprite1.addChild(Render.Container({
+                sorted: true
+            })),
             locations: sprite1.addChild(Render.Container()),
             debug: sprite1.addChild(Render.Container()),
             minimap: Render.app.stage.addChild(Render.Container())
@@ -11919,7 +11921,8 @@ class Chunk extends Renderable {
         this.width = this.height = CHUNK_SIZE;
         this.sprite = this.world.sprites.chunks.addChild(Render.Container({
             x: this.x,
-            y: this.y
+            y: this.y,
+            z: this.x - this.y
         }));
         if (App.debug.chunks) console.debug(`loaded chunk: ${this.id}`);
     }
