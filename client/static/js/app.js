@@ -11340,12 +11340,14 @@ class Render {
         this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST;
         this.engine.settings.ROUND_PIXELS = true;
         const domloader = global1.document.querySelector(".loader .loaded");
-        domloader.innerHTML = `<span>loading textures</span><span>loaded gracidea</span>${domloader.innerHTML}`;
+        domloader.innerHTML = `<span>loading textures<span class="loading"></span></span><span>loaded gracidea</span>${domloader.innerHTML}`;
         const loader = Render.engine.Loader.shared;
         loader.add("/copyrighted/textures/tileset3.json");
         loader.add("/copyrighted/textures/npcs.json");
         loader.add("/copyrighted/textures/creatures.json");
-        loader.onProgress.add(({ progress =0  }, { name =""  })=>domloader.innerHTML = `<span>loaded textures ${name.split("/").pop()} (${Math.floor(progress)}%)</span>${domloader.innerHTML}`
+        loader.onProgress.add(({ progress =0  }, { name =""  })=>domloader.innerHTML = `<span>loaded ${name.split("/").pop()} (${Math.floor(progress)}%)</span>${domloader.innerHTML}`
+        );
+        loader.onComplete.add(()=>domloader.innerHTML = `<span>loaded textures</span>${domloader.innerHTML}`
         );
         this.app = new Render.engine.Application({
             width: global1.document.body.clientWidth,
