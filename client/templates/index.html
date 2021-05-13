@@ -8,7 +8,7 @@
   <meta name="description" content="Gracidea, a Pokémon live map">
   <meta property="og:image" content="/opengraph.png">
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/styles.css?commit=a33a06d96e1cf7494e361cd3713996134fe1d971">
+  <link rel="stylesheet" href="/css/styles.css?commit=%{commit}">
 </head>
 <body>
 
@@ -44,7 +44,7 @@
             loader.innerHTML = `<span style="color: orange">using compat mode because of non-standard browser</span>${loader.innerHTML}`
         const script = document.createElement("script")
         script.setAttribute("type", "module")
-        script.setAttribute("src", `/js/app.${compat ? "compat" : "min"}.js?commit=a33a06d96e1cf7494e361cd3713996134fe1d971`)
+        script.setAttribute("src", `/js/app.${compat ? "compat" : "min"}.js?commit=%{commit}`)
         document.querySelector("body").append(script)
       }
     }

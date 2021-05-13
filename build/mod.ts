@@ -5,6 +5,7 @@ import { loose } from "./constants.ts"
 import { map } from "./map.ts"
 import { patch } from "./patch.ts"
 import { report } from "./report.ts"
+import { template } from "./templates.ts"
 import { tiles } from "./tiles.ts"
 const args = parse(Deno.args.map(arg => arg.replace(/^"/g, "").replace(/"$/, "")), { string: ["head", "sha"] })
 
@@ -26,4 +27,6 @@ if (import.meta.main) {
   }
   if ((args.patch) && (args.sha))
     await report(patches, { sha })
+  if ((args.templates) || (args.all))
+    await template({ from: "client/templates", to: "client/static" })
 }
