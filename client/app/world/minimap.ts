@@ -57,7 +57,7 @@ export class Minimap extends Renderable {
       this.data = await fetch(`/map/${this.world.name}/pins`).then(res => res.json()) as MinimapData
     //Iterate through regions
     for (const [name, { mx, my, pins }] of Object.entries(this.data.regions)) {
-      const sprite = this.sprite.addChild(Render.Sprite({ frame: `copyrighted/imgs/regions/${name}.png` }))
+      const sprite = this.sprite.addChild(Render.Sprite({ frame: `/copyrighted/imgs/regions/${name}.png?commit=${Render.commit}` }))
       sprite.position.set(mx, my)
       //Iterate through pins
       for (const { x, y, mx, my } of pins) {

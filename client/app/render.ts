@@ -21,6 +21,9 @@ export class Render {
   //deno-lint-ignore no-explicit-any
   static app: any
 
+  /** Current commit */
+  static commit: string
+
   /** Render setup */
   static async setup() {
     //Load and configure PIXI
@@ -28,14 +31,14 @@ export class Render {
     this.engine.settings.SCALE_MODE = this.engine.SCALE_MODES.NEAREST
     this.engine.settings.ROUND_PIXELS = true
     //Load resources
-    const commit = global.document.querySelector("#commit")?.innerText
+    this.commit = global.document.querySelector("#commit")?.innerText ?? ""
     const domloader = global.document.querySelector(".loader .loaded")
     domloader.querySelector(".loading")?.remove()
     domloader.innerHTML = `<span>loading textures<span class="loading"></span></span><span>loaded gracidea</span>${domloader.innerHTML}`
     const loader = Render.engine.Loader.shared
-    loader.add(`/copyrighted/textures/tileset3.json?commit=${commit}`)
-    loader.add(`/copyrighted/textures/npcs.json?commit=${commit}`)
-    loader.add(`/copyrighted/textures/creatures.json?commit=${commit}`)
+    loader.add(`/copyrighted/textures/tileset3.json?commit=${this.commit}`)
+    loader.add(`/copyrighted/textures/npcs.json?commit=${this.commit}`)
+    loader.add(`/copyrighted/textures/creatures.json?commit=${this.commit}`)
     loader.onProgress.add(({ progress = 0 }, { name = "" }) =>
       domloader.innerHTML = `<span>loaded ${name.split("/").pop()?.replace(/[?].*$/, "")} (${Math.floor(progress)}%)</span>${domloader.innerHTML}`
     )
