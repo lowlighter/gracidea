@@ -13,7 +13,9 @@
 <body>
 
   <div class="loader">
-    <div class="loaded"></div>
+    <div class="loaded">
+      <span></span>
+    </div>
   </div>
 
   <div id="location">
@@ -31,6 +33,8 @@
     <button data-control-for="fps"></button>
   </nav>
 
+  <template id="commit">%{commit}</template>
+
   <script>
     {
       const loader = document.querySelector(".loader .loaded")
@@ -39,7 +43,7 @@
       }
       window.onload = function () {
         const compat = (navigator.userAgent.includes("Safari"))&&(!navigator.userAgent.includes("Chrome"))
-          loader.innerHTML = `<span>loading gracidea<span class="loading"></span></span>${loader.innerHTML}`
+          loader.innerHTML = `<span>loading gracidea<span class="loading"></span></span><span>at commit ${"%{commit}".substring(0, 7)}</span>${loader.innerHTML}`
         if (compat)
             loader.innerHTML = `<span style="color: orange">using compat mode because of non-standard browser</span>${loader.innerHTML}`
         const script = document.createElement("script")

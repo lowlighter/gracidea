@@ -8,12 +8,14 @@
   <meta name="description" content="Gracidea, a Pokémon live map">
   <meta property="og:image" content="/opengraph.png">
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/styles.css?commit=5673563a80618134eca650771625dd63a313b5ad">
+  <link rel="stylesheet" href="/css/styles.css?commit=4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28">
 </head>
 <body>
 
   <div class="loader">
-    <div class="loaded"></div>
+    <div class="loaded">
+      <span>at commit 4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28</span>
+    </div>
   </div>
 
   <div id="location">
@@ -31,6 +33,8 @@
     <button data-control-for="fps"></button>
   </nav>
 
+  <template id="commit">4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28</template>
+
   <script>
     {
       const loader = document.querySelector(".loader .loaded")
@@ -44,7 +48,7 @@
             loader.innerHTML = `<span style="color: orange">using compat mode because of non-standard browser</span>${loader.innerHTML}`
         const script = document.createElement("script")
         script.setAttribute("type", "module")
-        script.setAttribute("src", `/js/app.${compat ? "compat" : "min"}.js?commit=5673563a80618134eca650771625dd63a313b5ad`)
+        script.setAttribute("src", `/js/app.${compat ? "compat" : "min"}.js?commit=4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28`)
         document.querySelector("body").append(script)
       }
     }
