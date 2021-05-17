@@ -8,13 +8,13 @@
   <meta name="description" content="Gracidea, a Pokémon live map">
   <meta property="og:image" content="/opengraph.png">
   <link rel="icon" href="/favicon.ico">
-  <link rel="stylesheet" href="/css/styles.css?commit=4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28">
+  <link rel="stylesheet" href="/css/styles.css?commit=deffa845a916cd42d14f668d96abe6fff7ce2424">
 </head>
 <body>
 
   <div class="loader">
     <div class="loaded">
-      <span>at commit 4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28</span>
+      <span></span>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
     <button data-control-for="fps"></button>
   </nav>
 
-  <template id="commit">4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28</template>
+  <template id="commit">deffa845a916cd42d14f668d96abe6fff7ce2424</template>
 
   <script>
     {
@@ -43,12 +43,12 @@
       }
       window.onload = function () {
         const compat = (navigator.userAgent.includes("Safari"))&&(!navigator.userAgent.includes("Chrome"))
-          loader.innerHTML = `<span>loading gracidea<span class="loading"></span></span>${loader.innerHTML}`
+          loader.innerHTML = `<span>loading gracidea<span class="loading"></span></span><span>at commit ${"deffa845a916cd42d14f668d96abe6fff7ce2424".substring(0, 7)}</span>${loader.innerHTML}`
         if (compat)
             loader.innerHTML = `<span style="color: orange">using compat mode because of non-standard browser</span>${loader.innerHTML}`
         const script = document.createElement("script")
         script.setAttribute("type", "module")
-        script.setAttribute("src", `/js/app.${compat ? "compat" : "min"}.js?commit=4a1fab4db1ad20c088f4bdb8f88fcc98ba0a3e28`)
+        script.setAttribute("src", `/js/app.${compat ? "compat" : "min"}.js?commit=deffa845a916cd42d14f668d96abe6fff7ce2424`)
         document.querySelector("body").append(script)
       }
     }
