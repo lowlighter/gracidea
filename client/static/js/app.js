@@ -11846,7 +11846,7 @@ class Camera extends Renderable {
         }));
         return super.debug(App.debug.camera);
     }
-    render({ DX =1 , DY =1 , DM =3  } = {
+    render({ DX =2 , DY =1 , DM =3  } = {
     }) {
         if (this.throttle) {
             this.debounce = true;
