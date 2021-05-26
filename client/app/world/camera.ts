@@ -45,7 +45,7 @@ export class Camera extends Renderable {
   }
 
   /** Render */
-  render({ DX = 1, DY = 1, DM = 3 }: { DX?: number; DY?: number; DM?: number } = {}) {
+  render({ DX = 2, DY = 1, DM = 3 }: { DX?: number; DY?: number; DM?: number } = {}) {
     //Handle throttle and debouncing
     if (this.throttle) {
       this.debounce = true
