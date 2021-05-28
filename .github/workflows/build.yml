@@ -15,9 +15,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Deno
-        uses: denolib/setup-deno@v2
+        uses: denoland/setup-deno@v1
       - name: Setup velociraptor
-        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+        run: jurassiscripts/setup-velociraptor@v1
       - name: Lint code
         run: vr lint
 
@@ -28,9 +28,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Deno
-        uses: denolib/setup-deno@v2
+        uses: denoland/setup-deno@v1
       - name: Setup velociraptor
-        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+        run: jurassiscripts/setup-velociraptor@v1
       - name: Bundle client app
         run: vr bundle
 
@@ -41,9 +41,9 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Deno
-        uses: denolib/setup-deno@v2
+        uses: denoland/setup-deno@v1
       - name: Setup velociraptor
-        run: deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+        run: jurassiscripts/setup-velociraptor@v1
       - name: Run tests
         run: vr test
 
@@ -54,10 +54,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Deno
-        uses: denolib/setup-deno@v2
+        uses: denoland/setup-deno@v1
       - name: Setup velociraptor and deployctl
         run: |
-          deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+          jurassiscripts/setup-velociraptor@v1
           deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
       - name: Run tests
         run: deployctl check deploy/mod.ts
@@ -90,10 +90,10 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Setup Deno
-        uses: denolib/setup-deno@v2
+        uses: denoland/setup-deno@v1
       - name: Setup velociraptor and dprint
         run: |
-          deno install --allow-all --name vr https://deno.land/x/velociraptor@1.0.0-beta.18/cli.ts
+          jurassiscripts/setup-velociraptor@v1
           curl -fsSL https://dprint.dev/install.sh | sh
           echo "$HOME/.dprint/bin" >> $GITHUB_PATH
       - name: Format code
