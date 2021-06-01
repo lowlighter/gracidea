@@ -17,7 +17,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
       - name: Setup velociraptor
-        run: jurassiscripts/setup-velociraptor@v1
+        uses: jurassiscripts/setup-velociraptor@v1
       - name: Lint code
         run: vr lint
 
@@ -30,7 +30,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
       - name: Setup velociraptor
-        run: jurassiscripts/setup-velociraptor@v1
+        uses: jurassiscripts/setup-velociraptor@v1
       - name: Bundle client app
         run: vr bundle
 
@@ -43,7 +43,7 @@ jobs:
       - name: Setup Deno
         uses: denoland/setup-deno@v1
       - name: Setup velociraptor
-        run: jurassiscripts/setup-velociraptor@v1
+        uses: jurassiscripts/setup-velociraptor@v1
       - name: Run tests
         run: vr test
 
@@ -55,10 +55,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Deno
         uses: denoland/setup-deno@v1
-      - name: Setup velociraptor and deployctl
-        run: |
-          jurassiscripts/setup-velociraptor@v1
-          deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
+      - name: Setup velociraptor
+        uses: jurassiscripts/setup-velociraptor@v1
+      - name: Setup deployctl
+        run: deno install --allow-all --name deployctl https://deno.land/x/deploy/deployctl.ts
       - name: Run tests
         run: deployctl check deploy/mod.ts
 
@@ -91,9 +91,10 @@ jobs:
         uses: actions/checkout@v2
       - name: Setup Deno
         uses: denoland/setup-deno@v1
-      - name: Setup velociraptor and dprint
+      - name: Setup velociraptor
+        uses: jurassiscripts/setup-velociraptor@v1
+      - name: Setup dprint
         run: |
-          jurassiscripts/setup-velociraptor@v1
           curl -fsSL https://dprint.dev/install.sh | sh
           echo "$HOME/.dprint/bin" >> $GITHUB_PATH
       - name: Format code
