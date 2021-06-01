@@ -91,7 +91,7 @@ async function json(name: string, type = MapData.map) {
     const content = await (Deno as rw).readTextFile(local)
     return content
   }
-  catch (error) {
+  catch {
     const body = await fetch(new URL(remote)).then(res => res.body)
     const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
     let content = ""
