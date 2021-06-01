@@ -47,6 +47,11 @@ export class Controller {
     Render.app.view.addEventListener("mousedown", (event: event) => click = { x: event.pageX, y: event.pageY, active: true })
     global.document.addEventListener("mousemove", (event: event) => {
       if (click.active) {
+        if (event.buttons === 0) {
+          click.active = false
+          this.world.camera.render()
+          return
+        }
         const delta = { x: click.x - event.pageX, y: click.y - event.pageY }
         click = { x: event.pageX, y: event.pageY, active: true }
         if (!this.world.minimap.open) {
@@ -62,10 +67,6 @@ export class Controller {
           )
         }
       }
-    })
-    Render.app.view.addEventListener("mouseup", () => {
-      click.active = false
-      this.world.camera.render()
     })
     Render.app.view.addEventListener("wheel", (event: event) => {
       event.preventDefault()

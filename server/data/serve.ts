@@ -62,10 +62,10 @@ export async function chunk({ section, map, patch }: { section: string; map: str
   const rectangle = { x: x * CHUNK_SIZE, y: y * CHUNK_SIZE, width: CHUNK_SIZE, height: CHUNK_SIZE }
   const { quadtree, map: data, patched } = await load(map, { patch })
   let areas = [...quadtree.get(rectangle)].filter(area => Quadtree.contains(area, rectangle)).map(({ data }: loose) => data)
-  let chunk = data.chunks[section]
+  let chunk = data.chunks[section] ?? null
   //Apply patch if needed
   if (patched) {
-    chunk = JSON.parse(JSON.stringify(chunk))
+    chunk = JSON.parse(JSON.stringify(chunk ?? {layers:{}}))
     for (const [layer, tiles] of Object.entries(patched?.chunks[section]?.layers ?? {}))
       chunk.layers[layer] = tiles
     areas = [...areas, ...patched.areas]
@@ -80,7 +80,7 @@ const enum MapData {
 }
 
 /** JSON loader */
-async function json(name: string, type = "map" as MapData) {
+async function json(name: string, type = MapData.map) {
   let local = `server/data/maps/${name}.gracidea.json`
   let remote = `https://raw.githubusercontent.com/lowlighter/gracidea/main/server/data/maps/${name}.gracidea.json`
   if (type === MapData.patch) {
@@ -88,10 +88,10 @@ async function json(name: string, type = "map" as MapData) {
     remote = `https://raw.githubusercontent.com/lowlighter/gracidea/patches/patches/${name}.json`
   }
   try {
-    return (Deno as rw).readTextFile(local)
+    const content = await (Deno as rw).readTextFile(local)
+    return content
   }
   catch (error) {
-    console.warn(error)
     const body = await fetch(new URL(remote)).then(res => res.body)
     const reader = body?.getReader() as ReadableStreamDefaultReader<Uint8Array>
     let content = ""
