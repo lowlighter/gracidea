@@ -65,7 +65,7 @@ export async function chunk({ section, map, patch }: { section: string; map: str
   let chunk = data.chunks[section] ?? null
   //Apply patch if needed
   if (patched) {
-    chunk = JSON.parse(JSON.stringify(chunk ?? {layers:{}}))
+    chunk = JSON.parse(JSON.stringify(chunk ?? { layers: {} }))
     for (const [layer, tiles] of Object.entries(patched?.chunks[section]?.layers ?? {}))
       chunk.layers[layer] = tiles
     areas = [...areas, ...patched.areas]
