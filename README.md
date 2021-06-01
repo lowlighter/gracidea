@@ -3,7 +3,7 @@
 ![](/.github/README/animated_map.gif)
 
 ![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
-![Deploy](https://img.shields.io/badge/%20-Gracidea-black.svg?logo=deno)
+[![Deploy](https://img.shields.io/badge/%20-Gracidea%20on%20deno%20deploy-black.svg?logo=deno)](https://gracidea.lecoq.io)
 
 
 [Check it out live here !](https://gracidea.lecoq.io)
@@ -42,7 +42,7 @@ Read [CONTRIBUTING.md](/CONTRIBUTING.md) for more informations.
 
 Consider leaving a **star** if you like this project!
 
-> Note that Gracidea is only a **mapping** project, **not a game** project. Suggestion for adding game mechanics (e.g. battles, captures, story, etc.) will be rejected 
+> Note that Gracidea is only a **mapping** project, **not a game** project. Suggestion for adding game mechanics (e.g. battles, captures, story, etc.) will be rejected
 
 ## ![](/client/static/copyrighted/imgs/icons/licenses.png) License and copyright
 
