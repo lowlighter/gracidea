@@ -11740,6 +11740,11 @@ class Controller {
         );
         global1.document.addEventListener("mousemove", (event)=>{
             if (click.active) {
+                if (event.buttons === 0) {
+                    click.active = false;
+                    this.world.camera.render();
+                    return;
+                }
                 const delta = {
                     x: click.x - event.pageX,
                     y: click.y - event.pageY
@@ -11755,10 +11760,6 @@ class Controller {
                     this.world.minimap.sprite.position.set(Math.round(this.world.minimap.sprite.position.x - delta.x), Math.round(this.world.minimap.sprite.position.y - delta.y));
                 }
             }
-        });
-        Render.app.view.addEventListener("mouseup", ()=>{
-            click.active = false;
-            this.world.camera.render();
         });
         Render.app.view.addEventListener("wheel", (event)=>{
             event.preventDefault();
