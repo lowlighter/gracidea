@@ -6,13 +6,5 @@
  <image source="tileset3.png" trans="000000" width="2036" height="1010"/>
  <wangsets>
   <wangset name="Terrains" type="corner" tile="-1"/>
-  <wangset name="Unnamed Set" type="mixed" tile="-1">
-   <wangcolor name="" color="#ff0000" tile="-1" probability="1"/>
-   <wangtile tileid="2491" wangid="0,0,0,0,1,0,0,0"/>
-   <wangtile tileid="2603" wangid="0,0,1,0,0,0,0,0"/>
-   <wangtile tileid="2604" wangid="1,0,1,0,1,0,1,0"/>
-   <wangtile tileid="2605" wangid="0,0,0,0,0,0,1,0"/>
-   <wangtile tileid="2717" wangid="1,0,0,0,0,0,0,0"/>
-  </wangset>
  </wangsets>
 </tileset>
