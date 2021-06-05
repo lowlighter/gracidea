@@ -20,7 +20,15 @@ scripts:
     cmd: deno test --unstable --allow-read tests
 
   build:
-    desc: Build data and sprites
+    desc: |
+      Build application
+          --all       to rebuild everything
+          --data      to rebuild maps data
+          --sprites   to rebuild sprites and textures
+          --templates to rebuild templated files
+          --patch     to build a preview
+            --head <user:branch>
+            --sha <commit>
     cmd: deno run --allow-all --unstable build/mod.ts
 
   bundle:
