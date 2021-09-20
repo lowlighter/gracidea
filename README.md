@@ -6,7 +6,7 @@
 [![Deploy](https://img.shields.io/badge/%20-Gracidea%20on%20deno%20deploy-black.svg?logo=deno)](https://gracidea.lecoq.io)
 
 
-[Check it out live here !](https://gracidea.lecoq.io)
+[Check it out live here !](https://gracidea.deno.dev)
 
 **Gracidea** is a cartographic project which aims to gather all known *Pokémon* regions into a single 2D map, keeping fidelity to games while taking the liberty of filling blanks and making minor arrangements based on official artworks, anime and manga.
 
