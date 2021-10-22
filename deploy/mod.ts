@@ -1,1 +1,1 @@
-addEventListener("fetch", event => void event.respondWith(new Response.redirect("https://gracidea.lecoq.io", 302)))
+addEventListener("fetch", event => void event.respondWith(new Response(null, {headers: {location: "https://gracidea.lecoq.io"}, status: 302})))
