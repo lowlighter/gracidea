@@ -11438,194 +11438,192 @@ var Yu = "6.1.3", Vu = {
     FXAAFilter: Su,
     NoiseFilter: Mu
 };
-const mod = function() {
-    return {
-        ALPHA_MODES: _e,
-        AbstractBatchRenderer: To,
-        AbstractMultiResource: ai,
-        AbstractRenderer: uo,
-        AccessibilityManager: Br,
-        AnimatedSprite: ju,
-        AppLoaderPlugin: es,
-        Application: wo,
-        ArrayResource: hi,
-        Attribute: Oi,
-        BLEND_MODES: se,
-        BUFFER_BITS: oe,
-        BUFFER_TYPE: Te,
-        BaseImageResource: ui,
-        BasePrepare: Ua,
-        BaseRenderTexture: gi,
-        BaseTexture: si,
-        BatchDrawCall: yo,
-        BatchGeometry: xo,
-        BatchPluginFactory: Oo,
-        BatchRenderer: So,
-        BatchShaderGenerator: bo,
-        BatchSystem: ji,
-        BatchTextureArray: go,
-        BitmapFont: yh,
-        BitmapFontData: ch,
-        BitmapFontLoader: bh,
-        BitmapText: Th,
-        BlobResource: us,
-        Bounds: Ar,
-        Buffer: Ii,
-        BufferResource: ni,
-        CLEAR_MODES: me,
-        CanvasResource: li,
-        Circle: ur,
-        CompressedTextureLoader: cs,
-        CompressedTextureResource: ls,
-        Container: Dr,
-        ContextSystem: Vi,
-        CountLimiter: Pa,
-        CubeResource: ci,
-        DDSLoader: Es,
-        DEG_TO_RAD: ar,
-        DRAW_MODES: ae,
-        DisplayObject: Ir,
-        ENV: ie,
-        Ellipse: lr,
-        Extract: Fo,
-        FORMATS: he,
-        FORMATS_TO_COMPONENTS: xs,
-        FillStyle: Fs,
-        Filter: An,
-        FilterState: Bi,
-        FilterSystem: ki,
-        Framebuffer: yi,
-        FramebufferSystem: qi,
-        GC_MODES: ve,
-        GLFramebuffer: zi,
-        GLProgram: zn,
-        GLTexture: oo,
-        GRAPHICS_CURVES: Ls,
-        Geometry: wi,
-        GeometrySystem: Zi,
-        Graphics: ca,
-        GraphicsData: na,
-        GraphicsGeometry: aa,
-        IGLUniformData: Vn,
-        INSTALLED: Qr,
-        INTERNAL_FORMATS: ts,
-        INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: ns,
-        ImageBitmapResource: _i,
-        ImageResource: di,
-        InteractionData: Hr,
-        InteractionEvent: Yr,
-        InteractionManager: Zr,
-        InteractionTrackingData: Vr,
-        KTXLoader: As,
-        LINE_CAP: Ps,
-        LINE_JOIN: Is,
-        LineStyle: ha,
-        Loader: Qo,
-        LoaderResource: zo,
-        MASK_TYPES: ge,
-        MIPMAP_MODES: pe,
-        MSAA_QUALITY: Ee,
-        MaskData: Ji,
-        MaskSystem: Dn,
-        Matrix: _r,
-        Mesh: oh,
-        MeshBatchUvs: rh,
-        MeshGeometry: uh,
-        MeshMaterial: hh,
-        NineSlicePlane: ku,
-        ObjectRenderer: Hi,
-        ObservablePoint: pr,
-        PI_2: or,
-        PRECISION: ye,
-        ParticleContainer: Ms,
-        ParticleRenderer: Cs,
-        PlaneGeometry: Lu,
-        Point: fr,
-        Polygon: cr,
-        Prepare: ka,
-        Program: bn,
-        ProjectionSystem: Ln,
-        Quad: Ci,
-        QuadUv: Li,
-        RAD_TO_DEG: sr,
-        RENDERER_TYPE: ne,
-        Rectangle: hr,
-        RenderTexture: Ri,
-        RenderTexturePool: Ai,
-        RenderTextureSystem: Bn,
-        Renderer: fo,
-        Resource: ii,
-        RopeGeometry: Fu,
-        RoundedRectangle: dr,
-        Runner: Jr,
-        SAMPLER_TYPES: ce,
-        SCALE_MODES: de,
-        SHAPES: ir,
-        SVGResource: fi,
-        ScissorSystem: wn,
-        Shader: xn,
-        ShaderSystem: Zn,
-        SimpleMesh: Gu,
-        SimplePlane: Bu,
-        SimpleRope: Uu,
-        Sprite: ma,
-        SpriteMaskFilter: Mn,
-        Spritesheet: ja,
-        SpritesheetLoader: Ya,
-        State: Rn,
-        StateSystem: io,
-        StencilSystem: Cn,
-        System: vo,
-        TARGETS: ue,
-        TEXT_GRADIENT: ia,
-        TYPES: le,
-        TYPES_TO_BYTES_PER_COMPONENT: bs,
-        TYPES_TO_BYTES_PER_PIXEL: Rs,
-        TemporaryDisplayObject: Pr,
-        Text: Sa,
-        TextMetrics: Ra,
-        TextStyle: Ea,
-        Texture: bi,
-        TextureGCSystem: no,
-        TextureLoader: rs,
-        TextureMatrix: Pn,
-        TextureSystem: so,
-        TextureUvs: Ei,
-        Ticker: Xr,
-        TickerPlugin: kr,
-        TilingSprite: qa,
-        TilingSpriteRenderer: $a,
-        TimeLimiter: Ha,
-        Transform: Rr,
-        UPDATE_PRIORITY: wr,
-        UniformGroup: Ui,
-        VERSION: Yu,
-        VideoResource: pi,
-        ViewableBuffer: Eo,
-        WRAP_MODES: fe,
-        accessibleTarget: Nr,
-        autoDetectRenderer: po,
-        autoDetectResource: $r,
-        checkMaxIfStatementsInShader: gn,
-        createUBOElements: Hn,
-        defaultFilterVertex: mo,
-        defaultVertex: _o,
-        filters: Vu,
-        generateProgram: Wn,
-        generateUniformBufferSync: Yn,
-        getTestContext: sn,
-        getUBOData: jn,
-        graphicsUtils: da,
-        groupD8: xr,
-        interactiveTarget: Wr,
-        isMobile: tt,
-        resources: Io,
-        settings: et,
-        systems: Do,
-        uniformParsers: pn,
-        utils: nr
-    };
-}();
+const mod = {
+    ALPHA_MODES: _e,
+    AbstractBatchRenderer: To,
+    AbstractMultiResource: ai,
+    AbstractRenderer: uo,
+    AccessibilityManager: Br,
+    AnimatedSprite: ju,
+    AppLoaderPlugin: es,
+    Application: wo,
+    ArrayResource: hi,
+    Attribute: Oi,
+    BLEND_MODES: se,
+    BUFFER_BITS: oe,
+    BUFFER_TYPE: Te,
+    BaseImageResource: ui,
+    BasePrepare: Ua,
+    BaseRenderTexture: gi,
+    BaseTexture: si,
+    BatchDrawCall: yo,
+    BatchGeometry: xo,
+    BatchPluginFactory: Oo,
+    BatchRenderer: So,
+    BatchShaderGenerator: bo,
+    BatchSystem: ji,
+    BatchTextureArray: go,
+    BitmapFont: yh,
+    BitmapFontData: ch,
+    BitmapFontLoader: bh,
+    BitmapText: Th,
+    BlobResource: us,
+    Bounds: Ar,
+    Buffer: Ii,
+    BufferResource: ni,
+    CLEAR_MODES: me,
+    CanvasResource: li,
+    Circle: ur,
+    CompressedTextureLoader: cs,
+    CompressedTextureResource: ls,
+    Container: Dr,
+    ContextSystem: Vi,
+    CountLimiter: Pa,
+    CubeResource: ci,
+    DDSLoader: Es,
+    DEG_TO_RAD: ar,
+    DRAW_MODES: ae,
+    DisplayObject: Ir,
+    ENV: ie,
+    Ellipse: lr,
+    Extract: Fo,
+    FORMATS: he,
+    FORMATS_TO_COMPONENTS: xs,
+    FillStyle: Fs,
+    Filter: An,
+    FilterState: Bi,
+    FilterSystem: ki,
+    Framebuffer: yi,
+    FramebufferSystem: qi,
+    GC_MODES: ve,
+    GLFramebuffer: zi,
+    GLProgram: zn,
+    GLTexture: oo,
+    GRAPHICS_CURVES: Ls,
+    Geometry: wi,
+    GeometrySystem: Zi,
+    Graphics: ca,
+    GraphicsData: na,
+    GraphicsGeometry: aa,
+    IGLUniformData: Vn,
+    INSTALLED: Qr,
+    INTERNAL_FORMATS: ts,
+    INTERNAL_FORMAT_TO_BYTES_PER_PIXEL: ns,
+    ImageBitmapResource: _i,
+    ImageResource: di,
+    InteractionData: Hr,
+    InteractionEvent: Yr,
+    InteractionManager: Zr,
+    InteractionTrackingData: Vr,
+    KTXLoader: As,
+    LINE_CAP: Ps,
+    LINE_JOIN: Is,
+    LineStyle: ha,
+    Loader: Qo,
+    LoaderResource: zo,
+    MASK_TYPES: ge,
+    MIPMAP_MODES: pe,
+    MSAA_QUALITY: Ee,
+    MaskData: Ji,
+    MaskSystem: Dn,
+    Matrix: _r,
+    Mesh: oh,
+    MeshBatchUvs: rh,
+    MeshGeometry: uh,
+    MeshMaterial: hh,
+    NineSlicePlane: ku,
+    ObjectRenderer: Hi,
+    ObservablePoint: pr,
+    PI_2: or,
+    PRECISION: ye,
+    ParticleContainer: Ms,
+    ParticleRenderer: Cs,
+    PlaneGeometry: Lu,
+    Point: fr,
+    Polygon: cr,
+    Prepare: ka,
+    Program: bn,
+    ProjectionSystem: Ln,
+    Quad: Ci,
+    QuadUv: Li,
+    RAD_TO_DEG: sr,
+    RENDERER_TYPE: ne,
+    Rectangle: hr,
+    RenderTexture: Ri,
+    RenderTexturePool: Ai,
+    RenderTextureSystem: Bn,
+    Renderer: fo,
+    Resource: ii,
+    RopeGeometry: Fu,
+    RoundedRectangle: dr,
+    Runner: Jr,
+    SAMPLER_TYPES: ce,
+    SCALE_MODES: de,
+    SHAPES: ir,
+    SVGResource: fi,
+    ScissorSystem: wn,
+    Shader: xn,
+    ShaderSystem: Zn,
+    SimpleMesh: Gu,
+    SimplePlane: Bu,
+    SimpleRope: Uu,
+    Sprite: ma,
+    SpriteMaskFilter: Mn,
+    Spritesheet: ja,
+    SpritesheetLoader: Ya,
+    State: Rn,
+    StateSystem: io,
+    StencilSystem: Cn,
+    System: vo,
+    TARGETS: ue,
+    TEXT_GRADIENT: ia,
+    TYPES: le,
+    TYPES_TO_BYTES_PER_COMPONENT: bs,
+    TYPES_TO_BYTES_PER_PIXEL: Rs,
+    TemporaryDisplayObject: Pr,
+    Text: Sa,
+    TextMetrics: Ra,
+    TextStyle: Ea,
+    Texture: bi,
+    TextureGCSystem: no,
+    TextureLoader: rs,
+    TextureMatrix: Pn,
+    TextureSystem: so,
+    TextureUvs: Ei,
+    Ticker: Xr,
+    TickerPlugin: kr,
+    TilingSprite: qa,
+    TilingSpriteRenderer: $a,
+    TimeLimiter: Ha,
+    Transform: Rr,
+    UPDATE_PRIORITY: wr,
+    UniformGroup: Ui,
+    VERSION: Yu,
+    VideoResource: pi,
+    ViewableBuffer: Eo,
+    WRAP_MODES: fe,
+    accessibleTarget: Nr,
+    autoDetectRenderer: po,
+    autoDetectResource: $r,
+    checkMaxIfStatementsInShader: gn,
+    createUBOElements: Hn,
+    defaultFilterVertex: mo,
+    defaultVertex: _o,
+    filters: Vu,
+    generateProgram: Wn,
+    generateUniformBufferSync: Yn,
+    getTestContext: sn,
+    getUBOData: jn,
+    graphicsUtils: da,
+    groupD8: xr,
+    interactiveTarget: Wr,
+    isMobile: tt,
+    resources: Io,
+    settings: et,
+    systems: Do,
+    uniformParsers: pn,
+    utils: nr
+};
 class Render {
     static engine;
     static app;
@@ -11744,12 +11742,12 @@ class Positionable {
     y;
     width;
     height;
-    constructor({ world: world1 , x: x2 = 0 , y: y1 = 0 , width: width1 = 0 , height: height1 = 0  }){
-        this.world = world1;
-        this.x = x2;
-        this.y = y1;
-        this.width = width1;
-        this.height = height1;
+    constructor({ world , x =0 , y =0 , width =0 , height =0  }){
+        this.world = world;
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
     }
 }
 class Renderable extends Positionable {
@@ -11814,9 +11812,9 @@ class Renderable extends Positionable {
 class Minimap extends Renderable {
     sprite;
     data = null;
-    constructor({ world: world2  }){
+    constructor({ world  }){
         super({
-            world: world2
+            world
         });
         this.sprite = this.world.sprites.minimap.addChild(Render.Container());
         this.hide();
@@ -11947,17 +11945,17 @@ class World {
     name;
     app;
     tick = 0;
-    constructor({ app: app1 , name: name1  }){
-        this.app = app1;
-        this.name = name1 ?? "overworld";
-        const sprite1 = Render.app.stage.addChild(Render.Container());
+    constructor({ app , name  }){
+        this.app = app;
+        this.name = name ?? "overworld";
+        const sprite = Render.app.stage.addChild(Render.Container());
         this.sprites = {
-            world: sprite1,
-            chunks: sprite1.addChild(Render.Container({
+            world: sprite,
+            chunks: sprite.addChild(Render.Container({
                 sorted: true
             })),
-            locations: sprite1.addChild(Render.Container()),
-            debug: sprite1.addChild(Render.Container()),
+            locations: sprite.addChild(Render.Container()),
+            debug: sprite.addChild(Render.Container()),
             minimap: Render.app.stage.addChild(Render.Container())
         };
         this.camera = new Camera({
@@ -11989,9 +11987,9 @@ class World {
 class Controller {
     app;
     world;
-    constructor({ app: app2 , world: world3  }){
-        this.app = app2;
-        this.world = world3;
+    constructor({ app , world  }){
+        this.app = app;
+        this.world = world;
         this.scrollers();
         this.controls();
     }
@@ -12101,9 +12099,9 @@ class Controller {
 }
 class Camera extends Renderable {
     sprite;
-    constructor({ world: world4  }){
+    constructor({ world  }){
         super({
-            world: world4
+            world
         });
         this.sprite = this.world.sprites.world.addChild(Render.Container());
         Object.defineProperties(this, {
@@ -12155,8 +12153,8 @@ class Camera extends Renderable {
         const X = Math.floor(x / 32);
         const Y = Math.floor(y / 32);
         const visible = [];
-        for(let x3 = X - DX; x3 <= X + DX; x3++){
-            for(let y = Y - DY; y <= Y + DY; y++)visible.push(`${x3};${y}`);
+        for(let x1 = X - DX; x1 <= X + DX; x1++){
+            for(let y = Y - DY; y <= Y + DY; y++)visible.push(`${x1};${y}`);
         }
         visible.forEach((id)=>{
             if (!this.world.loaded.chunks.has(id)) this.world.loaded.chunks.set(id, new Chunk({
@@ -12212,12 +12210,12 @@ class Chunk extends Renderable {
     layers = new Map();
     areas = new Set();
     world;
-    constructor({ id: id1 , world: world5  }){
+    constructor({ id , world  }){
         super({
-            world: world5
+            world
         });
-        this.id = id1;
-        this.world = world5;
+        this.id = id;
+        this.world = world;
         [this.x, this.y] = this.id.split(";").map((n)=>Number(n) * CHUNK_SIZE
         );
         this.width = this.height = CHUNK_SIZE;
@@ -12342,12 +12340,12 @@ class Area extends Renderable {
     data;
     polygon;
     npcs = new Set();
-    constructor({ id: id2 , data: data1 , world: world6  }){
+    constructor({ id , data , world  }){
         super({
-            world: world6
+            world
         });
-        this.id = id2;
-        this.data = data1;
+        this.id = id;
+        this.data = data;
         this.polygon = Render.Polygon(this.data.points);
         this.sprite = Render.Container();
         if (App.debug.logs) console.debug(`loaded area: ${this.id} (${this.data.name})`);
@@ -12484,24 +12482,24 @@ class NPC extends Renderable {
     lifetime = Infinity;
     direction = Direction.none;
     directions = [];
-    constructor({ world: world7 , area: area1 , type: type1 , name: name2 , pattern: pattern1 = Pattern.fixed  }){
+    constructor({ world , area , type , name , pattern =Pattern.fixed  }){
         super({
-            world: world7
+            world
         });
-        this.area = area1;
-        this.name = name2;
-        this.type = type1;
+        this.area = area;
+        this.name = name;
+        this.type = type;
         this.sprite = Render.Container();
-        this.pattern = pattern1;
+        this.pattern = pattern;
         let frame = "";
         this.directions = this.area.data.properties.directions ?? [];
-        if (type1 === Type.creatures) {
+        if (type === Type.creatures) {
             const type = Math.random() < App.config.shinyRate ? "shiny" : "regular";
             frame = `${type}/${this.name}`;
             this.lifetime = Math.floor(12 + Math.random() * 28);
             this.pattern = Pattern.wander;
         }
-        if (type1 === Type.people) frame = `${this.name}_${this.directions.length ? this.directions[0] : "down"}_0`;
+        if (type === Type.people) frame = `${this.name}_${this.directions.length ? this.directions[0] : "down"}_0`;
         this.sprites = {
             main: this.sprite.addChild(Render.Sprite({
                 frame: frame,
