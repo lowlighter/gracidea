@@ -5,7 +5,9 @@ scripts:
 
   start:
     desc: Run app locally
-    cmd: deno run --unstable --allow-net --allow-read server/app.ts
+    allow: [ read, net ]
+    unstable: true
+    cmd: deno run server/app.ts
 
   fmt:
     desc: Format code
@@ -13,11 +15,13 @@ scripts:
 
   lint:
     desc: Lint code
-    cmd: deno lint --unstable --ignore=node_modules,client/static/js,maps
+    cmd: deno lint --ignore=node_modules,build/head,client/static/js,maps
 
   test:
     desc: Run tests
-    cmd: deno test --unstable --allow-read tests
+    allow: [ read ]
+    unstable: true
+    cmd: deno test tests
 
   build:
     desc: |
@@ -29,7 +33,9 @@ scripts:
           --patch     to build a preview
             --head <user:branch>
             --sha <commit>
-    cmd: deno run --allow-all --unstable build/mod.ts
+    allow: [ all ]
+    unstable: true
+    cmd: deno run build/mod.ts
 
   bundle:
     desc: Bundle client app
