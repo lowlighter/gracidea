@@ -1,8 +1,9 @@
 ---
 name: 🎨 Sprite revision
-about: Propose a sprite revision
+about: Suggest a sprite revision
 title: ''
-labels: sprite revision
+labels:
+  - 🎨 sprites
 assignees: ''
 
 ---
@@ -14,6 +15,6 @@ assignees: ''
 
   Please:
     - Check you're not duplicating an existing issue
-    - Provide a clear and concise description along with screenshots if possible
+    - Provide a clear and concise description along with screenshots
 
 -->

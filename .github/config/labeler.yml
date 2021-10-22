@@ -1,24 +1,22 @@
-repository:
+🗃️ repository:
   - .github/**
   - .gitignore
   - .gitattributes
   - README.md
   - CONTRIBUTING.md
   - LICENSE
-  - velociraptor.yml
-build:
+  - scripts.yml
+🛠️ build:
   - build/**
-client-app:
-  - client/app/**
-client-assets:
-  - client/static/**
-deploy:
+📀 app (client):
+  - client/**
+🦕 deploy:
   - deploy
-maps:
-  - maps/**
-sprites:
+🗺️ maps:
+  - maps/(!sprites)/**
+🎨 sprites:
   - maps/sprites/**
-server-app:
+💿 app (server):
   - server/**
-tests:
+🧪 tests:
   - tests/**

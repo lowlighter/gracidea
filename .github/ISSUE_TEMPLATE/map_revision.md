@@ -1,8 +1,9 @@
 ---
 name: 🗺️ Map revision
-about: Propose a map revision
+about: Suggest a map revision
 title: ''
-labels: map revision
+labels:
+  - 🗺️ maps
 assignees: ''
 
 ---
