@@ -3,7 +3,7 @@
 ![](/.github/README/animated_map.gif)
 
 ![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
-[![Deploy](https://img.shields.io/badge/%20-Gracidea%20on%20deno%20deploy-black.svg?logo=deno)](https://gracidea.lecoq.io)
+[![Deploy](https://img.shields.io/badge/%20-Gracidea%20on%20deno%20deploy-black.svg?logo=deno)](https://gracidea.deno.dev)
 
 
 [Check it out live here !](https://gracidea.deno.dev)
