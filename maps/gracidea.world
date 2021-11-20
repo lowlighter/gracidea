@@ -1,0 +1,90 @@
+{
+    "maps": [
+        {
+            "fileName": "hoenn/hoenn-route-101.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -1344
+        },
+        {
+            "fileName": "hoenn/littleroot-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -1024
+        },
+        {
+            "fileName": "hoenn/oldale-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -1664
+        },
+        {
+            "fileName": "hoenn/hoenn-route-102.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": -800,
+            "y": -1664
+        },
+        {
+            "fileName": "hoenn/hoenn-route-103.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": 0,
+            "y": -1984
+        },
+        {
+            "fileName": "hoenn/petalburg-city.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -1280,
+            "y": -1824
+        },
+        {
+            "fileName": "hoenn/hoenn-route-104.tmx",
+            "height": 1280,
+            "width": 768,
+            "x": -1920,
+            "y": -1872
+        },
+        {
+            "fileName": "hoenn/hoenn-route-105.tmx",
+            "height": 1280,
+            "width": 768,
+            "x": -1920,
+            "y": -592
+        },
+        {
+            "fileName": "hoenn/hoenn-route-106.tmx",
+            "height": 512,
+            "width": 1536,
+            "x": -1920,
+            "y": 688
+        },
+        {
+            "fileName": "hoenn/anime-oldale-ruins.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 320,
+            "y": -1664
+        },
+        {
+            "fileName": "hoenn/hoenn-route-110.tmx",
+            "height": 1792,
+            "width": 768,
+            "x": 1280,
+            "y": -2944
+        },
+        {
+            "fileName": "hoenn/dewford-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -944,
+            "y": 1008
+        }
+    ],
+    "onlyShowAdjacentMaps": false,
+    "type": "world"
+}

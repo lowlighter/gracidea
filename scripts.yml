@@ -7,41 +7,23 @@ scripts:
     desc: Run app locally
     allow: [ read, net ]
     unstable: true
-    cmd: deno run server/app.ts
+    watch: true
+    cmd: deno run app/mod.ts
 
-  fmt:
-    desc: Format code
-    cmd: dprint fmt --config .github/config/dprint.json
+  #fmt:
+  #  desc: Format code
+  #  cmd: dprint fmt --config .github/config/dprint.json
 
   lint:
     desc: Lint code
-    cmd: deno lint --ignore=node_modules,build/head,client/static/js,maps
+    cmd: deno lint app --ignore=app/build --rules-exclude=require-await,no-async-promise-executor
 
   test:
     desc: Run tests
     allow: [ read ]
-    unstable: true
-    cmd: deno test tests
+    cmd: deno test app/tests
 
   build:
-    desc: |
-      Build application
-          --all       to rebuild everything
-          --data      to rebuild maps data
-          --sprites   to rebuild sprites and textures
-          --templates to rebuild templated files
-          --patch     to build a preview
-            --head <user:branch>
-            --sha <commit>
-    allow: [ all ]
-    unstable: true
-    cmd: deno run build/mod.ts
-
-  bundle:
-    desc: Bundle client app
-    cmd:
-      - echo {} > package.json
-      - npm install pixi.js terser @babel/core @babel/cli @babel/preset-env core-js@3
-      - deno bundle client/app/mod.ts client/static/js/app.js
-      - npx terser client/static/js/app.js --mangle --source-map --output client/static/js/app.min.js
-      - npx babel --config-file ./.github/config/babel.config.json --out-file client/static/js/app.compat.js --minified client/static/js/app.js
+    desc: Build application
+    allow: [ run, write, read ]
+    cmd: deno run app/build/mod.ts
