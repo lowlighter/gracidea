@@ -47,21 +47,21 @@
             "height": 1280,
             "width": 768,
             "x": -1920,
-            "y": -1872
+            "y": -2608
         },
         {
             "fileName": "hoenn/hoenn-route-105.tmx",
             "height": 1280,
             "width": 768,
             "x": -1920,
-            "y": -592
+            "y": -1328
         },
         {
             "fileName": "hoenn/hoenn-route-106.tmx",
             "height": 512,
-            "width": 1536,
+            "width": 1280,
             "x": -1920,
-            "y": 688
+            "y": -48
         },
         {
             "fileName": "hoenn/anime-oldale-ruins.tmx",
@@ -81,8 +81,120 @@
             "fileName": "hoenn/dewford-town.tmx",
             "height": 512,
             "width": 512,
-            "x": -944,
-            "y": 1008
+            "x": -960,
+            "y": 272
+        },
+        {
+            "fileName": "hoenn/hoenn-route-109.tmx",
+            "height": 1024,
+            "width": 768,
+            "x": 1280,
+            "y": -384
+        },
+        {
+            "fileName": "hoenn/hoenn-route-108.tmx",
+            "height": 768,
+            "width": 1024,
+            "x": 320,
+            "y": 272
+        },
+        {
+            "fileName": "hoenn/hoenn-route-107.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": -640,
+            "y": 272
+        },
+        {
+            "fileName": "hoenn/fill-001.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 320,
+            "y": -1344
+        },
+        {
+            "fileName": "hoenn/slateport-city.tmx",
+            "height": 1024,
+            "width": 768,
+            "x": 1280,
+            "y": -1344
+        },
+        {
+            "fileName": "hoenn/anime-littleroot-port.tmx",
+            "height": 768,
+            "width": 512,
+            "x": -448,
+            "y": -848
+        },
+        {
+            "fileName": "hoenn/fill-002.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": -1536,
+            "y": 272
+        },
+        {
+            "fileName": "hoenn/fill-003.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -640,
+            "y": 144
+        },
+        {
+            "fileName": "hoenn/fill-004.tmx",
+            "height": 256,
+            "width": 512,
+            "x": -1280,
+            "y": -1344
+        },
+        {
+            "fileName": "hoenn/mauville-city.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 1280,
+            "y": -3264
+        },
+        {
+            "fileName": "hoenn/hoenn-route-117.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": 320,
+            "y": -3264
+        },
+        {
+            "fileName": "hoenn/verdanturf-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -3264
+        },
+        {
+            "fileName": "hoenn/anime-foothill-town.tmx",
+            "height": 256,
+            "width": 512,
+            "x": 608,
+            "y": -3472
+        },
+        {
+            "fileName": "hoenn/anime-misty-village.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 848,
+            "y": -2944
+        },
+        {
+            "fileName": "hoenn/hoenn-route-111.tmx",
+            "height": 2304,
+            "width": 768,
+            "x": 1280,
+            "y": -5504
+        },
+        {
+            "fileName": "hoenn/hoenn-route-112.tmx",
+            "height": 1024,
+            "width": 768,
+            "x": 640,
+            "y": -5184
         }
     ],
     "onlyShowAdjacentMaps": false,

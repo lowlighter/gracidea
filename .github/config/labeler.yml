@@ -6,17 +6,36 @@
   - CONTRIBUTING.md
   - LICENSE
   - scripts.yml
-🛠️ build:
-  - build/**
-📀 app (client):
-  - client/**
-🦕 deploy:
-  - deploy
+
 🗺️ maps:
-  - maps/(!sprites)/**
+  - maps/**
 🎨 sprites:
-  - maps/sprites/**
-💿 app (server):
-  - server/**
-🧪 tests:
-  - tests/**
+  - copyrighted/**
+
+"🛠️ app: build":
+  - app/build/**
+"📀 app: client":
+  - app/client/**
+"💿 app: server":
+  - app/server/**
+"🧪 app: tests":
+  - app/tests/**
+
+"1️⃣ region: kanto":
+  - maps/kanto/**
+"2️ region: johto":
+  - maps/johto/**
+"3️ region: hoenn":
+  - maps/hoenn/**
+"4️ region: sinnoh":
+  - maps/sinnoh/**
+"5️ region: unova":
+  - maps/unova/**
+"6️ region: kalos":
+  - maps/kalos/**
+"7️ region: alola":
+  - maps/alola/**
+"8️ region: galar":
+  - maps/galar/**
+"*️⃣ region: other":
+  - maps/other/**
