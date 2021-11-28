@@ -26,42 +26,42 @@
             "height": 512,
             "width": 1024,
             "x": -800,
-            "y": -1664
+            "y": -1696
         },
         {
             "fileName": "hoenn/hoenn-route-103.tmx",
             "height": 512,
             "width": 1280,
             "x": 0,
-            "y": -1984
+            "y": -2016
         },
         {
             "fileName": "hoenn/petalburg-city.tmx",
             "height": 512,
             "width": 512,
             "x": -1280,
-            "y": -1824
+            "y": -1856
         },
         {
             "fileName": "hoenn/hoenn-route-104.tmx",
             "height": 1280,
             "width": 768,
             "x": -1920,
-            "y": -2608
+            "y": -2656
         },
         {
             "fileName": "hoenn/hoenn-route-105.tmx",
             "height": 1280,
             "width": 768,
             "x": -1920,
-            "y": -1328
+            "y": -1376
         },
         {
             "fileName": "hoenn/hoenn-route-106.tmx",
             "height": 512,
             "width": 1280,
             "x": -1920,
-            "y": -48
+            "y": -96
         },
         {
             "fileName": "hoenn/anime-oldale-ruins.tmx",
@@ -75,35 +75,35 @@
             "height": 1792,
             "width": 768,
             "x": 1280,
-            "y": -2944
+            "y": -2976
         },
         {
             "fileName": "hoenn/dewford-town.tmx",
             "height": 512,
             "width": 512,
             "x": -960,
-            "y": 272
+            "y": 224
         },
         {
             "fileName": "hoenn/hoenn-route-109.tmx",
             "height": 1024,
             "width": 768,
             "x": 1280,
-            "y": -384
+            "y": -416
         },
         {
             "fileName": "hoenn/hoenn-route-108.tmx",
             "height": 768,
             "width": 1024,
             "x": 320,
-            "y": 272
+            "y": 240
         },
         {
             "fileName": "hoenn/hoenn-route-107.tmx",
             "height": 512,
             "width": 1024,
             "x": -640,
-            "y": 272
+            "y": 224
         },
         {
             "fileName": "hoenn/fill-001.tmx",
@@ -117,84 +117,371 @@
             "height": 1024,
             "width": 768,
             "x": 1280,
-            "y": -1344
+            "y": -1376
         },
         {
             "fileName": "hoenn/anime-littleroot-port.tmx",
-            "height": 768,
+            "height": 1024,
             "width": 512,
             "x": -448,
-            "y": -848
+            "y": -880
         },
         {
             "fileName": "hoenn/fill-002.tmx",
             "height": 512,
             "width": 1280,
             "x": -1536,
-            "y": 272
+            "y": 224
         },
         {
             "fileName": "hoenn/fill-003.tmx",
             "height": 256,
             "width": 256,
             "x": -640,
-            "y": 144
+            "y": 96
         },
         {
             "fileName": "hoenn/fill-004.tmx",
-            "height": 256,
-            "width": 512,
+            "height": 512,
+            "width": 1280,
             "x": -1280,
-            "y": -1344
+            "y": -1376
         },
         {
             "fileName": "hoenn/mauville-city.tmx",
             "height": 512,
             "width": 768,
             "x": 1280,
-            "y": -3264
+            "y": -3296
         },
         {
             "fileName": "hoenn/hoenn-route-117.tmx",
             "height": 512,
             "width": 1024,
             "x": 320,
-            "y": -3264
+            "y": -3296
         },
         {
             "fileName": "hoenn/verdanturf-town.tmx",
             "height": 512,
             "width": 512,
             "x": 0,
-            "y": -3264
+            "y": -3296
         },
         {
             "fileName": "hoenn/anime-foothill-town.tmx",
             "height": 256,
             "width": 512,
-            "x": 608,
-            "y": -3472
+            "x": 400,
+            "y": -3504
         },
         {
             "fileName": "hoenn/anime-misty-village.tmx",
-            "height": 256,
-            "width": 256,
+            "height": 512,
+            "width": 512,
             "x": 848,
-            "y": -2944
+            "y": -2976
         },
         {
             "fileName": "hoenn/hoenn-route-111.tmx",
             "height": 2304,
             "width": 768,
             "x": 1280,
-            "y": -5504
+            "y": -5536
         },
         {
             "fileName": "hoenn/hoenn-route-112.tmx",
             "height": 1024,
             "width": 768,
             "x": 640,
-            "y": -5184
+            "y": -5216
+        },
+        {
+            "fileName": "hoenn/rustboro-city.tmx",
+            "height": 1280,
+            "width": 1024,
+            "x": -1888,
+            "y": -3616
+        },
+        {
+            "fileName": "hoenn/hoenn-route-116.tmx",
+            "height": 512,
+            "width": 1792,
+            "x": -1280,
+            "y": -3616
+        },
+        {
+            "fileName": "hoenn/anime-north-petalburg.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -784,
+            "y": -2128
+        },
+        {
+            "fileName": "hoenn/anime-rinshin-town.tmx",
+            "height": 512,
+            "width": 768,
+            "x": -1280,
+            "y": -2768
+        },
+        {
+            "fileName": "hoenn/trackless-forest.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -1056,
+            "y": -3168
+        },
+        {
+            "fileName": "hoenn/fill-005.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 0,
+            "y": -2944
+        },
+        {
+            "fileName": "hoenn/fill-006.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 592,
+            "y": -2432
+        },
+        {
+            "fileName": "hoenn/lavaridge-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 320,
+            "y": -4576
+        },
+        {
+            "fileName": "hoenn/hoenn-route-115.tmx",
+            "height": 1296,
+            "width": 768,
+            "x": -1920,
+            "y": -4896
+        },
+        {
+            "fileName": "hoenn/hoenn-route-114.tmx",
+            "height": 1280,
+            "width": 768,
+            "x": -1280,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/hoenn-route-113.tmx",
+            "height": 512,
+            "width": 1792,
+            "x": -320,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/fallarbor-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -704,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/hoenn-route-118.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": 1920,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-119.tmx",
+            "height": 2304,
+            "width": 768,
+            "x": 2560,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/fortree-city.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 3200,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/anime-valley-of-steel.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 928,
+            "y": -3968
+        },
+        {
+            "fileName": "hoenn/anime-lake-may.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 944,
+            "y": -3648
+        },
+        {
+            "fileName": "hoenn/anime-forina.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 448,
+            "y": -3936
+        },
+        {
+            "fileName": "hoenn/hoenn-route-120.tmx",
+            "height": 1792,
+            "width": 768,
+            "x": 3840,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/anime-forbidden-forest.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 2208,
+            "y": -4896
+        },
+        {
+            "fileName": "hoenn/anime-crossgate-town.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3376,
+            "y": -4848
+        },
+        {
+            "fileName": "hoenn/anime-shroomish-forest.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3424,
+            "y": -5168
+        },
+        {
+            "fileName": "hoenn/anime-rubello-town.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3376,
+            "y": -4256
+        },
+        {
+            "fileName": "hoenn/anime-mount-kirikiri.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3376,
+            "y": -4560
+        },
+        {
+            "fileName": "hoenn/anime-mirage-kingdom.tmx",
+            "height": 0,
+            "width": 0,
+            "x": 2128,
+            "y": -5456
+        },
+        {
+            "fileName": "hoenn/anime-the-greenhouse.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 1712,
+            "y": -5760
+        },
+        {
+            "fileName": "hoenn/hoenn-route-123.tmx",
+            "height": 512,
+            "width": 2304,
+            "x": 3200,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-121.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": 4480,
+            "y": -4256
+        },
+        {
+            "fileName": "hoenn/hoenn-route-122.tmx",
+            "height": 768,
+            "width": 768,
+            "x": 4816,
+            "y": -3936
+        },
+        {
+            "fileName": "hoenn/lilycove-city.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 5760,
+            "y": -4416
+        },
+        {
+            "fileName": "hoenn/hoenn-route-124.tmx",
+            "height": 1280,
+            "width": 1280,
+            "x": 7040,
+            "y": -4576
+        },
+        {
+            "fileName": "hoenn/hoenn-route-125.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 8320,
+            "y": -4576
+        },
+        {
+            "fileName": "hoenn/hoenn-route-126.tmx",
+            "height": 1280,
+            "width": 1280,
+            "x": 7040,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-127.tmx",
+            "height": 1280,
+            "width": 1280,
+            "x": 8320,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-128.tmx",
+            "height": 768,
+            "width": 2048,
+            "x": 8320,
+            "y": -2016
+        },
+        {
+            "fileName": "hoenn/hoenn-route-129.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 8320,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/hoenn-route-130.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 7040,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/mossdeep-city.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 8320,
+            "y": -3936
+        },
+        {
+            "fileName": "hoenn/fill-007.tmx",
+            "height": 768,
+            "width": 256,
+            "x": -2032,
+            "y": -2768
+        },
+        {
+            "fileName": "hoenn/fill-008.tmx",
+            "height": 768,
+            "width": 768,
+            "x": -1936,
+            "y": -5648
+        },
+        {
+            "fileName": "hoenn/fill-009.tmx",
+            "height": 1280,
+            "width": 768,
+            "x": 1920,
+            "y": -4560
         }
     ],
     "onlyShowAdjacentMaps": false,

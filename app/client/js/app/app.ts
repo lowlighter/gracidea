@@ -54,7 +54,7 @@ export class App {
   /** Config */
   static config = {
     style: "rse",
-    debug: true,
+    debug: false,
     creatures:{
       display:true,
       shiny: 1/8

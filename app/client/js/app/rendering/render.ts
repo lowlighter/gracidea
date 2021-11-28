@@ -44,7 +44,7 @@ export class Render {
     Object.assign(this, {instance:new Render.engine.Application({
       width: global.document.body.clientWidth,
       height: global.document.body.clientHeight,
-      resolution: global.devicePixelRatio,
+     // resolution: global.devicePixelRatio,
       backgroundAlpha: 0,
     })})
     this.instance.resizeTo = global.window
