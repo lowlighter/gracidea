@@ -40,8 +40,11 @@
 
   //Loading
   globalThis.onload = async function () {
+    //URL params
+    const params = new URLSearchParams({sha:gracidea.sha})
+
     //Load stylesheet
-    const css = tag("link", { rel: "stylesheet", href: `/css/styles.css?sha=${gracidea.sha}` });
+    const css = tag("link", { rel: "stylesheet", href: `/css/styles.css?${params}` });
     document.querySelector("head").append(css);
     await new Promise((solve) => css.onload = solve);
 
@@ -49,17 +52,19 @@
     const compat = (navigator.userAgent.includes("Safari")) && (!navigator.userAgent.includes("Chrome"));
     if (compat) {
       gracidea.loaded("browser compatibility mode enabled", "warn");
+      params.set("compat", 1)
     }
 
     //Debug mode
     const debug = location.hostname === "localhost";
     if (debug) {
       console.warn("debug mode enabled (served from localhost)");
+      params.set("debug", 1)
     }
 
     //Load main script
     gracidea.loaded("loading /js/app.js");
-    document.querySelector("body").append(tag("script", { type: "module", src: `/js/app.js?sha=${gracidea.sha}&debug=${debug}` }));
+    document.querySelector("body").append(tag("script", { type: "module", src: `/js/app.js?${params}` }));
   };
 
   //Errors display
