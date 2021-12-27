@@ -42,9 +42,10 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
       //Static assets
       for (const assets of ["../client", "../../copyrighted"]) {
         try {
-          console.debug(`trying static asset: ${new URL(`${assets}/${path}`, import.meta.url)}`)
-          console.log({...await fetch(new URL(`${assets}/${path}`, import.meta.url))})
-          const body = await fetch(new URL(`${assets}/${path}`, import.meta.url)).then((response) => response.body);
+          const {body, status} = await fetch(new URL(`${assets}/${path}`, import.meta.url))
+          if (status !== 200)
+            continue
+          console.debug(`trying static asset: ${new URL(`${assets}/${path}`, import.meta.url)} (status: ${status})`)
           return new Response(body, { headers });
         } catch {
           continue;
