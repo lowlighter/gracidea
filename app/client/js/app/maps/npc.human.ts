@@ -97,4 +97,3 @@ export const enum Pattern {
   fixed = "fixed",
   lookaround = "lookaround",
 }
-

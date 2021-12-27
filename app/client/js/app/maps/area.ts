@@ -87,7 +87,6 @@ export class Area extends Renderable {
     fill: [0x85144B, .125],
     textStyle: { align: "center", fontSize: 10, fill: "#85144B", fontFamily: "monospace" },
   } as Partial<Graphics>;
-
 }
 
 /** Types */
