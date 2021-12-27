@@ -1,13 +1,13 @@
 /** Imports */
-import { serve as handle } from "https://deno.land/std@0.119.0/http/server.ts";
+import { Server } from "https://deno.land/std@0.119.0/http/server.ts";
 import { parse } from "https://deno.land/std@0.119.0/path/mod.ts";
 import { api } from "./api/mod.ts";
 import { mime } from "./utils.ts";
 
 /** Server entrypoint */
 export async function serve({ port = 4000 }: { port?: number } = {}) {
-  console.debug(`listening on port ${port}`);
-  await handle(async (request) => {
+  const listener = Deno.listen({ port })
+  const server = new Server({async handler(request) {
     try {
       //Extract request
       const { pathname: path, search } = new URL(request.url);
@@ -53,5 +53,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
       console.error(error);
       return new Response(null, { status: 500 });
     }
-  }, { addr: `:${port}` });
+  }})
+  console.debug(`listening on port ${port}`);
+  await server.serve(listener)
 }
