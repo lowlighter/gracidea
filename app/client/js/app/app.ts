@@ -1,7 +1,7 @@
 //Imports
 import type { friend } from "./types.ts";
 import { global } from "./types.ts";
-import { deferred } from "https://deno.land/std@0.114.0/async/deferred.ts";
+import { deferred } from "https://deno.land/std@0.119.0/async/deferred.ts";
 import { Render } from "./rendering/render.ts";
 import { World } from "./maps/world.ts";
 import { Controller } from "./controls/controller.ts";

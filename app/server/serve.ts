@@ -1,6 +1,6 @@
 /** Imports */
-import { serve as handle } from "https://deno.land/std@0.114.0/http/server.ts";
-import { parse } from "https://deno.land/std@0.114.0/path/mod.ts";
+import { serve as handle } from "https://deno.land/std@0.119.0/http/server.ts";
+import { parse } from "https://deno.land/std@0.119.0/path/mod.ts";
 import { api } from "./api/mod.ts";
 import { mime } from "./utils.ts";
 

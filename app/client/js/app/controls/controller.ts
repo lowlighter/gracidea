@@ -3,7 +3,7 @@ import type { Renderable } from "../rendering/renderable.ts";
 import type { event } from "../types.ts";
 import { global } from "../types.ts";
 import { App } from "./../app.ts";
-import { debounce } from "https://deno.land/std@0.114.0/async/debounce.ts";
+import { debounce } from "https://deno.land/std@0.119.0/async/debounce.ts";
 
 /**
  * Controller

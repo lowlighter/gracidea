@@ -2,7 +2,7 @@
 import { Render } from "./render.ts";
 import { App } from "../app.ts";
 import type { Graphics } from "./render.ts";
-import { deferred } from "https://deno.land/std@0.114.0/async/deferred.ts";
+import { deferred } from "https://deno.land/std@0.119.0/async/deferred.ts";
 
 /**
  * Renderable object.

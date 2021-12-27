@@ -1,6 +1,6 @@
 //Imports
-import { parse as parseXML } from "https://deno.land/x/xml@2.0.0/parse.ts";
-import { dirname, join } from "https://deno.land/std@0.114.0/path/mod.ts";
+import { parse as parseXML } from "https://deno.land/x/xml@2.0.3/parse.ts";
+import { dirname, join } from "https://deno.land/std@0.119.0/path/mod.ts";
 import { calcArea, toArray } from "../../utils.ts";
 import type { parsed } from "../../types.ts";
 

@@ -1,7 +1,7 @@
 //Imports
 import argv from "https://cdn.skypack.dev/string-argv@0.3.1";
 import { uncompress } from "https://deno.land/x/compress@v0.4.1/tgz/mod.ts";
-import { bold, gray, green, red, yellow } from "https://deno.land/std@0.107.0/fmt/colors.ts";
+import { bold, gray, green, red, yellow } from "https://deno.land/std@0.119.0/fmt/colors.ts";
 
 /** Encoder instance*/
 const encoder = new TextEncoder();

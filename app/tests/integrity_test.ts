@@ -1,8 +1,8 @@
 //Imports
-import { expandGlob } from "https://deno.land/std@0.115.0/fs/mod.ts";
-import { assert } from "https://deno.land/std@0.115.0/testing/asserts.ts";
-import * as XML from "https://deno.land/x/xml@2.0.2/mod.ts";
-import { extname } from "https://deno.land/std@0.115.0/path/mod.ts";
+import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
+import { assert } from "https://deno.land/std@0.119.0/testing/asserts.ts";
+import * as XML from "https://deno.land/x/xml@2.0.3/mod.ts";
+import { extname } from "https://deno.land/std@0.119.0/path/mod.ts";
 
 //Ensure files are parsable
 for await (const { path, isFile } of expandGlob("{maps,copyrighted}/**/*.{tmx,tsx,tps,json}")) {

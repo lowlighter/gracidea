@@ -1,7 +1,7 @@
 //Imports
 import { clone, log, pack } from "./util.ts";
-import { expandGlob } from "https://deno.land/std@0.115.0/fs/mod.ts";
-import { basename, dirname } from "https://deno.land/std@0.115.0/path/mod.ts";
+import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
+import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 
 /** Gender formatted data */
 const genders = {} as {
