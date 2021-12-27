@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gracidea | Pokémon Live Map</title>
+  <meta name="author" content="lowlighter">
+  <meta name="description" content="Gracidea, a Pokémon live map">
+  <meta property="og:image" content="/opengraph.png">
+  <link rel="icon" href="/favicon.ico">
+  <style>body{background-color:#182850;}.loader{display: none;}</style>
+</head>
+<body>
+  <div class="loader">
+    <img src="/hello.png" alt="">
+    Gracidea is loading
+    <div class="loaded"></div>
+  </div>
+  <nav>
+    <a href="https://github.com/lowlighter/gracidea" target="_blank">
+      <img src="/icons/gracidea.png" alt="🌺">
+      <span>Gracidea <sub id="sha">{{sha}}</sub></span>
+    </a>
+    <a href="#">
+      <img src="/icons/map.png" alt="🗺️">
+      World map
+    </a>
+    <a href="#">
+      <img src="/icons/share.png" alt="💌">
+      Share link
+    </a>
+    <a href="#">
+      <img src="/icons/debug.png" alt="⚙️">
+      Debug mode
+    </a>
+    <span id="cursor-x"></span>
+    <span id="cursor-y"></span>
+  </nav>
+  <script src="/js/loader.js"></script>
+</body>
+</html>

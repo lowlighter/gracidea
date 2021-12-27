@@ -1,0 +1,811 @@
+{
+    "maps": [
+        {
+            "fileName": "hoenn/hoenn-route-101.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -1344
+        },
+        {
+            "fileName": "hoenn/littleroot-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -1024
+        },
+        {
+            "fileName": "hoenn/oldale-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -1664
+        },
+        {
+            "fileName": "hoenn/hoenn-route-102.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": -800,
+            "y": -1696
+        },
+        {
+            "fileName": "hoenn/hoenn-route-103.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": 0,
+            "y": -2016
+        },
+        {
+            "fileName": "hoenn/petalburg-city.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -1280,
+            "y": -1856
+        },
+        {
+            "fileName": "hoenn/hoenn-route-104.tmx",
+            "height": 1280,
+            "width": 768,
+            "x": -1920,
+            "y": -2656
+        },
+        {
+            "fileName": "hoenn/hoenn-route-105.tmx",
+            "height": 1280,
+            "width": 768,
+            "x": -1920,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/hoenn-route-106.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": -1920,
+            "y": -96
+        },
+        {
+            "fileName": "hoenn/anime-oldale-ruins.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 320,
+            "y": -1664
+        },
+        {
+            "fileName": "hoenn/hoenn-route-110.tmx",
+            "height": 1792,
+            "width": 768,
+            "x": 1280,
+            "y": -2976
+        },
+        {
+            "fileName": "hoenn/dewford-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -960,
+            "y": 224
+        },
+        {
+            "fileName": "hoenn/hoenn-route-109.tmx",
+            "height": 1024,
+            "width": 768,
+            "x": 1280,
+            "y": -416
+        },
+        {
+            "fileName": "hoenn/hoenn-route-108.tmx",
+            "height": 768,
+            "width": 1024,
+            "x": 320,
+            "y": 240
+        },
+        {
+            "fileName": "hoenn/hoenn-route-107.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": -640,
+            "y": 224
+        },
+        {
+            "fileName": "hoenn/fill-001.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 320,
+            "y": -1344
+        },
+        {
+            "fileName": "hoenn/slateport-city.tmx",
+            "height": 1024,
+            "width": 768,
+            "x": 1280,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/anime-littleroot-port.tmx",
+            "height": 1024,
+            "width": 512,
+            "x": -448,
+            "y": -880
+        },
+        {
+            "fileName": "hoenn/fill-002.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": -1536,
+            "y": 224
+        },
+        {
+            "fileName": "hoenn/fill-003.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -640,
+            "y": 96
+        },
+        {
+            "fileName": "hoenn/fill-004.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": -1280,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/mauville-city.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 1280,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-117.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": 320,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/verdanturf-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 0,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/anime-foothill-town.tmx",
+            "height": 256,
+            "width": 512,
+            "x": 480,
+            "y": -3504
+        },
+        {
+            "fileName": "hoenn/anime-misty-village.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 848,
+            "y": -2976
+        },
+        {
+            "fileName": "hoenn/hoenn-route-111.tmx",
+            "height": 2304,
+            "width": 768,
+            "x": 1280,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/hoenn-route-112.tmx",
+            "height": 1024,
+            "width": 768,
+            "x": 640,
+            "y": -5216
+        },
+        {
+            "fileName": "hoenn/rustboro-city.tmx",
+            "height": 1280,
+            "width": 1024,
+            "x": -1888,
+            "y": -3616
+        },
+        {
+            "fileName": "hoenn/hoenn-route-116.tmx",
+            "height": 512,
+            "width": 1792,
+            "x": -1280,
+            "y": -3616
+        },
+        {
+            "fileName": "hoenn/anime-north-petalburg.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -768,
+            "y": -2192
+        },
+        {
+            "fileName": "hoenn/anime-rinshin-town.tmx",
+            "height": 512,
+            "width": 768,
+            "x": -768,
+            "y": -2944
+        },
+        {
+            "fileName": "hoenn/fill-005.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 0,
+            "y": -2976
+        },
+        {
+            "fileName": "hoenn/fill-006.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 592,
+            "y": -2432
+        },
+        {
+            "fileName": "hoenn/lavaridge-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 320,
+            "y": -4576
+        },
+        {
+            "fileName": "hoenn/hoenn-route-115.tmx",
+            "height": 1296,
+            "width": 768,
+            "x": -1920,
+            "y": -4896
+        },
+        {
+            "fileName": "hoenn/hoenn-route-114.tmx",
+            "height": 1280,
+            "width": 768,
+            "x": -1280,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/hoenn-route-113.tmx",
+            "height": 512,
+            "width": 1792,
+            "x": -320,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/fallarbor-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -704,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/hoenn-route-118.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": 1920,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-119.tmx",
+            "height": 2304,
+            "width": 768,
+            "x": 2560,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/fortree-city.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 3200,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/anime-valley-of-steel.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 832,
+            "y": -4256
+        },
+        {
+            "fileName": "hoenn/anime-lake-may.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 832,
+            "y": -3744
+        },
+        {
+            "fileName": "hoenn/anime-forina.tmx",
+            "height": 768,
+            "width": 768,
+            "x": 144,
+            "y": -4288
+        },
+        {
+            "fileName": "hoenn/hoenn-route-120.tmx",
+            "height": 1792,
+            "width": 768,
+            "x": 3840,
+            "y": -5536
+        },
+        {
+            "fileName": "hoenn/anime-forbidden-forest.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 2176,
+            "y": -4112
+        },
+        {
+            "fileName": "hoenn/anime-crossgate-town.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3200,
+            "y": -5024
+        },
+        {
+            "fileName": "hoenn/anime-shroomish-forest.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3200,
+            "y": -5216
+        },
+        {
+            "fileName": "hoenn/anime-rubello-town.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 3840,
+            "y": -3936
+        },
+        {
+            "fileName": "hoenn/anime-mount-kirikiri.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3520,
+            "y": -5040
+        },
+        {
+            "fileName": "hoenn/anime-mirage-kingdom.tmx",
+            "height": 768,
+            "width": 512,
+            "x": 1920,
+            "y": -5632
+        },
+        {
+            "fileName": "hoenn/anime-the-greenhouse.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 1536,
+            "y": -5792
+        },
+        {
+            "fileName": "hoenn/hoenn-route-123.tmx",
+            "height": 512,
+            "width": 2304,
+            "x": 3200,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-121.tmx",
+            "height": 512,
+            "width": 1280,
+            "x": 4480,
+            "y": -4256
+        },
+        {
+            "fileName": "hoenn/hoenn-route-122.tmx",
+            "height": 768,
+            "width": 768,
+            "x": 4816,
+            "y": -3936
+        },
+        {
+            "fileName": "hoenn/lilycove-city.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 5760,
+            "y": -4416
+        },
+        {
+            "fileName": "hoenn/hoenn-route-124.tmx",
+            "height": 1280,
+            "width": 1280,
+            "x": 7040,
+            "y": -4576
+        },
+        {
+            "fileName": "hoenn/hoenn-route-125.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 8320,
+            "y": -4576
+        },
+        {
+            "fileName": "hoenn/hoenn-route-126.tmx",
+            "height": 1280,
+            "width": 1280,
+            "x": 7040,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-127.tmx",
+            "height": 1280,
+            "width": 1280,
+            "x": 8320,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/hoenn-route-128.tmx",
+            "height": 768,
+            "width": 2048,
+            "x": 8320,
+            "y": -2016
+        },
+        {
+            "fileName": "hoenn/hoenn-route-129.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 8320,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/hoenn-route-130.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 7040,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/mossdeep-city.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 8320,
+            "y": -3936
+        },
+        {
+            "fileName": "hoenn/fill-007.tmx",
+            "height": 768,
+            "width": 256,
+            "x": -2032,
+            "y": -2768
+        },
+        {
+            "fileName": "hoenn/fill-008.tmx",
+            "height": 768,
+            "width": 768,
+            "x": -1936,
+            "y": -5648
+        },
+        {
+            "fileName": "hoenn/fill-010.tmx",
+            "height": 768,
+            "width": 768,
+            "x": -1280,
+            "y": -4256
+        },
+        {
+            "fileName": "hoenn/fill-011.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 320,
+            "y": -3616
+        },
+        {
+            "fileName": "hoenn/fill-012.tmx",
+            "height": 256,
+            "width": 768,
+            "x": -1280,
+            "y": -5728
+        },
+        {
+            "fileName": "hoenn/fill-013.tmx",
+            "height": 256,
+            "width": 768,
+            "x": -704,
+            "y": -5696
+        },
+        {
+            "fileName": "hoenn/fill-014.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 1920,
+            "y": -4560
+        },
+        {
+            "fileName": "hoenn/fill-015.tmx",
+            "height": 512,
+            "width": 768,
+            "x": 1920,
+            "y": -3648
+        },
+        {
+            "fileName": "hoenn/fill-016.tmx",
+            "height": 768,
+            "width": 256,
+            "x": 4352,
+            "y": -3936
+        },
+        {
+            "fileName": "hoenn/fill-017.tmx",
+            "height": 768,
+            "width": 512,
+            "x": -720,
+            "y": -4576
+        },
+        {
+            "fileName": "hoenn/fill-018.tmx",
+            "height": 768,
+            "width": 256,
+            "x": -704,
+            "y": -5216
+        },
+        {
+            "fileName": "hoenn/fill-019.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": -720,
+            "y": -4000
+        },
+        {
+            "fileName": "hoenn/fill-020.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -1280,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/fill-021.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -1280,
+            "y": -2784
+        },
+        {
+            "fileName": "hoenn/fill-022.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -1280,
+            "y": -2272
+        },
+        {
+            "fileName": "hoenn/fill-023.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 128,
+            "y": -5216
+        },
+        {
+            "fileName": "hoenn/fill-024.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -448,
+            "y": -5216
+        },
+        {
+            "fileName": "hoenn/fill-025.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -768,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/fill-026.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 0,
+            "y": -2464
+        },
+        {
+            "fileName": "hoenn/fill-027.tmx",
+            "height": 768,
+            "width": 768,
+            "x": -576,
+            "y": -4688
+        },
+        {
+            "fileName": "hoenn/hoenn-safari-zone-se.tmx",
+            "height": 256,
+            "width": 512,
+            "x": 4656,
+            "y": -4512
+        },
+        {
+            "fileName": "hoenn/hoenn-safari-zone-sw.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 4480,
+            "y": -4512
+        },
+        {
+            "fileName": "hoenn/hoenn-safari-zone-nwmach-bike-area.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 4480,
+            "y": -4768
+        },
+        {
+            "fileName": "hoenn/hoenn-safari-zone-neacro-bike-area.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 4848,
+            "y": -4768
+        },
+        {
+            "fileName": "hoenn/hoenn-safari-zone-expansion-south.tmx",
+            "height": 256,
+            "width": 512,
+            "x": 5104,
+            "y": -4512
+        },
+        {
+            "fileName": "hoenn/hoenn-safari-zone-expansion-north.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 5104,
+            "y": -4768
+        },
+        {
+            "fileName": "hoenn/anime-larousse-city.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 5168,
+            "y": -5760
+        },
+        {
+            "fileName": "hoenn/fill-028.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3200,
+            "y": -3888
+        },
+        {
+            "fileName": "hoenn/fill-029.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3200,
+            "y": -3424
+        },
+        {
+            "fileName": "hoenn/fill-030.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3840,
+            "y": -3424
+        },
+        {
+            "fileName": "hoenn/fill-031.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3200,
+            "y": -4336
+        },
+        {
+            "fileName": "hoenn/anime-volley-town.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 5184,
+            "y": -5232
+        },
+        {
+            "fileName": "hoenn/fill-032.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 5488,
+            "y": -4592
+        },
+        {
+            "fileName": "hoenn/anime-banana-slakoth-garden.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 4720,
+            "y": -5360
+        },
+        {
+            "fileName": "hoenn/fill-033.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 1920,
+            "y": -4864
+        },
+        {
+            "fileName": "hoenn/fill-034.tmx",
+            "height": 256,
+            "width": 256,
+            "x": -80,
+            "y": -5792
+        },
+        {
+            "fileName": "hoenn/fill-035.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 1200,
+            "y": -5792
+        },
+        {
+            "fileName": "hoenn/fill-036.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 2816,
+            "y": -2960
+        },
+        {
+            "fileName": "hoenn/fill-037.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 3328,
+            "y": -2960
+        },
+        {
+            "fileName": "hoenn/fill-038.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 4096,
+            "y": -2960
+        },
+        {
+            "fileName": "hoenn/fill-039.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 4864,
+            "y": -2960
+        },
+        {
+            "fileName": "hoenn/fill-040.tmx",
+            "height": 512,
+            "width": 512,
+            "x": 5456,
+            "y": -3472
+        },
+        {
+            "fileName": "hoenn/hoenn-route-134.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 1920,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/hoenn-route-133.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 3200,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/hoenn-route-132.tmx",
+            "height": 768,
+            "width": 1280,
+            "x": 4480,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/pacifidlog-town.tmx",
+            "height": 768,
+            "width": 512,
+            "x": 5760,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/hoenn-route-131.tmx",
+            "height": 768,
+            "width": 1024,
+            "x": 6064,
+            "y": -1376
+        },
+        {
+            "fileName": "hoenn/fill-041.tmx",
+            "height": 256,
+            "width": 256,
+            "x": 4480,
+            "y": -5024
+        },
+        {
+            "fileName": "hoenn/sky-pillar.tmx",
+            "height": 768,
+            "width": 512,
+            "x": 6400,
+            "y": -1776
+        },
+        {
+            "fileName": "hoenn/ever-grande-city.tmx",
+            "height": 1024,
+            "width": 768,
+            "x": 10240,
+            "y": -3008
+        }
+    ],
+    "onlyShowAdjacentMaps": false,
+    "type": "world"
+}

@@ -1,6 +1,2 @@
-node_modules
 coverage
-patches
-build/*/
-package.json
-package-lock.json
+app/build/cache
