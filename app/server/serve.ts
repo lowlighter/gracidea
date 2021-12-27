@@ -45,7 +45,6 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
           const {body, status} = await fetch(new URL(`${assets}/${path}`, import.meta.url))
           if (status !== 200)
             continue
-          console.debug(`trying static asset: ${new URL(`${assets}/${path}`, import.meta.url)} (status: ${status})`)
           return new Response(body, { headers });
         } catch {
           continue;
