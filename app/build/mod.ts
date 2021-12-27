@@ -1,7 +1,7 @@
 //Imports
-import { build } from "./build.ts"
+import { build } from "./build.ts";
 
-//
-if (import.meta.main)
-  await build()
-
+//Entry point
+if (import.meta.main) {
+  await build();
+}

@@ -1,6 +1,7 @@
 //Imports
-import { serve } from "./server/serve.ts"
+import { serve } from "./server/serve.ts";
 
-//Start server
-if (import.meta.main)
-  await serve()
+//Entry point
+if (import.meta.main) {
+  await serve();
+}

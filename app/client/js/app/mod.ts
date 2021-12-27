@@ -4,8 +4,8 @@
  */
 
 //Imports
-import { global } from "./types.ts"
-import { App } from "./app.ts"
+import { global } from "./types.ts";
+import { App } from "./app.ts";
 
 //Start app
-global.gracidea.app = await App.setup()
+global.gracidea.app = await App.setup();

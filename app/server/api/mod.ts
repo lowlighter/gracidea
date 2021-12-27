@@ -1,33 +1,31 @@
+//deno-lint-ignore-file no-unreachable
 //Imports
-import { mime } from "../utils.ts"
-import { maps, mapRoute } from "./maps/mod.ts"
-import { tilesets} from "./textures/tilesets/mod.ts"
-
+import { mime } from "../utils.ts";
+import { mapRoute, maps } from "./maps/mod.ts";
+import { tilesets } from "./textures/tilesets/mod.ts";
 
 /** API entrypoint */
-export async function api({endpoint, headers, query = {}}:{endpoint:string, headers:Headers, query?:{[key:string]:string}}) {
+export async function api({ endpoint, headers }: { endpoint: string; headers: Headers; query?: { [key: string]: string } }) {
   //Handle endpoints
-  headers.set("content-type", `${mime(".json")}; charset=utf-8`)
-  let result = {error:null}
+  headers.set("content-type", `${mime(".json")}; charset=utf-8`);
+  const result = { error: null };
   try {
     switch (true) {
-      case mapRoute.test(endpoint):{
-        Object.assign(result, await maps(endpoint.match(mapRoute)?.groups as any))
-        break
+      case mapRoute.test(endpoint): {
+        Object.assign(result, await maps(endpoint.match(mapRoute)?.groups));
+        break;
       }
-      case endpoint.startsWith("/textures/tilesets/"):{
-        Object.assign(result, await tilesets({tileset:endpoint.replace("/textures/tilesets/", "")}))
-        break
+      case endpoint.startsWith("/textures/tilesets/"): {
+        Object.assign(result, await tilesets({ tileset: endpoint.replace("/textures/tilesets/", "") }));
+        break;
       }
       default:
-        throw new Error("bad endpoint")
+        throw new Error("bad endpoint");
     }
-  }
-  catch (error) {
-    Object.assign(result, {error:error.message})
-  }
-  finally {
+  } catch (error) {
+    Object.assign(result, { error: error.message });
+  } finally {
     //deno-lint-ignore no-unsafe-finally
-    return new Response(JSON.stringify(result), {headers})
+    return new Response(JSON.stringify(result), { headers });
   }
 }
