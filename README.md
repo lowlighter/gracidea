@@ -1,4 +1,4 @@
-# ![](/client/static/copyrighted/imgs/icons/gracidea.png) Gracidea
+# ![](/client/static/copyrighted/imgs/icons/gracidea.png) Gracidea - *Pokémon* live map
 
 ![](/.github/README/animated_map.gif)
 
@@ -9,24 +9,16 @@
 
 **Gracidea** is a cartographic project which aims to gather all known *Pokémon* regions into a single 2D live map. It tries to keep fidelity to games and fill blanks based on anime, manga, artworks and custom maps.
 
+It is animated and you may
+
 ### ![](/client/static/copyrighted/imgs/icons/pokedoll.png) Features
 
 **Gracidea** is not an ordinary world map! See below a short list of the awesome features embedded in it :
 
-* **Faithful maps** : Maps are based first on core games and then filled with region knowledge and interpretations
 * **Wild areas** : *Pokémon* can spawn in wild areas! If you're lucky you may see rare encounters and even shinies!
 * **Liveful cities** : Humans and trainers populate the *Pokémon* world!
 * **World map** : A mini-map lets you access cities and special locations quickly
 * *New features will be implemented at a later date !*
-
-### ![](/client/static/copyrighted/imgs/icons/map.png) Maps
-
-Since there are often map redesigns in *Pokémon* franchise, the following games were chosen to represent each region:
-* **Kanto** : *Pokémon FireRed and LeafGreen*
-* **Hoenn** : *Pokémon Emerald*
-* *Others regions will follow at a later date !*
-
-Note that some versions include 3D graphics, so these are interpretations of what they could have been if they were in 2D.
 
 ## ![](/client/static/copyrighted/imgs/icons/contribute.png) Contributing
 
