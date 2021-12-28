@@ -279,37 +279,35 @@ export class NPC extends Renderable {
 
   /** Active effects */
   #effects = {
-    fly:null as ReturnType<typeof Render.Sprite>|null,
-    swim:null as ReturnType<typeof Render.Sprite>|null
-  }
+    fly: null as ReturnType<typeof Render.Sprite> | null,
+    swim: null as ReturnType<typeof Render.Sprite> | null,
+  };
 
   /** Set texture effects */
-  protected effects(...effects:string[]) {
+  protected effects(...effects: string[]) {
     //Flying effect
     if (effects.includes("fly")) {
-      this.#effects.fly = this.sprite.addChildAt(Render.Graphics({ fill: [0, 0.5], ellipse: [0, 0.5, 2 / 3, 2 / 4] }), 0)
-      this.#effects.fly.cacheAsBitmap = true
-      this.#texture.position.y = 1.5
-    }
-    else if (this.#effects.fly) {
-      this.sprite.removeChild(this.#effects.fly)
-      this.#effects.fly.destroy({ children: true })
-      this.#effects.fly = null
-      this.#texture.position.y = 1
+      this.#effects.fly = this.sprite.addChildAt(Render.Graphics({ fill: [0, 0.5], ellipse: [0, 0.5, 2 / 3, 2 / 4] }), 0);
+      this.#effects.fly.cacheAsBitmap = true;
+      this.#texture.position.y = 1.5;
+    } else if (this.#effects.fly) {
+      this.sprite.removeChild(this.#effects.fly);
+      this.#effects.fly.destroy({ children: true });
+      this.#effects.fly = null;
+      this.#texture.position.y = 1;
     }
     //Swimming effect
     if (effects.includes("swim")) {
-      const mask = Render.Graphics({ rect: [-2, -2, 4, 2.4], fill: [0, 0] })
-      this.#effects.swim = mask
-      this.#effects.swim.cacheAsBitmap = true
-      this.sprite.addChild(mask)
-      this.#texture.mask = mask
-    }
-    else if (this.#effects.swim) {
-      this.sprite.removeChild(this.#effects.swim)
-      this.#effects.swim.destroy({ children: true })
-      this.#effects.swim = null
-      this.#texture.mask = null
+      const mask = Render.Graphics({ rect: [-2, -2, 4, 2.4], fill: [0, 0] });
+      this.#effects.swim = mask;
+      this.#effects.swim.cacheAsBitmap = true;
+      this.sprite.addChild(mask);
+      this.#texture.mask = mask;
+    } else if (this.#effects.swim) {
+      this.sprite.removeChild(this.#effects.swim);
+      this.#effects.swim.destroy({ children: true });
+      this.#effects.swim = null;
+      this.#texture.mask = null;
     }
   }
 

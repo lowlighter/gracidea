@@ -30,22 +30,22 @@ const sections = {} as {
 };
 
 /** Texture effects */
-const effects = {creature:{name:{}, area:{}}} as {
-  creature:{
-    name:{[id:string]:string}
-    area:{[id:string]:string}
-  }
-}
+const effects = { creature: { name: {}, area: {} } } as {
+  creature: {
+    name: { [id: string]: string };
+    area: { [id: string]: string };
+  };
+};
 
 /** Build utilities */
 export const build = Object.assign(async function () {
   await build.setup();
   await build.gender();
   await build.encounters();
-  await build.effects()
+  await build.effects();
   await build.sections();
   await build.save();
- // await build.tilesets();
+  // await build.tilesets();
 }, {
   /** Setup build environment */
   async setup() {
@@ -133,14 +133,16 @@ export const build = Object.assign(async function () {
     log.step("extract texture effects");
     for await (const { path, name: file } of expandGlob("app/build/cache/data/data/api/v2/type/*/*.json")) {
       log.progress(`processing: location-area/${basename(dirname(path))}/${file}`);
-      const { name, pokemon: creatures } = JSON.parse(await Deno.readTextFile(path),) as types;
+      const { name, pokemon: creatures } = JSON.parse(await Deno.readTextFile(path)) as types;
       if (name === "flying") {
-        for (const {pokemon:{name:creature}} of creatures)
-          effects.creature.name[creature] = "fly"
+        for (const { pokemon: { name: creature } } of creatures) {
+          effects.creature.name[creature] = "fly";
+        }
       }
     }
-    for (const method of ["old-rod", "good-rod", "super-rod", "surf", "super-rod-spots", "surf-spots"])
-      effects.creature.area[method] = "swim"
+    for (const method of ["old-rod", "good-rod", "super-rod", "surf", "super-rod-spots", "surf-spots"]) {
+      effects.creature.area[method] = "swim";
+    }
     log.debug(`processed: ${Object.keys(effects).length} texture effects`);
     log.success();
   },
@@ -229,7 +231,7 @@ type encounters = {
 
 /** Types data */
 type types = {
-  name: string
+  name: string;
   pokemon: Array<{
     pokemon: { name: string };
   }>;

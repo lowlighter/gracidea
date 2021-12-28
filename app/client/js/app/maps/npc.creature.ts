@@ -29,13 +29,16 @@ export class Creature extends NPC {
       frame: `${Math.random() < App.config.creatures.shiny ? "shiny" : "regular"}/${this.name}`,
       random: true,
     });
-    const effects = []
-    if (this.area.data.name in Render.effects.creature.area)
-      effects.push(Render.effects.creature.area[this.area.data.name])
-    if (this.name in Render.effects.creature.name)
-      effects.push(Render.effects.creature.name[this.name])
-    if (effects.length)
-      this.effects(...effects)
+    const effects = [];
+    if (this.area.data.name in Render.effects.creature.area) {
+      effects.push(Render.effects.creature.area[this.area.data.name]);
+    }
+    if (this.name in Render.effects.creature.name) {
+      effects.push(Render.effects.creature.name[this.name]);
+    }
+    if (effects.length) {
+      this.effects(...effects);
+    }
   }
 
   /** Lifetime */

@@ -6,5 +6,5 @@ const effectsData = await fetch(join(dirname(import.meta.url), "data.json")).the
 
 /** Texture effects */
 export async function effects() {
-  return effectsData
+  return effectsData;
 }

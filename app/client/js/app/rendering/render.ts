@@ -44,13 +44,13 @@ export class Render {
 
     //Load texture effects
     pending.push(
-      new Promise<void>(async solve => {
+      new Promise<void>(async (solve) => {
         const effects = await fetch("/api/textures/effects").then((response) => response.json());
         app.loaded(`loaded textures effects`);
         Object.assign(this, { effects });
         solve();
-      })
-    )
+      }),
+    );
 
     //Create application
     Object.assign(this, {
@@ -99,11 +99,11 @@ export class Render {
 
   /** Texture effects */
   static readonly effects: {
-    creature:{
-      name:{[key:string]:string}
-      area:{[key:string]:string}
-    }
-  }
+    creature: {
+      name: { [key: string]: string };
+      area: { [key: string]: string };
+    };
+  };
 
   /** Texture cache */
   static readonly cache: { [key: string]: ReturnType<typeof Render.engine.Texture> };

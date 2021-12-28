@@ -16,7 +16,7 @@ export async function api({ endpoint, headers }: { endpoint: string; headers: He
         Object.assign(result, await maps(endpoint.match(mapRoute)?.groups));
         break;
       }
-      case endpoint.startsWith("/textures/effects"):{
+      case endpoint.startsWith("/textures/effects"): {
         Object.assign(result, await effects());
         break;
       }
