@@ -29,19 +29,19 @@
 
   //Gracidea app global reference
   const gracidea = {
-    sha: document.querySelector("#sha").innerHTML.trim(),
+    deploy: document.querySelector("#deploy").innerHTML.trim(),
     loaded(text = "", type = null, options = {}) {
       loader.dispatchEvent(Object.assign(new Event("gracidea.loaded"), { data: { text, type, options } }));
     },
   };
   globalThis.gracidea = gracidea;
-  console.log(`Gracidea ${gracidea.sha.substring(0, 7)} - https://github.com/lowlighter/gracidea`);
+  console.log(`Gracidea ${gracidea.deploy} - https://github.com/lowlighter/gracidea`);
   console.log("All dreams are but another reality. Never forget…");
 
   //Loading
   globalThis.onload = async function () {
     //URL params
-    const params = new URLSearchParams({ sha: gracidea.sha });
+    const params = new URLSearchParams({ deploy: gracidea.deploy });
 
     //Load stylesheet
     const css = tag("link", { rel: "stylesheet", href: `/css/styles.css?${params}` });

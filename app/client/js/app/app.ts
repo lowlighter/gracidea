@@ -44,9 +44,9 @@ export class App {
     return global.gracidea.loaded as (text: string, type?: string | null, options?: { update?: boolean }) => void;
   }
 
-  /** Current commit sha */
-  static get sha() {
-    return global.gracidea.sha as string;
+  /** Current deployment id */
+  static get deploy() {
+    return global.gracidea.deploy as string;
   }
 
   /** Config */

@@ -4,6 +4,15 @@ import { parse } from "https://deno.land/std@0.119.0/path/mod.ts";
 import { api } from "./api/mod.ts";
 import { mime } from "./utils.ts";
 
+/** Deployment id */
+let deploy = ""
+try {
+  deploy = Deno.env.get("DENO_DEPLOYMENT_ID") ?? ""
+}
+catch {
+  //No-op
+}
+
 /** Server entrypoint */
 export async function serve({ port = 4000 }: { port?: number } = {}) {
   const listener = Deno.listen({ port });
@@ -19,6 +28,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         //Prepare header
         const headers = new Headers();
         headers.set("content-type", `${mime(ext)}; charset=utf-8`);
+        headers.set("cache-control", "public, max-age=86400, immutable")
 
         //API endpoints
         if (dir.startsWith("/api")) {
@@ -29,7 +39,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         if ((dir === "/") && ((!file) || (file === "index.html"))) {
           headers.set("content-type", `${mime(".html")}; charset=utf-8`);
           const index = await fetch(new URL(`../client/index.html`, import.meta.url)).then((response) => response.text());
-          const body = index.replace("{{sha}}", "sha");
+          const body = index.replace("{{deploy}}", deploy);
           return new Response(body, { headers });
         }
 

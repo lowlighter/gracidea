@@ -11690,7 +11690,7 @@ class Render {
             "npcs",
             "creatures"
         ]){
-            loader.add(`/textures/${app.config.style}/${texture}.json?sha=${app.sha}`);
+            loader.add(`/textures/${app.config.style}/${texture}.json?deploy=${app.deploy}`);
         }
         loader.onProgress.add((_, { url =""  })=>app.loaded(`loaded ${new URL(url, global1.location).pathname}`)
         );
@@ -12527,8 +12527,8 @@ class App {
     static get loaded() {
         return global1.gracidea.loaded;
     }
-    static get sha() {
-        return global1.gracidea.sha;
+    static get deploy() {
+        return global1.gracidea.deploy;
     }
     static config = {
         style: "rse",
@@ -12615,7 +12615,7 @@ class Camera extends Renderable {
                     `visible.x: ${this.#visible.x} to ${this.#visible.x + this.#visible.width}`,
                     `visible.y: ${this.#visible.y} to ${this.#visible.y + this.#visible.height}`,
                     `loaded.x: ${this.#loaded.x} to ${this.#loaded.x + this.#loaded.width}`,
-                    `loaded.y: ${this.#loaded.y} to ${this.#loaded.y + this.#loaded.height}`, 
+                    `loaded.y: ${this.#loaded.y} to ${this.#loaded.y + this.#loaded.height}`,
                 ].join("\n"),
                 textPosition: {
                     x: x10,
