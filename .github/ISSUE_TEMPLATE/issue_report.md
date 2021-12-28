@@ -1,0 +1,62 @@
+---
+name: 📝 Issue report
+description: Create a report to help us improve
+body:
+
+  - type: markdown
+    attributes:
+      value: >
+        **Thank you for your interest in Gracidea project!**
+
+        Please note that [issues](https://github.com/lowlighter/gracidea/issues)
+        are exclusively reserved for bug and progress tracking.
+
+        Use [discussions](https://github.com/lowlighter/gracidea/discussions) for any
+        other request instead.
+
+  - type: textarea
+    attributes:
+      label: Summary
+      description: Explain the problem briefly below.
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Impacted components
+      description: Please select which component is impacted.
+      options:
+        - "📀 app: client"
+        - "💿 app: server"
+        - "🎨 textures"
+        - "🗺️ maps"
+        - "🗃️ repository"
+    validations:
+      required: true
+
+  - type: dropdown
+    attributes:
+      label: Impacted regions
+      description: Please select which regions is impacted (if applicable).
+      options:
+        "1️⃣ region: kanto"
+        "2️ region: johto"
+        "3️ region: hoenn"
+        "4️ region: sinnoh"
+        "5️ region: unova"
+        "6️ region: kalos"
+        "7️ region: alola"
+        "8️ region: galar"
+        "*️⃣ region: other"
+
+  - type: checkboxes
+    attributes:
+      label: Community guidelines
+      description: Please review and accept to follow community guidelines
+      options:
+        - label: I am not duplicating an existing [issue](https://github.com/lowlighter/gracidea/issues), [pull request](https://github.com/lowlighter/gracidea/pulls) or [discussion](https://github.com/lowlighter/gracidea/discussions)
+          required: true
+        - label: I have read [contribution guidelines](https://github.com/lowlighter/gracidea/blob/main/CONTRIBUTING.md)
+          required: true
+        - label: I agree to follow the [Code of Conduct](https://github.com/lowlighter/gracidea/blob/main/CODE_OF_CONDUCT.md)
+          required: true
