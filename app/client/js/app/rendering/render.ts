@@ -69,15 +69,12 @@ export class Render {
     app.loaded("render engine ready");
   }
 
-  /** Time */
-  static readonly t = 0;
-
   /** Registered renderable instances */
   private static readonly registered = new WeakMap<Renderable>();
 
   /** Register a new renderable */
   static register(renderable: Renderable) {
-    this.registered.set(renderable, (dt: number) => renderable.update({ t: Render.t, dt }));
+    this.registered.set(renderable, (dt: number) => renderable.update({ t: Date.now(), dt }));
     Render.engine.Ticker.shared.add(this.registered.get(renderable));
     return this;
   }
@@ -160,7 +157,7 @@ export class Render {
 
   /** Created a new tiling sprite */
   static TilingSprite({ frame = null, x = 0, y = 0, z = NaN, width = 0, height = 0 }: TilingSprite = {}) {
-    const sprite = Render.engine.TilingSprite(Render.Texture(frame), { width: width * 16, height: height * 16 });
+    const sprite = new Render.engine.TilingSprite(Render.Texture(frame), width * 16, height * 16);
     sprite.position.set(x * 16, y * 16);
     if (!Number.isNaN(z)) {
       sprite.zIndex = z;
