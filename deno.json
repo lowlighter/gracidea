@@ -21,7 +21,7 @@
   "fmt": {
     "files": {
       "include": ["app/"],
-      "exclude": ["app/build/cache/", "app/server/maps/data.json"]
+      "exclude": ["app/build/cache/", "app/server/api/maps/data.json",  "app/server/api/textures/effects/data.json"]
     },
     "options": {
       "lineWidth": 200
