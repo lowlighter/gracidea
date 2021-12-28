@@ -29,14 +29,23 @@ const sections = {} as {
   };
 };
 
+/** Texture effects */
+const effects = {creature:{name:{}, area:{}}} as {
+  creature:{
+    name:{[id:string]:string}
+    area:{[id:string]:string}
+  }
+}
+
 /** Build utilities */
 export const build = Object.assign(async function () {
   await build.setup();
   await build.gender();
   await build.encounters();
+  await build.effects()
   await build.sections();
   await build.save();
-  await build.tilesets();
+ // await build.tilesets();
 }, {
   /** Setup build environment */
   async setup() {
@@ -119,6 +128,22 @@ export const build = Object.assign(async function () {
     log.debug(`found: ${Object.keys(encounters).length} areas`);
     log.success();
   },
+  /** Compute texture effects */
+  async effects() {
+    log.step("extract texture effects");
+    for await (const { path, name: file } of expandGlob("app/build/cache/data/data/api/v2/type/*/*.json")) {
+      log.progress(`processing: location-area/${basename(dirname(path))}/${file}`);
+      const { name, pokemon: creatures } = JSON.parse(await Deno.readTextFile(path),) as types;
+      if (name === "flying") {
+        for (const {pokemon:{name:creature}} of creatures)
+          effects.creature.name[creature] = "fly"
+      }
+    }
+    for (const method of ["old-rod", "good-rod", "super-rod", "surf", "super-rod-spots", "surf-spots"])
+      effects.creature.area[method] = "swim"
+    log.debug(`processed: ${Object.keys(effects).length} texture effects`);
+    log.success();
+  },
   /** Extract sections data */
   async sections() {
     log.step("extract sections metadata");
@@ -169,7 +194,12 @@ export const build = Object.assign(async function () {
       "app/server/api/maps/data.json",
       JSON.stringify(sections),
     );
-    log.debug(`found: app/server/api/maps/data.json`);
+    log.debug(`saved: app/server/api/maps/data.json`);
+    await Deno.writeTextFile(
+      "app/server/api/textures/effects/data.json",
+      JSON.stringify(effects),
+    );
+    log.debug(`saved: app/server/api/textures/effects/data.json`);
     log.success();
   },
 });
@@ -194,5 +224,13 @@ type encounters = {
         method: { name: string };
       }>;
     }>;
+  }>;
+};
+
+/** Types data */
+type types = {
+  name: string
+  pokemon: Array<{
+    pokemon: { name: string };
   }>;
 };

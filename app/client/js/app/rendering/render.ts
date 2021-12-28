@@ -42,6 +42,16 @@ export class Render {
       }),
     );
 
+    //Load texture effects
+    pending.push(
+      new Promise<void>(async solve => {
+        const effects = await fetch("/api/textures/effects").then((response) => response.json());
+        app.loaded(`loaded textures effects`);
+        Object.assign(this, { effects });
+        solve();
+      })
+    )
+
     //Create application
     Object.assign(this, {
       instance: new Render.engine.Application({
@@ -89,6 +99,14 @@ export class Render {
     animated: { [key: string]: { frames: string[]; speed: number } };
     zindex: { [key: string]: number };
   };
+
+  /** Texture effects */
+  static readonly effects: {
+    creature:{
+      name:{[key:string]:string}
+      area:{[key:string]:string}
+    }
+  }
 
   /** Texture cache */
   static readonly cache: { [key: string]: ReturnType<typeof Render.engine.Texture> };

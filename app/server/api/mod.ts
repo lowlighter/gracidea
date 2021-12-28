@@ -3,6 +3,7 @@
 import { mime } from "../utils.ts";
 import { mapRoute, maps } from "./maps/mod.ts";
 import { tilesets } from "./textures/tilesets/mod.ts";
+import { effects } from "./textures/effects/mod.ts";
 
 /** API entrypoint */
 export async function api({ endpoint, headers }: { endpoint: string; headers: Headers; query?: { [key: string]: string } }) {
@@ -13,6 +14,10 @@ export async function api({ endpoint, headers }: { endpoint: string; headers: He
     switch (true) {
       case mapRoute.test(endpoint): {
         Object.assign(result, await maps(endpoint.match(mapRoute)?.groups));
+        break;
+      }
+      case endpoint.startsWith("/textures/effects"):{
+        Object.assign(result, await effects());
         break;
       }
       case endpoint.startsWith("/textures/tilesets/"): {
