@@ -38,15 +38,15 @@ body:
       label: Impacted regions
       description: Please select which regions is impacted (if applicable).
       options:
-        "1️⃣ region: kanto"
-        "2️ region: johto"
-        "3️ region: hoenn"
-        "4️ region: sinnoh"
-        "5️ region: unova"
-        "6️ region: kalos"
-        "7️ region: alola"
-        "8️ region: galar"
-        "*️⃣ region: other"
+        - "1️⃣ region: kanto"
+        - "2️ region: johto"
+        - "3️ region: hoenn"
+        - "4️ region: sinnoh"
+        - "5️ region: unova"
+        - "6️ region: kalos"
+        - "7️ region: alola"
+        - "8️ region: galar"
+        - "*️⃣ region: other"
 
   - type: checkboxes
     attributes:
