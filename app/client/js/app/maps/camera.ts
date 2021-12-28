@@ -6,10 +6,10 @@ import type { World } from "./world.ts";
 import type { Region } from "./region.ts";
 
 /** Visible range */
-const visible = { x: 16 * 7, y: 16 * 5 };
+const visible = { x: 16 * 4, y: 16 * 3 };
 
 /** Loaded range */
-const loaded = { x: 16 * 11, y: 16 * 9 };
+const loaded = { x: 16 * 5, y: 16 * 4 };
 
 /**
  * Camera.
