@@ -1,5 +1,5 @@
 //Imports
-import { clone, log, pack } from "./util.ts";
+import { clone, log, pack, tileset } from "./util.ts";
 import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
 import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 
@@ -36,6 +36,7 @@ export const build = Object.assign(async function () {
   await build.encounters();
   await build.sections();
   await build.save();
+  await build.tilesets();
 }, {
   /** Setup build environment */
   async setup() {
@@ -147,6 +148,18 @@ export const build = Object.assign(async function () {
     }
     log.debug(`processed: ${files} file`);
     log.debug(`found: ${Object.keys(sections).length} sections`);
+    log.success();
+  },
+  /** Package tilesets */
+  async tilesets() {
+    log.step("package tilesets");
+    for await (
+      const { path, name: file } of expandGlob(
+        "copyrighted/tilesets/*.png",
+      )
+    ) {
+      await tileset({ path, file });
+    }
     log.success();
   },
   /** Save data */

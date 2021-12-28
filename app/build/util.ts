@@ -2,6 +2,9 @@
 import argv from "https://cdn.skypack.dev/string-argv@0.3.1";
 import { uncompress } from "https://deno.land/x/compress@v0.4.1/tgz/mod.ts";
 import { bold, gray, green, red, yellow } from "https://deno.land/std@0.119.0/fmt/colors.ts";
+import { Image } from "https://deno.land/x/imagescript@1.2.9/mod.ts";
+import { ensureDir } from "https://deno.land/std@0.119.0/fs/mod.ts";
+import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 
 /** Encoder instance*/
 const encoder = new TextEncoder();
@@ -70,4 +73,22 @@ export async function pack({ pkg, dir }: { pkg: string; dir: string }) {
   }
   const { version = "unknown" } = JSON.parse(await Deno.readTextFile(`${dir}/package/package.json`));
   log.debug(`packed: ${pkg}@${version}${exists ? " (already present)" : ""}`);
+}
+
+/** Crop an image instance */
+export async function tileset({ path, file }: { path: string; file: string }) {
+  log.progress(`processing: tilesets/${basename(dirname(path))}/${file}`);
+  const directory = `app/build/cache/tilesets/${basename(file, ".png")}`;
+  const padding = 2;
+  const tilesize = 16;
+  const image = await Image.decode(await Deno.readFile(path));
+  const X = (image.width - padding) / (tilesize + padding), Y = (image.height - padding) / (tilesize + padding);
+  await ensureDir(directory);
+  for (let y = 0; y < Y; y++) {
+    for (let x = 0; x < X; x++) {
+      const i = x + y * X, px = padding + x * (tilesize + padding), py = padding + y * (tilesize + padding);
+      await Deno.writeFile(`${directory}/${i}.png`, await image.clone().crop(px, py, tilesize, tilesize).encode());
+      log.progress(`processing: tilesets/${basename(dirname(path))}/${file} (${i}/${X * Y})`);
+    }
+  }
 }
