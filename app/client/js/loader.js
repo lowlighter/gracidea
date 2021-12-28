@@ -41,7 +41,7 @@
   //Loading
   globalThis.onload = async function () {
     //URL params
-    const params = new URLSearchParams({sha:gracidea.sha})
+    const params = new URLSearchParams({ sha: gracidea.sha });
 
     //Load stylesheet
     const css = tag("link", { rel: "stylesheet", href: `/css/styles.css?${params}` });
@@ -52,14 +52,14 @@
     const compat = (navigator.userAgent.includes("Safari")) && (!navigator.userAgent.includes("Chrome"));
     if (compat) {
       gracidea.loaded("browser compatibility mode enabled", "warn");
-      params.set("compat", 1)
+      params.set("compat", 1);
     }
 
     //Debug mode
     const debug = location.hostname === "localhost";
     if (debug) {
       console.warn("debug mode enabled (served from localhost)");
-      params.set("debug", 1)
+      params.set("debug", 1);
     }
 
     //Load main script
