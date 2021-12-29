@@ -5,11 +5,10 @@ import { api } from "./api/mod.ts";
 import { mime } from "./utils.ts";
 
 /** Deployment id */
-let deploy = ""
+let deploy = "";
 try {
-  deploy = Deno.env.get("DENO_DEPLOYMENT_ID") ?? ""
-}
-catch {
+  deploy = Deno.env.get("DENO_DEPLOYMENT_ID") ?? "";
+} catch {
   //No-op
 }
 
@@ -28,7 +27,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         //Prepare header
         const headers = new Headers();
         headers.set("content-type", `${mime(ext)}; charset=utf-8`);
-        headers.set("cache-control", "public, max-age=86400, immutable")
+        headers.set("cache-control", "public, max-age=86400, immutable");
 
         //API endpoints
         if (dir.startsWith("/api")) {

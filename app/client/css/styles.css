@@ -93,6 +93,13 @@ nav a img {
   opacity: .7;
 }
 
+nav a.app-name img {
+  height: 1.5rem;
+  width: 1.5rem;
+}
+nav a.app-name {
+  font-size: 1.5rem;
+}
 
 
 /*

@@ -3,7 +3,6 @@ import type { Renderable } from "../rendering/renderable.ts";
 import type { event } from "../types.ts";
 import { global } from "../types.ts";
 import { App } from "./../app.ts";
-import { debounce } from "https://deno.land/std@0.119.0/async/debounce.ts";
 
 /**
  * Controller
@@ -34,7 +33,6 @@ export class Controller {
   #scrollers() {
     let click = { x: 0, y: 0, active: false };
     let touch = { x: 0, y: 0 };
-    const sync = debounce(() => this.#sync(), 50);
     App.rendering.view.addEventListener("touchstart", (event: event) => {
       touch = { x: event.touches[0].pageX, y: event.touches[0].pageY };
     });
@@ -57,7 +55,6 @@ export class Controller {
         this.#update({ delta });
       }
       this.#cursor = { x: event.clientX, y: event.clientY };
-      sync();
     });
     App.rendering.view.addEventListener("wheel", (event: event) => {
       event.preventDefault();
@@ -75,13 +72,6 @@ export class Controller {
         );
       }
     }
-  }
-
-  /** Sync controller data */
-  #sync() {
-    const { x, y } = this.cursor;
-    global.document.querySelector("#cursor-x").innerText = x;
-    global.document.querySelector("#cursor-y").innerText = y;
   }
 
   /** Camera position */

@@ -8,7 +8,7 @@
   <meta name="description" content="Gracidea, a Pokémon live map">
   <meta property="og:image" content="/opengraph.png">
   <link rel="icon" href="/favicon.ico">
-  <style>body{background-color:#182850;}.loader{display: none;}</style>
+  <style>body{background-color:#182850;}.loader,nav{display: none;}</style>
 </head>
 <body>
   <div class="loader">
@@ -17,10 +17,11 @@
     <div class="loaded"></div>
   </div>
   <nav>
-    <a href="https://github.com/lowlighter/gracidea" target="_blank">
+    <a href="https://github.com/lowlighter/gracidea" target="_blank" class="app-name">
       <img src="/icons/gracidea.png" alt="🌺">
       <span>Gracidea <sub id="deploy">{{deploy}}</sub></span>
     </a>
+    <!--
     <a href="#">
       <img src="/icons/map.png" alt="🗺️">
       World map
@@ -33,8 +34,7 @@
       <img src="/icons/debug.png" alt="⚙️">
       Debug mode
     </a>
-    <span id="cursor-x"></span>
-    <span id="cursor-y"></span>
+    -->
   </nav>
   <script src="/js/loader.js"></script>
 </body>
