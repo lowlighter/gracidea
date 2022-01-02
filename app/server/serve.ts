@@ -36,6 +36,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
 
         //Index
         if ((dir === "/") && ((!file) || (file === "index.html"))) {
+          headers.delete("cache-control");
           headers.set("content-type", `${mime(".html")}; charset=utf-8`);
           const index = await fetch(new URL(`../client/index.html`, import.meta.url)).then((response) => response.text());
           const body = index.replace("{{deploy}}", deploy);
