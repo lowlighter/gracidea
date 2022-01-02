@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="1">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="30" height="30" tilewidth="16" tileheight="16" infinite="0" nextlayerid="6" nextobjectid="7">
  <tileset firstgid="1" source="../../copyrighted/tilesets/tileset.tsx"/>
  <layer id="1" name="1" width="30" height="30">
   <data encoding="csv">
@@ -137,5 +137,24 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="3" name="people"/>
+ <objectgroup id="3" name="people">
+  <object id="1" name="gentleman" type="wander" x="304" y="144">
+   <polygon points="0,0 64,0 64,48 0,48"/>
+  </object>
+  <object id="2" name="generic_f3" type="wander" x="256" y="272">
+   <polygon points="0,0 48,0 48,48 0,48"/>
+  </object>
+  <object id="3" name="schoolkid_m" type="wander" x="336" y="400">
+   <polygon points="0,0 32,0 32,-16 64,-16 64,32 0,32"/>
+  </object>
+  <object id="4" name="generic_m1" type="fixed" x="128" y="352">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+  <object id="5" name="norman" type="wander" x="208" y="144">
+   <polygon points="0,0 32,0 32,32 0,32"/>
+  </object>
+  <object id="6" name="rich_boy" type="wander" x="80" y="176">
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+ </objectgroup>
 </map>

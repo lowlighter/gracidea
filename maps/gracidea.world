@@ -58,8 +58,8 @@
         },
         {
             "fileName": "hoenn/anime-oldale-ruins.tmx",
-            "height": 256,
-            "width": 256,
+            "height": 320,
+            "width": 384,
             "x": 320,
             "y": -1664
         },
@@ -198,16 +198,16 @@
         },
         {
             "fileName": "hoenn/anime-north-petalburg.tmx",
-            "height": 512,
-            "width": 512,
-            "x": -768,
-            "y": -2192
+            "height": 320,
+            "width": 544,
+            "x": -800,
+            "y": -2016
         },
         {
             "fileName": "hoenn/anime-rinshin-town.tmx",
-            "height": 1600,
-            "width": 1600,
-            "x": -768,
+            "height": 512,
+            "width": 512,
+            "x": -800,
             "y": -2944
         },
         {
@@ -457,8 +457,8 @@
         },
         {
             "fileName": "hoenn/fill-011.tmx",
-            "height": 256,
-            "width": 256,
+            "height": 512,
+            "width": 512,
             "x": 320,
             "y": -3616
         },
@@ -529,15 +529,15 @@
             "fileName": "hoenn/fill-021.tmx",
             "height": 512,
             "width": 512,
-            "x": -1280,
-            "y": -2784
+            "x": -288,
+            "y": -2432
         },
         {
             "fileName": "hoenn/fill-022.tmx",
-            "height": 256,
-            "width": 256,
+            "height": 416,
+            "width": 512,
             "x": -1280,
-            "y": -2272
+            "y": -2656
         },
         {
             "fileName": "hoenn/fill-023.tmx",
@@ -555,9 +555,9 @@
         },
         {
             "fileName": "hoenn/fill-025.tmx",
-            "height": 256,
-            "width": 256,
-            "x": -768,
+            "height": 352,
+            "width": 768,
+            "x": -800,
             "y": -3296
         },
         {
@@ -758,9 +758,9 @@
         },
         {
             "fileName": "hoenn/hoenn-route-131.tmx",
-            "height": 768,
-            "width": 1024,
-            "x": 6064,
+            "height": 640,
+            "width": 960,
+            "x": 6080,
             "y": -1376
         },
         {
@@ -888,6 +888,41 @@
             "width": 336,
             "x": -1616,
             "y": -5648
+        },
+        {
+            "fileName": "hoenn/fill-056.tmx",
+            "height": 176,
+            "width": 480,
+            "x": -1440,
+            "y": 544
+        },
+        {
+            "fileName": "hoenn/fill-057.tmx",
+            "height": 512,
+            "width": 1024,
+            "x": -800,
+            "y": -2432
+        },
+        {
+            "fileName": "hoenn/fill-058.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -288,
+            "y": -3296
+        },
+        {
+            "fileName": "hoenn/fill-059.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -288,
+            "y": -2944
+        },
+        {
+            "fileName": "hoenn/fill-060.tmx",
+            "height": 512,
+            "width": 512,
+            "x": -288,
+            "y": -2016
         }
     ],
     "onlyShowAdjacentMaps": false,

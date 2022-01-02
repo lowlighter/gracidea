@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="80" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="5">
+<map version="1.5" tiledversion="1.7.2" orientation="orthogonal" renderorder="right-down" width="80" height="22" tilewidth="16" tileheight="16" infinite="0" nextlayerid="8" nextobjectid="7">
  <tileset firstgid="1" source="../../copyrighted/tilesets/tileset.tsx"/>
  <layer id="1" name="1" width="80" height="22">
   <data encoding="csv">
@@ -105,7 +105,17 @@
 0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0
 </data>
  </layer>
- <objectgroup id="6" name="people"/>
+ <objectgroup id="6" name="people">
+  <object id="5" name="generic_m1" type="wander" x="288" y="160">
+   <polygon points="0,0 64,0 64,48 16,48 16,32 0,32"/>
+  </object>
+  <object id="6" name="may" type="fixed" x="160" y="48">
+   <properties>
+    <property name="right" type="bool" value="true"/>
+   </properties>
+   <polygon points="0,0 16,0 16,16 0,16"/>
+  </object>
+ </objectgroup>
  <objectgroup id="7" name="creatures">
   <object id="1" name="walk" x="32" y="64">
    <polygon points="0,0 32,0 32,16 64,16 64,32 112,32 112,96 96,96 96,128 32,128 32,96 0,96"/>
