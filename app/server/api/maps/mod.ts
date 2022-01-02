@@ -74,17 +74,47 @@ async function load({ region, section }: { region: string; section: string }) {
 
     //Parse chunks data
     const chunks = [] as Array<{ id: string; layer: string; x: number; y: number; tiles: number[] }>;
-    for (const { "@name": layer, data: { chunk: chunked } } of toArray(raw.layer)) {
+    for (const { "@name": layer, ..._layer } of toArray(raw.layer)) {
+      const {"@width":width, "@height":height, data:{"#text":tiled = null, chunk:chunked = []}} = _layer
+      //Fixed-size map
+      if (tiled) {
+        //Extract and format data
+        const tiles = (tiled as string)
+          .split("\n")
+          .map(value => value.trim())
+          .filter(value => value.length)
+          .map(value => value
+            .split(",")
+            .map(value => value.trim())
+            .filter(value => value.length)
+          )
+        //Padding for 16-sized chunks
+        const TY = tiles.length, TX = tiles[0].length
+        for (let f = 0; f < 16-(TY%16); f++)
+          tiles.push(new Array(TX).fill(0))
+        for (const row of tiles)
+          row.push(...new Array(16 -(TX%16)).fill(0))
+        //Generate chunked data
+        for (let x = 0; x < width; x+=16) {
+          for (let y = 0; y < height; y+=16) {
+            chunked.push({"@x":x, "@y":y, "#text":tiles.slice(y, y+16).map(row => row.slice(x, x+16).join(",")).join(",\n")})
+          }
+        }
+      }
+
+      //Chunked map
       for (const chunk of toArray(chunked)) {
         //Extract and format data
         const { "@x": x, "@y": y, "#text": _tiles } = chunk;
         const id = `${X + x / 16};${Y + y / 16}`;
-        const tiles = _tiles.split(",")
-          .filter((value: string) => value.trim().length)
-          .map((value: string) => Math.max(Number(value) - 1, 0));
-
+        const tiles = (_tiles as string)
+          .split(",")
+          .map(value => value.trim())
+          .filter(value => value.length)
+          .map(value => Math.max(Number(value) - 1, 0));
         //Save chunk
-        chunks.push({ id, layer, x, y, tiles });
+        if (tiles.reduce((a, b) => a + b, 0))
+          chunks.push({ id, layer, x, y, tiles });
       }
     }
 
