@@ -611,10 +611,10 @@
         },
         {
             "fileName": "hoenn/hoenn-safari-zone-expansion-north.tmx",
-            "height": 256,
-            "width": 256,
+            "height": 1648,
+            "width": 1600,
             "x": 5104,
-            "y": -4768
+            "y": -4816
         },
         {
             "fileName": "hoenn/anime-larousse-city.tmx",
@@ -772,9 +772,9 @@
         },
         {
             "fileName": "hoenn/sky-pillar.tmx",
-            "height": 768,
-            "width": 512,
-            "x": 6400,
+            "height": 400,
+            "width": 496,
+            "x": 6416,
             "y": -1776
         },
         {
