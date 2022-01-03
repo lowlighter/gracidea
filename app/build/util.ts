@@ -92,3 +92,11 @@ export async function tileset({ path, file }: { path: string; file: string }) {
     }
   }
 }
+
+/** Clean folder */
+export async function clean({path}:{path:string}) {
+  if (!path)
+    throw new RangeError("no path specified for cleaning!")
+  await Deno.remove(path, {recursive:true})
+  log.debug(`cleaned: ${path}`);
+}
