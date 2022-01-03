@@ -4,7 +4,6 @@ import { uncompress } from "https://deno.land/x/compress@v0.4.1/tgz/mod.ts";
 import { bold, gray, green, red, yellow } from "https://deno.land/std@0.119.0/fmt/colors.ts";
 import { Image } from "https://deno.land/x/imagescript@1.2.9/mod.ts";
 import { ensureDir } from "https://deno.land/std@0.119.0/fs/mod.ts";
-import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 
 /** Encoder instance*/
 const encoder = new TextEncoder();

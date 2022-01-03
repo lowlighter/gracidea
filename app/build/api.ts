@@ -134,7 +134,7 @@ export async function load({ region, section }: { region: string; section: strin
   //Formatted section data
   return { id: `${region}/${section}`, chunks, areas, ...load.data.maps?.[section] };
 }
-load.data = { maps: null as null | { [key: string]: object }, pending: { maps: null as null | Promise<{ [key: string]: object }> } };
+load.data = { maps: null as null | loose, pending: { maps: null as null | Promise<loose> } };
 
 /** Tilesets endpoint */
 export async function tilesets({ tileset }: { tileset: string }) {
@@ -169,6 +169,10 @@ export async function tilesets({ tileset }: { tileset: string }) {
 /** Parsed data accessor */
 //deno-lint-ignore no-explicit-any
 type parsed = any;
+
+/** Loose type */
+//deno-lint-ignore ban-types
+type loose = { [key: string]: object };
 
 /** Read and parse serialized data */
 async function read(path: string) {
