@@ -11700,7 +11700,7 @@ class Render {
             )
         ));
         pending.push(new Promise(async (solve)=>{
-            const tileset = await fetch("/api/textures/tilesets/tileset").then((response)=>response.json()
+            const tileset = await fetch(`/api/textures/${app.config.style}/tileset`).then((response)=>response.json()
             );
             app.loaded(`loaded tileset metadata`);
             Object.assign(this, {

@@ -45,10 +45,17 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         }
 
         //Client app (debug mode auto-bundling)
-        if ((query.debug) && (dir === "/js") && (["app.js", "app.js.map"].includes(file))) {
+        if ((dir === "/js") && (["app.js", "app.js.map"].includes(file))) {
           headers.set("content-type", `${mime(".js")}; charset=utf-8`);
-          const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "module" });
-          return new Response(files[`deno:///bundle${{ "app.js": ".js", "app.js.map": ".js.map" }[file]}`], { headers });
+          if (query.debug) {
+            console.debug(`bundling app...`);
+            const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "module" });
+            return new Response(files[`deno:///bundle${{ "app.js": ".js", "app.js.map": ".js.map" }[file]}`], { headers });
+          }
+          const { body, status } = await fetch(new URL(`../generated/js/${file}`, import.meta.url))
+          if (status !== 200)
+            return new Response(null, { status: 404 });
+          return new Response(body, {headers})
         }
 
         //Static assets
