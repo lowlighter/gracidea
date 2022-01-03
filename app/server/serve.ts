@@ -1,8 +1,6 @@
 /** Imports */
 import { Server } from "https://deno.land/std@0.119.0/http/server.ts";
 import { parse } from "https://deno.land/std@0.119.0/path/mod.ts";
-import { api } from "./api/mod.ts";
-import { mime } from "./utils.ts";
 
 /** Deployment id */
 let deploy = "";
@@ -27,20 +25,23 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         //Prepare header
         const headers = new Headers();
         headers.set("content-type", `${mime(ext)}; charset=utf-8`);
-        headers.set("cache-control", "public, max-age=86400, immutable");
-
-        //API endpoints
-        if (dir.startsWith("/api")) {
-          return api({ endpoint: path.replace("/api", ""), headers, query });
-        }
 
         //Index
         if ((dir === "/") && ((!file) || (file === "index.html"))) {
-          headers.delete("cache-control");
           headers.set("content-type", `${mime(".html")}; charset=utf-8`);
           const index = await fetch(new URL(`../client/index.html`, import.meta.url)).then((response) => response.text());
           const body = index.replace("{{deploy}}", deploy);
           return new Response(body, { headers });
+        }
+        headers.set("cache-control", "public, max-age=86400, immutable");
+
+        //API data
+        if (dir.startsWith("/api/")||(dir.endsWith("/api"))) {
+          headers.set("content-type", `${mime(".json")}; charset=utf-8`);
+          const { body, status } = await fetch(new URL(`../generated/${path}.json`, import.meta.url))
+          if (status !== 200)
+            return new Response(null, { status: 404 });
+          return new Response(body, {headers})
         }
 
         //Client app (debug mode auto-bundling)
@@ -71,4 +72,20 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
   });
   console.debug(`listening on port ${port}`);
   await server.serve(listener);
+}
+
+/** Send back MIME type by file extension  */
+function mime(ext: string) {
+  return {
+    ".ico": "image/x-icon",
+    ".jpg": "image/jpeg",
+    ".jpeg": "image/jpeg",
+    ".png": "image/png",
+    ".webp": "image/webp",
+    ".gif": "image/gif",
+    ".html": "text/html",
+    ".css": "text/css",
+    ".js": "application/javascript",
+    ".json": "application/json",
+  }[ext] ?? "text/plain";
 }
