@@ -12764,21 +12764,50 @@ class Section extends Renderable {
     }
     data;
     async init() {
-        Object.assign(this, {
-            data: await fetch(`/api/maps/${this.id}`).then((res)=>res.json()
-            )
-        });
+        this.#placeholder = this.sprite.addChild(Render.Graphics({
+            stroke: [
+                1,
+                2637960,
+                1
+            ],
+            fill: [
+                1583184,
+                1
+            ],
+            rect: [
+                0,
+                0,
+                this.bounds.width,
+                this.bounds.height
+            ],
+            text: `${this.id}\n(loading)`,
+            textStyle: {
+                align: "center",
+                fontSize: 16,
+                fill: "white",
+                fontFamily: "monospace"
+            },
+            textPosition: {
+                x: this.bounds.width / 2,
+                y: this.bounds.height / 2
+            }
+        }));
         return super.init({
             parent: this.region
         });
     }
     #loaded = false;
+    #placeholder = null;
     async load() {
         if (this.#loaded) {
             return;
         }
         this.#loaded = true;
         await this.ready;
+        Object.assign(this, {
+            data: await fetch(`/api/maps/${this.id}`).then((res)=>res.json()
+            )
+        });
         const { chunks , areas  } = this.data;
         this.debug.addChild(Render.Graphics({
             rect: [
@@ -12818,6 +12847,12 @@ class Section extends Renderable {
                 section: this,
                 data: area
             }));
+        }
+        if (this.#placeholder) {
+            this.sprite.removeChild(this.#placeholder)?.destroy({
+                children: true
+            });
+            this.#placeholder = null;
         }
         if (App.config.debug) {
             console.debug(`loaded: ${this.constructor.name}#${this.id}`);
