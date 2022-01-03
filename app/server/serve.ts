@@ -36,12 +36,13 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         headers.set("cache-control", "public, max-age=86400, immutable");
 
         //API data
-        if (dir.startsWith("/api/")||(dir.endsWith("/api"))) {
+        if (dir.startsWith("/api/") || (dir.endsWith("/api"))) {
           headers.set("content-type", `${mime(".json")}; charset=utf-8`);
-          const { body, status } = await fetch(new URL(`../generated/${path}.json`, import.meta.url))
-          if (status !== 200)
+          const { body, status } = await fetch(new URL(`../generated/${path}.json`, import.meta.url));
+          if (status !== 200) {
             return new Response(null, { status: 404 });
-          return new Response(body, {headers})
+          }
+          return new Response(body, { headers });
         }
 
         //Client app (debug mode auto-bundling)
@@ -52,10 +53,11 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
             const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "module" });
             return new Response(files[`deno:///bundle${{ "app.js": ".js", "app.js.map": ".js.map" }[file]}`], { headers });
           }
-          const { body, status } = await fetch(new URL(`../generated/js/${file}`, import.meta.url))
-          if (status !== 200)
+          const { body, status } = await fetch(new URL(`../generated/js/${file}`, import.meta.url));
+          if (status !== 200) {
             return new Response(null, { status: 404 });
-          return new Response(body, {headers})
+          }
+          return new Response(body, { headers });
         }
 
         //Static assets

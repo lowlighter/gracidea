@@ -94,10 +94,12 @@ export async function crop({ path, tileset }: { path: string; tileset: string })
 }
 
 /** Clean folder */
-export async function clean({path}:{path:string}) {
-  if (!path)
-    throw new RangeError("no path specified for cleaning!")
-  if (await Deno.lstat(path).then(() => true).catch(() => false))
-    await Deno.remove(path, {recursive:true})
+export async function clean({ path }: { path: string }) {
+  if (!path) {
+    throw new RangeError("no path specified for cleaning!");
+  }
+  if (await Deno.lstat(path).then(() => true).catch(() => false)) {
+    await Deno.remove(path, { recursive: true });
+  }
   log.debug(`cleaned: ${path}`);
 }

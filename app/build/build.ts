@@ -1,9 +1,9 @@
 //Imports
-import { clone, log, pack, crop, clean } from "./util.ts";
-import { expandGlob, ensureDir } from "https://deno.land/std@0.119.0/fs/mod.ts";
+import { clean, clone, crop, log, pack } from "./util.ts";
+import { ensureDir, expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
 import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
-import { parse as  parseFlags} from "https://deno.land/std@0.119.0/flags/mod.ts";
-import * as api from "./api.ts"
+import { parse as parseFlags } from "https://deno.land/std@0.119.0/flags/mod.ts";
+import * as api from "./api.ts";
 
 /** Gender formatted data */
 const genders = {} as {
@@ -40,36 +40,37 @@ const effects = { creature: { name: {}, area: {} } } as {
 };
 
 /** Warnings */
-const warnings = []
+const warnings = [];
 
 /** Flags (--clean --tilesets) */
-const flags = parseFlags(Deno.args)
+const flags = parseFlags(Deno.args);
 
 /** Build utilities */
 export const build = Object.assign(async function () {
-  console.log(flags)
-  const start = performance.now()
+  console.log(flags);
+  const start = performance.now();
   await build.setup();
-  await build.gender()
-  await build.encounters()
+  await build.gender();
+  await build.encounters();
   await build.sections();
   await build.effects();
-  await build.api()
-  log.step(`completed in ${performance.now()-start} ms`)
+  await build.api();
+  log.step(`completed in ${performance.now() - start} ms`);
   if (warnings.length) {
-    log.warn(`${warnings.length} warnings`)
-    Deno.exit(2)
+    log.warn(`${warnings.length} warnings`);
+    Deno.exit(2);
   }
-  Deno.exit(0)
+  Deno.exit(0);
 }, {
   /** Setup build environment */
   async setup() {
     log.step("setup environment");
     await clone({ repo: "PokeAPI/api-data", dir: "app/build/cache/data" });
-    await clone({repo: "msikma/pokesprite", dir: "app/build/cache/creatures"});
+    await clone({ repo: "msikma/pokesprite", dir: "app/build/cache/creatures" });
     await pack({ pkg: "pixi.js", dir: "app/build/cache/pixi.js" });
-    if (flags.clean)
-      await clean({path:"app/generated"})
+    if (flags.clean) {
+      await clean({ path: "app/generated" });
+    }
     log.success();
   },
   /** Extract gender data */
@@ -155,7 +156,7 @@ export const build = Object.assign(async function () {
           { language: { name: language }, name }: { language: { name: string }; name: string },
         ) => [language, name]),
       );
-      sections[id] = {id, region,i18n,encounters: encounters[`${id}-area`] ?? null};
+      sections[id] = { id, region, i18n, encounters: encounters[`${id}-area`] ?? null };
       files++;
     }
     log.debug(`processed: ${files} file`);
@@ -165,11 +166,11 @@ export const build = Object.assign(async function () {
   /** API data */
   async api() {
     log.step("compute api data");
-    const save = async (path:string, data:unknown|Promise<unknown>) => {
-      path = `app/generated/api/${path}`
+    const save = async (path: string, data: unknown | Promise<unknown>) => {
+      path = `app/generated/api/${path}`;
       await ensureDir(dirname(path));
-      await Deno.writeTextFile(path, JSON.stringify(await data))
-    }
+      await Deno.writeTextFile(path, JSON.stringify(await data));
+    };
     //Maps data
     {
       log.progress(`processing: maps data`);
@@ -179,52 +180,53 @@ export const build = Object.assign(async function () {
     //Regions
     {
       log.progress(`processing: world regions`);
-      await save("maps.json", api.regions())
+      await save("maps.json", api.regions());
       log.debug(`processed: world regions`);
     }
     //Sections
     {
       let regions = 0, sections = 0;
       for await (const { name: region, isDirectory } of expandGlob("maps/*")) {
-        if (!isDirectory)
-          continue
+        if (!isDirectory) {
+          continue;
+        }
         log.progress(`processing: ${region}`);
-        await save(`maps/${region}.json`, api.sections({region}))
-        for await (const {name, isFile} of expandGlob(`maps/${region}/*.tmx`)) {
-          if (!isFile)
-            continue
-          const section = name.replace(".tmx", "")
+        await save(`maps/${region}.json`, api.sections({ region }));
+        for await (const { name, isFile } of expandGlob(`maps/${region}/*.tmx`)) {
+          if (!isFile) {
+            continue;
+          }
+          const section = name.replace(".tmx", "");
           log.progress(`processing: ${region}/${section}`);
           try {
-            await save(`maps/${region}/${section}.json`, api.load({region, section}))
-            sections++
-          }
-          catch (error) {
+            await save(`maps/${region}/${section}.json`, api.load({ region, section }));
+            sections++;
+          } catch (error) {
             if (/not properly referenced/.test(error.message)) {
-              warnings.push(error)
-              log.warn(error.message)
-              continue
+              warnings.push(error);
+              log.warn(error.message);
+              continue;
             }
-            throw error
+            throw error;
           }
         }
-        regions++
+        regions++;
       }
       log.debug(`processed: ${regions} regions, ${sections} sections`);
     }
     //Tilesets
     {
-      let tilesets = 0
+      let tilesets = 0;
       for await (const { path, name } of expandGlob("copyrighted/textures/*/*.tsx")) {
-        const style = basename(dirname(path))
-        const tileset = `${style}/${name.replace(".tsx", "")}`
+        const style = basename(dirname(path));
+        const tileset = `${style}/${name.replace(".tsx", "")}`;
         log.progress(`processing: ${tileset}`);
-        await save(`textures/${tileset}.json`, api.tilesets({tileset}))
+        await save(`textures/${tileset}.json`, api.tilesets({ tileset }));
         if (flags.tilesets) {
-          await crop({ path:path.replace(".tsx", ".png"), tileset });
+          await crop({ path: path.replace(".tsx", ".png"), tileset });
           log.progress(`packaged: ${tileset}`);
         }
-        tilesets++
+        tilesets++;
       }
       log.debug(`processed: ${tilesets} tilesets`);
     }

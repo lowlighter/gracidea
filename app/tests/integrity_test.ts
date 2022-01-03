@@ -11,12 +11,12 @@ for (const glob of ["{maps,copyrighted}/**/*.{tmx,tsx,tps,json}", "app/generated
       const file = path.replace(Deno.cwd(), "");
       const ext = extname(path).substring(1);
       Deno.test(file, async () =>
-      assert({
-        json: JSON,
-        tmx: XML,
-        tsx: XML,
-        tps: XML,
-      }[ext]?.parse(await Deno.readTextFile(path))));
+        assert({
+          json: JSON,
+          tmx: XML,
+          tsx: XML,
+          tps: XML,
+        }[ext]?.parse(await Deno.readTextFile(path))));
     }
   }
 }
