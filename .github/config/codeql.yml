@@ -4,5 +4,4 @@ queries:
 paths-ignore:
   - copyrighted/**
   - maps/**
-  - app/client/js/app.js
-  - app/client/js/app.min.js
+  - generated/**
