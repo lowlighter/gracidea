@@ -21,15 +21,21 @@ export async function sections({ region, filter = "" }: { region: string; filter
   const { maps: raw } = await read("maps/gracidea.world");
 
   //Formatted region sections data
-  const sections = raw
-    .filter(({ fileName = "" }) => fileName.startsWith(`${region}/`) && fileName.includes(filter))
-    .map(({ fileName = "", height = 0, width = 0, x = 0, y = 0 }) => ({
-      id: fileName.replace(".tmx", ""),
-      x: x / 16,
-      y: y / 16,
-      height: height / 16,
-      width: width / 16,
-    }));
+  const sections = await Promise.all(
+    raw
+      .filter(({ fileName = "" }) => fileName.startsWith(`${region}/`) && fileName.includes(filter))
+      .map(async ({ fileName = "", x = 0, y = 0, ...properties }) => {
+        const { map: raw } = await read(`maps/${fileName}`);
+        const { "@width": width = properties.width ?? 0, "@height": height = properties.height ?? 0 } = toArray(raw.layer)?.[0] ?? {};
+        return {
+          id: fileName.replace(".tmx", ""),
+          x: x / 16,
+          y: y / 16,
+          height,
+          width,
+        };
+      }),
+  );
   return { sections };
 }
 
