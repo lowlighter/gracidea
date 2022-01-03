@@ -2,6 +2,7 @@
 import { clone, log, pack, crop, clean } from "./util.ts";
 import { expandGlob, ensureDir } from "https://deno.land/std@0.119.0/fs/mod.ts";
 import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
+import { parse as  parseFlags} from "https://deno.land/std@0.119.0/flags/mod.ts";
 import * as api from "./api.ts"
 
 /** Gender formatted data */
@@ -41,8 +42,12 @@ const effects = { creature: { name: {}, area: {} } } as {
 /** Warnings */
 const warnings = []
 
+/** Flags (--clean --tilesets) */
+const flags = parseFlags(Deno.args)
+
 /** Build utilities */
 export const build = Object.assign(async function () {
+  console.log(flags)
   const start = performance.now()
   await build.setup();
   await build.gender()
@@ -63,7 +68,8 @@ export const build = Object.assign(async function () {
     await clone({ repo: "PokeAPI/api-data", dir: "app/build/cache/data" });
     await clone({repo: "msikma/pokesprite", dir: "app/build/cache/creatures"});
     await pack({ pkg: "pixi.js", dir: "app/build/cache/pixi.js" });
-    await clean({path:"app/generated"})
+    if (flags.clean)
+      await clean({path:"app/generated"})
     log.success();
   },
   /** Extract gender data */
@@ -214,7 +220,7 @@ export const build = Object.assign(async function () {
         const tileset = `${style}/${name.replace(".tsx", "")}`
         log.progress(`processing: ${tileset}`);
         await save(`textures/tilesets/${tileset}.json`, api.tilesets({tileset}))
-        if (true) {
+        if (flags.tilesets) {
           await crop({ path:path.replace(".tsx", ".png"), tileset });
           log.progress(`packaged: ${tileset}`);
         }

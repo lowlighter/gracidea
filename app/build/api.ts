@@ -129,7 +129,7 @@ export async function load({region, section}:{region:string, section:string}) {
   //Formatted section data
   return { id: `${region}/${section}`, chunks, areas, ...load.data.maps?.[section] };
 }
-load.data = {maps:null as null|{[key:string]:object}, pending:{maps:null as null|Promise<{[key:string]:unknown}>}}
+load.data = {maps:null as null|{[key:string]:object}, pending:{maps:null as null|Promise<{[key:string]:object}>}}
 
 /** Tilesets endpoint */
 export async function tilesets({ tileset }: { tileset: string }) {
