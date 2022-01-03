@@ -2,9 +2,9 @@
   "velociraptor":{
     "scripts": {
       "start":"deno run --unstable --watch --allow-read --allow-net app/mod.ts",
-      "build":"deno run --allow-read --allow-run=git --allow-write=app/build/cache,app/server/api/maps/data.json app/build/mod.ts",
+      "build":"deno run --allow-read --allow-net --allow-run=git --allow-write=app/build/cache,app/generated app/build/mod.ts",
       "test":"deno test --allow-read app/tests",
-      "bundle": "deno bundle app/client/js/app/mod.ts app/client/js/app.js",
+      "bundle": "deno bundle app/client/js/app/mod.ts app/generated/js/app.js",
       "fmt": "deno fmt --config deno.json",
       "lint": "deno lint --config deno.json"
     }
@@ -12,7 +12,7 @@
   "lint": {
     "files": {
       "include": ["app/"],
-      "exclude": ["app/build/cache/", "app/client/js/app.js", "app/client/js/app.min.js"]
+      "exclude": ["app/build/cache/", "app/generated/"]
     },
     "rules": {
       "exclude": ["require-await", "no-async-promise-executor"]
@@ -21,7 +21,7 @@
   "fmt": {
     "files": {
       "include": ["app/"],
-      "exclude": ["app/build/cache/", "app/server/api/maps/data.json",  "app/server/api/textures/effects/data.json"]
+      "exclude": ["app/build/cache/", "app/generated/"]
     },
     "options": {
       "lineWidth": 200
