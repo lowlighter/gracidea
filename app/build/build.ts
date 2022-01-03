@@ -1,5 +1,5 @@
 //Imports
-import { clone, log, pack, tileset, clean } from "./util.ts";
+import { clone, log, pack, crop, clean } from "./util.ts";
 import { expandGlob, ensureDir } from "https://deno.land/std@0.119.0/fs/mod.ts";
 import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 import * as api from "./api.ts"
@@ -50,7 +50,6 @@ export const build = Object.assign(async function () {
   await build.sections();
   await build.effects();
   await build.api()
-  await build.tilesets();
   log.step(`completed in ${performance.now()-start} ms`)
   if (warnings.length) {
     log.warn(`${warnings.length} warnings`)
@@ -157,14 +156,6 @@ export const build = Object.assign(async function () {
     log.debug(`found: ${Object.keys(sections).length} sections`);
     log.success();
   },
-  /** Package tilesets */
-  async tilesets() {
-    log.step("package tilesets");
-    for await (const { path, name: file } of expandGlob("copyrighted/tilesets/*.png")) {
-      await tileset({ path, file });
-    }
-    log.success();
-  },
   /** API data */
   async api() {
     log.step("compute api data");
@@ -218,10 +209,15 @@ export const build = Object.assign(async function () {
     //Tilesets
     {
       let tilesets = 0
-      for await (const { name } of expandGlob("copyrighted/tilesets/*.tsx")) {
-        const tileset = name.replace(".tsx", "")
+      for await (const { path, name } of expandGlob("copyrighted/textures/*/*.tsx")) {
+        const style = basename(dirname(path))
+        const tileset = `${style}/${name.replace(".tsx", "")}`
         log.progress(`processing: ${tileset}`);
         await save(`textures/tilesets/${tileset}.json`, api.tilesets({tileset}))
+        if (true) {
+          await crop({ path:path.replace(".tsx", ".png"), tileset });
+          log.progress(`packaged: ${tileset}`);
+        }
         tilesets++
       }
       log.debug(`processed: ${tilesets} tilesets`);

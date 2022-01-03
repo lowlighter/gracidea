@@ -76,9 +76,9 @@ export async function pack({ pkg, dir }: { pkg: string; dir: string }) {
 }
 
 /** Crop an image instance */
-export async function tileset({ path, file }: { path: string; file: string }) {
-  log.progress(`processing: tilesets/${basename(dirname(path))}/${file}`);
-  const directory = `app/build/cache/tilesets/${basename(file, ".png")}`;
+export async function crop({ path, tileset }: { path: string; tileset: string }) {
+  log.progress(`processing: ${tileset}`);
+  const directory = `app/build/cache/tilesets/${tileset}`;
   const padding = 2;
   const tilesize = 16;
   const image = await Image.decode(await Deno.readFile(path));
@@ -88,7 +88,7 @@ export async function tileset({ path, file }: { path: string; file: string }) {
     for (let x = 0; x < X; x++) {
       const i = x + y * X, px = padding + x * (tilesize + padding), py = padding + y * (tilesize + padding);
       await Deno.writeFile(`${directory}/${i}.png`, await image.clone().crop(px, py, tilesize, tilesize).encode());
-      log.progress(`processing: tilesets/${basename(dirname(path))}/${file} (${i}/${X * Y})`);
+      log.progress(`processing: ${tileset} (${i}/${X * Y})`);
     }
   }
 }

@@ -134,7 +134,7 @@ load.data = {maps:null as null|{[key:string]:object}, pending:{maps:null as null
 /** Tilesets endpoint */
 export async function tilesets({ tileset }: { tileset: string }) {
   //Load tileset data
-  const { tileset: raw } = await read(`copyrighted/tilesets/${tileset}.tsx`)
+  const { tileset: raw } = await read(`copyrighted/textures/${tileset}.tsx`)
 
   //Parse tiles data
   const animated = {} as { [key: string]: { frames: string[]; speed: number } };
