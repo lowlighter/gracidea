@@ -219,7 +219,7 @@ export const build = Object.assign(async function () {
         const style = basename(dirname(path))
         const tileset = `${style}/${name.replace(".tsx", "")}`
         log.progress(`processing: ${tileset}`);
-        await save(`textures/tilesets/${tileset}.json`, api.tilesets({tileset}))
+        await save(`textures/${tileset}.json`, api.tilesets({tileset}))
         if (flags.tilesets) {
           await crop({ path:path.replace(".tsx", ".png"), tileset });
           log.progress(`packaged: ${tileset}`);
