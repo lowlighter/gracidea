@@ -50,7 +50,7 @@ export const build = Object.assign(async function () {
   await build.sections();
   await build.effects();
   await build.api()
-  // await build.tilesets();
+  await build.tilesets();
   log.step(`completed in ${performance.now()-start} ms`)
   if (warnings.length) {
     log.warn(`${warnings.length} warnings`)
