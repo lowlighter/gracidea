@@ -11700,7 +11700,7 @@ class Render {
             )
         ));
         pending.push(new Promise(async (solve)=>{
-            const tileset = await fetch(`/api/textures/${app.config.style}/tileset`).then((response)=>response.json()
+            const tileset = await fetch(`/data/textures/${app.config.style}/tileset`).then((response)=>response.json()
             );
             app.loaded(`loaded tileset metadata`);
             Object.assign(this, {
@@ -11709,7 +11709,7 @@ class Render {
             solve();
         }));
         pending.push(new Promise(async (solve)=>{
-            const effects = await fetch("/api/textures/effects").then((response)=>response.json()
+            const effects = await fetch("/data/textures/effects").then((response)=>response.json()
             );
             app.loaded(`loaded textures effects`);
             Object.assign(this, {
@@ -12655,7 +12655,7 @@ class Region extends Renderable {
         return super.destructor();
     }
     async init() {
-        const { sections  } = await fetch(`/api/maps/${this.id}`).then((res)=>res.json()
+        const { sections  } = await fetch(`/data/maps/${this.id}`).then((res)=>res.json()
         );
         for (const { id ="" , x: x13 = 0 , y =0 , width =0 , height =0  } of sections){
             this.loadable.set(id, Render.Rectangle([
@@ -12693,7 +12693,7 @@ class World extends Renderable {
         this.init();
     }
     async init() {
-        const { regions  } = await fetch("/api/maps").then((res)=>res.json()
+        const { regions  } = await fetch("/data/maps").then((res)=>res.json()
         );
         for (const { id ="" , x: x14 = 0 , y =0  } of regions){
             this.regions.set(id, new Region({
@@ -12805,7 +12805,7 @@ class Section extends Renderable {
         this.#loaded = true;
         await this.ready;
         Object.assign(this, {
-            data: await fetch(`/api/maps/${this.id}`).then((res)=>res.json()
+            data: await fetch(`/data/maps/${this.id}`).then((res)=>res.json()
             )
         });
         const { chunks , areas  } = this.data;

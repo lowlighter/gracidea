@@ -67,7 +67,7 @@ export class Section extends Renderable {
     this.#loaded = true;
     await this.ready;
 
-    Object.assign(this, { data: await fetch(`/api/maps/${this.id}`).then((res) => res.json()) });
+    Object.assign(this, { data: await fetch(`/data/maps/${this.id}`).then((res) => res.json()) });
     const { chunks, areas } = this.data;
 
     this.debug.addChild(Render.Graphics({

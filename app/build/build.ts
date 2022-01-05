@@ -167,7 +167,7 @@ export const build = Object.assign(async function () {
   async api() {
     log.step("compute api data");
     const save = async (path: string, data: unknown | Promise<unknown>) => {
-      path = `app/generated/api/${path}`;
+      path = `app/generated/data/${path}`;
       await ensureDir(dirname(path));
       await Deno.writeTextFile(path, JSON.stringify(await data));
     };

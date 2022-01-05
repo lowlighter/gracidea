@@ -30,7 +30,7 @@ export class Region extends Renderable {
 
   /** Initialize renderable */
   protected async init() {
-    const { sections } = await fetch(`/api/maps/${this.id}`).then((res) => res.json());
+    const { sections } = await fetch(`/data/maps/${this.id}`).then((res) => res.json());
     for (const { id = "", x = 0, y = 0, width = 0, height = 0 } of sections) {
       this.loadable.set(id, Render.Rectangle([x / 16, y / 16, width / 16, height / 16]));
     }

@@ -25,7 +25,7 @@ export class World extends Renderable {
 
   /** Initialize renderable */
   protected async init() {
-    const { regions } = await fetch("/api/maps").then((res) => res.json());
+    const { regions } = await fetch("/data/maps").then((res) => res.json());
     for (const { id = "", x = 0, y = 0 } of regions) {
       this.regions.set(id, new Region({ world: this, id, x, y }));
     }

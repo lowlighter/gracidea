@@ -36,7 +36,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         headers.set("cache-control", "public, max-age=86400, immutable");
 
         //API data
-        if (dir.startsWith("/api/") || (dir.endsWith("/api"))) {
+        if (dir.startsWith("/data/") || (dir.endsWith("/data"))) {
           headers.set("content-type", `${mime(".json")}; charset=utf-8`);
           const { body, status } = await fetch(new URL(`../generated/${path}.json`, import.meta.url));
           if (status !== 200) {
