@@ -5,7 +5,7 @@ import * as XML from "https://deno.land/x/xml@2.0.3/mod.ts";
 import { extname } from "https://deno.land/std@0.119.0/path/mod.ts";
 
 //Ensure files are parsable
-for (const glob of ["{maps,copyrighted}/**/*.{tmx,tsx,tps,json}", "app/generated/**/*.json"]) {
+for (const glob of ["{maps,copyrighted}/**/*.{tmx,tsx,tps,json}", "app/public/**/*.json"]) {
   for await (const { path, isFile } of expandGlob(glob)) {
     if (isFile) {
       const file = path.replace(Deno.cwd(), "");

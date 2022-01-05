@@ -35,7 +35,7 @@ export class Render {
     //Load tileset properties
     pending.push(
       new Promise<void>(async (solve) => {
-        const tileset = await fetch(`/data/textures/${app.config.style}/tileset`).then((response) => response.json());
+        const tileset = await fetch(`/data/textures/${app.config.style}/tileset.json`).then((response) => response.json());
         app.loaded(`loaded tileset metadata`);
         Object.assign(this, { tileset });
         solve();
@@ -45,7 +45,7 @@ export class Render {
     //Load texture effects
     pending.push(
       new Promise<void>(async (solve) => {
-        const effects = await fetch("/data/textures/effects").then((response) => response.json());
+        const effects = await fetch("/data/textures/effects.json").then((response) => response.json());
         app.loaded(`loaded textures effects`);
         Object.assign(this, { effects });
         solve();

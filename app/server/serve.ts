@@ -38,7 +38,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         //API data
         if (dir.startsWith("/data/") || (dir.endsWith("/data"))) {
           headers.set("content-type", `${mime(".json")}; charset=utf-8`);
-          const { body, status } = await fetch(new URL(`../generated/${path}.json`, import.meta.url));
+          const { body, status } = await fetch(new URL(`../public/${path}.json`, import.meta.url));
           if (status !== 200) {
             return new Response(null, { status: 404 });
           }
@@ -53,7 +53,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
             const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "module" });
             return new Response(files[`deno:///bundle${{ "app.js": ".js", "app.js.map": ".js.map" }[file]}`], { headers });
           }
-          const { body, status } = await fetch(new URL(`../generated/js/${file}`, import.meta.url));
+          const { body, status } = await fetch(new URL(`../public/js/${file}`, import.meta.url));
           if (status !== 200) {
             return new Response(null, { status: 404 });
           }

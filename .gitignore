@@ -1,2 +1,3 @@
-coverage
+.vercel
 app/build/cache
+app/public

@@ -2,9 +2,8 @@
   "velociraptor":{
     "scripts": {
       "start":"deno run --unstable --watch --allow-read --allow-net app/mod.ts",
-      "build":"deno run --allow-read --allow-net --allow-run=git --allow-write=app/build/cache,app/generated app/build/mod.ts",
+      "build":"deno run --allow-read --allow-net --allow-run=git --allow-write=app/build/cache,app/public app/build/mod.ts",
       "test":"deno test --allow-read app/tests",
-      "bundle": "deno bundle app/client/js/app/mod.ts app/generated/js/app.js",
       "fmt": "deno fmt --config deno.json",
       "lint": "deno lint --config deno.json"
     }
@@ -12,7 +11,7 @@
   "lint": {
     "files": {
       "include": ["app/"],
-      "exclude": ["app/build/cache/", "app/generated/"]
+      "exclude": ["app/build/cache/", "app/public/"]
     },
     "rules": {
       "exclude": ["require-await", "no-async-promise-executor"]
@@ -21,7 +20,7 @@
   "fmt": {
     "files": {
       "include": ["app/"],
-      "exclude": ["app/build/cache/", "app/generated/"]
+      "exclude": ["app/build/cache/", "app/public/"]
     },
     "options": {
       "lineWidth": 200

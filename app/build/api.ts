@@ -43,7 +43,7 @@ export async function sections({ region, filter = "" }: { region: string; filter
 export async function load({ region, section }: { region: string; section: string }) {
   //Load map data if it isn't yet
   if (!load.data.maps) {
-    load.data.pending.maps = read("app/generated/data/maps/data.json");
+    load.data.pending.maps = read("app/public/data/maps/data.json");
     load.data.maps = await load.data.pending.maps;
   }
   await load.data.pending.maps;

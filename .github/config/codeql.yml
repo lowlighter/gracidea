@@ -4,4 +4,3 @@ queries:
 paths-ignore:
   - copyrighted/**
   - maps/**
-  - app/generated/**

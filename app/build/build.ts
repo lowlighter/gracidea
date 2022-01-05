@@ -1,6 +1,7 @@
 //Imports
 import { clean, clone, crop, log, pack } from "./util.ts";
 import { ensureDir, expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
+import { copy } from "https://deno.land/std@0.119.0/fs/copy.ts";
 import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 import { parse as parseFlags } from "https://deno.land/std@0.119.0/flags/mod.ts";
 import * as api from "./api.ts";
@@ -47,7 +48,6 @@ const flags = parseFlags(Deno.args);
 
 /** Build utilities */
 export const build = Object.assign(async function () {
-  console.log(flags);
   const start = performance.now();
   await build.setup();
   await build.gender();
@@ -55,6 +55,7 @@ export const build = Object.assign(async function () {
   await build.sections();
   await build.effects();
   await build.api();
+  await build.public();
   log.step(`completed in ${performance.now() - start} ms`);
   if (warnings.length) {
     log.warn(`${warnings.length} warnings`);
@@ -69,7 +70,7 @@ export const build = Object.assign(async function () {
     await clone({ repo: "msikma/pokesprite", dir: "app/build/cache/creatures" });
     await pack({ pkg: "pixi.js", dir: "app/build/cache/pixi.js" });
     if (flags.clean) {
-      await clean({ path: "app/generated" });
+      await clean({ path: "app/public" });
     }
     log.success();
   },
@@ -167,7 +168,7 @@ export const build = Object.assign(async function () {
   async api() {
     log.step("compute api data");
     const save = async (path: string, data: unknown | Promise<unknown>) => {
-      path = `app/generated/data/${path}`;
+      path = `app/public/data/${path}`;
       await ensureDir(dirname(path));
       await Deno.writeTextFile(path, JSON.stringify(await data));
     };
@@ -236,6 +237,26 @@ export const build = Object.assign(async function () {
       await save("textures/effects.json", JSON.stringify(effects));
       log.debug(`processed: texture effects`);
     }
+    log.success();
+  },
+  /** Public assets */
+  async public() {
+    log.step("creating public assets");
+    log.progress(`copying: static assets`);
+    await copy("app/client", "app/public", { overwrite: true });
+    await copy("copyrighted", "app/public", { overwrite: true });
+    const pending = [];
+    for (const glob of ["README.md", "animated_map.gif", "gracidea.webp", "js/app", "textures/**/*.{tsx,tps,png}"]) {
+      for await (const { path } of expandGlob(`app/public/${glob}`)) {
+        pending.push(Deno.remove(path, { recursive: true }));
+      }
+    }
+    await Promise.all(pending);
+    log.debug(`copied: static assets`);
+    log.progress(`emitting: app.js`);
+    const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic" });
+    await Deno.writeTextFile("app/public/js/app.js", files[`deno:///bundle.js`]);
+    log.debug(`emitted: app.js`);
     log.success();
   },
 });

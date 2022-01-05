@@ -31,29 +31,3 @@ jobs:
           languages: typescript
           config-file: .github/config/codeql.yml
       - uses: github/codeql-action/analyze@v1
-
-  ci:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs:
-      - fmt-lint-test
-      - analyze
-    steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.BOT_TOKEN }}
-          clean: true
-          fetch-depth: 0
-      - uses: jurassiscripts/setup-velociraptor@v2
-        with:
-          checkout: false
-      - run: |
-          deno run -A app/build/mod.ts --clean
-          deno bundle app/client/js/app/mod.ts app/generated/js/app.js
-          git config user.name github-actions[bot]
-          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-          set +e
-          git add --all
-          git commit -m "ci: auto-build app"
-          git push
-          set -e
