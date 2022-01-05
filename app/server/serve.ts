@@ -2,10 +2,10 @@
 import { Server } from "https://deno.land/std@0.119.0/http/server.ts";
 import { parse } from "https://deno.land/std@0.119.0/path/mod.ts";
 
-/** Deployment id */
-let deploy = "";
+/** Commit sha */
+let sha = "";
 try {
-  deploy = Deno.env.get("DENO_DEPLOYMENT_ID") ?? "";
+  sha = Deno.env.get("VERCEL_GIT_COMMIT_SHA") ?? Deno.env.get("DENO_DEPLOYMENT_ID") ?? "";
 } catch {
   //No-op
 }
@@ -30,7 +30,7 @@ export async function serve({ port = 4000 }: { port?: number } = {}) {
         if ((dir === "/") && ((!file) || (file === "index.html"))) {
           headers.set("content-type", `${mime(".html")}; charset=utf-8`);
           const index = await fetch(new URL(`../client/index.html`, import.meta.url)).then((response) => response.text());
-          const body = index.replace("{{deploy}}", deploy);
+          const body = index.replace("{{sha}}", sha);
           return new Response(body, { headers });
         }
         headers.set("cache-control", "public, max-age=86400, immutable");

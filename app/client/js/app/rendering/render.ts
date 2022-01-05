@@ -26,7 +26,7 @@ export class Render {
     //Load resources
     const loader = Render.engine.Loader.shared;
     for (const texture of ["tileset", "npcs", "creatures"]) {
-      loader.add(`/textures/${app.config.style}/${texture}.json?deploy=${app.deploy}`);
+      loader.add(`/textures/${app.config.style}/${texture}.json?sha=${app.sha}`);
     }
     loader.onProgress.add((_: unknown, { url = "" }) => app.loaded(`loaded ${new URL(url, global.location).pathname}`));
     loader.onComplete.add(() => app.loaded("all textures successfully loaded"));
