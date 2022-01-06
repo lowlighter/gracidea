@@ -3,7 +3,7 @@
 ![](/copyrighted/animated_map.gif)
 
 ![Build](https://github.com/lowlighter/gracidea/workflows/Build/badge.svg)
-[![Live demo](https://img.shields.io/badge/%20-Gracidea%20live%20demo-black.svg?logo=deno)](https://gracidea.deno.dev)
+[![Live demo](https://img.shields.io/badge/%20-Gracidea%20live%20demo-black.svg?logo=adafruit)](https://gracidea.vercel.app)
 
 **Gracidea** is a cartographic project which aims to map the whole known *Pokémon* world into a single 2D living web map.
 
