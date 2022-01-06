@@ -175,7 +175,7 @@ export const build = Object.assign(async function () {
     //Maps data
     {
       log.progress(`processing: maps data`);
-      await save("maps/data.json", JSON.stringify(sections));
+      await save("maps/data.json", sections);
       log.debug(`processed: maps data`);
     }
     //Regions
@@ -234,7 +234,7 @@ export const build = Object.assign(async function () {
     //Textures effect
     {
       log.progress(`processing: texture effects`);
-      await save("textures/effects.json", JSON.stringify(effects));
+      await save("textures/effects.json", effects);
       log.debug(`processed: texture effects`);
     }
     log.success();
@@ -242,21 +242,42 @@ export const build = Object.assign(async function () {
   /** Public assets */
   async public() {
     log.step("creating public assets");
-    log.progress(`copying: static assets`);
-    await copy("app/client", "app/public", { overwrite: true });
-    await copy("copyrighted", "app/public", { overwrite: true });
-    const pending = [];
-    for (const glob of ["README.md", "animated_map.gif", "gracidea.webp", "js/app", "textures/**/*.{tsx,tps,png}"]) {
-      for await (const { path } of expandGlob(`app/public/${glob}`)) {
-        pending.push(Deno.remove(path, { recursive: true }));
+    //Static assets
+    {
+      log.progress(`copying: static assets`);
+      await copy("app/client", "app/public", { overwrite: true });
+      await copy("copyrighted", "app/public", { overwrite: true });
+      const pending = [];
+      for (const glob of ["README.md", "animated_map.gif", "gracidea.webp", "js/app", "textures/**/*.{tsx,tps,png}"]) {
+        for await (const { path } of expandGlob(`app/public/${glob}`)) {
+          pending.push(Deno.remove(path, { recursive: true }));
+        }
       }
+      await Promise.all(pending);
+      log.debug(`copied: static assets`);
     }
-    await Promise.all(pending);
-    log.debug(`copied: static assets`);
-    log.progress(`emitting: app.js`);
-    const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic" });
-    await Deno.writeTextFile("app/public/js/app.js", files[`deno:///bundle.js`]);
-    log.debug(`emitted: app.js`);
+    //Index.html
+    {
+      let sha = "(head)"
+      try {
+        sha = Deno.env.get("VERCEL_GIT_COMMIT_SHA") || sha
+      }
+      catch {
+        //No-op
+      }
+      log.progress(`templating: index.html`)
+      let index = await Deno.readTextFile("app/client/index.html")
+      index = index.replaceAll("{{sha}}", sha)
+      await Deno.writeTextFile("app/public/index.html", index)
+      log.debug(`templated: index.html`);
+    }
+    //App.js
+    {
+      log.progress(`emitting: app.js`);
+      const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic" });
+      await Deno.writeTextFile("app/public/js/app.js", files[`deno:///bundle.js`]);
+      log.debug(`emitted: app.js`);
+    }
     log.success();
   },
 });

@@ -43,10 +43,8 @@ export async function sections({ region, filter = "" }: { region: string; filter
 export async function load({ region, section }: { region: string; section: string }) {
   //Load map data if it isn't yet
   if (!load.data.maps) {
-    load.data.pending.maps = read("app/public/data/maps/data.json");
-    load.data.maps = await load.data.pending.maps;
+    load.data.maps = await read("app/public/data/maps/data.json");
   }
-  await load.data.pending.maps;
 
   //Load section data
   const { map: raw } = await read(`maps/${region}/${section}.tmx`);
@@ -140,7 +138,7 @@ export async function load({ region, section }: { region: string; section: strin
   //Formatted section data
   return { id: `${region}/${section}`, chunks, areas, ...load.data.maps?.[section] };
 }
-load.data = { maps: null as null | loose, pending: { maps: null as null | Promise<loose> } };
+load.data = { maps: null as null | loose };
 
 /** Tilesets endpoint */
 export async function tilesets({ tileset }: { tileset: string }) {
