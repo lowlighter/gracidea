@@ -4,7 +4,7 @@ import { ensureDir, expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
 import { copy } from "https://deno.land/std@0.119.0/fs/copy.ts";
 import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 import { parse as parseFlags } from "https://deno.land/std@0.119.0/flags/mod.ts";
-import * as api from "./api.ts";
+import * as data from "./data.ts";
 
 /** Gender formatted data */
 const genders = {} as {
@@ -54,7 +54,7 @@ export const build = Object.assign(async function () {
   await build.encounters();
   await build.sections();
   await build.effects();
-  await build.api();
+  await build.data();
   await build.public();
   log.step(`completed in ${performance.now() - start} ms`);
   if (warnings.length) {
@@ -164,9 +164,9 @@ export const build = Object.assign(async function () {
     log.debug(`found: ${Object.keys(sections).length} sections`);
     log.success();
   },
-  /** API data */
-  async api() {
-    log.step("compute api data");
+  /** Data */
+  async data() {
+    log.step("compute data");
     const save = async (path: string, data: unknown | Promise<unknown>) => {
       path = `app/public/data/${path}`;
       await ensureDir(dirname(path));
@@ -181,7 +181,7 @@ export const build = Object.assign(async function () {
     //Regions
     {
       log.progress(`processing: world regions`);
-      await save("maps.json", api.regions());
+      await save("maps.json", data.regions());
       log.debug(`processed: world regions`);
     }
     //Sections
@@ -192,7 +192,7 @@ export const build = Object.assign(async function () {
           continue;
         }
         log.progress(`processing: ${region}`);
-        await save(`maps/${region}.json`, api.sections({ region }));
+        await save(`maps/${region}.json`, data.sections({ region }));
         for await (const { name, isFile } of expandGlob(`maps/${region}/*.tmx`)) {
           if (!isFile) {
             continue;
@@ -200,7 +200,7 @@ export const build = Object.assign(async function () {
           const section = name.replace(".tmx", "");
           log.progress(`processing: ${region}/${section}`);
           try {
-            await save(`maps/${region}/${section}.json`, api.load({ region, section }));
+            await save(`maps/${region}/${section}.json`, data.load({ region, section }));
             sections++;
           } catch (error) {
             if (/not properly referenced/.test(error.message)) {
@@ -222,7 +222,7 @@ export const build = Object.assign(async function () {
         const style = basename(dirname(path));
         const tileset = `${style}/${name.replace(".tsx", "")}`;
         log.progress(`processing: ${tileset}`);
-        await save(`textures/${tileset}.json`, api.tilesets({ tileset }));
+        await save(`textures/${tileset}.json`, data.tilesets({ tileset }));
         if (flags.tilesets) {
           await crop({ path: path.replace(".tsx", ".png"), tileset });
           log.progress(`packaged: ${tileset}`);
