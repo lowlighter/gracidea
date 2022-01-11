@@ -1,6 +1,6 @@
 /**
  * Copyright Simon Lecoq (@lowlighter)
- * @license https://github.com/lowlighter/gracidea/blob/main/README.md
+ * @license https://github.com/lowlighter/gracidea/blob/main/LICENSE
  */
 
 //Imports
