@@ -3,9 +3,11 @@ import { calcArea, log, read, save, toArray } from "../util.ts";
 import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
 
 /** Data */
-export default async function () {
+export default async function ({ locations = null } = {}) {
   log.step("compute maps data");
-  const locations = await read("app/public/data/maps/data.json");
+  if (!locations) {
+    locations = await read("app/public/data/maps/data.json");
+  }
 
   //Regions
   {
