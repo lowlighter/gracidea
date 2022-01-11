@@ -1,5 +1,5 @@
 //Imports
-import { log } from "../util.ts";
+import { log, read } from "../util.ts";
 import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
 import { copy } from "https://deno.land/std@0.119.0/fs/copy.ts";
 
@@ -31,7 +31,7 @@ export default async function () {
       //No-op
     }
     log.progress(`templating: index.html`);
-    let index = await Deno.readTextFile("app/client/index.html");
+    let index = await read("app/client/index.html");
     index = index.replaceAll("{{sha}}", sha.substring(0, 7));
     await Deno.writeTextFile("app/public/index.html", index);
     log.debug(`templated: index.html`);
@@ -40,7 +40,7 @@ export default async function () {
   //App.js
   {
     log.progress(`emitting: app.js`);
-    const { files } = await Deno.emit(new URL("../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic" });
+    const { files } = await Deno.emit(new URL("../../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic" });
     await Deno.writeTextFile("app/public/js/app.js", files[`deno:///bundle.js`]);
     log.debug(`emitted: app.js`);
   }

@@ -4,7 +4,7 @@ import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
 import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
 
 /** Prepare textures */
-export default async function () {
+export default async function ({ tp = false }) {
   log.step("preparing textures");
 
   //Tiles properties
@@ -34,7 +34,9 @@ export default async function () {
         }
       }
       await save(`textures/${tileset}.json`, { id: tileset, animated, zindex });
-      await crop({ path: path.replace(".tsx", ".png"), tileset });
+      if (tp) {
+        await crop({ path: path.replace(".tsx", ".png"), tileset });
+      }
       tilesets++;
     }
     log.debug(`processed: ${tilesets} tilesets`);
@@ -53,7 +55,7 @@ export default async function () {
     //Type related effects
     for await (const { path, name: file } of expandGlob("app/build/cache/data/data/api/v2/type/*/*.json")) {
       log.progress(`processing: location-area/${basename(dirname(path))}/${file}`);
-      const { name, pokemon: creatures } = JSON.parse(await Deno.readTextFile(path)) as types;
+      const { name, pokemon: creatures } = await read<types>(path);
       if (name === "flying") {
         for (const { pokemon: { name: creature } } of creatures) {
           effects.creature.name[creature] = "fly";

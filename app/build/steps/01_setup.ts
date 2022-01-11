@@ -8,6 +8,7 @@ export default async function () {
   //Clone dependencies repositories
   await clone({ repo: "PokeAPI/api-data", dir: "app/build/cache/data" });
   await clone({ repo: "msikma/pokesprite", dir: "app/build/cache/creatures" });
+  await clone({ repo: "lowlighter/gracidea", dir: "app/build/cache/previous" });
 
   //Pack package dependencies
   await pack({ pkg: "pixi.js", dir: "app/build/cache/pixi.js" });

@@ -106,21 +106,21 @@ export async function clean({ path }: { path: string }) {
 }
 
 /** Read and parse serialized data */
-export async function read<T = parsed>(path: string): Promise<T> {
+export async function read<T = parsed>(path: string, { parse = true } = {}): Promise<T> {
   const ext = extname(path);
   const url = isAbsolute(path) ? toFileUrl(path).href : join(dirname(import.meta.url), "../..", path);
-  console.log(url);
   const content = await fetch(url).then((response) => response.text());
-  switch (ext) {
-    case ".world":
-    case ".json":
-      return JSON.parse(content);
-    case ".tmx":
-    case ".tsx":
-      return parseXML(content) as unknown as T;
-    default:
-      return content as unknown as T;
+  if (parse) {
+    switch (ext) {
+      case ".world":
+      case ".json":
+        return JSON.parse(content);
+      case ".tmx":
+      case ".tsx":
+        return parseXML(content) as unknown as T;
+    }
   }
+  return content as unknown as T;
 }
 
 /** Save data */
