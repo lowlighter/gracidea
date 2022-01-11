@@ -16,7 +16,11 @@ const decoder = new TextDecoder();
 /** Log wrapper */
 export const log = {
   get size() {
-    return Deno.consoleSize(Deno.stdout.rid).columns;
+    try {
+      return Deno.consoleSize(Deno.stdout.rid).columns;
+    } catch {
+      return 128;
+    }
   },
   step(text: string) {
     return console.log(bold(`>>> ${text}`.padEnd(this.size)));
