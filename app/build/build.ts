@@ -21,7 +21,7 @@ export const build = Object.assign(async function () {
   await maps();
   await textures({ tp: flags.tp });
   await assets();
-  await diff({ diff: flags.diff });
+  await diff({ perform: flags.diff });
   log.step(`completed in ${performance.now() - start} ms`);
   Deno.exit(0);
 });
