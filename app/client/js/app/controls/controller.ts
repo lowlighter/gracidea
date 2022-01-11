@@ -1,8 +1,8 @@
 //Imports
-import type { Renderable } from "../rendering/renderable.ts";
-import type { event } from "../types.ts";
-import { global } from "../types.ts";
-import { App } from "./../app.ts";
+import type { Renderable } from "app/client/rendering/renderable.ts";
+import type { event } from "app/client/types.ts";
+import { global } from "app/client/types.ts";
+import { App } from "app/client/app.ts";
 
 /**
  * Controller

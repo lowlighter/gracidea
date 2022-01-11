@@ -1,8 +1,8 @@
 //Imports
-import type { World } from "./world.ts";
-import { Section } from "./section.ts";
-import { Renderable } from "../rendering/renderable.ts";
-import { Render } from "../rendering/render.ts";
+import type { World } from "app/client/maps/world.ts";
+import { Section } from "app/client/maps/section.ts";
+import { Renderable } from "app/client/rendering/renderable.ts";
+import { Render } from "app/client/rendering/render.ts";
 
 /**
  * Region.

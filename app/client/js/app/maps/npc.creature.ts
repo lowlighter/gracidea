@@ -1,8 +1,8 @@
 //Imports
-import type { Area } from "./area.ts";
-import { App } from "../app.ts";
-import { NPC } from "./npc.ts";
-import { Render } from "../rendering/render.ts";
+import type { Area } from "app/client/maps/area.ts";
+import { App } from "app/client/app.ts";
+import { NPC } from "app/client/maps/npc.ts";
+import { Render } from "app/client/rendering/render.ts";
 
 /**
  * NPC (Creature).

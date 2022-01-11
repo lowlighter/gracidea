@@ -1,9 +1,9 @@
 //Imports
-import { Render } from "./../rendering/render.ts";
-import type { Region } from "./region.ts";
-import { Renderable } from "../rendering/renderable.ts";
-import { Area } from "./area.ts";
-import { App } from "../app.ts";
+import { Render } from "app/client/rendering/render.ts";
+import type { Region } from "app/client/maps/region.ts";
+import { Renderable } from "app/client/rendering/renderable.ts";
+import { Area } from "app/client/maps/area.ts";
+import { App } from "app/client/app.ts";
 
 /**
  * Section.

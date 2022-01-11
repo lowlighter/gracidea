@@ -1,7 +1,7 @@
 //Imports
-import type { Area } from "./area.ts";
-import type { rw } from "../types.ts";
-import { NPC } from "./npc.ts";
+import type { Area } from "app/client/maps/area.ts";
+import type { rw } from "app/client/types.ts";
+import { NPC } from "app/client/maps/npc.ts";
 
 /**
  * NPC (Human).

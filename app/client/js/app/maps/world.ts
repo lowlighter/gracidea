@@ -1,10 +1,10 @@
 //Imports
-import { App } from "../app.ts";
-import { Renderable } from "../rendering/renderable.ts";
-import { Region } from "./region.ts";
-import { Camera } from "./camera.ts";
-import type { Graphics } from "./../rendering/render.ts";
-import { Render } from "../rendering/render.ts";
+import { App } from "app/client/app.ts";
+import { Renderable } from "app/client/rendering/renderable.ts";
+import { Region } from "app/client/maps/region.ts";
+import { Camera } from "app/client/maps/camera.ts";
+import type { Graphics } from "app/client/rendering/render.ts";
+import { Render } from "app/client/rendering/render.ts";
 
 /**
  * World.

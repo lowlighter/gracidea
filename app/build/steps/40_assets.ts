@@ -1,7 +1,7 @@
 //Imports
-import { log, read } from "../util.ts";
-import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
-import { copy } from "https://deno.land/std@0.119.0/fs/copy.ts";
+import { log, read } from "app/build/util.ts";
+import { expandGlob } from "std/fs/mod.ts";
+import { copy } from "std/fs/copy.ts";
 
 /** Public assets */
 export default async function () {
@@ -40,7 +40,7 @@ export default async function () {
   //App.js
   {
     log.progress(`emitting: app.js`);
-    const { files } = await Deno.emit(new URL("../../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic" });
+    const { files } = await Deno.emit(new URL("../../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic", importMapPath: "deno.json" });
     await Deno.writeTextFile("app/public/js/app.js", files[`deno:///bundle.js`]);
     log.debug(`emitted: app.js`);
   }

@@ -1,9 +1,9 @@
 //Imports
-import type { Area } from "./area.ts";
-import { Renderable } from "./../rendering/renderable.ts";
-import { Render } from "../rendering/render.ts";
-import type { Graphics } from "./../rendering/render.ts";
-import type { rw } from "../types.ts";
+import type { Area } from "app/client/maps/area.ts";
+import { Renderable } from "app/client/rendering/renderable.ts";
+import { Render } from "app/client/rendering/render.ts";
+import type { Graphics } from "app/client/rendering/render.ts";
+import type { rw } from "app/client/types.ts";
 
 /** Directions */
 const enum Direction {

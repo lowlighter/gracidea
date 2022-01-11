@@ -1,5 +1,5 @@
 //Imports
-import { build } from "./build.ts";
+import { build } from "app/build/build.ts";
 
 //Entry point
 if (import.meta.main) {

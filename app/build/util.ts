@@ -1,11 +1,11 @@
 //Imports
-import argv from "https://cdn.skypack.dev/string-argv@0.3.1";
-import { uncompress } from "https://deno.land/x/compress@v0.4.1/tgz/mod.ts";
-import { bold, gray, green, red, yellow } from "https://deno.land/std@0.119.0/fmt/colors.ts";
-import { Image } from "https://deno.land/x/imagescript@1.2.9/mod.ts";
-import { ensureDir } from "https://deno.land/std@0.119.0/fs/mod.ts";
-import { dirname, extname, isAbsolute, join, toFileUrl } from "https://deno.land/std@0.119.0/path/mod.ts";
-import { parse as parseXML } from "https://deno.land/x/xml@2.0.3/parse.ts";
+import argv from "y/string-argv@0.3.1";
+import { uncompress } from "x/compress@v0.4.1/tgz/mod.ts";
+import { bold, gray, green, red, yellow } from "std/fmt/colors.ts";
+import { Image } from "x/imagescript@1.2.9/mod.ts";
+import { ensureDir } from "std/fs/mod.ts";
+import { dirname, extname, isAbsolute, join, toFileUrl } from "std/path/mod.ts";
+import { parse as parseXML } from "x/xml@2.0.3/parse.ts";
 
 /** Encoder instance*/
 const encoder = new TextEncoder();

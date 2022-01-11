@@ -1,9 +1,9 @@
 //Imports
-import { global } from "../types.ts";
-import { Render } from "./../rendering/render.ts";
-import { Renderable } from "../rendering/renderable.ts";
-import type { World } from "./world.ts";
-import type { Region } from "./region.ts";
+import { global } from "app/client/types.ts";
+import { Render } from "app/client/rendering/render.ts";
+import { Renderable } from "app/client/rendering/renderable.ts";
+import type { World } from "app/client/maps/world.ts";
+import type { Region } from "app/client/maps/region.ts";
 
 /** Visible range */
 const visible = { x: 16 * 4, y: 16 * 3 };

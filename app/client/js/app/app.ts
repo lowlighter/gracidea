@@ -1,10 +1,10 @@
 //Imports
-import type { friend } from "./types.ts";
-import { global } from "./types.ts";
-import { deferred } from "https://deno.land/std@0.119.0/async/deferred.ts";
-import { Render } from "./rendering/render.ts";
-import { World } from "./maps/world.ts";
-import { Controller } from "./controls/controller.ts";
+import type { friend } from "app/client/types.ts";
+import { global } from "app/client/types.ts";
+import { deferred } from "std/async/deferred.ts";
+import { Render } from "app/client/rendering/render.ts";
+import { World } from "app/client/maps/world.ts";
+import { Controller } from "app/client/controls/controller.ts";
 
 /** App */
 export class App {

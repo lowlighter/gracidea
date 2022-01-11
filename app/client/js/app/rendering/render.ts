@@ -1,8 +1,8 @@
 //Imports
-import * as PIXI from "../../../../../app/build/cache/pixi.js/package/dist/browser/pixi.min.mjs";
-import { global } from "../types.ts";
-import type { App } from "../app.ts";
-import type { Renderable } from "./renderable.ts";
+import * as PIXI from "app/cache/pixi.js";
+import { global } from "app/client/types.ts";
+import type { App } from "app/client/app.ts";
+import type { Renderable } from "app/client/rendering/renderable.ts";
 
 /**
  * Render engine.

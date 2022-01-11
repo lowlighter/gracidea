@@ -1,8 +1,8 @@
 //Imports
-import { Render } from "./render.ts";
-import { App } from "../app.ts";
-import type { Graphics } from "./render.ts";
-import { deferred } from "https://deno.land/std@0.119.0/async/deferred.ts";
+import { Render } from "app/client/rendering/render.ts";
+import { App } from "app/client/app.ts";
+import type { Graphics } from "app/client/rendering/render.ts";
+import { deferred } from "std/async/deferred.ts";
 
 /**
  * Renderable object.

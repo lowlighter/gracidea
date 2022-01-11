@@ -1,6 +1,9 @@
 {
   "deno.enable": true,
   "deno.unstable": true,
+  "deno.importMap": "deno.json",
+  "deno.config": "deno.json",
+  "deno.lint": true,
   "deno.suggest.imports.hosts": {
     "https://deno.land": false
   }

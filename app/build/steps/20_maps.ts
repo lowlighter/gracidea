@@ -1,6 +1,6 @@
 //Imports
-import { calcArea, log, read, save, toArray } from "../util.ts";
-import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
+import { calcArea, log, read, save, toArray } from "app/build/util.ts";
+import { expandGlob } from "std/fs/mod.ts";
 
 /** Data */
 export default async function ({ locations = null } = {}) {

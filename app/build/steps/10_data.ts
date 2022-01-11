@@ -1,7 +1,7 @@
 //Imports
-import { log, read, save } from "./../util.ts";
-import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
-import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
+import { log, read, save } from "app/build/util.ts";
+import { expandGlob } from "std/fs/mod.ts";
+import { basename, dirname } from "std/path/mod.ts";
 
 /** Data extraction */
 export default async function () {

@@ -1,13 +1,13 @@
 //Imports
-import { App } from "../app.ts";
-import { Render } from "../rendering/render.ts";
-import { Renderable } from "./../rendering/renderable.ts";
-import type { Section } from "./section.ts";
-import { Controller } from "../controls/controller.ts";
-import { NPC } from "./npc.ts";
-import { Creature } from "./npc.creature.ts";
-import { Human } from "./npc.human.ts";
-import type { Graphics } from "./../rendering/render.ts";
+import { App } from "app/client/app.ts";
+import { Render } from "app/client/rendering/render.ts";
+import { Renderable } from "app/client/rendering/renderable.ts";
+import type { Section } from "app/client/maps/section.ts";
+import { Controller } from "app/client/controls/controller.ts";
+import { NPC } from "app/client/maps/npc.ts";
+import { Creature } from "app/client/maps/npc.creature.ts";
+import { Human } from "app/client/maps/npc.human.ts";
+import type { Graphics } from "app/client/rendering/render.ts";
 
 /**
  * Section area.

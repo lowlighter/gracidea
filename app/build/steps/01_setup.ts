@@ -1,5 +1,5 @@
 //Imports
-import { clone, log, pack } from "../util.ts";
+import { clone, log, pack } from "app/build/util.ts";
 
 /** Setup environment */
 export default async function () {

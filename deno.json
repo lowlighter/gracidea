@@ -8,6 +8,14 @@
       "lint": "deno lint --config deno.json"
     }
   },
+  "imports": {
+    "std/": "https://deno.land/std@0.119.0/",
+    "x/": "https://deno.land/x/",
+    "y/": "https://cdn.skypack.dev/",
+    "app/": "./app/",
+    "app/client/": "./app/client/js/app/",
+    "app/cache/pixi.js": "./app/build/cache/pixi.js/package/dist/browser/pixi.min.mjs"
+  },
   "lint": {
     "files": {
       "include": ["app/"],

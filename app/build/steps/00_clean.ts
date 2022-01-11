@@ -1,5 +1,5 @@
 //Imports
-import { clean, log } from "../util.ts";
+import { clean, log } from "app/build/util.ts";
 
 /** Clean environment */
 export default async function ({ perform = false }) {

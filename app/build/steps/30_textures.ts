@@ -1,7 +1,7 @@
 //Imports
-import { crop, log, read, save, toArray } from "../util.ts";
-import { expandGlob } from "https://deno.land/std@0.119.0/fs/mod.ts";
-import { basename, dirname } from "https://deno.land/std@0.119.0/path/mod.ts";
+import { crop, log, read, save, toArray } from "app/build/util.ts";
+import { expandGlob } from "std/fs/mod.ts";
+import { basename, dirname } from "std/path/mod.ts";
 
 /** Prepare textures */
 export default async function ({ tp = false }) {
