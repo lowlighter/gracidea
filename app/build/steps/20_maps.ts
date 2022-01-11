@@ -41,6 +41,7 @@ export default async function ({ locations = null } = {}) {
       if (!isDirectory) {
         continue;
       }
+      log.progress(`processing: ${region}/*`);
       await save(`maps/${region}.json`, load.sections({ region }));
       for await (const { name, isFile } of expandGlob(`maps/${region}/*.tmx`)) {
         if (!isFile) {
@@ -93,7 +94,7 @@ const load = {
   },
 
   /** Load region section */
-  async section({ region, section, locations }: { region: string; section: string; locations: { [key: string]: { [key: string]: unknown } } }) {
+  async section({ region, section, locations }: { region: string; section: string; locations: { [key: string]: { [key: string]: unknown } } | null }) {
     //Load section data
     const { map: raw } = await read(`maps/${region}/${section}.tmx`);
     const position = await load.sections({ region, filter: section }).then(({ sections: [p = null] }) => p ? { X: p.x, Y: p.y } : null);
@@ -184,6 +185,6 @@ const load = {
     }
 
     //Formatted section data
-    return { id: `${region}/${section}`, chunks, areas, ...locations[section] };
+    return { id: `${region}/${section}`, chunks, areas, ...locations?.[section] };
   },
 };

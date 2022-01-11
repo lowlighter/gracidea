@@ -9,7 +9,6 @@ export default async function ({ perform = false }) {
   if (perform) {
     for (const path of ["app/public", "app/build/cache"]) {
       await clean({ path });
-      log.debug(`cleaned: ${path}`);
     }
   } else {
     log.debug("(nothing to do)");

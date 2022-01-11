@@ -14,28 +14,29 @@ const encoder = new TextEncoder();
 const decoder = new TextDecoder();
 
 /** Log wrapper */
-export const log = Object.assign(function (text: string) {
-  return console.log(text.padEnd(64));
-}, {
+export const log = {
+  get size() {
+    return Deno.consoleSize(Deno.stdout.rid).columns;
+  },
   step(text: string) {
-    return console.log(bold(`>>> ${text.padEnd(64)}`));
+    return console.log(bold(`>>> ${text}`.padEnd(this.size)));
   },
   progress(text: string) {
-    Deno.stdout.write(encoder.encode(`${gray(text).padEnd(64)}\r`));
+    Deno.stdout.write(encoder.encode(`${gray(text).padEnd(this.size)}\r`));
   },
   debug(text: string) {
-    return console.debug(gray(text.padEnd(64)));
+    return console.debug(gray(text.padEnd(this.size)));
   },
   warn(text: string) {
-    return console.warn(yellow(text.padEnd(64)));
+    return console.warn(yellow(text.padEnd(this.size)));
   },
   error(text: string) {
-    return console.error(red(text.padEnd(64)));
+    return console.error(red(text.padEnd(this.size)));
   },
   success() {
-    return console.log(green("success!".padEnd(64)));
+    return console.log(green("success!".padEnd(this.size)));
   },
-});
+};
 
 /** Execute a command */
 export async function exec(command: string) {
