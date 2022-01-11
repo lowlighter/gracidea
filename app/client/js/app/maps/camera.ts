@@ -6,10 +6,10 @@ import type { World } from "app/client/maps/world.ts";
 import type { Region } from "app/client/maps/region.ts";
 
 /** Visible range */
-const visible = { x: 16 * 6, y: 16 * 4 };
+const visible = { x: 16 * 9, y: 16 * 7 };
 
 /** Loaded range */
-const loaded = { x: 16 * 8, y: 16 * 6 };
+const loaded = { x: 16 * 11, y: 16 * 9 };
 
 /**
  * Camera.
