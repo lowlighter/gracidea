@@ -3,10 +3,10 @@ import { calcArea, log, read, save, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 
 /** Data */
-export default async function ({ locations = null } = {}) {
+export default async function ({ locations = null as locations } = {}) {
   log.step("compute maps data");
   if (!locations) {
-    locations = await read("app/public/data/maps/data.json");
+    locations = await read<NonNullable<locations>>("app/public/data/maps/data.json");
   }
 
   //Regions
@@ -94,7 +94,7 @@ const load = {
   },
 
   /** Load region section */
-  async section({ region, section, locations }: { region: string; section: string; locations: { [key: string]: { [key: string]: unknown } } | null }) {
+  async section({ region, section, locations }: { region: string; section: string; locations: locations }) {
     //Load section data
     const { map: raw } = await read(`maps/${region}/${section}.tmx`);
     const position = await load.sections({ region, filter: section }).then(({ sections: [p = null] }) => p ? { X: p.x, Y: p.y } : null);
@@ -188,3 +188,6 @@ const load = {
     return { id: `${region}/${section}`, chunks, areas, ...locations?.[section] };
   },
 };
+
+/** Locations */
+type locations = { [key: string]: { [key: string]: unknown } } | null;
