@@ -12,6 +12,11 @@ body {
   font-family: monospace;
   opacity: .7;
 }
+* {
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+}
 
 /* Loader */
 .loader {
@@ -61,9 +66,10 @@ body {
 /* Menu */
 nav {
   position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
+  top: .5rem;
+  left: .5rem;
+  margin-right: .5rem;
+  margin-bottom: .5rem;
   padding: .5rem;
   z-index: 8888;
   color: white;
@@ -72,13 +78,25 @@ nav {
   flex-direction: column;
   overflow-x: auto;
   max-width: 20rem;
+  width: 100%;
+  border-radius: 0.75rem;
+  box-shadow: 0 0 15px #000000A0;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+  background-color: #000000B0;
+  transition: background-color 1s ease;
+  overflow: auto;
+  max-height: calc(100% - 2rem);
+}
+nav.collapsed {
+  background-color: transparent;
 }
 nav a, nav summary {
   display: flex;
   align-items: center;
   flex-shrink: 0;
   min-width: 10rem;
-  color: #4496FF;
+  color: #6ca8ec;
   cursor: pointer;
 }
 nav a, nav a:visited {
@@ -94,19 +112,30 @@ nav a img, nav summary img {
 }
 nav .app-name {
   font-size: 1.5rem;
+  cursor: pointer;
 }
 nav .app-name img {
   height: 1.5rem;
   width: 1.5rem;
 }
+nav .app-name:hover {
+  color: #D2A8FF;
+}
+nav summary {
+  color: #D2A8FF;
+}
 nav > a {
   margin-left: -.25rem;
+  color: #D2A8FF;
 }
 nav details summary {
   margin-left: -1.25rem;
 }
 nav details {
   padding-left: 1rem;
+}
+nav.collapsed > *:not(.app-name) {
+  display: none;
 }
 
 /* Patches */
@@ -157,6 +186,10 @@ nav details {
 .debug label:hover {
   background-color: #FFFFFF20;
 }
-.debug label input {
+.debug label input, .debug label select {
   max-width: 5rem;
+  background: transparent;
+  border: none;
+  text-align: right;
+  color: white;
 }
