@@ -1,7 +1,7 @@
 {
   "velociraptor":{
     "scripts": {
-      "start":"deno run --unstable --watch --allow-read --allow-net app/mod.ts",
+      "start":"deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts",
       "build":"deno run --allow-read --allow-net --allow-run=git --allow-write=app/build/cache,app/public app/build/mod.ts",
       "test":"deno test --allow-read app/tests",
       "fmt": "deno fmt --config deno.json",
