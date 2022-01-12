@@ -99,11 +99,11 @@ const load = {
   async section({ region, section, locations }: { region: string; section: string; locations: { [key: string]: { [key: string]: unknown } | void } }) {
     //Load section data
     const { map: raw } = await read(`maps/${region}/${section}.tmx`);
-    const position = await load.sections({ region, filter: section }).then(({ sections: [p = null] }) => p ? { X: p.x, Y: p.y } : null);
-    if (!position) {
+    const bounds = await load.sections({ region, filter: section }).then(({ sections: [p = null] }) => p ?? null);
+    if (!bounds) {
       throw new TypeError(`${section} is not properly referenced in ${region}`);
     }
-    const { X, Y } = position;
+    const { x: X, y: Y } = bounds;
 
     //Parse chunks data
     const chunks = [] as Array<{ id: string; layer: string; x: number; y: number; tiles: number[] }>;
@@ -192,6 +192,6 @@ const load = {
     }
 
     //Formatted section data
-    return { id: `${region}/${section}`, x: X, y: Y, chunks, areas, ...locations?.[section] };
+    return { id: `${region}/${section}`, ...bounds, chunks, areas, ...locations?.[section] };
   },
 };
