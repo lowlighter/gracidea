@@ -71,4 +71,10 @@ export class Creature extends NPC {
   protected action() {
     this.wander();
   }
+
+  /** Update */
+  async update({ debug = this.debug.visible, t, dt }: { t: number; dt: number; debug?: boolean }) {
+    this.sprite.visible = App.config.creatures.display;
+    super.update({ debug, t, dt });
+  }
 }

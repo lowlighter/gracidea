@@ -9,7 +9,7 @@ import { Controller } from "app/client/controls/controller.ts";
 /** App */
 export class App {
   /** World */
-  readonly world!: World;
+  static readonly world: World;
 
   /** App setup */
   static async setup() {
@@ -18,6 +18,7 @@ export class App {
 
     await (Render as friend).setup({ app: this });
     const world = new World();
+    Object.assign(this, { world });
     new Controller({ target: world });
 
     Object.assign(this, { world });
@@ -51,8 +52,14 @@ export class App {
 
   /** Config */
   static config = {
-    style: "rse",
+    patch: true,
     debug: false,
+    textures: {
+      style: "rse",
+    },
+    people: {
+      display: true,
+    },
     creatures: {
       display: true,
       shiny: 1 / 8,

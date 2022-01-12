@@ -2,6 +2,7 @@
 import type { Area } from "app/client/maps/area.ts";
 import type { rw } from "app/client/types.ts";
 import { NPC } from "app/client/maps/npc.ts";
+import { App } from "app/client/app.ts";
 
 /**
  * NPC (Human).
@@ -86,6 +87,12 @@ export class Human extends NPC {
   /** Perform NPC action */
   protected action() {
     this.wander();
+  }
+
+  /** Update */
+  async update({ debug = this.debug.visible, t, dt }: { t: number; dt: number; debug?: boolean }) {
+    this.sprite.visible = App.config.people.display;
+    super.update({ debug, t, dt });
   }
 }
 

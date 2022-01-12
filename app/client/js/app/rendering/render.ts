@@ -26,7 +26,7 @@ export class Render {
     //Load resources
     const loader = Render.engine.Loader.shared;
     for (const texture of ["tileset", "npcs", "creatures"]) {
-      loader.add(`/textures/${app.config.style}/${texture}.json?sha=${app.sha}`);
+      loader.add(`/textures/${app.config.textures.style}/${texture}.json?sha=${app.sha}`);
     }
     loader.onProgress.add((_: unknown, { url = "" }) => app.loaded(`loaded ${new URL(url, global.location).pathname}`));
     loader.onComplete.add(() => app.loaded("all textures successfully loaded"));
@@ -35,7 +35,7 @@ export class Render {
     //Load tileset properties
     pending.push(
       new Promise<void>(async (solve) => {
-        const tileset = await fetch(`/data/textures/${app.config.style}/tileset.json`).then((response) => response.json());
+        const tileset = await fetch(`/data/textures/${app.config.textures.style}/tileset.json`).then((response) => response.json());
         app.loaded(`loaded tileset metadata`);
         Object.assign(this, { tileset });
         solve();
@@ -226,6 +226,16 @@ export class Render {
       graphics.zIndex = z;
     }
     return graphics;
+  }
+
+  /** Patch sprite */
+  static patch(sprite: ReturnType<typeof Render.Container>, type = null as "+" | "-" | "~" | "=" | null) {
+    if (type) {
+      sprite.tint = { "+": 0x116329, "-": 0x82071E, "~": 0x953800, "=": 0x222222 }[type];
+      sprite.alpha = type === "=" ? 0.25 : 0.75;
+    } else {
+      sprite.tint = 0xFFFFFF;
+    }
   }
 }
 

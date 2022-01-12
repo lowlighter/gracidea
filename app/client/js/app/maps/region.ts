@@ -46,4 +46,9 @@ export class Region extends Renderable {
       this.sections.set(id, new Section({ region: this, id, bounds: this.loadable.get(id)! }));
     }
   }
+
+  /** Update */
+  async update({ t, dt }: { t: number; dt: number; debug?: boolean }) {
+    return super.update({ debug: false, t, dt });
+  }
 }

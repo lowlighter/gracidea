@@ -77,15 +77,19 @@ export class Section extends Renderable {
     }));
 
     //Load chunks
-    for (const { /*id,*/ x: X, y: Y, tiles } of chunks) {
+    for (const { id, x: X, y: Y, tiles } of chunks) {
       //this.debug.addChild(Render.Graphics({ text:id, textStyle: { fontSize: 10, fill: "white" }, textPosition:{x:X+.25, y:Y+.25}, textAnchor:[0, 0], stroke: [1, 0x2ECC40, .5], fill: [0x2ECC40, .125], rect: [X, Y, 16, 16] }))
       for (let i = 0; i < tiles.length; i++) {
         const frame = tiles[i];
+        let tile = null;
         if (frame) {
           const x = X + i % 16, y = Y + Math.floor(i / 16);
           if (frame) {
-            this.sprite.addChild(Render.Sprite({ frame, x, y, z: Render.tileset.zindex[`${frame}`] ?? 0 }));
+            tile = this.sprite.addChild(Render.Sprite({ frame, x, y, z: Render.tileset.zindex[`${frame}`] ?? 0 }));
           }
+        }
+        if ((App.config.patch) && (tile)) {
+          Render.patch(tile, this.data.diff?.tiles?.[id]?.[i] ?? "=");
         }
       }
     }

@@ -4,6 +4,7 @@ import { Renderable } from "app/client/rendering/renderable.ts";
 import { Render } from "app/client/rendering/render.ts";
 import type { Graphics } from "app/client/rendering/render.ts";
 import type { rw } from "app/client/types.ts";
+import { App } from "app/client/app.ts";
 
 /** Directions */
 const enum Direction {
@@ -96,6 +97,11 @@ export class NPC extends Renderable {
       }
     };
     this.sprite.mouseout = () => this.sprite.filters = null;
+
+    //Patch
+    if (App.config.patch) {
+      Render.patch(this.sprite, this.area.section.data.diff?.areas?.[this.id] ?? "=");
+    }
 
     return super.init();
   }

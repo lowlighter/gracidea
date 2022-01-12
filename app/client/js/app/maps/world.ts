@@ -30,6 +30,10 @@ export class World extends Renderable {
       this.regions.set(id, new Region({ world: this, id, x, y }));
     }
     this.#sea.sprite = this.sprite.addChild(Render.TilingSprite());
+    if (App.config.patch) {
+      Render.patch(this.#sea.sprite, "=");
+      this.#sea.sprite.alpha = 0.1;
+    }
     return super.init({ parent: App.rendering.stage });
   }
 

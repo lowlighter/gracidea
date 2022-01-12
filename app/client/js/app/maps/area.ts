@@ -54,14 +54,14 @@ export class Area extends Renderable {
 
   /** Update renderable */
   async update({ debug = this.debug.visible, t, dt }: { t: number; dt: number; debug?: boolean }) {
-    if (this.data.type === "creatures") {
-      if ((App.config.creatures.display) && (this.npcs.size < 1 /*+ Number(this.data.properties.size)/10*/)) {
+    if ((this.data.type === "creatures") && (App.config.creatures.display)) {
+      if ((this.npcs.size < 1 /*+ Number(this.data.properties.size)/10*/)) {
         if (this.encounters) {
           this.npcs.add(new Creature({ area: this }));
         }
       }
     }
-    if (this.data.type === "people") {
+    if ((this.data.type === "people") && (App.config.people.display)) {
       if (this.npcs.size < 1) {
         this.npcs.add(new Human({ area: this }));
       }
