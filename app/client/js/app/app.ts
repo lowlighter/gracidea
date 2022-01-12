@@ -52,10 +52,13 @@ export class App {
 
   /** Config */
   static config = {
-    patch: true,
+    patch: false,
     debug: false,
     textures: {
       style: "rse",
+    },
+    pins: {
+      display: true,
     },
     people: {
       display: true,

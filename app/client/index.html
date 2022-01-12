@@ -17,24 +17,33 @@
     <div class="loaded"></div>
   </div>
   <nav>
-    <a href="https://github.com/lowlighter/gracidea" target="_blank" class="app-name">
+    <div class="app-name">
       <img src="/icons/gracidea.png" alt="🌺">
       <span>Gracidea <sub id="sha">{{sha}}</sub></span>
+    </div>
+    <a href="#" id="share">
+      <img src="/icons/share.png" alt="💌"> Share position
     </a>
-    <!--
-    <a href="#">
-      <img src="/icons/map.png" alt="🗺️">
-      World map
-    </a>
-    <a href="#">
-      <img src="/icons/share.png" alt="💌">
-      Share link
-    </a>
-    <a href="#">
-      <img src="/icons/debug.png" alt="⚙️">
-      Debug mode
-    </a>
-    -->
+    <details open>
+      <summary><img src="/icons/map.png" alt="🗺️">World map</summary>
+      <span style="font-style: italic;">(Coming soon)</span>
+    </details>
+    <details open>
+      <summary><img src="/icons/debug.png" alt="⚙️">Debug</summary>
+      <div class="debug"></div>
+    </details>
+    <details open>
+      <summary><img src="/icons/patches.png" alt="🗂️">Patches</summary>
+      <div class="patches"></div>
+    </details>
+    <details open>
+      <summary><img src="/icons/pokedoll.png" alt="🦑">Repository</summary>
+      <a href="https://github.com/lowlighter/gracidea" target="_blank">GitHub</a>
+      <a href="https://github.com/lowlighter/gracidea/issues/new?template=issue_report.yml" target="_blank">Report an issue</a>
+      <a href="https://github.com/lowlighter/gracidea/discussions" target="_blank">Start a discussion</a>
+      <a href="https://github.com/lowlighter/gracidea/blob/main/CONTRIBUTING.md" target="_blank">Contribute</a>
+      <a href="https://github.com/lowlighter/gracidea/blob/main/LICENSE" target="_blank">License</a>
+    </details>
   </nav>
   <script src="/js/loader.js"></script>
 </body>

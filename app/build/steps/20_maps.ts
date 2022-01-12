@@ -6,7 +6,7 @@ import { expandGlob } from "std/fs/mod.ts";
 export default async function ({ preload = true } = {}) {
   log.step("compute maps data");
   const locations = {};
-  if (!preload) {
+  if (preload) {
     Object.assign(locations, await read("app/public/data/maps/data.json"));
     log.debug(`loaded: maps/data.json (pre-generated)`);
   }
@@ -179,11 +179,11 @@ const load = {
             area.properties = { pattern: mode, directions };
             break;
           }
-            /*case "map": {
-            const {"@gid":gid} = object
-            area.properties = {  }
-            break
-          }*/
+          case "map": {
+            const { "@gid": tile } = object;
+            area.properties = { tile };
+            break;
+          }
         }
 
         //Save area

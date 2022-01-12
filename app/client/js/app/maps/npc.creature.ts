@@ -59,7 +59,7 @@ export class Creature extends NPC {
         return this.destructor();
       }
     } else if (this.sprite.alpha < 1) {
-      this.sprite.alpha = Math.min(1, this.sprite.alpha * 1.2);
+      this.sprite.alpha = Math.min(App.config.patch ? 0.25 : 1, this.sprite.alpha * 1.2);
       if (!this.sprite.alpha) {
         this.sprite.alpha = 0.1;
       }
