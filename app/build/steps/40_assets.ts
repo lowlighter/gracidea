@@ -37,13 +37,5 @@ export default async function () {
     log.debug(`templated: index.html`);
   }
 
-  //App.js
-  {
-    log.progress(`emitting: app.js`);
-    const { files } = await Deno.emit(new URL("../../client/js/app/mod.ts", import.meta.url).href, { bundle: "classic", importMapPath: "deno.json" });
-    await Deno.writeTextFile("app/public/js/app.js", files[`deno:///bundle.js`]);
-    log.debug(`emitted: app.js`);
-  }
-
   log.success();
 }

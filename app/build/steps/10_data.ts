@@ -1,11 +1,17 @@
 //Imports
-import { log, read, save } from "app/build/util.ts";
+import { clone, log, read, save } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 import { basename, dirname } from "std/path/mod.ts";
 
 /** Data extraction */
 export default async function () {
   log.step("extracting data");
+
+  //Setup
+  {
+    await clone({ repo: "PokeAPI/api-data", dir: "app/build/cache/data" });
+    await clone({ repo: "msikma/pokesprite", dir: "app/build/cache/creatures" });
+  }
 
   //Extract gender data
   const genders = {} as {

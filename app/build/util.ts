@@ -1,7 +1,7 @@
 //Imports
 import argv from "y/string-argv@0.3.1";
 import { uncompress } from "x/compress@v0.4.1/tgz/mod.ts";
-import { bold, gray, green, red, yellow } from "std/fmt/colors.ts";
+import { bold, cyan, gray, green, red, yellow } from "std/fmt/colors.ts";
 import { Image } from "x/imagescript@1.2.9/mod.ts";
 import { ensureDir } from "std/fs/mod.ts";
 import { dirname, extname, isAbsolute, join, toFileUrl } from "std/path/mod.ts";
@@ -30,6 +30,9 @@ export const log = {
   },
   debug(text: string) {
     return console.debug(gray(text.padEnd(this.size)));
+  },
+  info(text: string) {
+    return console.info(cyan(text.padEnd(this.size)));
   },
   warn(text: string) {
     return console.warn(yellow(text.padEnd(this.size)));
@@ -111,19 +114,17 @@ export async function clean({ path }: { path: string }) {
 }
 
 /** Read and parse serialized data */
-export async function read<T = parsed>(path: string, { parse = true } = {}): Promise<T> {
+export async function read<T = parsed>(path: string): Promise<T> {
   const ext = extname(path);
-  const url = isAbsolute(path) ? toFileUrl(path).href : join(dirname(import.meta.url), "../..", path);
+  const url = isAbsolute(path) ? toFileUrl(path).href : toFileUrl(join(Deno.cwd(), path)).href;
   const content = await fetch(url).then((response) => response.text());
-  if (parse) {
-    switch (ext) {
-      case ".world":
-      case ".json":
-        return JSON.parse(content);
-      case ".tmx":
-      case ".tsx":
-        return parseXML(content) as unknown as T;
-    }
+  switch (ext) {
+    case ".world":
+    case ".json":
+      return JSON.parse(content);
+    case ".tmx":
+    case ".tsx":
+      return parseXML(content) as unknown as T;
   }
   return content as unknown as T;
 }

@@ -2,16 +2,12 @@
 import { clean, log } from "app/build/util.ts";
 
 /** Clean environment */
-export default async function ({ perform = false }) {
+export default async function () {
   log.step("cleaning environment");
 
   //Remove previous directories
-  if (perform) {
-    for (const path of ["app/public", "app/build/cache"]) {
-      await clean({ path });
-    }
-  } else {
-    log.debug("(nothing to do)");
+  for (const path of ["app/public", "app/build/cache"]) {
+    await clean({ path });
   }
 
   log.success();

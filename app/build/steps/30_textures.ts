@@ -1,11 +1,14 @@
 //Imports
-import { crop, log, read, save, toArray } from "app/build/util.ts";
+import { clone, log, read, save, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 import { basename, dirname } from "std/path/mod.ts";
 
 /** Prepare textures */
-export default async function ({ tp = false }) {
+export default async function () {
   log.step("preparing textures");
+
+  //Setup
+  await clone({ repo: "PokeAPI/api-data", dir: "app/build/cache/data" });
 
   //Tiles properties
   {
@@ -34,9 +37,6 @@ export default async function ({ tp = false }) {
         }
       }
       await save(`textures/${tileset}.json`, { id: tileset, animated, zindex });
-      if (tp) {
-        await crop({ path: path.replace(".tsx", ".png"), tileset });
-      }
       tilesets++;
     }
     log.debug(`processed: ${tilesets} tilesets`);

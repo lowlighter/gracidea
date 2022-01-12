@@ -3,10 +3,12 @@ import { calcArea, log, read, save, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 
 /** Data */
-export default async function ({ locations = null as locations } = {}) {
+export default async function ({ preload = true } = {}) {
   log.step("compute maps data");
-  if (!locations) {
-    locations = await read<NonNullable<locations>>("app/public/data/maps/data.json");
+  const locations = {};
+  if (!preload) {
+    Object.assign(locations, await read("app/public/data/maps/data.json"));
+    log.debug(`loaded: maps/data.json (pre-generated)`);
   }
 
   //Regions
@@ -94,7 +96,7 @@ const load = {
   },
 
   /** Load region section */
-  async section({ region, section, locations }: { region: string; section: string; locations: locations }) {
+  async section({ region, section, locations }: { region: string; section: string; locations: { [key: string]: { [key: string]: unknown } | void } }) {
     //Load section data
     const { map: raw } = await read(`maps/${region}/${section}.tmx`);
     const position = await load.sections({ region, filter: section }).then(({ sections: [p = null] }) => p ? { X: p.x, Y: p.y } : null);
@@ -140,7 +142,7 @@ const load = {
       for (const chunk of toArray(chunked)) {
         //Extract and format data
         const { "@x": x, "@y": y, "#text": _tiles } = chunk;
-        const id = `${X + x / 16};${Y + y / 16}`;
+        const id = `${layer}/${X + x / 16};${Y + y / 16}`;
         const tiles = (_tiles as string)
           .split(",")
           .map((value) => value.trim())
@@ -177,6 +179,11 @@ const load = {
             area.properties = { pattern: mode, directions };
             break;
           }
+            /*case "map": {
+            const {"@gid":gid} = object
+            area.properties = {  }
+            break
+          }*/
         }
 
         //Save area
@@ -185,9 +192,6 @@ const load = {
     }
 
     //Formatted section data
-    return { id: `${region}/${section}`, chunks, areas, ...locations?.[section] };
+    return { id: `${region}/${section}`, x: X, y: Y, chunks, areas, ...locations?.[section] };
   },
 };
-
-/** Locations */
-type locations = { [key: string]: { [key: string]: unknown } } | null;
