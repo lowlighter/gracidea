@@ -17,6 +17,7 @@ if (flags.default ?? true) {
   flags.maps ??= true;
   flags.textures ??= true;
   flags.assets ??= true;
+  flags.app ??= true;
 }
 delete (flags as { _?: unknown })._;
 for (const [flag, value] of Object.entries(flags)) {
