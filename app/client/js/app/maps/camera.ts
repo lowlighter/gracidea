@@ -6,10 +6,10 @@ import type { World } from "app/client/maps/world.ts";
 import type { Region } from "app/client/maps/region.ts";
 
 /** Visible range */
-const visible = { x: 16 * 9, y: 16 * 7 };
+const visible = { x: 7 * 16, y: 5 * 16 };
 
 /** Loaded range */
-const loaded = { x: 16 * 11, y: 16 * 9 };
+const loaded = { x: 11 * 16, y: 9 * 16 };
 
 /**
  * Camera.
@@ -37,10 +37,10 @@ export class Camera extends Renderable {
   async update({ debug = this.debug.visible, t, dt }: { t: number; dt: number; debug?: boolean }) {
     //Update position and areas
     const { x, y } = this;
-    this.#visible.x = x - this.#visible.width / 2;
-    this.#visible.y = y - this.#visible.height / 2;
-    this.#loaded.x = x - this.#loaded.width / 2;
-    this.#loaded.y = y - this.#loaded.height / 2;
+    this.#visible.x = Math.ceil(x - this.#visible.width / 2);
+    this.#visible.y = Math.ceil(y - this.#visible.height / 2);
+    this.#loaded.x = Math.ceil(x - this.#loaded.width / 2);
+    this.#loaded.y = Math.ceil(y - this.#loaded.height / 2);
 
     //Dynamically load and unload sections
     this.#world.regions.forEach((region: Region) => {
@@ -78,6 +78,8 @@ export class Camera extends Renderable {
           `visible.y: ${this.#visible.y} to ${this.#visible.y + this.#visible.height}`,
           `loaded.x: ${this.#loaded.x} to ${this.#loaded.x + this.#loaded.width}`,
           `loaded.y: ${this.#loaded.y} to ${this.#loaded.y + this.#loaded.height}`,
+          `world.x: ${this.#world.sprite.position.x}px`,
+          `world.y: ${this.#world.sprite.position.y}px`,
         ].join("\n"),
         textPosition: { x, y },
         textAnchor: [.5, .5],

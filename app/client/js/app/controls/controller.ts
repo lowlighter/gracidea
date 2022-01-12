@@ -76,16 +76,30 @@ export class Controller {
         global.document.querySelector(".debug")?.append(label);
       }
 
-      //Debug mode
+      //Debug logs
       {
-        const label = dom.element("label", { text: "debug" });
+        const label = dom.element("label", { text: "debug.logs" });
         label.append(dom.element("input", {
           listeners: {
             click({ target: { checked: value } }) {
-              App.config.debug = value;
+              App.config.debug.logs = value;
             },
           },
-          attributes: { type: "checkbox", checked: App.config.debug },
+          attributes: { type: "checkbox", checked: App.config.debug.logs },
+        }));
+        global.document.querySelector(".debug")?.append(label);
+      }
+
+      //Debug bounds
+      {
+        const label = dom.element("label", { text: "debug.bounds" });
+        label.append(dom.element("input", {
+          listeners: {
+            click({ target: { checked: value } }) {
+              App.config.debug.bounds = value;
+            },
+          },
+          attributes: { type: "checkbox", checked: App.config.debug.bounds },
         }));
         global.document.querySelector(".debug")?.append(label);
       }
@@ -104,6 +118,20 @@ export class Controller {
         for (const style of ["rse"]) {
           select.append(dom.element("option", { text: style, attributes: { value: style } }));
         }
+        global.document.querySelector(".debug")?.append(label);
+      }
+
+      //Textures sea
+      {
+        const label = dom.element("label", { text: "textures.sea" });
+        label.append(dom.element("input", {
+          listeners: {
+            click({ target: { checked: value } }) {
+              App.config.textures.sea = value;
+            },
+          },
+          attributes: { type: "checkbox", checked: App.config.textures.sea },
+        }));
         global.document.querySelector(".debug")?.append(label);
       }
 
@@ -149,6 +177,9 @@ export class Controller {
         global.document.querySelector(".debug")?.append(label);
       }
     }
+
+    //Menu
+    global.document.querySelector("nav .app-name").addEventListener("click", () => global.document.querySelector("nav").classList.toggle("collapsed"));
   }
 
   /** Focused element */

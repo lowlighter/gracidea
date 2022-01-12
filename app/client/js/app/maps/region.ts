@@ -11,13 +11,16 @@ export class Region extends Renderable {
   /** World */
   readonly world: World;
 
+  /** Bounds */
+  readonly bounds = Render.Rectangle();
+
   /** Loaded sections */
   readonly sections = new Map<string, Section>();
 
   /** Constructor */
-  constructor({ world, id, x, y }: { world: World; id: string; x: number; y: number }) {
+  constructor({ world, id, bounds }: { world: World; id: string; bounds: { x: number; y: number; width: number; height: number } }) {
     super({ id });
-    this.sprite.position.set(x, y);
+    Object.assign(this.bounds, bounds);
     this.world = world;
     this.init();
   }

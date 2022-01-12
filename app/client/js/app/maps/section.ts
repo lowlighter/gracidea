@@ -22,9 +22,9 @@ export class Section extends Renderable {
   constructor({ region, id, bounds }: { region: Region; id: string; bounds: { x: number; y: number; width: number; height: number } }) {
     super({ id, visible: false });
     const { x, y } = bounds;
+    this.region = region;
     this.sprite.position.set(x * 16, y * 16);
     this.sprite.sortableChildren = true;
-    this.region = region;
     Object.assign(this.bounds, bounds);
     this.init();
   }
@@ -66,19 +66,21 @@ export class Section extends Renderable {
     }
     this.#loaded = true;
     await this.ready;
-
     Object.assign(this, { data: await fetch(`/data/maps/${this.id}.json`).then((res) => res.json()) });
     const { chunks, areas } = this.data;
 
-    this.debug.addChild(Render.Graphics({
-      rect: [0, 0, this.bounds.width, this.bounds.height],
-      stroke: [1, 0x3D9970, .5],
-      fill: [0x3D9970, .125],
-    }));
-
     //Load chunks
-    for (const { id, x: X, y: Y, tiles } of chunks) {
-      //this.debug.addChild(Render.Graphics({ text:id, textStyle: { fontSize: 10, fill: "white" }, textPosition:{x:X+.25, y:Y+.25}, textAnchor:[0, 0], stroke: [1, 0x2ECC40, .5], fill: [0x2ECC40, .125], rect: [X, Y, 16, 16] }))
+    for (const { id, layer, x: X, y: Y, tiles } of chunks) {
+      this.debug.addChild(
+        Render.Graphics({
+          text: id,
+          textStyle: { fontSize: 10, fontFamily: "monospace", fill: "white" },
+          textPosition: { x: X + .25, y: Y + .75 * (1 + layer) },
+          textAnchor: [0, 0],
+          stroke: [1, 0x2ECC40, .5],
+          rect: [X, Y, 16, 16],
+        }),
+      );
       for (let i = 0; i < tiles.length; i++) {
         const frame = tiles[i];
         let tile = null;
@@ -104,7 +106,7 @@ export class Section extends Renderable {
       this.#placeholder = null;
     }
 
-    if (App.config.debug) {
+    if (App.config.debug.logs) {
       console.debug(`loaded: ${this.constructor.name}#${this.id}`);
     }
   }

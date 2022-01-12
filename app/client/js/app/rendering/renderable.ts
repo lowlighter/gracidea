@@ -19,7 +19,7 @@ export abstract class Renderable {
     this.debug = Render.Container({ x, y, z });
     Object.defineProperty(this.debug, "visible", {
       get() {
-        return App.config.debug;
+        return App.config.debug.bounds;
       },
     });
     this.debug.bounds = this.debug.addChild(Render.Container());
@@ -39,7 +39,7 @@ export abstract class Renderable {
     this.debug.destroy({ children: true });
     this.debug.bounds.destroy({ children: true });
     Object.assign(this, { destroyed: true });
-    if (App.config.debug) {
+    if (App.config.debug.logs) {
       console.debug(`destroyed: ${this.constructor.name}#${this.id}`);
     }
   }
@@ -54,7 +54,7 @@ export abstract class Renderable {
       App.rendering.stage.addChild(this.debug);
     } else if (parent) {
       if ((this.destroyed) || (parent.destroyed)) {
-        if (App.config.debug) {
+        if (App.config.debug.logs) {
           console.debug(`creation aborted: ${this.constructor.name}#${this.id} (sprite already destroyed)`);
         }
         return this.destructor();
@@ -62,7 +62,7 @@ export abstract class Renderable {
       parent.sprite.addChild(this.sprite);
       parent.debug.addChild(this.debug);
     }
-    if (App.config.debug) {
+    if (App.config.debug.logs) {
       console.debug(`created: ${this.constructor.name}#${this.id}`);
     }
     this.ready.resolve();
@@ -94,7 +94,7 @@ export abstract class Renderable {
         const { width, height } = this.sprite._bounds.getRectangle();
         this.debug.bounds.removeChildren();
         this.debug.bounds.addChild(Render.Graphics({
-          text: `${this.id}`,
+          text: `${this.id}\n${Math.floor(this.sprite.x / 16)};${Math.floor(this.sprite.y / 16)} (${this.sprite.x};${this.sprite.y})`,
           rect: [0, 0, width / 16, height / 16],
           ...Renderable.debug,
           ...(this.constructor as typeof Renderable).debug,

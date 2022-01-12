@@ -21,8 +21,6 @@ export class App {
     Object.assign(this, { world });
     new Controller({ target: world });
 
-    Object.assign(this, { world });
-
     this.ready.resolve();
 
     world.camera.place({ x: Number(x) || 0, y: Number(y) || 0 });
@@ -53,9 +51,13 @@ export class App {
   /** Config */
   static config = {
     patch: false,
-    debug: false,
+    debug: {
+      logs: false,
+      bounds: false,
+    },
     textures: {
       style: "rse",
+      sea: true,
     },
     pins: {
       display: true,
@@ -65,7 +67,7 @@ export class App {
     },
     creatures: {
       display: true,
-      shiny: 1 / 8,
+      shiny: 1 / 128,
     },
   };
 }
