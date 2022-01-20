@@ -1,0 +1,39 @@
+{
+	"name": "Deno",
+ 	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			"VARIANT": "bullseye"
+		}
+	},
+	"settings": {
+		"deno.enable": true,
+		"deno.unstable": true,
+		"deno.lint": true,
+		"deno.importMap": "deno.json",
+		"deno.config": "deno.json",
+		"editor.defaultFormatter": "denoland.vscode-deno"
+	},
+	"extensions": [
+		"denoland.vscode-deno"
+	],
+	"remoteUser": "vscode",
+	"features": {
+		"desktop-lite": {
+			"password": "vscode",
+			"webPort": "6080",
+			"vncPort": "5901"
+		}
+	},
+	"runArgs": ["--init", "--shm-size=1g"],
+	"forwardPorts": [6080, 5901],
+	"overrideCommand": false,
+	"portsAttributes": {
+		"5901": {
+			"label": "VNC"
+		},
+		"6080": {
+			"label": "WEB VNC"
+		}
+	}
+}

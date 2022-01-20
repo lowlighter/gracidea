@@ -1,0 +1,19 @@
+#!/bin/sh
+xmodmap "/home/vscode/.Xmodmap"
+
+# Start fbautostart 
+which fbautostart > /dev/null
+if [ $? -eq 0 ]; then
+    fbautostart
+fi
+
+# Start fluxbox
+fluxbox &
+fbpid=$!
+
+# Start tiled
+sleep 1
+{
+    /tiled/AppRun &
+} &
+wait $fbpid
