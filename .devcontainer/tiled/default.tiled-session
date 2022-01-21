@@ -1,16 +1,26 @@
 {
-    "activeFile": "",
+    "activeFile": "/workspaces/gracidea/maps/hoenn/hoenn-route-101.tmx",
     "expandedProjectPaths": [
     ],
     "file.lastUsedOpenFilter": "All Files (*)",
     "fileStates": {
+        "/workspaces/gracidea/maps/hoenn/hoenn-route-101.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 160.0523046747303,
+                "y": 160.31382804838185
+            }
+        }
     },
     "loadedWorlds": [
         "/workspaces/gracidea/maps/gracidea.world"
     ],
     "openFiles": [
+        "/workspaces/gracidea/maps/hoenn/hoenn-route-101.tmx"
     ],
     "project": "",
     "recentFiles": [
+        "/workspaces/gracidea/maps/hoenn/hoenn-route-101.tmx"
     ]
 }

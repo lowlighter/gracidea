@@ -24,7 +24,9 @@ RUN wget -O /tmp/Tiled.AppImage https://github.com/mapeditor/tiled/releases/down
     && /tmp/Tiled.AppImage --appimage-extract \ 
     && mv squashfs-root /tiled \
     && chown -R vscode /tiled \
-    && chmod +x /tiled/AppRun 
+    && chmod +x /tiled/AppRun \
+    && mkdir -p /home/vscode/.cache/tiled/sentry \
+    && echo 1 > /home/vscode/.cache/tiled/sentry/user-consent
 
 # Desktop lite
 COPY library-scripts/desktop-lite-debian.sh /tmp/library-scripts/
