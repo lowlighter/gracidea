@@ -15,6 +15,7 @@ const flags = parseFlags(Deno.args);
 if (flags.default ?? true) {
   flags.data ??= true;
   flags.maps ??= true;
+  flags.diff ??= Deno.env.get("VERCEL_ENV") === "preview"
   flags.textures ??= true;
   flags.assets ??= true;
   flags.app ??= true;
