@@ -1,5 +1,5 @@
 //Imports
-import { expandGlob } from "std/fs/mod.ts";
+import { expandGlob, ensureDir } from "std/fs/mod.ts";
 import { copy } from "std/fs/copy.ts";
 import { clone, log, read, save } from "app/build/util.ts";
 import maps from "app/build/steps/20_maps.ts";
@@ -12,18 +12,18 @@ export default async function () {
   await clone({ repo: "lowlighter/gracidea", dir: "app/build/cache/previous" });
 
   //Generate previous maps data
-  if (!await Deno.lstat(`app/build/cache/previous/app/public/data/maps`).then(() => true).catch(() => false)) {
-    log.progress(`building: gracidea previous maps data`);
+  if (await Deno.lstat(`app/build/cache/previous/app/public/data/maps`).then(() => true).catch(() => false)) 
+  log.debug(`built: previous maps data (already present)`);
+  else {
+    log.progress(`building: previous maps data`);
+    await ensureDir("app/build/cache/previous/app/public/data/maps/")
     await copy("app/public/data/maps/data.json", "app/build/cache/previous/app/public/data/maps/data.json", { overwrite: true });
     const cwd = Deno.cwd();
     Deno.chdir("app/build/cache/previous");
     await maps({ preload: false });
     Deno.chdir(cwd);
-    log.debug(`built: gracidea previous maps data`);
-  } else {
-    log.debug(`built: gracidea previous maps data (already present)`);
-  }
-
+    log.debug(`built: previous maps data`);
+  } 
   //Compute maps data diff
   {
     //List maps data
@@ -38,10 +38,10 @@ export default async function () {
     //Compute diff
     const patches = [];
     for (const id of ids) {
-      log.debug(`processing: ${id}`);
+      log.progress(`processing: ${id}`);
       const A = await read(`app/build/cache/previous/app/public/data/maps/${id}.json`).catch(() => ({ chunks: [], areas: [] }));
       const B = await read(`app/public/data/maps/${id}.json`).catch(() => ({ chunks: [], areas: [] }));
-      const diff = { tiles: {}, areas: {} } as { tiles: { [chunk: string]: { [tile: number]: "+" | "-" | "~" } }; areas: { [area: number | string]: "+" | "-" | "~" } };
+      const diff = { tiles: {}, areas: {} } as { tiles: { [chunk: string]: { [tile: number]: {d: "+" | "-" | "~", a:number|null, b:number|null } }}; areas: { [area: number | string]: {d:"+" | "-" | "~", a:unknown|null, b:unknown|null} } };
 
       //Chunks diff
       {
@@ -59,11 +59,11 @@ export default async function () {
           for (let i = 0; i < tiles; i++) {
             const t = { a: a[id]?.tiles[i] ?? 0, b: b[id]?.tiles[i] ?? 0 };
             if ((!t.a) && (t.b)) {
-              d[i] = "+";
+              d[i] = {d:"+", a:null, b:t.b}
             } else if ((t.a) && (!t.b)) {
-              d[i] = "-";
+              d[i] = {d:"-", a:t.a, b:null}
             } else if (t.a !== t.b) {
-              d[i] = "~";
+              d[i] = {d:"~", a:t.a, b:t.b}
             }
           }
           if (!Object.keys(d).length) {
@@ -90,11 +90,11 @@ export default async function () {
           const r = { a: a[id] ?? null, b: b[id] ?? null };
           const i = id;
           if ((!r.a) && (r.b)) {
-            d[i] = "+";
+            d[i] = {d:"+", a:null, b:r.b};
           } else if ((r.a) && (!r.b)) {
-            d[i] = "-";
+            d[i] = {d:"-", a:r.a, b:null};
           } else if ((r.a) && (r.b) && (JSON.stringify(r.a) !== JSON.stringify(r.b))) {
-            d[i] = "~";
+            d[i] = {d:"~", a:r.a, b:r.b};
           }
         }
         if (!Object.keys(diff.areas).length) {
@@ -110,14 +110,15 @@ export default async function () {
           y: B.y,
           tiles: Object.entries(diff.tiles ?? []).map(([chunk, tiles]) => ({
             chunk,
-            added: Object.values(tiles).filter((v) => v === "+").length,
-            deleted: Object.values(tiles).filter((v) => v === "-").length,
-            changed: Object.values(tiles).filter((v) => v === "~").length,
+            added: Object.values(tiles).filter(({d}) => d === "+").length,
+            deleted: Object.values(tiles).filter(({d}) => d === "-").length,
+            changed: Object.values(tiles).filter(({d}) => d === "~").length,
+            editions: tiles
           })),
           areas: {
-            added: Object.entries(diff.areas ?? []).filter(([_, v]) => v === "+").flatMap(([k]) => B.areas.filter(({ id }: { id: string }) => `${k}` === `${id}`)),
-            deleted: Object.entries(diff.areas ?? []).filter(([_, v]) => v === "-").flatMap(([k]) => B.areas.filter(({ id }: { id: string }) => `${k}` === `${id}`)),
-            changed: Object.entries(diff.areas ?? []).filter(([_, v]) => v === "~").flatMap(([k]) => B.areas.filter(({ id }: { id: string }) => `${k}` === `${id}`)),
+            added: Object.entries(diff.areas ?? []).filter(([_, {d}]) => d === "+").flatMap(([k]) => B.areas.filter(({ id }: { id: string }) => `${k}` === `${id}`)),
+            deleted: Object.entries(diff.areas ?? []).filter(([_, {d}]) => d === "-").flatMap(([k]) => B.areas.filter(({ id }: { id: string }) => `${k}` === `${id}`)),
+            changed: Object.entries(diff.areas ?? []).filter(([_, {d}]) => d === "~").flatMap(([k]) => B.areas.filter(({ id }: { id: string }) => `${k}` === `${id}`)),
           },
         });
         Object.assign(B, { diff });

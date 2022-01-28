@@ -1,5 +1,5 @@
 //Imports
-import { clone, log, read, save, toArray } from "app/build/util.ts";
+import { clone, log, read, save, exists, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 import { basename, dirname } from "std/path/mod.ts";
 
@@ -12,11 +12,15 @@ export default async function () {
 
   //Tiles properties
   {
-    let tilesets = 0;
+    let tilesets = 0, skipped = 0;
     for await (const { path, name } of expandGlob("copyrighted/textures/*/*.tsx")) {
       const style = basename(dirname(path));
       const tileset = `${style}/${name.replace(".tsx", "")}`;
       log.progress(`processing: ${tileset}`);
+      if (await exists(`textures/${tileset}.json`)) {
+        skipped++
+        continue
+      }
       const { tileset: raw } = await read(`copyrighted/textures/${tileset}.tsx`);
       const animated = {} as { [key: string]: { frames: string[]; speed: number } };
       const zindex = {} as { [key: string]: number };
@@ -39,18 +43,20 @@ export default async function () {
       await save(`textures/${tileset}.json`, { id: tileset, animated, zindex });
       tilesets++;
     }
-    log.debug(`processed: ${tilesets} tilesets`);
+    log.debug(`processed: ${tilesets} tilesets (skipped ${skipped})`);
   }
 
   //Textures effect
-  const effects = { creature: { name: {}, area: {} } } as {
-    creature: {
-      name: { [id: string]: string };
-      area: { [id: string]: string };
-    };
-  };
-  {
+  if (await exists("textures/effects.json")) 
+    log.debug("skipped: textures/effects.json (already present)");
+  else {
     log.progress(`processing: texture effects`);
+    const effects = { creature: { name: {}, area: {} } } as {
+      creature: {
+        name: { [id: string]: string };
+        area: { [id: string]: string };
+      };
+    };
 
     //Type related effects
     for await (const { path, name: file } of expandGlob("app/build/cache/data/data/api/v2/type/*/*.json")) {

@@ -16,6 +16,13 @@ export class App {
     this.loaded("loaded /js/app.js", null, { update: true });
     const { x = 5, y = -55 } = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
+    this.loaded("loading patches");
+    const patches = await fetch("/data/maps/patches.json").then(response => response.json())
+    if (patches.length) {
+      this.config.patch = true
+      this.loaded("loaded patches", null, {update:true});
+    }
+
     await (Render as friend).setup({ app: this });
     const world = new World();
     Object.assign(this, { world });

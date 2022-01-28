@@ -99,9 +99,15 @@ export class NPC extends Renderable {
     this.sprite.mouseout = () => this.sprite.filters = null;
 
     //Patch
-    if (App.config.patch) {
+    /*if (App.config.patch) {
       Render.patch(this.sprite, this.area.section.data.diff?.areas?.[this.id] ?? "=");
-    }
+      if (type) {
+        sprite.tint = { "+": 0x116329, "-": 0x82071E, "~": 0x953800, "=": 0x222222 }[type];
+        sprite.alpha = type === "=" ? 0.25 : 0.75;
+      } else {
+        sprite.tint = 0xFFFFFF;
+      }
+    }*/
 
     return super.init();
   }

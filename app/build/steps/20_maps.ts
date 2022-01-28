@@ -1,5 +1,5 @@
 //Imports
-import { calcArea, log, read, save, toArray } from "app/build/util.ts";
+import { calcArea, log, read, save, exists, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 
 /** Data */
@@ -8,11 +8,13 @@ export default async function ({ preload = true } = {}) {
   const locations = {};
   if (preload) {
     Object.assign(locations, await read("app/public/data/maps/data.json"));
-    log.debug(`loaded: maps/data.json (pre-generated)`);
+    log.debug("loaded: maps/data.json");
   }
 
   //Regions
-  {
+  if (await exists("maps.json")) 
+  log.debug("skipped: maps.json (already present)");
+  else {
     const ids = ["hoenn"];
     const regions = [];
     for (const id of ids) {
@@ -38,12 +40,16 @@ export default async function ({ preload = true } = {}) {
 
   //Sections
   {
-    let regions = 0, sections = 0;
+    const regions = {count:0, skipped:0}, sections = {count:0, skipped:0};
     for await (const { name: region, isDirectory } of expandGlob("maps/*")) {
       if (!isDirectory) {
         continue;
       }
       log.progress(`processing: ${region}/*`);
+      if (await exists(`maps/${region}.json`)) {
+        regions.skipped++
+        continue
+      }
       await save(`maps/${region}.json`, load.sections({ region }));
       for await (const { name, isFile } of expandGlob(`maps/${region}/*.tmx`)) {
         if (!isFile) {
@@ -52,8 +58,12 @@ export default async function ({ preload = true } = {}) {
         const section = name.replace(".tmx", "");
         log.progress(`processing: ${region}/${section}`);
         try {
+          if (await exists(`maps/${region}/${section}.json`)) {
+            sections.skipped++
+            continue
+          }
           await save(`maps/${region}/${section}.json`, load.section({ region, section, locations }));
-          sections++;
+          sections.count++;
         } catch (error) {
           if (/not properly referenced/.test(error.message)) {
             log.warn(error.message);
@@ -62,9 +72,9 @@ export default async function ({ preload = true } = {}) {
           throw error;
         }
       }
-      regions++;
+      regions.count++;
     }
-    log.debug(`processed: ${regions} regions, ${sections} sections`);
+    log.debug(`processed: ${regions.count} regions (skipped ${regions.skipped}), ${sections.count} sections (skipped ${sections.skipped})`);
   }
 
   log.success();

@@ -166,7 +166,7 @@ export class Render {
   }
 
   /** Create a new sprite */
-  static Sprite({ frame = null, x = 0, y = 0, z = NaN, anchor, scale }: Sprite = {}) {
+  static Sprite({ frame = null, x = 0, y = 0, z = NaN, alpha = NaN, anchor, scale }: Sprite = {}) {
     let sprite;
     if (`${frame}` in this.tileset.animated) {
       const { frames, speed } = this.tileset.animated[frame];
@@ -182,6 +182,9 @@ export class Render {
     }
     if (scale) {
       sprite.scale.set(...scale);
+    }
+    if (!Number.isNaN(alpha)) {
+      sprite.alpha = alpha
     }
     if (!Number.isNaN(z)) {
       sprite.zIndex = z;
@@ -228,15 +231,6 @@ export class Render {
     return graphics;
   }
 
-  /** Patch sprite */
-  static patch(sprite: ReturnType<typeof Render.Container>, type = null as "+" | "-" | "~" | "=" | null) {
-    if (type) {
-      sprite.tint = { "+": 0x116329, "-": 0x82071E, "~": 0x953800, "=": 0x222222 }[type];
-      sprite.alpha = type === "=" ? 0.25 : 0.75;
-    } else {
-      sprite.tint = 0xFFFFFF;
-    }
-  }
 }
 
 /** Compute intersection between two rectangle (from @pixi/math) */
@@ -278,6 +272,7 @@ export type Sprite = {
   x?: number;
   y?: number;
   z?: number;
+  alpha?: number;
   anchor?: [number, number];
   scale?: [number, number];
 };
