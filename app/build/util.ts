@@ -97,8 +97,8 @@ export async function pack({ pkg, dir }: { pkg: string; dir: string }) {
   log.progress(`packing: ${pkg}`);
   const exists = await Deno.lstat(dir).then(() => true).catch(() => false);
   if (!exists) {
+    await ensureDir("app/build/cache")
     const { stdout } = await exec(`npm pack ${pkg} --pack-destination app/build/cache`);
-    console.log(stdout);
     const archive = `app/build/cache/${stdout}`;
     log.progress(`uncompressing: ${archive}`);
     await ensureDir(dir);
