@@ -157,7 +157,7 @@
         <key>trimSpriteNames</key>
         <true/>
         <key>prependSmartFolderName</key>
-        <false/>
+        <true/>
         <key>autodetectAnimations</key>
         <false/>
         <key>globalSpriteSettings</key>
