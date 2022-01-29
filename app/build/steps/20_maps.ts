@@ -1,9 +1,16 @@
 //Imports
-import { calcArea, exists, log, read, save, toArray } from "app/build/util.ts";
+import { calcArea, exists, log as logger, read, save, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 
 /** Data */
-export default async function ({ preload = true } = {}) {
+export default async function ({ preload = true, quiet = false } = {}) {
+  const log = quiet
+    ? new Proxy({} as { [key: string]: () => void }, {
+      get(target, key) {
+        return Reflect.get(target, key) ?? (() => void 0);
+      },
+    })
+    : logger;
   log.step("compute maps data");
   const locations = {};
   if (preload) {

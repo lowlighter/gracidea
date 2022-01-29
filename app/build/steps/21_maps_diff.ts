@@ -20,7 +20,7 @@ export default async function () {
     await copy("app/public/data/maps/data.json", "app/build/cache/previous/app/public/data/maps/data.json", { overwrite: true });
     const cwd = Deno.cwd();
     Deno.chdir("app/build/cache/previous");
-    await maps({ preload: false });
+    await maps({ preload: false, quiet: true });
     Deno.chdir(cwd);
     log.debug(`built: previous maps data`);
   }
