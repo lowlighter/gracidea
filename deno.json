@@ -1,11 +1,26 @@
 {
+  "meta":{
+    "author": "lowlighter (Simon Lecoq)",
+    "repository":"https://github.com/lowlighter/gracidea",
+    "license": "https://github.com/lowlighter/gracidea/blob/main/LICENSE"
+  },
   "velociraptor":{
+    "unstable": true,
+    "quiet": true,
+    "allow": ["read", "net"],
+    "importMap": "deno.json",
     "scripts": {
-      "start":"deno run --allow-net --allow-read https://deno.land/std/http/file_server.ts",
-      "build":"deno run --allow-read --allow-net --allow-run=git --allow-write=app/build/cache,app/public app/build/mod.ts",
-      "test":"deno test --allow-read app/tests",
-      "fmt": "deno fmt --config deno.json",
-      "lint": "deno lint --config deno.json"
+      "fmt": "deno fmt",
+      "lint": "deno lint",
+      "test": "deno test app/tests",
+      "start": "deno run https://deno.land/std/http/file_server.ts app/public",
+      "build": {
+        "allow": {
+          "run": ["git", "npm"],
+          "write": ["app/build/cache", "app/public", "/tmp", "pixi.js-6.2.2.tgz"]
+        },
+        "cmd": "deno run app/build/mod.ts"
+      }
     }
   },
   "imports": {
