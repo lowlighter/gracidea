@@ -46,6 +46,8 @@ export default async function () {
         for (const object of toArray(objects)) {
           //Parse polygon
           const { "@name": name, "@x": x, "@y": y, "@width": width, "@height": height, polygon } = object;
+          if (!name)
+            continue
           const points = (polygon?.["@points"].match(/-?\d+/g) ?? [0, 0, width, 0, width, height, 0, height])
             .map((value: string) => Number(value))
             .map((delta: number, index: number) => (delta + (index % 2 ? y : x)) / 8);
