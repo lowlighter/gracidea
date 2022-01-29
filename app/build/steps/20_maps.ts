@@ -49,7 +49,7 @@ export default async function ({ preload = true, quiet = false } = {}) {
   {
     const regions = { count: 0, skipped: 0 }, sections = { count: 0, skipped: 0 };
     for await (const { name: region, isDirectory } of expandGlob("maps/*")) {
-      if ((!isDirectory)||(region === "all")) {
+      if ((!isDirectory) || (region === "all")) {
         continue;
       }
       log.progress(`processing: ${region}/*`);

@@ -195,7 +195,7 @@ export class NPC extends Renderable {
       }
       case Direction.left: {
         this.x -= delta;
-        this.#animate(this.#tx-this.x)
+        this.#animate(this.#tx - this.x);
         if (this.x <= this.#tx) {
           this.x = this.#tx;
           this.#direction = Direction.none;
@@ -204,7 +204,7 @@ export class NPC extends Renderable {
       }
       case Direction.right: {
         this.x += delta;
-        this.#animate(this.#tx-this.x)
+        this.#animate(this.#tx - this.x);
         if (this.x >= this.#tx) {
           this.x = this.#tx;
           this.#direction = Direction.none;
@@ -213,7 +213,7 @@ export class NPC extends Renderable {
       }
       case Direction.up: {
         this.y -= delta;
-        this.#animate(this.#ty-this.y)
+        this.#animate(this.#ty - this.y);
         if (this.y <= this.#ty) {
           this.y = this.#ty;
           this.#direction = Direction.none;
@@ -222,7 +222,7 @@ export class NPC extends Renderable {
       }
       case Direction.down: {
         this.y += delta;
-        this.#animate(this.#ty-this.y)
+        this.#animate(this.#ty - this.y);
         if (this.y >= this.#ty) {
           this.y = this.#ty;
           this.#direction = Direction.none;
@@ -293,12 +293,13 @@ export class NPC extends Renderable {
   }
 
   /** Texture animation */
-  #animate(delta:number, {speed = 4, frames = 3} = {}) {
-    if (this.#direction === Direction.none)
-      return
-    const i = Math.floor(Math.abs(delta)/(1/speed))%frames
-    const d = {[Direction.up]:"up", [Direction.right]:"right", [Direction.down]:"down", [Direction.left]:"left"}[this.#direction]
-    this.texture({ suffix: `_${d}_${i}`});
+  #animate(delta: number, { speed = 4, frames = 3 } = {}) {
+    if (this.#direction === Direction.none) {
+      return;
+    }
+    const i = Math.floor(Math.abs(delta) / (1 / speed)) % frames;
+    const d = { [Direction.up]: "up", [Direction.right]: "right", [Direction.down]: "down", [Direction.left]: "left" }[this.#direction];
+    this.texture({ suffix: `_${d}_${i}` });
   }
 
   /** Active effects */

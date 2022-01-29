@@ -10,7 +10,7 @@ export default async function () {
   //Worldmap
   {
     log.progress("processing: worldmap");
-    await crop({ path: "copyrighted/textures/all/worldmap.png", tileset:"worldmap", padding:0, tilesize:8 });
+    await crop({ path: "copyrighted/textures/all/worldmap.png", tileset: "worldmap", padding: 0, tilesize: 8 });
     log.debug("processed: worldmap");
   }
 
@@ -19,8 +19,9 @@ export default async function () {
     let tilesets = 0;
     for await (const { path, name } of expandGlob("copyrighted/textures/*/*.tsx")) {
       const style = basename(dirname(path));
-      if (style === "all")
-        continue
+      if (style === "all") {
+        continue;
+      }
       const tileset = `${style}/${name.replace(".tsx", "")}`;
       log.progress(`processing: ${tileset}`);
       await crop({ path: path.replace(".tsx", ".png"), tileset });

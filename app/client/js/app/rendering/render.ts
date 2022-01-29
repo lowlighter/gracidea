@@ -28,7 +28,7 @@ export class Render {
     for (const texture of ["tileset", "npcs", "creatures"]) {
       loader.add(`/textures/${app.config.textures.style}/${texture}.json?sha=${app.sha}`);
     }
-    loader.add(`/textures/all/worldmap.json?sha=${app.sha}`)
+    loader.add(`/textures/all/worldmap.json?sha=${app.sha}`);
     loader.onProgress.add((_: unknown, { url = "" }) => app.loaded(`loaded ${new URL(url, global.location).pathname}`));
     loader.onComplete.add(() => app.loaded("all textures successfully loaded"));
     pending.push(new Promise((solve) => loader.load(() => solve(null))));
