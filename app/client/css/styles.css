@@ -166,7 +166,7 @@ nav.collapsed > *:not(.app-name) {
   color: #116329;
 }
 .patches .diff .changed {
-  color: #953800;
+  color: #D79533;
 }
 .patches .diff .deleted {
   color: #82071E;

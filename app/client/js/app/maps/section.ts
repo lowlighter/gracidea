@@ -87,19 +87,21 @@ export class Section extends Renderable {
           const { d, a, b } = this.data.diff?.tiles?.[id]?.[i] ?? {};
           switch (d) {
             case "+":
-              frames.push({ frame: b, alpha: 0.75 }, { frame: 6328, alpha: 0.1 });
+              frames.push({ frame: b, alpha: 0.8 }, { frame: 6327, alpha: 0.4 });
               break;
             case "~":
-              frames.push({ frame: b, alpha: 0.75 }, { frame: 6326, alpha: 0.1 });
+              frames.push({ frame: b, alpha: 0.8 }, { frame: 6325, alpha: 0.4 });
               break;
             case "-":
-              frames.push({ frame: a, alpha: 0.75 }, { frame: 6327, alpha: 0.1 });
+              frames.push({ frame: a, alpha: 0.8 }, { frame: 6326, alpha: 0.4 });
               break;
             default:
-              frames.push({ frame: tiles[i], alpha: 0.25 });
+              if (tiles[i]) {
+                frames.push({ frame: tiles[i], alpha: 0.2 });
+              }
               break;
           }
-        } else {
+        } else if (tiles[i]) {
           frames.push({ frame: tiles[i] });
         }
         if (frames.length) {
