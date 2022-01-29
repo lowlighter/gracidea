@@ -1,5 +1,5 @@
 //Imports
-import { log, read, save, clone, exists } from "app/build/util.ts";
+import { clone, exists, log, read, save } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 import { basename, dirname } from "std/path/mod.ts";
 
@@ -13,7 +13,7 @@ export default async function () {
   if (await exists("maps/data.json")) {
     log.debug("skipped: maps/data.json (already present)");
     log.success();
-    return
+    return;
   }
 
   //Extract gender data

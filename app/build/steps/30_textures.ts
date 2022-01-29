@@ -1,5 +1,5 @@
 //Imports
-import { clone, log, read, save, exists, toArray } from "app/build/util.ts";
+import { clone, exists, log, read, save, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 import { basename, dirname } from "std/path/mod.ts";
 
@@ -18,8 +18,8 @@ export default async function () {
       const tileset = `${style}/${name.replace(".tsx", "")}`;
       log.progress(`processing: ${tileset}`);
       if (await exists(`textures/${tileset}.json`)) {
-        skipped++
-        continue
+        skipped++;
+        continue;
       }
       const { tileset: raw } = await read(`copyrighted/textures/${tileset}.tsx`);
       const animated = {} as { [key: string]: { frames: string[]; speed: number } };
@@ -47,9 +47,9 @@ export default async function () {
   }
 
   //Textures effect
-  if (await exists("textures/effects.json")) 
+  if (await exists("textures/effects.json")) {
     log.debug("skipped: textures/effects.json (already present)");
-  else {
+  } else {
     log.progress(`processing: texture effects`);
     const effects = { creature: { name: {}, area: {} } } as {
       creature: {

@@ -1,7 +1,7 @@
 //Imports
 import argv from "y/string-argv@0.3.1";
 import { uncompress } from "x/compress@v0.4.1/tgz/mod.ts";
-import { bold, cyan, gray, green, red, yellow, italic } from "std/fmt/colors.ts";
+import { bold, cyan, gray, green, italic, red, yellow } from "std/fmt/colors.ts";
 import { Image } from "x/imagescript@1.2.9/mod.ts";
 import { ensureDir } from "std/fs/mod.ts";
 import { dirname, extname, isAbsolute, join, toFileUrl } from "std/path/mod.ts";
@@ -44,8 +44,8 @@ export const log = {
     return console.log(green("success!".padEnd(this.size)));
   },
   skipped() {
-    return console.log(gray(italic("skipped".padEnd(this.size))))
-  }
+    return console.log(gray(italic("skipped".padEnd(this.size))));
+  },
 };
 
 /** Execute a command */
@@ -141,8 +141,8 @@ export async function save(path: string, data: unknown | Promise<unknown>) {
 
 /** Test data path */
 export async function exists(path: string) {
-  path = `app/public/data/${path}`
-  return await Deno.lstat(path).then(() => true).catch(() => false)
+  path = `app/public/data/${path}`;
+  return await Deno.lstat(path).then(() => true).catch(() => false);
 }
 
 /** Send back a flattened array without falsy values */

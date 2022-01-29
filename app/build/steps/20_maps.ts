@@ -1,5 +1,5 @@
 //Imports
-import { calcArea, log, read, save, exists, toArray } from "app/build/util.ts";
+import { calcArea, exists, log, read, save, toArray } from "app/build/util.ts";
 import { expandGlob } from "std/fs/mod.ts";
 
 /** Data */
@@ -12,9 +12,9 @@ export default async function ({ preload = true } = {}) {
   }
 
   //Regions
-  if (await exists("maps.json")) 
-  log.debug("skipped: maps.json (already present)");
-  else {
+  if (await exists("maps.json")) {
+    log.debug("skipped: maps.json (already present)");
+  } else {
     const ids = ["hoenn"];
     const regions = [];
     for (const id of ids) {
@@ -40,15 +40,15 @@ export default async function ({ preload = true } = {}) {
 
   //Sections
   {
-    const regions = {count:0, skipped:0}, sections = {count:0, skipped:0};
+    const regions = { count: 0, skipped: 0 }, sections = { count: 0, skipped: 0 };
     for await (const { name: region, isDirectory } of expandGlob("maps/*")) {
       if (!isDirectory) {
         continue;
       }
       log.progress(`processing: ${region}/*`);
       if (await exists(`maps/${region}.json`)) {
-        regions.skipped++
-        continue
+        regions.skipped++;
+        continue;
       }
       await save(`maps/${region}.json`, load.sections({ region }));
       for await (const { name, isFile } of expandGlob(`maps/${region}/*.tmx`)) {
@@ -59,8 +59,8 @@ export default async function ({ preload = true } = {}) {
         log.progress(`processing: ${region}/${section}`);
         try {
           if (await exists(`maps/${region}/${section}.json`)) {
-            sections.skipped++
-            continue
+            sections.skipped++;
+            continue;
           }
           await save(`maps/${region}/${section}.json`, load.section({ region, section, locations }));
           sections.count++;

@@ -84,28 +84,29 @@ export class Section extends Renderable {
       for (let i = 0; i < tiles.length; i++) {
         const frames = [];
         if (App.config.patch) {
-          const {d, a, b} = this.data.diff?.tiles?.[id]?.[i] ?? {}
+          const { d, a, b } = this.data.diff?.tiles?.[id]?.[i] ?? {};
           switch (d) {
             case "+":
-              frames.push({frame:b, alpha:0.75}, {frame:6328, alpha:0.1})
-              break
+              frames.push({ frame: b, alpha: 0.75 }, { frame: 6328, alpha: 0.1 });
+              break;
             case "~":
-              frames.push({frame:b, alpha:0.75}, {frame:6326, alpha:0.1})
-              break
+              frames.push({ frame: b, alpha: 0.75 }, { frame: 6326, alpha: 0.1 });
+              break;
             case "-":
-              frames.push({frame:a, alpha:0.75}, {frame:6327, alpha:0.1})
-              break
+              frames.push({ frame: a, alpha: 0.75 }, { frame: 6327, alpha: 0.1 });
+              break;
             default:
-              frames.push({frame:tiles[i], alpha:0.25})
-              break
+              frames.push({ frame: tiles[i], alpha: 0.25 });
+              break;
           }
+        } else {
+          frames.push({ frame: tiles[i] });
         }
-        else
-          frames.push({frame:tiles[i]})
         if (frames.length) {
           const x = X + i % 16, y = Y + Math.floor(i / 16);
-          for (const {frame, alpha = 1} of frames)
+          for (const { frame, alpha = 1 } of frames) {
             this.sprite.addChild(Render.Sprite({ frame, x, y, z: Render.tileset.zindex[`${frame}`] ?? 0, alpha }));
+          }
         }
       }
     }

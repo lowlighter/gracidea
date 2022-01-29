@@ -15,7 +15,7 @@ const flags = parseFlags(Deno.args);
 if (flags.default ?? true) {
   flags.data ??= true;
   flags.maps ??= true;
-  flags.diff ??= true 
+  flags.diff ??= true;
   flags.textures ??= true;
   flags.assets ??= true;
   flags.app ??= true;

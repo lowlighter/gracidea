@@ -65,10 +65,9 @@ export class Controller {
 
         global.document.querySelector(".patches")?.append(patch);
       }
+    } else {
+      global.document.querySelector(".patches")?.remove();
     }
-    else
-    global.document.querySelector(".patches")?.remove();
-
 
     //Debug options
     {

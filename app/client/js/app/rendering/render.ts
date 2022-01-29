@@ -184,7 +184,7 @@ export class Render {
       sprite.scale.set(...scale);
     }
     if (!Number.isNaN(alpha)) {
-      sprite.alpha = alpha
+      sprite.alpha = alpha;
     }
     if (!Number.isNaN(z)) {
       sprite.zIndex = z;
@@ -230,7 +230,6 @@ export class Render {
     }
     return graphics;
   }
-
 }
 
 /** Compute intersection between two rectangle (from @pixi/math) */
