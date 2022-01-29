@@ -7,7 +7,7 @@ import texturesPacker from "app/build/steps/31_textures_packer.ts";
 import assets from "app/build/steps/40_assets.ts";
 import app from "app/build/steps/41_assets_app.ts";
 import diff from "app/build/steps/21_maps_diff.ts";
-import { log } from "app/build/util.ts";
+import { log, requirements } from "app/build/util.ts";
 import { parse as parseFlags } from "std/flags/mod.ts";
 
 /** Flags */
@@ -31,6 +31,7 @@ for (const [flag, value] of Object.entries(flags)) {
 export const build = Object.assign(async function () {
   const start = performance.now();
   log.info(`flags: ${Object.keys(flags).join(", ") || "(none)"}`);
+  await requirements();
   if (flags.clean) {
     await clean();
   }

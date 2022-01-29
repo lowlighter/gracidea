@@ -1,6 +1,5 @@
 //Imports
 import argv from "y/string-argv@0.3.1";
-import { uncompress } from "x/compress@v0.4.1/tgz/mod.ts";
 import { bold, cyan, gray, green, italic, red, yellow } from "std/fmt/colors.ts";
 import { Image } from "x/imagescript@1.2.9/mod.ts";
 import { ensureDir } from "std/fs/mod.ts";
@@ -48,8 +47,28 @@ export const log = {
   },
 };
 
+/** Requirements */
+export async function requirements() {
+  if (Deno.build.os === "windows") {
+    try {
+      await exec("wsl exit", { compat: false });
+    } catch {
+      log.error("error: windows subsystem for linux is not available");
+      return false;
+    }
+  }
+  let success = true;
+  for (const bin of ["git", "npm", "tar"]) {
+    await exec(`which ${bin}`).catch((_) => (log.error(`error: ${bin} is not available`), success = false));
+  }
+  return success;
+}
+
 /** Execute a command */
-export async function exec(command: string) {
+export async function exec(command: string, { compat = true } = {}) {
+  if ((compat) && (Deno.build.os === "windows")) {
+    command = `wsl ${command}`;
+  }
   log.progress(`executing: ${command}`);
   const process = Deno.run({ cmd: argv(command), stdout: "piped", stderr: "piped" });
   const [{ success, code }, ...stdio] = await Promise.all([process.status(), process.output(), process.stderrOutput()]);
@@ -78,9 +97,12 @@ export async function pack({ pkg, dir }: { pkg: string; dir: string }) {
   log.progress(`packing: ${pkg}`);
   const exists = await Deno.lstat(dir).then(() => true).catch(() => false);
   if (!exists) {
-    const { stdout: archive } = await exec(`${Deno.build.os === "windows" ? "wsl " : ""}npm pack ${pkg}`);
+    const { stdout } = await exec(`npm pack ${pkg} --pack-destination app/build/cache`);
+    console.log(stdout);
+    const archive = `app/build/cache/${stdout}`;
     log.progress(`uncompressing: ${archive}`);
-    await uncompress(archive, dir);
+    await ensureDir(dir);
+    await exec(`tar --extract --file ${archive} --directory ${dir}`);
     await Deno.remove(archive);
   }
   const { version = "unknown" } = JSON.parse(await Deno.readTextFile(`${dir}/package/package.json`));
