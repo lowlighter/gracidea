@@ -152,3 +152,11 @@ For world regions, create a new `.png` file in `copyrighted/textures/all/regions
 
 GitHub users having access to [GitHub codespaces](https://github.com/features/codespaces) may directly use the custom container with all dependencies installed (this also include [Tiled map editor](https://www.mapeditor.org) which is accessible through [NoVNC](https://novnc.com))
 
+
+### 📚 How-to
+
+Use `vr build` and then `vr start` to start a local instance.
+
+> ⚠️ Note that by default, already generated data are not rebuilt if files are already present. Pass `--clean` flag to ensure that cache is fully reloaded
+
+Changes should pass `vr fmt` and `vr lint`.
