@@ -110,11 +110,9 @@ export async function pack({ pkg, dir }: { pkg: string; dir: string }) {
 }
 
 /** Crop an image instance */
-export async function crop({ path, tileset }: { path: string; tileset: string }) {
+export async function crop({ path, tileset, padding = 2, tilesize = 16 }: { path: string; tileset: string, padding?:number, tilesize?:number }) {
   log.progress(`processing: ${tileset}`);
   const directory = `app/build/cache/tilesets/${tileset}`;
-  const padding = 2;
-  const tilesize = 16;
   const image = await Image.decode(await Deno.readFile(path));
   const X = (image.width - padding) / (tilesize + padding), Y = (image.height - padding) / (tilesize + padding);
   await ensureDir(directory);
