@@ -46,13 +46,11 @@
       },
       "dev-app":{
         "desc": "> rebuild app client and assets",
-        "cmd":"vr build --no-default --app --assets",
-        "watch": true
+        "cmd":"vr build --app --assets"
       },
       "dev-map":{
         "desc": "> rebuild app diff",
-        "cmd":"vr build --no-default --diff",
-        "watch": true
+        "cmd":"vr build --diff"
       }
     }
   },

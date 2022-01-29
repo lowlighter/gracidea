@@ -21,6 +21,46 @@ export class Controller {
 
   /** Init */
   async init() {
+    //World map
+    {
+      //Toggle world map
+      {
+        const label = dom.element("label", { text: "Display world map" });
+        label.append(dom.element("input", {
+          attributes: { id: "control-worldmap", type: "checkbox" },
+          listeners: {
+            click: ({ target: { checked: value } }) => {
+              App.world.map.visible = value;
+              this.focus(value ? { sprite: App.world.map.getChildByName("worldmap") } as Renderable : this.target);
+            },
+          },
+        }));
+        global.document.querySelector(".worldmap")?.append(label);
+      }
+
+      //Search location
+      {
+        const label = dom.element("label", { text: "Search location" });
+        label.append(dom.element("input", {
+          attributes: { list: "control-worldmap-search" },
+          listeners: {
+            change({ target: { value } }) {
+              const location = App.world.locations.filter(({ name }) => name === value)[0] ?? null;
+              if (location) {
+                App.world.camera.place(location);
+                global.document.querySelector("[list='control-worldmap-search']").value = "";
+              }
+            },
+          },
+        }));
+        const datalist = label.appendChild(dom.element("datalist", { attributes: { id: "control-worldmap-search" } }));
+        for (const value of App.world.locations.map(({ name }) => name)) {
+          datalist.append(dom.element("option", { attributes: { value } }));
+        }
+        global.document.querySelector(".worldmap")?.append(label);
+      }
+    }
+
     //Patches
     if (App.config.patch) {
       const patches = await fetch("/data/maps/patches.json").then((response) => response.json());
@@ -66,7 +106,7 @@ export class Controller {
         global.document.querySelector(".patches")?.append(patch);
       }
     } else {
-      global.document.querySelector(".patches")?.remove();
+      global.document.querySelector(".patches")?.parentNode?.remove();
     }
 
     //Debug options
@@ -257,6 +297,11 @@ export class Controller {
       x: Math.floor((-this.target.sprite.position.x + this.#cursor.x) / 16),
       y: Math.floor((-this.target.sprite.position.y + this.#cursor.y) / 16),
     };
+  }
+
+  /** Query selector */
+  qs(selector: string) {
+    return global.document.querySelector(selector);
   }
 }
 

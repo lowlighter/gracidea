@@ -18,7 +18,7 @@
     const message = tag("span", { text });
     message.append(tag("span", { class: "loading" }));
     if (type) {
-      message.setAttribute("style", `color:${{ error: "red", warn: "orange" }[type]};`);
+      message.setAttribute("style", `color:${{ error: "red", warn: "orange", notice: "magenta" }[type]};`);
     }
     if (update) {
       loader.querySelector(":first-child")?.remove();

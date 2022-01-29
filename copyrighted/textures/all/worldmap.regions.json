@@ -1,0 +1,28 @@
+{"frames": {
+
+"regions/hoenn":
+{
+	"frame": {"x":1,"y":1,"w":494,"h":308},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":494,"h":308},
+	"sourceSize": {"w":494,"h":308}
+},
+"regions/sevii_islands":
+{
+	"frame": {"x":1,"y":311,"w":153,"h":318},
+	"rotated": true,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":153,"h":318},
+	"sourceSize": {"w":153,"h":318}
+}},
+"meta": {
+	"app": "https://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "worldmap.regions.webp",
+	"format": "RGBA8888",
+	"size": {"w":496,"h":465},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:02d7a5a477af8648752e00ea0090b13e:f56614d6b12e684375cff36b6472714b:b7590c7922ce95aa38f27d756895b0de$"
+}
+}

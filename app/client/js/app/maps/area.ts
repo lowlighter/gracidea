@@ -66,9 +66,6 @@ export class Area extends Renderable {
         this.npcs.add(new Human({ area: this }));
       }
     }
-    if (this.data.type === "map") {
-      //this.section.sprite.addChild(Render.Sprite({frame:this.data.properties.tile, x:this.polygon.points[0]/16, y:this.polygon.points[1]/16}))
-    }
 
     if ((debug) && (this.dirty)) {
       this.debug.bounds.removeChildren();

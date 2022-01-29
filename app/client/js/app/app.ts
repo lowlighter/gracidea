@@ -11,27 +11,33 @@ export class App {
   /** World */
   static readonly world: World;
 
+  /** Controller */
+  static readonly controller: Controller;
+
   /** App setup */
   static async setup() {
+    //Setup
     this.loaded("loaded /js/app.js", null, { update: true });
-    const { x = 5, y = -55 } = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
-    this.loaded("loading patches");
+    //Load patches
     const patches = await fetch(`/data/maps/patches.json?sha=${this.sha}`).then((response) => response.json());
     if (patches.length) {
       this.config.patch = true;
-      this.loaded("loaded patches", null, { update: true });
+      this.loaded("loaded patches, switching in preview mode");
     }
 
+    //Setup renderer, world and controller
     await (Render as friend).setup({ app: this });
-    const world = new World();
-    Object.assign(this, { world });
-    new Controller({ target: world });
-
+    Object.assign(this, { world: new World() });
+    await this.world.ready;
+    Object.assign(this, { controller: new Controller({ target: this.world }) });
     this.ready.resolve();
 
-    world.camera.place({ x: Number(x) || 0, y: Number(y) || 0 });
+    //User inputs
+    const { x = 5, y = -55 } = Object.fromEntries(new URLSearchParams(window.location.search).entries());
+    this.world.camera.place({ x: Number(x) || 0, y: Number(y) || 0 });
 
+    //Finalize loading
     this.loaded("waiting for first rendering");
     global.document.querySelector(".loader").remove();
     return App;
@@ -57,24 +63,33 @@ export class App {
 
   /** Config */
   static config = {
-    patch: false,
-    debug: {
-      logs: false,
-      bounds: false,
-    },
+    //Texture settings
     textures: {
+      //(for future usage) Textures styles
       style: "rse",
+      //Toggle sea display
       sea: true,
     },
-    pins: {
-      display: true,
-    },
+    //People settings
     people: {
+      //Toggle display
       display: true,
     },
+    //Creatures settings
     creatures: {
+      //Toggle display
       display: true,
+      //Shiny rate
       shiny: 1 / 128,
     },
+    //Debug settings
+    debug: {
+      //Toggle debug logs in console
+      logs: false,
+      //Toggle renderable bounds display
+      bounds: false,
+    },
+    //Patch settings (auto-enabled when patches.json is not empty)
+    patch: false,
   };
 }

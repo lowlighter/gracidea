@@ -138,6 +138,30 @@ nav.collapsed > *:not(.app-name) {
   display: none;
 }
 
+/* Labels and inputs */
+label {
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  border-radius: .25rem;
+}
+label:hover {
+  background-color: #FFFFFF20;
+}
+label input, label select {
+  max-width: 5rem;
+  background: transparent;
+  border: none;
+  text-align: right;
+  color: white;
+}
+
+/* Debug */
+.debug {
+  display: flex;
+  flex-direction: column;
+}
+
 /* Patches */
 .patches {
   font-family: monospace;
@@ -170,26 +194,4 @@ nav.collapsed > *:not(.app-name) {
 }
 .patches .diff .deleted {
   color: #82071E;
-}
-
-/* Debug */
-.debug {
-  display: flex;
-  flex-direction: column;
-}
-.debug label {
-  display: flex;
-  justify-content: space-between;
-  cursor: pointer;
-  border-radius: .25rem;
-}
-.debug label:hover {
-  background-color: #FFFFFF20;
-}
-.debug label input, .debug label select {
-  max-width: 5rem;
-  background: transparent;
-  border: none;
-  text-align: right;
-  color: white;
 }

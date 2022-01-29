@@ -16,6 +16,12 @@ export class World extends Renderable {
   /** Camera */
   readonly camera: Camera;
 
+  /** World map */
+  readonly map: ReturnType<typeof Render.Container>;
+
+  /** World locations */
+  readonly locations = [] as Array<{ name: string; x: number; y: number }>;
+
   /** Constructor */
   constructor() {
     super({ id: "gracidea" });
@@ -25,6 +31,12 @@ export class World extends Renderable {
 
   /** Initialize renderable */
   protected async init() {
+    await Promise.all([this.#regions(), this.#map()]);
+    return super.init({ parent: App.rendering.stage });
+  }
+
+  /** Setup world regions */
+  async #regions() {
     const { regions } = await fetch("/data/maps.json").then((res) => res.json());
     for (const { id = "", ...bounds } of regions) {
       this.regions.set(id, new Region({ world: this, id, bounds }));
@@ -33,7 +45,52 @@ export class World extends Renderable {
     if (App.config.patch) {
       this.#sea.sprite.alpha = 0.1;
     }
-    return super.init({ parent: App.rendering.stage });
+  }
+
+  /** Setup world map */
+  async #map() {
+    //Setup
+    const { width, height, layers, images, links } = await fetch("/data/maps.world.json").then((res) => res.json());
+    const container = App.rendering.stage.addChild(Render.Container({ z: 1 }));
+    container.addChild(Render.Graphics({ fill: [0x51BADA, 0.75], rect: [0, 0, 128, 128] }));
+    container.visible = false;
+    Object.assign(this, { map: container });
+
+    //Create world map
+    const map = container.addChild(Render.Container());
+    map.name = "worldmap";
+    map.scale.set(2);
+    for (const { layer, tiles } of layers) {
+      //Cities, roads and interests points
+      for (let i = 0; i < width * height; i++) {
+        const tile = tiles[i] - 1;
+        if (tile) {
+          const x = (i % width) / 2, y = Math.floor(i / width) / 2;
+          map.addChild(Render.Sprite({ frame: `worldmap/${tile}`, x, y }));
+        }
+      }
+      //After sea roads, display region background
+      if (layer === "roads.sea") {
+        for (const { name, x, y, width, height } of images) {
+          const sprite = map.addChild(Render.Sprite({ frame: `regions/${name}` }));
+          Object.assign(sprite, { x, y, width, height });
+        }
+      }
+    }
+
+    //Create links
+    for (const { name, points, location } of links) {
+      const sprite = map.addChild(Render.Graphics({ fill: [0xFFFFFF, 1], polygon: points.map((point: number) => point / 2) }));
+      sprite.interactive = true;
+      sprite.cursor = "pointer";
+      sprite.alpha = 0;
+      sprite.mouseover = () => sprite.alpha = 0.8;
+      sprite.mouseout = () => sprite.alpha = 0;
+      sprite.click = () => (this.camera.place(location), App.controller.qs("#control-worldmap").click());
+      this.locations.push({ name, ...location });
+    }
+
+    console.log(this.locations);
   }
 
   /** Sea texture */

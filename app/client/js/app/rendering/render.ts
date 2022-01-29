@@ -28,7 +28,9 @@ export class Render {
     for (const texture of ["tileset", "npcs", "creatures"]) {
       loader.add(`/textures/${app.config.textures.style}/${texture}.json?sha=${app.sha}`);
     }
-    loader.add(`/textures/all/worldmap.json?sha=${app.sha}`);
+    for (const texture of ["worldmap", "worldmap.regions"]) {
+      loader.add(`/textures/all/${texture}.json?sha=${app.sha}`);
+    }
     loader.onProgress.add((_: unknown, { url = "" }) => app.loaded(`loaded ${new URL(url, global.location).pathname}`));
     loader.onComplete.add(() => app.loaded("all textures successfully loaded"));
     pending.push(new Promise((solve) => loader.load(() => solve(null))));
@@ -46,7 +48,7 @@ export class Render {
     //Load texture effects
     pending.push(
       new Promise<void>(async (solve) => {
-        const effects = await fetch("/data/textures/effects.json?sha=${app.sha}").then((response) => response.json());
+        const effects = await fetch(`/data/textures/effects.json?sha=${app.sha}`).then((response) => response.json());
         app.loaded(`loaded textures effects`);
         Object.assign(this, { effects });
         solve();
@@ -58,11 +60,11 @@ export class Render {
       instance: new Render.engine.Application({
         width: global.document.body.clientWidth,
         height: global.document.body.clientHeight,
-        // resolution: global.devicePixelRatio,
         backgroundAlpha: 0,
       }),
     });
     this.instance.resizeTo = global.window;
+    this.instance.stage.sortableChildren = true;
     global.document.querySelector("body").appendChild(this.instance.view);
 
     //Wait for resources to be loaded
