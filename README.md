@@ -12,6 +12,7 @@
 * **Faithful maps** based on games, anime, manga, artworks and custom map fillers
 * **Animated tiles and characters** for a more liveful world
 * **Wild areas** with accurate spawn rates (based on [PokeAPI data](https://github.com/PokeAPI/api-data)), including shiny encounters!
+* **Ergonomic interface** to quickly navigate around the map
 * *More features to come...*
 
 ## ![](/copyrighted/icons/contribute.png) Contributing
@@ -20,7 +21,7 @@ The *Pokémon* world is really huge, and so is the amount of work needed to map 
 
 Whether you want to complete the mapping, provide new sprites or improve code, please read our [contributions guideline](/CONTRIBUTING.md) and open a [pull request](https://github.com/lowlighter/gracidea/pulls)!
 
-> ⚠️ Note that *Gracidea* is **NOT A GAME PROJECT**, only an artistic project. All suggestion related to introduction of game mechanics (player, battles, captures, etc.) will be **systematically rejected**.
+> ⚠️ Note that *Gracidea* is **NOT A GAME PROJECT**, only an artistic project. All suggestions related to introduction of game mechanics (player, battles, captures, etc.) will be **systematically rejected**.
 
 ## ![](/copyrighted/icons/license.png) License and copyright
 

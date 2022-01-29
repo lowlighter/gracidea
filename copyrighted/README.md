@@ -1,5 +1,5 @@
 This folder contains copyrighted materials.
-See [pokemon.com/us/legal](https://www.pokemon.com/us/legal) for more informations.
+See [pokemon.com/us/legal](https://www.pokemon.com/us/legal/) for more informations.
 
 ```
 © 2021 Pokémon. © 1995–2021 Nintendo/Creatures Inc./GAME FREAK inc.

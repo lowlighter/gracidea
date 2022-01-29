@@ -7,10 +7,10 @@ body:
       value: >
         **Thank you for your interest in Gracidea project!**
 
-        Please note that [issues](https://github.com/lowlighter/gracidea/issues)
-        are exclusively reserved for bug and progress tracking.
-
-        Use [discussions](https://github.com/lowlighter/gracidea/discussions) for any
+        > ⚠️ **Please note that [issues](https://github.com/lowlighter/gracidea/issues)
+        are exclusively reserved for bug and progress tracking.**
+        >
+        > Use [discussions](https://github.com/lowlighter/gracidea/discussions) for any
         other request instead.
 
   - type: textarea
@@ -26,9 +26,10 @@ body:
       description: Please select which component is impacted.
       options:
         - "📀 app: client"
-        - "💿 app: server"
-        - "🎨 textures"
+        - "🛠️ app: build"
+        - "🧪 app: tests"
         - "🗺️ maps"
+        - "🎨 textures"
         - "🗃️ repository"
     validations:
       required: true
