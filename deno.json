@@ -7,19 +7,52 @@
   "velociraptor":{
     "unstable": true,
     "quiet": true,
-    "allow": ["read", "net"],
+    "allow": {
+      "net": ["deno.land"]
+    },
     "importMap": "deno.json",
     "scripts": {
-      "fmt": "deno fmt",
-      "lint": "deno lint",
-      "test": "deno test app/tests",
-      "start": "deno run https://deno.land/std/http/file_server.ts app/public",
-      "build": {
+      "fmt": {
+        "desc": "> format code",
+        "cmd":"deno fmt"
+      },
+      "lint": {
+        "desc": "> lint code",
+        "cmd":"deno lint"
+      },
+      "test": {
+        "desc": "> run tests",
         "allow": {
-          "run": ["git", "npm"],
-          "write": ["app/build/cache", "app/public", "/tmp", "pixi.js-6.2.2.tgz"]
+          "read": "."
+        },
+        "cmd": "deno test app/tests"
+      },
+      "start": {
+        "desc": "> start a local server (require a build first)",
+        "allow": {
+          "read": ".",
+          "net": "0.0.0.0:4507"
+        },
+        "cmd":"deno run https://deno.land/std/http/file_server.ts app/public"
+      },
+      "build": {
+        "desc": "> build app data, textures, client and assets",
+        "allow": {
+          "read": ".",
+          "run": ["git", "npm", "tar", "which", "wsl"],
+          "write": ["app/build/cache", "app/public"]
         },
         "cmd": "deno run app/build/mod.ts"
+      },
+      "dev-app":{
+        "desc": "> rebuild app client and assets",
+        "cmd":"vr build --no-default --app --assets",
+        "watch": ["app/client", "copyrighted"]
+      },
+      "dev-map":{
+        "desc": "> rebuild app diff",
+        "cmd":"vr build --no-default --diff",
+        "watch": ["maps", "copyrighted"]
       }
     }
   },
