@@ -11,6 +11,9 @@ RUN mkdir -p /deno \
 ENV PATH=${DENO_INSTALL}/bin:${PATH} \
     DENO_DIR=${DENO_INSTALL}/.cache/deno
 
+RUN deno install -qAn vr https://deno.land/x/velociraptor/cli.ts \
+    && echo 'export PATH="$HOME/.deno/bin:$PATH"' >> ~/.bashrc
+
 # Vercel install
 RUN curl -fsSL https://deb.nodesource.com/setup_17.x | bash -\
     && apt-get update \

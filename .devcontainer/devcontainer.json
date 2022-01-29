@@ -29,6 +29,12 @@
 	"forwardPorts": [6080, 5901],
 	"overrideCommand": false,
 	"portsAttributes": {
+		"3000": {
+			"label": "VERCEL"
+		},
+		"4507": {
+			"label": "HTTP SERVER"
+		},
 		"5901": {
 			"label": "VNC"
 		},
