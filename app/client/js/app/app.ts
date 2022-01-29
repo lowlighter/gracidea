@@ -17,7 +17,7 @@ export class App {
     const { x = 5, y = -55 } = Object.fromEntries(new URLSearchParams(window.location.search).entries());
 
     this.loaded("loading patches");
-    const patches = await fetch("/data/maps/patches.json").then((response) => response.json());
+    const patches = await fetch(`/data/maps/patches.json?sha=${this.sha}`).then((response) => response.json());
     if (patches.length) {
       this.config.patch = true;
       this.loaded("loaded patches", null, { update: true });

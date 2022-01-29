@@ -47,12 +47,12 @@
       "dev-app":{
         "desc": "> rebuild app client and assets",
         "cmd":"vr build --no-default --app --assets",
-        "watch": ["app/client", "copyrighted"]
+        "watch": true
       },
       "dev-map":{
         "desc": "> rebuild app diff",
         "cmd":"vr build --no-default --diff",
-        "watch": ["maps", "copyrighted"]
+        "watch": true
       }
     }
   },

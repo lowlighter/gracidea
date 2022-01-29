@@ -59,5 +59,4 @@ export const build = Object.assign(async function () {
   if (Object.keys(flags).length) {
     log.step(`completed in ${((performance.now() - start) / 1000).toFixed(2)} s`);
   }
-  Deno.exit(0);
 });

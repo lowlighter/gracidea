@@ -15,9 +15,9 @@ jobs:
       max-parallel: 3
       matrix:
         job:
-          - deno fmt --config deno.json
-          - deno lint --config deno.json
-          - deno test -A app/tests
+          - vr fmt
+          - vr lint
+          - vr test
     steps:
       - uses: jurassiscripts/setup-velociraptor@v2
       - run: ${{ matrix.job }}
