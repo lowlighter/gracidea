@@ -103,6 +103,13 @@ export class Controller {
           }
         }
 
+        //Pull request number
+        const pr = await fetch("/data/maps/patches.pr.json").then((response) => response.json()).catch(() => null);
+        if (pr) {
+          const link = dom.element("a", { attributes: { href: `https://github.com/lowlighter/gracidea/pull/${pr}` }, text: `See pull request #${pr} on GitHub` });
+          global.document.querySelector(".debug")?.append(link);
+        }
+
         global.document.querySelector(".patches")?.append(patch);
       }
     } else {
