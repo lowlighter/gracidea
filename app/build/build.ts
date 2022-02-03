@@ -27,25 +27,26 @@ if (!Object.keys(flags).length) {
 /** Build utilities */
 export const build = Object.assign(async function () {
   const start = performance.now();
+  const { force = false } = flags;
   log.info(`flags: ${Object.entries(flags).map(([flag, value]) => value ? flag : `no-${flag}`).join(", ") || "(none)"}`);
   await requirements();
   if (flags.clean ?? flags.all) {
     await clean();
   }
   if (flags.data ?? flags.all) {
-    await data();
+    await data({ force });
   }
   if (flags.maps ?? flags.all) {
-    await maps();
+    await maps({ force });
   }
   if (flags.diff ?? flags.all) {
     await diff();
   }
   if (flags.world ?? flags.all) {
-    await world();
+    await world({ force });
   }
   if (flags.textures ?? flags.all) {
-    await textures();
+    await textures({ force });
   }
   if (flags["texture-packer"] ?? flags.all) {
     await texturesPacker();

@@ -3,7 +3,7 @@ import { calcArea, exists, log as logger, read, save, toArray } from "app/build/
 import { expandGlob } from "std/fs/mod.ts";
 
 /** Data */
-export default async function ({ preload = true, quiet = false } = {}) {
+export default async function ({ preload = true, quiet = false, force = false } = {}) {
   const log = quiet
     ? new Proxy({} as { [key: string]: () => void }, {
       get(target, key) {
@@ -19,7 +19,7 @@ export default async function ({ preload = true, quiet = false } = {}) {
   }
 
   //Regions
-  if (await exists("maps.json")) {
+  if ((!force) && (await exists("maps.json"))) {
     log.debug("skipped: maps.json (already present)");
   } else {
     const ids = ["hoenn"];
@@ -53,7 +53,7 @@ export default async function ({ preload = true, quiet = false } = {}) {
         continue;
       }
       log.progress(`processing: ${region}/*`);
-      if (await exists(`maps/${region}.json`)) {
+      if ((!force) && (await exists(`maps/${region}.json`))) {
         regions.skipped++;
         continue;
       }
@@ -65,7 +65,7 @@ export default async function ({ preload = true, quiet = false } = {}) {
         const section = name.replace(".tmx", "");
         log.progress(`processing: ${region}/${section}`);
         try {
-          if (await exists(`maps/${region}/${section}.json`)) {
+          if ((!force) && (await exists(`maps/${region}/${section}.json`))) {
             sections.skipped++;
             continue;
           }

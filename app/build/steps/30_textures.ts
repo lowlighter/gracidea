@@ -4,7 +4,7 @@ import { expandGlob } from "std/fs/mod.ts";
 import { basename, dirname } from "std/path/mod.ts";
 
 /** Prepare textures */
-export default async function () {
+export default async function ({ force = false } = {}) {
   log.step("preparing textures");
 
   //Setup
@@ -17,7 +17,7 @@ export default async function () {
       const style = basename(dirname(path));
       const tileset = `${style}/${name.replace(".tsx", "")}`;
       log.progress(`processing: ${tileset}`);
-      if (await exists(`textures/${tileset}.json`)) {
+      if ((!force) && (await exists(`textures/${tileset}.json`))) {
         skipped++;
         continue;
       }
@@ -47,7 +47,7 @@ export default async function () {
   }
 
   //Textures effect
-  if (await exists("textures/effects.json")) {
+  if ((!force) && (await exists("textures/effects.json"))) {
     log.debug("skipped: textures/effects.json (already present)");
   } else {
     log.progress(`processing: texture effects`);

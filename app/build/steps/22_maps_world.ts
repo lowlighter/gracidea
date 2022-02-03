@@ -2,11 +2,11 @@
 import { exists, log, read, save, toArray } from "app/build/util.ts";
 
 /** Compute diff */
-export default async function () {
+export default async function ({ force = false } = {}) {
   log.step("compute world map data");
 
   //Setup
-  if (await exists("maps.world.json")) {
+  if ((!force) && (await exists("maps.world.json"))) {
     log.debug("skipped: maps.world.json (already present)");
     log.success();
     return;
@@ -57,6 +57,7 @@ export default async function () {
           if (!cache[region]) {
             cache[region] = { x: NaN, y: NaN };
             const { sections } = await read(`app/public/data/maps/${region}.json`);
+            console.log(sections);
             Object.assign(cache, Object.fromEntries(sections.map(({ id = "", x = 0, y = 0 }) => [id, { x, y }])));
           }
           map.links.push({ name, points, location: cache[name] ?? null });

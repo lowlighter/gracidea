@@ -4,13 +4,13 @@ import { expandGlob } from "std/fs/mod.ts";
 import { basename, dirname } from "std/path/mod.ts";
 
 /** Data extraction */
-export default async function () {
+export default async function ({ force = false } = {}) {
   log.step("extracting data");
 
   //Setup
   await clone({ repo: "PokeAPI/api-data", dir: "app/build/cache/data" });
   await clone({ repo: "msikma/pokesprite", dir: "app/build/cache/creatures" });
-  if (await exists("maps/data.json")) {
+  if ((!force) && (await exists("maps/data.json"))) {
     log.debug("skipped: maps/data.json (already present)");
     log.success();
     return;
