@@ -5,7 +5,6 @@ import { Region } from "app/client/maps/region.ts";
 import { Camera } from "app/client/maps/camera.ts";
 import type { Graphics } from "app/client/rendering/render.ts";
 import { Render } from "app/client/rendering/render.ts";
-import { debounce } from "std/async/debounce.ts";
 
 /**
  * World.
@@ -88,6 +87,7 @@ export class World extends Renderable {
       sprite.mouseover = () => sprite.alpha = 0.8;
       sprite.mouseout = () => sprite.alpha = 0;
       sprite.click = () => (this.camera.place(location.spawn ?? location), App.controller.qs("#control-worldmap").click());
+      sprite.tap = sprite.click;
       this.locations.push({ name, ...location, bounds: new Render.engine.Rectangle(location.x, location.y, location.width, location.height) });
     }
   }
