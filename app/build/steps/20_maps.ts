@@ -25,7 +25,7 @@ export default async function ({ preload = true, quiet = false, force = false } 
     const ids = ["hoenn"];
     const regions = [];
     for (const id of ids) {
-      log.progress(`processing: ${id}`);
+      log.progress(`processing region: ${id}`);
       const region = { x: { min: Infinity, max: -Infinity }, y: { min: Infinity, max: -Infinity } };
       for (const { x, y, width, height } of (await load.sections({ region: id })).sections) {
         region.x.min = Math.min(x, region.x.min);
@@ -42,7 +42,7 @@ export default async function ({ preload = true, quiet = false, force = false } 
       });
     }
     await save("maps.json", { regions });
-    log.debug(`processed: ${ids.length} regions`);
+    log.debug(`processed regions: ${ids.length}`);
   }
 
   //Sections
@@ -52,7 +52,7 @@ export default async function ({ preload = true, quiet = false, force = false } 
       if ((!isDirectory) || (region === "all")) {
         continue;
       }
-      log.progress(`processing: ${region}/*`);
+      log.progress(`processing section: ${region}/*`);
       if ((!force) && (await exists(`maps/${region}.json`))) {
         regions.skipped++;
         continue;
@@ -63,7 +63,7 @@ export default async function ({ preload = true, quiet = false, force = false } 
           continue;
         }
         const section = name.replace(".tmx", "");
-        log.progress(`processing: ${region}/${section}`);
+        log.progress(`processing section: ${region}/${section}`);
         try {
           if ((!force) && (await exists(`maps/${region}/${section}.json`))) {
             sections.skipped++;
@@ -81,7 +81,30 @@ export default async function ({ preload = true, quiet = false, force = false } 
       }
       regions.count++;
     }
-    log.debug(`processed: ${regions.count} regions (skipped ${regions.skipped}), ${sections.count} sections (skipped ${sections.skipped})`);
+    log.debug(`processed sections: ${sections.count} (${sections.skipped} skipped) from ${regions.count} regions (${regions.skipped} skipped)`);
+  }
+
+  //Spawn points
+  {
+    let regions = 0, skipped = 0;
+    for await (const { name: region, isDirectory } of expandGlob("maps/*")) {
+      if ((!isDirectory) || (region === "all")) {
+        continue;
+      }
+      log.progress(`processing region spawns: ${region}`);
+      if ((!force) && (await exists(`maps/${region}.json`))) {
+        skipped++;
+        continue;
+      }
+      const data = await read(`app/public/data/maps/${region}.json`);
+      data.sections = await Promise.all(data.sections.map(async (section: { id: string }) => {
+        const { spawn } = await read(`app/public/data/maps/${section.id}.json`);
+        return Object.assign(section, { spawn });
+      }));
+      await save(`maps/${region}.json`, data);
+      regions++;
+    }
+    log.debug(`processed region spawns: from ${regions} regions (${skipped} skipped)`);
   }
 
   log.success();
@@ -172,6 +195,19 @@ const load = {
       }
     }
 
+    //Search spawn point (tile id 6324)
+    let spawn = null;
+    for (const { x, y, tiles } of chunks) {
+      for (let i = 0; i < tiles.length; i++) {
+        if (tiles[i] === 6324) {
+          if (spawn) {
+            logger.warn(`spawn tile for ${section} was defined multiple time!`);
+          }
+          spawn = { x: X + x + i % 16, y: Y + y + Math.floor(i / 16) };
+        }
+      }
+    }
+
     //Parse areas data
     const areas = [] as Array<{ id: string; name: string; points: number[]; properties: { [key: string]: unknown } }>;
     for (const { "@name": type, object: objects } of toArray(raw.objectgroup)) {
@@ -209,6 +245,6 @@ const load = {
     }
 
     //Formatted section data
-    return { id: `${region}/${section}`, ...bounds, chunks, areas, ...locations?.[section] };
+    return { id: `${region}/${section}`, ...bounds, chunks, areas, spawn, ...locations?.[section] };
   },
 };
