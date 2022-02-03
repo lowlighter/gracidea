@@ -101,7 +101,7 @@ export class Section extends Renderable {
               }
               break;
           }
-        } else if (tiles[i]) {
+        } else if ((tiles[i])&&(tiles[i] < 6215)) {
           frames.push({ frame: tiles[i] });
         }
         if (frames.length) {

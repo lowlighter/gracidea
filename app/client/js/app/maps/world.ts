@@ -5,6 +5,7 @@ import { Region } from "app/client/maps/region.ts";
 import { Camera } from "app/client/maps/camera.ts";
 import type { Graphics } from "app/client/rendering/render.ts";
 import { Render } from "app/client/rendering/render.ts";
+import { debounce } from "std/async/debounce.ts";
 
 /**
  * World.
@@ -20,7 +21,7 @@ export class World extends Renderable {
   readonly map: ReturnType<typeof Render.Container>;
 
   /** World locations */
-  readonly locations = [] as Array<{ name: string; x: number; y: number }>;
+  readonly locations = [] as Array<{ name: string; x: number; y: number, spawn:{x:number, y:number}|null, bounds:ReturnType<typeof Render.engine.Rectangle> }>;
 
   /** Constructor */
   constructor() {
@@ -31,7 +32,7 @@ export class World extends Renderable {
 
   /** Initialize renderable */
   protected async init() {
-    await Promise.all([this.#regions(), this.#map()]);
+    await Promise.all([this.#regions(), this.#map(), this.#coordinates()]);
     return super.init({ parent: App.rendering.stage });
   }
 
@@ -86,9 +87,17 @@ export class World extends Renderable {
       sprite.alpha = 0;
       sprite.mouseover = () => sprite.alpha = 0.8;
       sprite.mouseout = () => sprite.alpha = 0;
-      sprite.click = () => (this.camera.place(location), App.controller.qs("#control-worldmap").click());
-      this.locations.push({ name, ...location });
+      sprite.click = () => (this.camera.place(location.spawn ?? location), App.controller.qs("#control-worldmap").click());
+      this.locations.push({ name, ...location, bounds:new Render.engine.Rectangle(location.x, location.y, location.width, location.height) });
     }
+  }
+
+  /** Setup coordinates handle */
+  async #coordinates() {
+    const handle = App.rendering.stage.addChild(Render.Sprite({z:2}));
+    handle.name = "coordinates"
+    handle.position.set(4, App.rendering.view.height - 20)
+    handle.addChild(new Render.engine.Text("", { fontSize: 16, fill: "white", strokeThickness:2, fontFamily: "monospace" }))
   }
 
   /** Sea texture */
@@ -118,6 +127,16 @@ export class World extends Renderable {
           this.#sea.resize = false;
         }
         this.#sea.sprite.position.set(-Math.floor(1 + this.sprite.position.x / 16) * 16, -Math.floor(1 + this.sprite.position.y / 16) * 16);
+      }
+    }
+    //Coordinates update
+    if (App.controller) {
+      const {x, y} = App.controller.camera
+      const {children:[coordinates]} = App.rendering.stage.getChildByName("coordinates")
+      coordinates.text = `${x};${y}`;
+      const location = this.locations.find(({bounds}) => bounds.contains(x, y))
+      if (location) {
+        coordinates.text += ` — ${location.name}`
       }
     }
     return super.update({ t, dt, debug: true });
