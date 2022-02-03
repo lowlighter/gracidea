@@ -131,6 +131,37 @@ export default async function () {
     await save(`maps/patches.json`, patches);
     log.debug(`processed: ${ids.size} files`);
   }
+  //Search for linked pull request
+  {
+    const pr = await pullrequest();
+    if (pr) {
+      await save(`maps/patches.pr.json`, pr);
+      log.debug(`linked: pull request #${pr}`);
+    }
+  }
 
   log.success();
+}
+
+//Search pull request number on GitHub
+async function pullrequest() {
+  try {
+    const { data: { search: { nodes: [{ number: pr }] } } } = await fetch("https://api.github.com/graphql", {
+      method: "POST",
+      body: JSON.stringify({
+        query: `query {
+          search(query: "repo:lowlighter/gracidea is:pr is:open hash:${Deno.env.get("VERCEL_GIT_COMMIT_SHA")}", type: ISSUE, first: 1) {
+            nodes {
+              ... on PullRequest {
+                number
+              }
+            }
+          }
+        }`,
+      }),
+    }).then((response) => response.json());
+    return pr;
+  } catch {
+    return null;
+  }
 }
