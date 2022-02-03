@@ -57,7 +57,7 @@ export default async function ({ force = false } = {}) {
           if (!cache[region]) {
             cache[region] = { x: NaN, y: NaN };
             const { sections } = await read(`app/public/data/maps/${region}.json`);
-            Object.assign(cache, Object.fromEntries(sections.map(({ id = "", x = 0, y = 0, width = 0, height = 0, spawn = null }) => [id, { x, y, width, height, spawn}])));
+            Object.assign(cache, Object.fromEntries(sections.map(({ id = "", x = 0, y = 0, width = 0, height = 0, spawn = null }) => [id, { x, y, width, height, spawn }])));
           }
           map.links.push({ name, points, location: cache[name] ?? null });
         }
