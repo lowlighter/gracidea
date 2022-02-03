@@ -89,8 +89,6 @@ export class World extends Renderable {
       sprite.click = () => (this.camera.place(location), App.controller.qs("#control-worldmap").click());
       this.locations.push({ name, ...location });
     }
-
-    console.log(this.locations);
   }
 
   /** Sea texture */
